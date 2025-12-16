@@ -3,31 +3,32 @@ use std::borrow::Cow;
 use crate::prelude::*;
 use crate::select_prompt::SelectOption;
 use crate::State;
+use ratatui::crossterm::event::{KeyCode, KeyEvent, KeyEventKind, KeyModifiers};
+
 #[derive(Debug, Default, Clone, PartialEq, Eq, Hash)]
 pub struct SelectState<'a> {
     status: Status,
     focus: FocusState,
+    position: usize,
     focused_index: usize,
-    value: Cow<'a, String>,
-    options: Cow<'a, [SelectOption<'a>]>,
+    value: Cow<'a, str>,
     cursor: (u16, u16),
 }
 
 impl<'a> SelectState<'a> {
     pub fn new(options: impl Into<Cow<'a, [SelectOption<'a>]>>) -> Self {
         Self {
-            options: options.into(),
             ..Default::default()
         }
     }
     #[must_use]
-    pub const fn with_status(mut self, status: Status) -> Self {
+    pub const fn with_status(&mut self, status: Status) -> &mut Self {
         self.status = status;
         self
     }
 
     #[must_use]
-    pub const fn with_focus(mut self, focus: FocusState) -> Self {
+    pub const fn with_focus(&mut self, focus: FocusState) -> &mut Self {
         self.focus = focus;
         self
     }
@@ -60,16 +61,30 @@ impl State for SelectState<'_> {
         &mut self.focus
     }
 
+    fn handle_key_event(&mut self, event: KeyEvent) {
+        match event.code {
+            KeyCode::Up => {
+                if self.focused_index > 0 {
+                    self.focused_index -= 1;
+                }
+            }
+            KeyCode::Down => {
+                self.focused_index += 1;
+            }
+            _ => {}
+        }
+    }
+
     fn focus_state(&self) -> FocusState {
         self.focus
     }
 
     fn position(&self) -> usize {
-        self.focused_index
+        self.position
     }
 
     fn position_mut(&mut self) -> &mut usize {
-        &mut self.focused_index
+        &mut self.position
     }
 
     fn cursor(&self) -> (u16, u16) {
