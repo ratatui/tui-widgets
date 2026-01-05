@@ -1,12 +1,13 @@
 use crate::prelude::*;
+use ratatui::crossterm::event::{KeyCode, KeyEvent, KeyEventKind};
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Hash)]
 pub struct SelectState {
     status: Status,
     focus: FocusState,
     focused_index: usize,
+    //TODO: remove options_len and use options.len() directly
     options_len: usize,
-    cursor: (u16, u16),
 }
 
 impl SelectState {
@@ -23,7 +24,7 @@ impl SelectState {
     }
 
     pub fn move_down(&mut self) {
-        if self.focused_index < self.options_len - 1 {
+        if self.focused_index < self.options_len.saturating_sub(1) {
             self.focused_index += 1;
         }
     }
@@ -44,6 +45,12 @@ impl SelectState {
     }
 
     pub fn set_focused_index(&mut self, index: usize) {
+        if self.options_len > 0 && index >= self.options_len {
+            panic!(
+                "Focused index {} out of bounds (len: {})",
+                index, self.options_len
+            );
+        }
         self.focused_index = index;
     }
 
@@ -60,8 +67,25 @@ impl SelectState {
         &self.status
     }
 
-    pub fn with_focused_index(&mut self, index: usize) -> &mut Self {
-        self.focused_index = index;
-        self
+    pub fn complete(&mut self) {
+        self.status = Status::Done;
+    }
+
+    pub fn abort(&mut self) {
+        self.status = Status::Aborted;
+    }
+
+    pub fn handle_key_event(&mut self, key: KeyEvent) {
+        if key.kind != KeyEventKind::Press {
+            return;
+        }
+
+        match key.code {
+            KeyCode::Up => self.move_up(),
+            KeyCode::Down => self.move_down(),
+            KeyCode::Enter => self.complete(),
+            KeyCode::Esc => self.abort(),
+            _ => {}
+        }
     }
 }
