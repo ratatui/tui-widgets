@@ -1,9 +1,15 @@
-use ratatui::layout::Rect;
-use ratatui::widgets::{Block, Paragraph, StatefulWidget, Widget};
+use ratatui_core::buffer::Buffer;
+use ratatui_core::layout::Alignment;
+use ratatui_core::layout::Rect;
+use ratatui_core::style::{Color, Modifier, Style, Stylize};
+use ratatui_core::terminal::Frame;
+use ratatui_core::text::{Line, Span};
+use ratatui_core::widgets::{StatefulWidget, Widget};
+use ratatui_widgets::block::Block;
+use ratatui_widgets::paragraph::Paragraph;
 
 use crate::prelude::*;
 use crate::select_state::SelectState;
-use ratatui::prelude::*;
 
 #[derive(Debug, Default, Clone, PartialEq, Eq)]
 pub struct SelectPrompt<'a> {
@@ -21,6 +27,18 @@ impl<'a> SelectPrompt<'a> {
         SelectPrompt {
             label: Some(label),
             options,
+            block: None,
+        }
+    }
+
+    pub fn from_strings(label: &'a str, options: Vec<&'a str>) -> Self {
+        let select_options = options
+            .into_iter()
+            .map(|opt| SelectOption { value: opt })
+            .collect();
+        SelectPrompt {
+            label: Some(label),
+            options: select_options,
             block: None,
         }
     }
@@ -81,7 +99,9 @@ mod tests {
     use super::*;
     use ratatui::backend::TestBackend;
     use ratatui::widgets::Borders;
+    use ratatui::Terminal;
     use rstest::{fixture, rstest};
+
     #[test]
     fn new() {
         let options = vec![

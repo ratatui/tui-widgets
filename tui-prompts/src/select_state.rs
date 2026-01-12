@@ -1,6 +1,5 @@
 use crate::prelude::*;
-use ratatui::crossterm::event::{KeyCode, KeyEvent, KeyEventKind};
-
+use crossterm::event::{KeyCode, KeyEvent, KeyEventKind};
 #[derive(Debug, Default, Clone, PartialEq, Eq, Hash)]
 pub struct SelectState {
     status: Status,
