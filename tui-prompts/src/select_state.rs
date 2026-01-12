@@ -66,6 +66,18 @@ impl SelectState {
         &self.status
     }
 
+    pub fn focus(&mut self) {
+        self.focus = FocusState::Focused;
+    }
+
+    pub fn blur(&mut self) {
+        self.focus = FocusState::Unfocused;
+    }
+
+    pub fn is_focused(&self) -> bool {
+        self.focus == FocusState::Focused
+    }
+
     pub fn complete(&mut self) {
         self.status = Status::Done;
     }
