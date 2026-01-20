@@ -61,7 +61,7 @@ use std::iter::zip;
 use indoc::indoc;
 use ratatui_core::buffer::Buffer;
 use ratatui_core::layout::Rect;
-use ratatui_core::style::{Color, Stylize};
+use ratatui_core::style::{Color, Style, Stylize};
 use ratatui_core::widgets::Widget;
 use strum::{Display, EnumIter};
 
@@ -85,6 +85,7 @@ pub struct Card {
     pub rank: Rank,
     pub suit: Suit,
     pub size: CardSize,
+    pub style: Style,
 }
 
 /// The size of a card when rendered.
@@ -134,7 +135,21 @@ pub enum Suit {
 
 impl Card {
     pub const fn new(rank: Rank, suit: Suit, size: CardSize) -> Self {
-        Self { rank, suit, size }
+        Self {
+            rank,
+            suit,
+            size,
+            style: Style::new(),
+        }
+    }
+
+    /// Sets the style of the card.
+    ///
+    /// The foreground color defaults to the suit color if not specified.
+    /// The background defaults to transparent (`Color::Reset`) if not specified.
+    pub const fn style(mut self, style: Style) -> Self {
+        self.style = style;
+        self
     }
 
     pub fn as_colored_symbol(&self) -> String {
@@ -218,21 +233,21 @@ impl Rank {
         match self {
             Self::Ace => indoc! {"
                 ╭──────╮
-                │Ax    │
-                │  x   │
-                │    xA│
+                │Ax  x │
+                │      │
+                │ x  xA│
                 ╰──────╯"},
             Self::Two => indoc! {"
                 ╭──────╮
-                │2x    │
+                │2x  x │
                 │      │
-                │    x2│
+                │ x  x2│
                 ╰──────╯"},
             Self::Three => indoc! {"
                 ╭──────╮
-                │3x    │
-                │  x   │
-                │    x3│
+                │3x  x │
+                │      │
+                │ x  x3│
                 ╰──────╯"},
             Self::Four => indoc! {"
                 ╭──────╮
@@ -243,38 +258,38 @@ impl Rank {
             Self::Five => indoc! {"
                 ╭──────╮
                 │5x  x │
-                │  x   │
+                │      │
                 │ x  x5│
                 ╰──────╯"},
             Self::Six => indoc! {"
                 ╭──────╮
                 │6x  x │
-                │ x  x │
+                │      │
                 │ x  x6│
                 ╰──────╯"},
             Self::Seven => indoc! {"
                 ╭──────╮
                 │7x  x │
-                │ x x x│
+                │      │
                 │ x  x7│
                 ╰──────╯"},
             Self::Eight => indoc! {"
                 ╭──────╮
-                │8x xx │
-                │ x  x │
-                │ xx x8│
+                │8x  x │
+                │      │
+                │ x  x8│
                 ╰──────╯"},
             Self::Nine => indoc! {"
                 ╭──────╮
-                │9x xx │
-                │ x x x│
-                │ xx x9│
+                │9x  x │
+                │      │
+                │ x  x9│
                 ╰──────╯"},
             Self::Ten => indoc! {"
                 ╭──────╮
-                │Tx xx │
-                │ xx x │
-                │ xx xT│
+                │10  x │
+                │      │
+                │ x  10│
                 ╰──────╯"},
             Self::Jack => indoc! {"
                 ╭──────╮
@@ -452,9 +467,10 @@ impl Widget for &Card {
                 template.replace("xx", symbol)
             }
         };
-        let color = self.suit.color();
+        let fg = self.style.fg.unwrap_or(self.suit.color());
+        let bg = self.style.bg.unwrap_or(Color::Reset);
         for (line, row) in zip(card.lines(), area.rows()) {
-            let span = line.fg(color).bg(Color::White);
+            let span = line.fg(fg).bg(bg);
             span.render(row, buf);
         }
     }
