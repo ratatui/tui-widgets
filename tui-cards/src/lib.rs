@@ -17,10 +17,10 @@
 //! Create a `Card` and render it directly in a frame.
 //!
 //! ```no_run
-//! use tui_cards::{Card, Rank, Suit};
+//! use tui_cards::{Card, CardSize, Rank, Suit};
 //!
 //! # fn draw(frame: &mut ratatui::Frame) {
-//! let card = Card::new(Rank::Ace, Suit::Spades);
+//! let card = Card::new(Rank::Ace, Suit::Spades, CardSize::Normal);
 //! frame.render_widget(&card, frame.area());
 //! # }
 //! ```
@@ -67,12 +67,16 @@ use strum::{Display, EnumIter};
 
 /// A playing card.
 ///
+/// Card dimensions depend on the size:
+/// - `CardSize::Normal`: 14 characters wide × 9 lines tall
+/// - `CardSize::Small`: 8 characters wide × 5 lines tall
+///
 /// # Example
 ///
 /// ```rust
-/// use tui_cards::{Card, Rank, Suit};
+/// use tui_cards::{Card, CardSize, Rank, Suit};
 /// # fn draw(frame: &mut ratatui::Frame) {
-/// let card = Card::new(Rank::Ace, Suit::Spades);
+/// let card = Card::new(Rank::Ace, Suit::Spades, CardSize::Normal);
 /// frame.render_widget(&card, frame.area());
 /// # }
 /// ```
@@ -80,6 +84,27 @@ use strum::{Display, EnumIter};
 pub struct Card {
     pub rank: Rank,
     pub suit: Suit,
+    pub size: CardSize,
+}
+
+/// The size of a card when rendered.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum CardSize {
+    /// Small card: 8 characters wide × 5 lines tall.
+    Small,
+    /// Normal card: 14 characters wide × 9 lines tall.
+    #[default]
+    Normal,
+}
+
+impl CardSize {
+    /// Returns the dimensions (width, height) of the card.
+    pub const fn dimensions(self) -> (u16, u16) {
+        match self {
+            Self::Small => (8, 5),
+            Self::Normal => (14, 9),
+        }
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Display, EnumIter)]
@@ -108,8 +133,8 @@ pub enum Suit {
 }
 
 impl Card {
-    pub const fn new(rank: Rank, suit: Suit) -> Self {
-        Self { rank, suit }
+    pub const fn new(rank: Rank, suit: Suit, size: CardSize) -> Self {
+        Self { rank, suit, size }
     }
 
     pub fn as_colored_symbol(&self) -> String {
@@ -180,7 +205,100 @@ impl Suit {
 }
 
 impl Rank {
-    pub const fn template(self) -> &'static str {
+    /// Returns the template for the given card size.
+    pub const fn template(self, size: CardSize) -> &'static str {
+        match size {
+            CardSize::Small => self.small_template(),
+            CardSize::Normal => self.normal_template(),
+        }
+    }
+
+    /// Returns the small template (8 wide × 5 tall).
+    pub const fn small_template(self) -> &'static str {
+        match self {
+            Self::Ace => indoc! {"
+                ╭──────╮
+                │Ax    │
+                │  x   │
+                │    xA│
+                ╰──────╯"},
+            Self::Two => indoc! {"
+                ╭──────╮
+                │2x    │
+                │      │
+                │    x2│
+                ╰──────╯"},
+            Self::Three => indoc! {"
+                ╭──────╮
+                │3x    │
+                │  x   │
+                │    x3│
+                ╰──────╯"},
+            Self::Four => indoc! {"
+                ╭──────╮
+                │4x  x │
+                │      │
+                │ x  x4│
+                ╰──────╯"},
+            Self::Five => indoc! {"
+                ╭──────╮
+                │5x  x │
+                │  x   │
+                │ x  x5│
+                ╰──────╯"},
+            Self::Six => indoc! {"
+                ╭──────╮
+                │6x  x │
+                │ x  x │
+                │ x  x6│
+                ╰──────╯"},
+            Self::Seven => indoc! {"
+                ╭──────╮
+                │7x  x │
+                │ x x x│
+                │ x  x7│
+                ╰──────╯"},
+            Self::Eight => indoc! {"
+                ╭──────╮
+                │8x xx │
+                │ x  x │
+                │ xx x8│
+                ╰──────╯"},
+            Self::Nine => indoc! {"
+                ╭──────╮
+                │9x xx │
+                │ x x x│
+                │ xx x9│
+                ╰──────╯"},
+            Self::Ten => indoc! {"
+                ╭──────╮
+                │Tx xx │
+                │ xx x │
+                │ xx xT│
+                ╰──────╯"},
+            Self::Jack => indoc! {"
+                ╭──────╮
+                │Jx    │
+                │  JJ  │
+                │    xJ│
+                ╰──────╯"},
+            Self::Queen => indoc! {"
+                ╭──────╮
+                │Qx    │
+                │  QQ  │
+                │    xQ│
+                ╰──────╯"},
+            Self::King => indoc! {"
+                ╭──────╮
+                │Kx    │
+                │  KK  │
+                │    xK│
+                ╰──────╯"},
+        }
+    }
+
+    /// Returns the normal template (14 wide × 9 tall).
+    pub const fn normal_template(self) -> &'static str {
         match self {
             Self::Ace => indoc! {"
                 ╭────────────╮
@@ -323,9 +441,17 @@ impl Widget for &Card {
     where
         Self: Sized,
     {
-        let template = self.rank.template();
-        let symbol = self.suit.as_four_color_symbol();
-        let card = template.replace("xx", symbol);
+        let template = self.rank.template(self.size);
+        let card = match self.size {
+            CardSize::Small => {
+                let symbol = self.suit.as_symbol();
+                template.replace('x', &symbol.to_string())
+            }
+            CardSize::Normal => {
+                let symbol = self.suit.as_four_color_symbol();
+                template.replace("xx", symbol)
+            }
+        };
         let color = self.suit.color();
         for (line, row) in zip(card.lines(), area.rows()) {
             let span = line.fg(color).bg(Color::White);

@@ -21,17 +21,33 @@ suite by [Joshka].
 Create a `Card` and render it directly in a frame.
 
 ```rust
-use tui_cards::{Card, Rank, Suit};
+use tui_cards::{Card, CardSize, Rank, Suit};
 
-let card = Card::new(Rank::Ace, Suit::Spades);
+let card = Card::new(Rank::Ace, Suit::Spades, CardSize::Normal);
 frame.render_widget(&card, frame.area());
 ```
+
+## Card Sizes
+
+Cards can be rendered in two sizes:
+
+| Size | Dimensions |
+|------|------------|
+| `CardSize::Normal` | 14 × 9 characters |
+| `CardSize::Small` | 8 × 5 characters |
+
+Use `CardSize::dimensions()` to get the `(width, height)` tuple for layout calculations.
 
 ## Demo
 
 ```shell
 cargo run --example card
 ```
+
+**Controls:**
+- `s` - Switch to small cards
+- `n` - Switch to normal cards
+- `q` - Quit
 
 ## More widgets
 
