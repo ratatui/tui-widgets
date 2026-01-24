@@ -74,6 +74,7 @@ The widget crates are also available as standalone crates.
 ## License
 
 Copyright (c) Josh McKinney
+Copyright (c) The Ratatui Developers
 
 This project is licensed under either of:
 
