@@ -8,7 +8,7 @@ on:
 jobs:
   release:
     name: Release-plz release
-    if: ${{ github.repository_owner == 'joshka' }}
+    if: ${{ github.repository_owner == 'ratatui' }}
     runs-on: ubuntu-latest
     environment: release
     permissions:
@@ -33,7 +33,7 @@ jobs:
 
   release_pr:
     name: Release-plz PR
-    if: ${{ github.repository_owner == 'joshka' }}
+    if: ${{ github.repository_owner == 'ratatui' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
