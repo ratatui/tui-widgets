@@ -82,9 +82,9 @@ This project is licensed under either of:
 
 at your option.
 
-[LICENSE-APACHE]: https://github.com/joshka/tui-widgets/blob/main/LICENSE-APACHE
-[LICENSE-MIT]: https://github.com/joshka/tui-widgets/blob/main/LICENSE-MIT
-[CONTRIBUTING.md]: https://github.com/joshka/tui-widgets/blob/main/CONTRIBUTING.md
+[LICENSE-APACHE]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-APACHE
+[LICENSE-MIT]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
+[CONTRIBUTING.md]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 
 ## Contribution
 

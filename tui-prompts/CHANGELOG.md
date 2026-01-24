@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Refresh widget docs ([#148](https://github.com/joshka/tui-widgets/issues/148))
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   > Standardize widget crate docs and README layouts.
   > Unify badges, links, and license references.
   > Add consistent usage sections and link style updates.
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/joshka/tui-widgets/issues/120))
+- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   > feat!: migrate to ratatui 0.30
   >
   > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
@@ -32,21 +32,21 @@ All notable changes to this project will be documented in this file.
 
 ### 🎨 Styling
 
-- *(tui-prompts)* Apply changes from cargo fmt ([#118](https://github.com/joshka/tui-widgets/issues/118))
+- *(tui-prompts)* Apply changes from cargo fmt ([#118](https://github.com/ratatui/tui-widgets/issues/118))
 
 
 ## [0.5.2] - 2025-11-02
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
-- *(tui-prompts)* Full-width character input in non-multiline prompt ([#93](https://github.com/joshka/tui-widgets/issues/93)) ([#94](https://github.com/joshka/tui-widgets/issues/94))
+- *(tui-prompts)* Full-width character input in non-multiline prompt ([#93](https://github.com/ratatui/tui-widgets/issues/93)) ([#94](https://github.com/ratatui/tui-widgets/issues/94))
 
 ### 🎨 Styling
 
@@ -54,23 +54,23 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove needless lifetimes ([#60](https://github.com/joshka/tui-widgets/issues/60))
+- Remove needless lifetimes ([#60](https://github.com/ratatui/tui-widgets/issues/60))
 
-- Remove leftover github workflow files ([#73](https://github.com/joshka/tui-widgets/issues/73))
+- Remove leftover github workflow files ([#73](https://github.com/ratatui/tui-widgets/issues/73))
 
 
 ## [0.5.1] - 2025-11-02
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
-- *(tui-prompts)* Full-width character input in non-multiline prompt ([#93](https://github.com/joshka/tui-widgets/issues/93)) ([#94](https://github.com/joshka/tui-widgets/issues/94))
+- *(tui-prompts)* Full-width character input in non-multiline prompt ([#93](https://github.com/ratatui/tui-widgets/issues/93)) ([#94](https://github.com/ratatui/tui-widgets/issues/94))
 
 ### 🎨 Styling
 
@@ -78,9 +78,9 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove needless lifetimes ([#60](https://github.com/joshka/tui-widgets/issues/60))
+- Remove needless lifetimes ([#60](https://github.com/ratatui/tui-widgets/issues/60))
 
-- Remove leftover github workflow files ([#73](https://github.com/joshka/tui-widgets/issues/73))
+- Remove leftover github workflow files ([#73](https://github.com/ratatui/tui-widgets/issues/73))
 
 
 ## [0.4.1] - 2024-10-20
@@ -115,7 +115,7 @@ Ratatui-0.28.0 compatible release
 
 ### 📚 Documentation
 
-- Clean up changelogs ([#17](https://github.com/joshka/tui-widgets/pull/17))
+- Clean up changelogs ([#17](https://github.com/ratatui/tui-widgets/pull/17))
   > - removed unnecessary footer comments
   > - removed [unreleased] sections
   > - removed duplicate release notes
@@ -130,14 +130,14 @@ Ratatui-0.28.0 compatible release
 
 ### 🐛 Bug Fixes
 
-- Delete and backspace behavior for multi-byte characters ([#57](https://github.com/joshka/tui-widgets/pull/57))
+- Delete and backspace behavior for multi-byte characters ([#57](https://github.com/ratatui/tui-widgets/pull/57))
 - Fixup tui-prompts version to match crates.io
 
 ### ⚙️ Miscellaneous Tasks
 
 - Move tui-prompts to its own directory
 - Move to tui-widgets repository
-- Various fixes / clippy lints ([#6](https://github.com/joshka/tui-widgets/pull/6))
+- Various fixes / clippy lints ([#6](https://github.com/ratatui/tui-widgets/pull/6))
 
 ## [0.3.14](https://github.com/joshka/tui-prompts/compare/v0.3.13...v0.3.14) - 2024-07-02
 

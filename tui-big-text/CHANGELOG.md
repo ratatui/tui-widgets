@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Refresh widget docs ([#148](https://github.com/joshka/tui-widgets/issues/148))
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   > Standardize widget crate docs and README layouts.
   > Unify badges, links, and license references.
   > Add consistent usage sections and link style updates.
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(tui-big-text)* [**breaking**] Add block octant characters ([#117](https://github.com/joshka/tui-widgets/issues/117))
+- *(tui-big-text)* [**breaking**] Add block octant characters ([#117](https://github.com/ratatui/tui-widgets/issues/117))
   > The changes in this PR add the following enum variants:
   >
   > * `PixelSize::QuarterHeight` and `PixelSize::Octant` to `PixelSize`
@@ -27,7 +27,7 @@ All notable changes to this project will be documented in this file.
   > **two-row-tall text** styles in action and how they compare to text
   > rendered with other `PixelSize` settings.
 
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/joshka/tui-widgets/issues/120))
+- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   > feat!: migrate to ratatui 0.30
   >
   > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
@@ -43,19 +43,19 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- *(tui-big-text)* Fix enum name in field details ([#119](https://github.com/joshka/tui-widgets/issues/119))
+- *(tui-big-text)* Fix enum name in field details ([#119](https://github.com/ratatui/tui-widgets/issues/119))
 
 
 ## [0.7.3] - 2025-11-02
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
 ### 🎨 Styling
 
@@ -65,19 +65,19 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/joshka/tui-widgets/issues/70))
+- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/ratatui/tui-widgets/issues/70))
 
 
 ## [0.7.2] - 2025-11-02
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
 ### 🎨 Styling
 
@@ -87,7 +87,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/joshka/tui-widgets/issues/70))
+- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/ratatui/tui-widgets/issues/70))
 
 
 ## [0.6.1] - 2024-10-20
@@ -110,7 +110,7 @@ Ratatui-0.28.0 compatible release
 
 ### 🐛 Bug Fixes
 
-- Update to ratatui 0.28 ([#24](https://github.com/joshka/tui-widgets/pull/24))
+- Update to ratatui 0.28 ([#24](https://github.com/ratatui/tui-widgets/pull/24))
   > Note that for projects that rely on crossterm, Ratatui 0.28.0 now relies internally on Crossterm 0.28.0.
   > Ratatui release notes highlights: <https://ratatui.rs/highlights/v028/>
   > See <https://github.com/ratatui-org/ratatui/issues/1298> for notes about crossterm compatibility
@@ -125,7 +125,7 @@ Ratatui-0.28.0 compatible release
 
 ### 📚 Documentation
 
-- Clean up changelogs ([#17](https://github.com/joshka/tui-widgets/pull/17))
+- Clean up changelogs ([#17](https://github.com/ratatui/tui-widgets/pull/17))
   > - removed unnecessary footer comments
   > - removed [unreleased] sections
   > - removed duplicate release notes
@@ -170,7 +170,7 @@ Ratatui-0.28.0 compatible release
   >     .build()?;
   > ```
 
-- *(tui-big-text)* [**breaking**] Make `BigText` builder infallible ([#14](https://github.com/joshka/tui-widgets/pull/14))
+- *(tui-big-text)* [**breaking**] Make `BigText` builder infallible ([#14](https://github.com/ratatui/tui-widgets/pull/14))
   > BigTextBuilder.build() no longer returns a Result. Instead it returns
   > the BigText widget directly. This change is made to simplify rendering
   > code which often otherwise doesn't have any error conditions.
@@ -197,7 +197,7 @@ Ratatui-0.28.0 compatible release
 
 ### ⚙️ Miscellaneous Tasks
 
-- Various fixes / clippy lints ([#6](https://github.com/joshka/tui-widgets/pull/6))
+- Various fixes / clippy lints ([#6](https://github.com/ratatui/tui-widgets/pull/6))
 
 ## [0.4.5] - 2024-06-25
 
@@ -208,7 +208,7 @@ Ratatui-0.28.0 compatible release
 - Set msrv to 1.74
 - Update git cliff config
 
-## [0.4.6](https://github.com/joshka/tui-widgets/compare/tui-big-text-v0.4.5...tui-big-text-v0.4.6) - 2024-07-24
+## [0.4.6](https://github.com/ratatui/tui-widgets/compare/tui-big-text-v0.4.5...tui-big-text-v0.4.6) - 2024-07-24
 
 ### Other
 

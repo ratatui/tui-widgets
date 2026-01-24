@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Refresh widget docs ([#148](https://github.com/joshka/tui-widgets/issues/148))
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   > Standardize widget crate docs and README layouts.
   > Unify badges, links, and license references.
   > Add consistent usage sections and link style updates.
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Refresh readmes and rdme check ([#140](https://github.com/joshka/tui-widgets/issues/140))
+- Refresh readmes and rdme check ([#140](https://github.com/ratatui/tui-widgets/issues/140))
   > Regenerate crate READMEs via cargo-rdme and add a CI check to keep
   > workspace readmes in sync.
 
@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/joshka/tui-widgets/issues/120))
+- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   > feat!: migrate to ratatui 0.30
   >
   > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
@@ -44,11 +44,11 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Calculate area of QRCodeWidget ([#68](https://github.com/joshka/tui-widgets/issues/68))
+- Calculate area of QRCodeWidget ([#68](https://github.com/ratatui/tui-widgets/issues/68))
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
@@ -64,11 +64,11 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Calculate area of QRCodeWidget ([#68](https://github.com/joshka/tui-widgets/issues/68))
+- Calculate area of QRCodeWidget ([#68](https://github.com/ratatui/tui-widgets/issues/68))
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.

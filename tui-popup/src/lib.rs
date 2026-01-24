@@ -144,23 +144,23 @@
 //!
 //! [Crate]: https://crates.io/crates/tui-popup
 //! [Docs]: https://docs.rs/tui-popup/
-//! [Dependency Status]: https://deps.rs/repo/github/joshka/tui-widgets
-//! [Coverage]: https://app.codecov.io/gh/joshka/tui-widgets
+//! [Dependency Status]: https://deps.rs/repo/github/ratatui/tui-widgets
+//! [Coverage]: https://app.codecov.io/gh/ratatui/tui-widgets
 //! [Ratatui Discord]: https://discord.gg/pMCEU9hNEj
 //! [Crate badge]: https://img.shields.io/crates/v/tui-popup?logo=rust&style=flat
 //! [Docs Badge]: https://img.shields.io/docsrs/tui-popup?logo=rust&style=flat
-//! [Deps Badge]: https://deps.rs/repo/github/joshka/tui-widgets/status.svg?style=flat
+//! [Deps Badge]: https://deps.rs/repo/github/ratatui/tui-widgets/status.svg?style=flat
 //! [License Badge]: https://img.shields.io/crates/l/tui-popup?style=flat
-//! [License]: https://github.com/joshka/tui-widgets/blob/main/LICENSE-MIT
+//! [License]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
 //! [Coverage Badge]:
-//!     https://img.shields.io/codecov/c/github/joshka/tui-widgets?logo=codecov&style=flat
+//!     https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
 //! [Discord Badge]: https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
 //!
-//! [GitHub Repository]: https://github.com/joshka/tui-widgets
+//! [GitHub Repository]: https://github.com/ratatui/tui-widgets
 //! [API Docs]: https://docs.rs/tui-popup/
-//! [Examples]: https://github.com/joshka/tui-widgets/tree/main/tui-popup/examples
-//! [Changelog]: https://github.com/joshka/tui-widgets/blob/main/tui-popup/CHANGELOG.md
-//! [Contributing]: https://github.com/joshka/tui-widgets/blob/main/CONTRIBUTING.md
+//! [Examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-popup/examples
+//! [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-popup/CHANGELOG.md
+//! [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 //! [KnownSize]: https://docs.rs/tui-popup/latest/tui_popup/trait.KnownSize.html
 //! [KnownSizeWrapper]: https://docs.rs/tui-popup/latest/tui_popup/struct.KnownSizeWrapper.html
 //! [tui-scrollview]: https://crates.io/crates/tui-scrollview

@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(scrollbar)* Support crossterm 0.28 ([#172](https://github.com/joshka/tui-widgets/issues/172))
+- *(scrollbar)* Support crossterm 0.28 ([#172](https://github.com/ratatui/tui-widgets/issues/172))
   > Add versioned crossterm feature flags and re-export the selected version
   > as `tui_scrollbar::crossterm`.
   >
@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(scrollbar)* Update glyph previews and tests ([#169](https://github.com/joshka/tui-widgets/issues/169))
+- *(scrollbar)* Update glyph previews and tests ([#169](https://github.com/ratatui/tui-widgets/issues/169))
   > Default ScrollBar renders without arrow endcaps and uses a dark gray
   > background with a blank (space) track.
   >
@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(scrollbar)* Add tui-scrollbar crate ([#164](https://github.com/joshka/tui-widgets/issues/164))
+- *(scrollbar)* Add tui-scrollbar crate ([#164](https://github.com/ratatui/tui-widgets/issues/164))
   > ## Summary
   >
   > Introduce `tui-scrollbar`, a new widget crate for Ratatui that renders

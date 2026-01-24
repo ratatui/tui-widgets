@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Refresh widget docs ([#148](https://github.com/joshka/tui-widgets/issues/148))
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   > Standardize widget crate docs and README layouts.
   > Unify badges, links, and license references.
   > Add consistent usage sections and link style updates.
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Refresh readmes and rdme check ([#140](https://github.com/joshka/tui-widgets/issues/140))
+- Refresh readmes and rdme check ([#140](https://github.com/ratatui/tui-widgets/issues/140))
   > Regenerate crate READMEs via cargo-rdme and add a CI check to keep
   > workspace readmes in sync.
 
@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/joshka/tui-widgets/issues/120))
+- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   > feat!: migrate to ratatui 0.30
   >
   > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
@@ -44,12 +44,12 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
 ### 🎨 Styling
 
@@ -59,27 +59,27 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove leftover github workflow files ([#73](https://github.com/joshka/tui-widgets/issues/73))
+- Remove leftover github workflow files ([#73](https://github.com/ratatui/tui-widgets/issues/73))
 
-- Use semver compatible dependency versions ([#77](https://github.com/joshka/tui-widgets/issues/77))
+- Use semver compatible dependency versions ([#77](https://github.com/ratatui/tui-widgets/issues/77))
   > Use 0.x and x.y instead of 0.x.y and x.y.z for deps to reduce
   > incompatibilities
 
 ### Other
 
-- Added render_stateful_widget method to ScrollView ([#65](https://github.com/joshka/tui-widgets/issues/65))
+- Added render_stateful_widget method to ScrollView ([#65](https://github.com/ratatui/tui-widgets/issues/65))
 
 
 ## [0.5.2] - 2025-11-02
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
 ### 🎨 Styling
 
@@ -89,22 +89,22 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove leftover github workflow files ([#73](https://github.com/joshka/tui-widgets/issues/73))
+- Remove leftover github workflow files ([#73](https://github.com/ratatui/tui-widgets/issues/73))
 
-- Use semver compatible dependency versions ([#77](https://github.com/joshka/tui-widgets/issues/77))
+- Use semver compatible dependency versions ([#77](https://github.com/ratatui/tui-widgets/issues/77))
   > Use 0.x and x.y instead of 0.x.y and x.y.z for deps to reduce
   > incompatibilities
 
 ### Other
 
-- Added render_stateful_widget method to ScrollView ([#65](https://github.com/joshka/tui-widgets/issues/65))
+- Added render_stateful_widget method to ScrollView ([#65](https://github.com/ratatui/tui-widgets/issues/65))
 
 
 ## [0.5.1] - 2024-11-23
 
 ### 🚀 Features
 
-- *(tui-scrollview)* Add scrollbars visibility handling ([#45](https://github.com/joshka/tui-widgets/pull/45))
+- *(tui-scrollview)* Add scrollbars visibility handling ([#45](https://github.com/ratatui/tui-widgets/pull/45))
   > Scrollbars can now be set to never display, always display or automatically display (default).
 
 ## [0.4.1] - 2024-10-20
@@ -113,7 +113,7 @@ All notable changes to this project will be documented in this file.
 
 - Broken links from move to tui-widgets
 
-- *(tui-scrollview)* Make scroll_view buffer area the same as its content ([#37](https://github.com/joshka/tui-widgets/pull/37))
+- *(tui-scrollview)* Make scroll_view buffer area the same as its content ([#37](https://github.com/ratatui/tui-widgets/pull/37))
   > This makes the scroll_view buffer area the same as its content by
   > default.
   > The previous behavior is easily reproduced by adding empty space to the
@@ -121,7 +121,7 @@ All notable changes to this project will be documented in this file.
   > Most tests remain the same with the scrollbar updated to match the new
   > size.
   >
-  > Fixes:[#35](https://github.com/joshka/tui-widgets/pull/35)
+  > Fixes:[#35](https://github.com/ratatui/tui-widgets/pull/35)
 
 ### 📚 Documentation
 
@@ -143,7 +143,7 @@ Ratatui-0.28.0 compatible release
 
 ### 📚 Documentation
 
-- Clean up changelogs ([#17](https://github.com/joshka/tui-widgets/pull/17))
+- Clean up changelogs ([#17](https://github.com/ratatui/tui-widgets/pull/17))
   > - removed unnecessary footer comments
   > - removed [unreleased] sections
   > - removed duplicate release notes
@@ -164,9 +164,9 @@ Ratatui-0.28.0 compatible release
 
 ### ⚙️ Miscellaneous Tasks
 
-- Various fixes / clippy lints ([#6](https://github.com/joshka/tui-widgets/pull/6))
+- Various fixes / clippy lints ([#6](https://github.com/ratatui/tui-widgets/pull/6))
 
-## [0.3.8](https://github.com/joshka/tui-widgets/compare/tui-scrollview-v0.3.7...tui-scrollview-v0.3.8) - 2024-07-24
+## [0.3.8](https://github.com/ratatui/tui-widgets/compare/tui-scrollview-v0.3.7...tui-scrollview-v0.3.8) - 2024-07-24
 
 ### Other
 
