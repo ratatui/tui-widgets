@@ -229,26 +229,26 @@
 //! [Ratatui]: https://crates.io/crates/ratatui
 //! [Crate]: https://crates.io/crates/tui-scrollbar
 //! [Docs]: https://docs.rs/tui-scrollbar/
-//! [Dependency Status]: https://deps.rs/repo/github/joshka/tui-widgets
-//! [Coverage]: https://app.codecov.io/gh/joshka/tui-widgets
+//! [Dependency Status]: https://deps.rs/repo/github/ratatui/tui-widgets
+//! [Coverage]: https://app.codecov.io/gh/ratatui/tui-widgets
 //! [Ratatui Discord]: https://discord.gg/pMCEU9hNEj
 //! [Crate badge]: https://img.shields.io/crates/v/tui-scrollbar?logo=rust&style=flat
 //! [Docs Badge]: https://img.shields.io/docsrs/tui-scrollbar?logo=rust&style=flat
-//! [Deps Badge]: https://deps.rs/repo/github/joshka/tui-widgets/status.svg?style=flat
+//! [Deps Badge]: https://deps.rs/repo/github/ratatui/tui-widgets/status.svg?style=flat
 //! [License Badge]: https://img.shields.io/crates/l/tui-scrollbar?style=flat
-//! [License]: https://github.com/joshka/tui-widgets/blob/main/LICENSE-MIT
+//! [License]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
 //! [Coverage Badge]:
-//!     https://img.shields.io/codecov/c/github/joshka/tui-widgets?logo=codecov&style=flat
+//!     https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
 //! [Discord Badge]: https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
-//! [GitHub Repository]: https://github.com/joshka/tui-widgets
+//! [GitHub Repository]: https://github.com/ratatui/tui-widgets
 //! [API Docs]: https://docs.rs/tui-scrollbar/
-//! [Examples]: https://github.com/joshka/tui-widgets/tree/main/tui-scrollbar/examples
-//! [Changelog]: https://github.com/joshka/tui-widgets/blob/main/tui-scrollbar/CHANGELOG.md
-//! [Contributing]: https://github.com/joshka/tui-widgets/blob/main/CONTRIBUTING.md
-//! [Crate source]: https://github.com/joshka/tui-widgets/blob/main/tui-scrollbar/src/lib.rs
-//! [`scrollbar_mouse` example]: https://github.com/joshka/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar_mouse.rs
-//! [`scrollbar` example]: https://github.com/joshka/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar.rs
-//! [tui-scrollbar examples]: https://github.com/joshka/tui-widgets/tree/main/tui-scrollbar/examples
+//! [Examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples
+//! [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-scrollbar/CHANGELOG.md
+//! [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
+//! [Crate source]: https://github.com/ratatui/tui-widgets/blob/main/tui-scrollbar/src/lib.rs
+//! [`scrollbar_mouse` example]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar_mouse.rs
+//! [`scrollbar` example]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar.rs
+//! [tui-scrollbar examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples
 //! [`Buffer`]: ratatui_core::buffer::Buffer
 //! [`Rect`]: ratatui_core::layout::Rect
 //! [`Widget`]: ratatui_core::widgets::Widget

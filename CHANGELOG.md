@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(scrollbar)* Add tui-scrollbar crate ([#164](https://github.com/joshka/tui-widgets/issues/164))
+- *(scrollbar)* Add tui-scrollbar crate ([#164](https://github.com/ratatui/tui-widgets/issues/164))
   > ## Summary
   >
   > Introduce `tui-scrollbar`, a new widget crate for Ratatui that renders
@@ -52,7 +52,7 @@ All notable changes to this project will be documented in this file.
   > scrollbar.render(area, &mut buffer);
   > ```
 
-- *(scrollbar)* Add styled defaults ([#168](https://github.com/joshka/tui-widgets/issues/168))
+- *(scrollbar)* Add styled defaults ([#168](https://github.com/ratatui/tui-widgets/issues/168))
   > Set default track/thumb/arrow styles, style the demos with a filled
   > track, and update arrow glyphs and demo links.
   >
@@ -60,7 +60,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(tui-scrollbar)* Release v0.2.0 ([#165](https://github.com/joshka/tui-widgets/issues/165))
+- *(tui-scrollbar)* Release v0.2.0 ([#165](https://github.com/ratatui/tui-widgets/issues/165))
   > ## 🤖 New release
   >
   > * `tui-scrollbar`: 0.1.0 -> 0.2.0 (⚠ API breaking changes)
@@ -75,14 +75,14 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Refresh widget docs ([#148](https://github.com/joshka/tui-widgets/issues/148))
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   > Standardize widget crate docs and README layouts.
   > Unify badges, links, and license references.
   > Add consistent usage sections and link style updates.
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(tui-box-text)* Release v0.3.1 ([#149](https://github.com/joshka/tui-widgets/issues/149))
+- *(tui-box-text)* Release v0.3.1 ([#149](https://github.com/ratatui/tui-widgets/issues/149))
   > ## 🤖 New release
   >
   > * `tui-box-text`: 0.3.0 -> 0.3.1 (✓ API compatible changes)
@@ -96,7 +96,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -109,7 +109,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-cards)* Release v0.3.1 ([#150](https://github.com/joshka/tui-widgets/issues/150))
+- *(tui-cards)* Release v0.3.1 ([#150](https://github.com/ratatui/tui-widgets/issues/150))
   > ## 🤖 New release
   >
   > * `tui-cards`: 0.3.0 -> 0.3.1 (✓ API compatible changes)
@@ -123,7 +123,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -136,7 +136,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-bar-graph)* Release v0.3.1 ([#151](https://github.com/joshka/tui-widgets/issues/151))
+- *(tui-bar-graph)* Release v0.3.1 ([#151](https://github.com/ratatui/tui-widgets/issues/151))
   > ## 🤖 New release
   >
   > * `tui-bar-graph`: 0.3.0 -> 0.3.1 (✓ API compatible changes)
@@ -150,7 +150,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -163,7 +163,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-qrcode)* Release v0.2.2 ([#152](https://github.com/joshka/tui-widgets/issues/152))
+- *(tui-qrcode)* Release v0.2.2 ([#152](https://github.com/ratatui/tui-widgets/issues/152))
   > ## 🤖 New release
   >
   > * `tui-qrcode`: 0.2.1 -> 0.2.2 (✓ API compatible changes)
@@ -177,7 +177,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -190,7 +190,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-popup)* Release v0.7.2 ([#155](https://github.com/joshka/tui-widgets/issues/155))
+- *(tui-popup)* Release v0.7.2 ([#155](https://github.com/ratatui/tui-widgets/issues/155))
   > ## 🤖 New release
   >
   > * `tui-popup`: 0.7.1 -> 0.7.2 (✓ API compatible changes)
@@ -204,7 +204,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -217,7 +217,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-big-text)* Release v0.8.1 ([#154](https://github.com/joshka/tui-widgets/issues/154))
+- *(tui-big-text)* Release v0.8.1 ([#154](https://github.com/ratatui/tui-widgets/issues/154))
   > ## 🤖 New release
   >
   > * `tui-big-text`: 0.8.0 -> 0.8.1 (✓ API compatible changes)
@@ -231,7 +231,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -244,7 +244,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-scrollview)* Release v0.6.2 ([#156](https://github.com/joshka/tui-widgets/issues/156))
+- *(tui-scrollview)* Release v0.6.2 ([#156](https://github.com/ratatui/tui-widgets/issues/156))
   > ## 🤖 New release
   >
   > * `tui-scrollview`: 0.6.1 -> 0.6.2 (✓ API compatible changes)
@@ -258,7 +258,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -271,7 +271,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-prompts)* Release v0.6.1 ([#161](https://github.com/joshka/tui-widgets/issues/161))
+- *(tui-prompts)* Release v0.6.1 ([#161](https://github.com/ratatui/tui-widgets/issues/161))
   > ## 🤖 New release
   >
   > * `tui-prompts`: 0.6.0 -> 0.6.1 (✓ API compatible changes)
@@ -285,7 +285,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - Refresh widget docs
-  > ([#148](https://github.com/joshka/tui-widgets/issues/148))
+  > ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   >   > Standardize widget crate docs and README layouts.
   >   > Unify badges, links, and license references.
   >   > Add consistent usage sections and link style updates.
@@ -303,11 +303,11 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Refresh readmes and rdme check ([#140](https://github.com/joshka/tui-widgets/issues/140))
+- Refresh readmes and rdme check ([#140](https://github.com/ratatui/tui-widgets/issues/140))
   > Regenerate crate READMEs via cargo-rdme and add a CI check to keep
   > workspace readmes in sync.
 
-- *(tui-qrcode)* Release v0.2.1 ([#141](https://github.com/joshka/tui-widgets/issues/141))
+- *(tui-qrcode)* Release v0.2.1 ([#141](https://github.com/ratatui/tui-widgets/issues/141))
   > ## 🤖 New release
   >
   > * `tui-qrcode`: 0.2.0 -> 0.2.1 (✓ API compatible changes)
@@ -321,7 +321,7 @@ All notable changes to this project will be documented in this file.
   > ### ⚙️ Miscellaneous Tasks
   >
   > - Refresh readmes and rdme check
-  > ([#140](https://github.com/joshka/tui-widgets/issues/140))
+  > ([#140](https://github.com/ratatui/tui-widgets/issues/140))
   >   > Regenerate crate READMEs via cargo-rdme and add a CI check to keep
   >   > workspace readmes in sync.
   > </blockquote>
@@ -338,14 +338,14 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(tui-bar-graph)* [**breaking**] Add block octant characters ([#116](https://github.com/joshka/tui-widgets/issues/116))
+- *(tui-bar-graph)* [**breaking**] Add block octant characters ([#116](https://github.com/ratatui/tui-widgets/issues/116))
   > Since Unicode 16.0 was published on September 10, 2024, support for
   > block octant characters (U+1CD00 to U+1CDE5,
   > [PDF](https://www.unicode.org/charts/PDF/Unicode-16.0/U160-1CC00.pdf))
   > has been improving in fonts. We should enable users of `tui-widgets` to
   > use these characters in addition to existing options.
 
-- *(tui-big-text)* [**breaking**] Add block octant characters ([#117](https://github.com/joshka/tui-widgets/issues/117))
+- *(tui-big-text)* [**breaking**] Add block octant characters ([#117](https://github.com/ratatui/tui-widgets/issues/117))
   > The changes in this PR add the following enum variants:
   >
   > * `PixelSize::QuarterHeight` and `PixelSize::Octant` to `PixelSize`
@@ -356,7 +356,7 @@ All notable changes to this project will be documented in this file.
   > **two-row-tall text** styles in action and how they compare to text
   > rendered with other `PixelSize` settings.
 
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/joshka/tui-widgets/issues/120))
+- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   > feat!: migrate to ratatui 0.30
   >
   > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
@@ -372,23 +372,23 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Add AGENTS.md repository guidelines ([#108](https://github.com/joshka/tui-widgets/issues/108))
+- Add AGENTS.md repository guidelines ([#108](https://github.com/ratatui/tui-widgets/issues/108))
 
-- *(tui-big-text)* Fix enum name in field details ([#119](https://github.com/joshka/tui-widgets/issues/119))
+- *(tui-big-text)* Fix enum name in field details ([#119](https://github.com/ratatui/tui-widgets/issues/119))
 
 ### 🎨 Styling
 
-- *(tui-prompts)* Apply changes from cargo fmt ([#118](https://github.com/joshka/tui-widgets/issues/118))
+- *(tui-prompts)* Apply changes from cargo fmt ([#118](https://github.com/ratatui/tui-widgets/issues/118))
 
 ### ⚙️ Miscellaneous Tasks
 
-- Enable trusted publishing via release-plz ([#110](https://github.com/joshka/tui-widgets/issues/110))
+- Enable trusted publishing via release-plz ([#110](https://github.com/ratatui/tui-widgets/issues/110))
 
-- Run release-plz per package ([#121](https://github.com/joshka/tui-widgets/issues/121))
+- Run release-plz per package ([#121](https://github.com/ratatui/tui-widgets/issues/121))
   > - Run release-plz release-pr in a per-crate matrix
   > - Keep release job as a single workspace publish
 
-- *(tui-box-text)* Release v0.3.0 ([#106](https://github.com/joshka/tui-widgets/issues/106))
+- *(tui-box-text)* Release v0.3.0 ([#106](https://github.com/ratatui/tui-widgets/issues/106))
   > ## 🤖 New release
   >
   > * `tui-box-text`: 0.2.2 -> 0.3.0 (✓ API compatible changes)
@@ -402,7 +402,7 @@ All notable changes to this project will be documented in this file.
   > ### 🚀 Features
   >
   > - [**breaking**] Migrate to ratatui 0.30
-  > ([#120](https://github.com/joshka/tui-widgets/issues/120))
+  > ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   >   > feat!: migrate to ratatui 0.30
   >   >
   > > - Update workspace deps to ratatui 0.30, ratatui-core,
@@ -425,11 +425,11 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- Fix release-plz matrix concurrency ([#123](https://github.com/joshka/tui-widgets/issues/123))
+- Fix release-plz matrix concurrency ([#123](https://github.com/ratatui/tui-widgets/issues/123))
   > Avoid matrix jobs canceling each other by including the package name in
   > the concurrency group.
 
-- *(tui-big-text)* Release v0.8.0 ([#122](https://github.com/joshka/tui-widgets/issues/122))
+- *(tui-big-text)* Release v0.8.0 ([#122](https://github.com/ratatui/tui-widgets/issues/122))
   > ## 🤖 New release
   >
   > * `tui-big-text`: 0.7.3 -> 0.8.0 (✓ API compatible changes)
@@ -443,7 +443,7 @@ All notable changes to this project will be documented in this file.
   > ### 🚀 Features
   >
   > - *(tui-big-text)* [**breaking**] Add block octant characters
-  > ([#117](https://github.com/joshka/tui-widgets/issues/117))
+  > ([#117](https://github.com/ratatui/tui-widgets/issues/117))
   >   > The changes in this PR add the following enum variants:
   >   >
   >   > * `PixelSize::QuarterHeight` and `PixelSize::Octant` to `PixelSize`
@@ -455,7 +455,7 @@ All notable changes to this project will be documented in this file.
   >   > rendered with other `PixelSize` settings.
   >
   > - [**breaking**] Migrate to ratatui 0.30
-  > ([#120](https://github.com/joshka/tui-widgets/issues/120))
+  > ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   >   > feat!: migrate to ratatui 0.30
   >   >
   > > - Update workspace deps to ratatui 0.30, ratatui-core,
@@ -473,7 +473,7 @@ All notable changes to this project will be documented in this file.
   > ### 📚 Documentation
   >
   > - *(tui-big-text)* Fix enum name in field details
-  > ([#119](https://github.com/joshka/tui-widgets/issues/119))
+  > ([#119](https://github.com/ratatui/tui-widgets/issues/119))
   > </blockquote>
   >
   >
@@ -483,11 +483,11 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- Separate release-pr branches ([#126](https://github.com/joshka/tui-widgets/issues/126))
+- Separate release-pr branches ([#126](https://github.com/ratatui/tui-widgets/issues/126))
   > Configure per-package release-plz branch prefixes so matrix jobs target
   > distinct PR branches instead of clobbering one.
 
-- *(tui-cards)* Release v0.3.0 ([#125](https://github.com/joshka/tui-widgets/issues/125))
+- *(tui-cards)* Release v0.3.0 ([#125](https://github.com/ratatui/tui-widgets/issues/125))
   > ## 🤖 New release
   >
   > * `tui-cards`: 0.2.4 -> 0.3.0 (✓ API compatible changes)
@@ -501,7 +501,7 @@ All notable changes to this project will be documented in this file.
   > ### 🚀 Features
   >
   > - [**breaking**] Migrate to ratatui 0.30
-  > ([#120](https://github.com/joshka/tui-widgets/issues/120))
+  > ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   >   > feat!: migrate to ratatui 0.30
   >   >
   > > - Update workspace deps to ratatui 0.30, ratatui-core,
@@ -524,15 +524,15 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- Template per-package release-pr config ([#127](https://github.com/joshka/tui-widgets/issues/127))
+- Template per-package release-pr config ([#127](https://github.com/ratatui/tui-widgets/issues/127))
   > Generate a per-package release-plz config in CI so each matrix job uses
   > a unique PR branch prefix without unsupported package settings.
 
-- Add per-package release-plz configs ([#128](https://github.com/joshka/tui-widgets/issues/128))
+- Add per-package release-plz configs ([#128](https://github.com/ratatui/tui-widgets/issues/128))
   > Commit per-package release-plz config files and point the workflow at
   > them so each matrix job uses a unique PR branch prefix.
 
-- *(tui-popup)* Release v0.7.0 ([#129](https://github.com/joshka/tui-widgets/issues/129))
+- *(tui-popup)* Release v0.7.0 ([#129](https://github.com/ratatui/tui-widgets/issues/129))
   > ## 🤖 New release
   >
   > * `tui-popup`: 0.6.2 -> 0.7.0 (✓ API compatible changes)
@@ -546,7 +546,7 @@ All notable changes to this project will be documented in this file.
   > ### 🚀 Features
   >
   > - [**breaking**] Migrate to ratatui 0.30
-  > ([#120](https://github.com/joshka/tui-widgets/issues/120))
+  > ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   >   > feat!: migrate to ratatui 0.30
   >   >
   > > - Update workspace deps to ratatui 0.30, ratatui-core,
@@ -569,7 +569,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-scrollview)* Release v0.6.0 ([#132](https://github.com/joshka/tui-widgets/issues/132))
+- *(tui-scrollview)* Release v0.6.0 ([#132](https://github.com/ratatui/tui-widgets/issues/132))
   > ## 🤖 New release
   >
   > * `tui-scrollview`: 0.5.3 -> 0.6.0 (✓ API compatible changes)
@@ -583,7 +583,7 @@ All notable changes to this project will be documented in this file.
   > ### 🚀 Features
   >
   > - [**breaking**] Migrate to ratatui 0.30
-  > ([#120](https://github.com/joshka/tui-widgets/issues/120))
+  > ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   >   > feat!: migrate to ratatui 0.30
   >   >
   > > - Update workspace deps to ratatui 0.30, ratatui-core,
@@ -606,7 +606,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-bar-graph)* Release v0.3.0 ([#131](https://github.com/joshka/tui-widgets/issues/131))
+- *(tui-bar-graph)* Release v0.3.0 ([#131](https://github.com/ratatui/tui-widgets/issues/131))
   > ## 🤖 New release
   >
   > * `tui-bar-graph`: 0.2.0 -> 0.3.0 (⚠ API breaking changes)
@@ -616,7 +616,7 @@ All notable changes to this project will be documented in this file.
   > ```text
   > --- failure enum_variant_added: enum variant added on exhaustive enum ---
 
-- *(tui-prompts)* Release v0.6.0 ([#130](https://github.com/joshka/tui-widgets/issues/130))
+- *(tui-prompts)* Release v0.6.0 ([#130](https://github.com/ratatui/tui-widgets/issues/130))
   > ## 🤖 New release
   >
   > * `tui-prompts`: 0.5.2 -> 0.6.0 (✓ API compatible changes)
@@ -630,7 +630,7 @@ All notable changes to this project will be documented in this file.
   > ### 🚀 Features
   >
   > - [**breaking**] Migrate to ratatui 0.30
-  > ([#120](https://github.com/joshka/tui-widgets/issues/120))
+  > ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   >   > feat!: migrate to ratatui 0.30
   >   >
   > > - Update workspace deps to ratatui 0.30, ratatui-core,
@@ -648,7 +648,7 @@ All notable changes to this project will be documented in this file.
   > ### 🎨 Styling
   >
   > - *(tui-prompts)* Apply changes from cargo fmt
-  > ([#118](https://github.com/joshka/tui-widgets/issues/118))
+  > ([#118](https://github.com/ratatui/tui-widgets/issues/118))
   > </blockquote>
   >
   >
@@ -658,7 +658,7 @@ All notable changes to this project will be documented in this file.
   > This PR was generated with
   > [release-plz](https://github.com/release-plz/release-plz/).
 
-- *(tui-qrcode)* Release v0.2.0 ([#133](https://github.com/joshka/tui-widgets/issues/133))
+- *(tui-qrcode)* Release v0.2.0 ([#133](https://github.com/ratatui/tui-widgets/issues/133))
   > ## 🤖 New release
   >
   > * `tui-qrcode`: 0.1.3 -> 0.2.0 (✓ API compatible changes)
@@ -672,7 +672,7 @@ All notable changes to this project will be documented in this file.
   > ### 🚀 Features
   >
   > - [**breaking**] Migrate to ratatui 0.30
-  > ([#120](https://github.com/joshka/tui-widgets/issues/120))
+  > ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   >   > feat!: migrate to ratatui 0.30
   >   >
   > > - Update workspace deps to ratatui 0.30, ratatui-core,
@@ -697,7 +697,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🛡️ Security
 
-- *(deps)* Bump indoc from 2.0.6 to 2.0.7 ([#115](https://github.com/joshka/tui-widgets/issues/115))
+- *(deps)* Bump indoc from 2.0.6 to 2.0.7 ([#115](https://github.com/ratatui/tui-widgets/issues/115))
   > Bumps [indoc](https://github.com/dtolnay/indoc) from 2.0.6 to 2.0.7.
   > <details>
   > <summary>Release notes</summary>
@@ -763,7 +763,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump rstest from 0.25.0 to 0.26.1 ([#114](https://github.com/joshka/tui-widgets/issues/114))
+- *(deps)* Bump rstest from 0.25.0 to 0.26.1 ([#114](https://github.com/ratatui/tui-widgets/issues/114))
   > Bumps [rstest](https://github.com/la10736/rstest) from 0.25.0 to 0.26.1.
   > <details>
   > <summary>Release notes</summary>
@@ -942,7 +942,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump document-features from 0.2.11 to 0.2.12 ([#113](https://github.com/joshka/tui-widgets/issues/113))
+- *(deps)* Bump document-features from 0.2.11 to 0.2.12 ([#113](https://github.com/ratatui/tui-widgets/issues/113))
   > Bumps [document-features](https://github.com/slint-ui/document-features)
   > from 0.2.11 to 0.2.12.
   > <details>
@@ -991,7 +991,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump clap from 4.5.48 to 4.5.53 ([#111](https://github.com/joshka/tui-widgets/issues/111))
+- *(deps)* Bump clap from 4.5.48 to 4.5.53 ([#111](https://github.com/ratatui/tui-widgets/issues/111))
   > Bumps [clap](https://github.com/clap-rs/clap) from 4.5.48 to 4.5.53.
   > <details>
   > <summary>Release notes</summary>
@@ -1128,14 +1128,14 @@ All notable changes to this project will be documented in this file.
 
 ### Other
 
-- *(deps)* Bump tokio from 1.47.1 to 1.48.0 ([#112](https://github.com/joshka/tui-widgets/issues/112))
+- *(deps)* Bump tokio from 1.47.1 to 1.48.0 ([#112](https://github.com/ratatui/tui-widgets/issues/112))
 
 
 ## [0.5.0] - 2025-11-02
 
 ### 🚀 Features
 
-- Add new tui-bar-graph crate ([#63](https://github.com/joshka/tui-widgets/issues/63))
+- Add new tui-bar-graph crate ([#63](https://github.com/ratatui/tui-widgets/issues/63))
   > ![Braille demo](https://vhs.charm.sh/vhs-3H7bFj0M1kj0GoHcc4EIJ4.gif)
   >
   > ![Solid demo](https://vhs.charm.sh/vhs-5XMtSFgX3vqOhKcKl8fEQK.gif)
@@ -1151,14 +1151,14 @@ All notable changes to this project will be documented in this file.
   > frame.render_widget(bar_graph, area);
   > ```
 
-- Calculate area of QRCodeWidget ([#68](https://github.com/joshka/tui-widgets/issues/68))
+- Calculate area of QRCodeWidget ([#68](https://github.com/ratatui/tui-widgets/issues/68))
 
-- *(tui-bar-graph)* [**breaking**] Support boxed gradients ([#66](https://github.com/joshka/tui-widgets/issues/66))
+- *(tui-bar-graph)* [**breaking**] Support boxed gradients ([#66](https://github.com/ratatui/tui-widgets/issues/66))
   > This patch adds support for boxed gradients in the `BarGraph` widget.
   > This makes it possible to choose gradients of different types at runtime
   > without having to change the type of the `BarGraph` struct.
 
-- *(tui-bar-graph)* Add Quadrant style ([#80](https://github.com/joshka/tui-widgets/issues/80))
+- *(tui-bar-graph)* Add Quadrant style ([#80](https://github.com/ratatui/tui-widgets/issues/80))
   > This style uses the block drawing 2x2 quadrant characters.
   > In contrast to the braille style, it renders solid rather than dots.
   > In contrast to the solid style, it renders two columns and rows per bar.
@@ -1169,17 +1169,17 @@ All notable changes to this project will be documented in this file.
 
 - Broken bar graph test
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- Use f64:midpoint ([#83](https://github.com/joshka/tui-widgets/issues/83))
+- Use f64:midpoint ([#83](https://github.com/ratatui/tui-widgets/issues/83))
   > MSRV is now 1.87
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
-- *(tui-prompts)* Full-width character input in non-multiline prompt ([#93](https://github.com/joshka/tui-widgets/issues/93)) ([#94](https://github.com/joshka/tui-widgets/issues/94))
+- *(tui-prompts)* Full-width character input in non-multiline prompt ([#93](https://github.com/ratatui/tui-widgets/issues/93)) ([#94](https://github.com/ratatui/tui-widgets/issues/94))
 
 ### 🚜 Refactor
 
@@ -1195,27 +1195,27 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove needless lifetimes ([#60](https://github.com/joshka/tui-widgets/issues/60))
+- Remove needless lifetimes ([#60](https://github.com/ratatui/tui-widgets/issues/60))
 
-- Fix git-cliff config ([#61](https://github.com/joshka/tui-widgets/issues/61))
+- Fix git-cliff config ([#61](https://github.com/ratatui/tui-widgets/issues/61))
 
 - Prepare tui-bar-graph 0.1.1
 
-- Remove leftover github workflow files ([#73](https://github.com/joshka/tui-widgets/issues/73))
+- Remove leftover github workflow files ([#73](https://github.com/ratatui/tui-widgets/issues/73))
 
 - Commit cargo.lock file
 
-- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/joshka/tui-widgets/issues/70))
+- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/ratatui/tui-widgets/issues/70))
 
-- Use semver compatible dependency versions ([#77](https://github.com/joshka/tui-widgets/issues/77))
+- Use semver compatible dependency versions ([#77](https://github.com/ratatui/tui-widgets/issues/77))
   > Use 0.x and x.y instead of 0.x.y and x.y.z for deps to reduce
   > incompatibilities
 
-- *(deps)* Use less specific versions of color-eyre and clap ([#82](https://github.com/joshka/tui-widgets/issues/82))
+- *(deps)* Use less specific versions of color-eyre and clap ([#82](https://github.com/ratatui/tui-widgets/issues/82))
 
 ### 🛡️ Security
 
-- *(deps)* Bump derive_setters from 0.1.7 to 0.1.8 ([#86](https://github.com/joshka/tui-widgets/issues/86))
+- *(deps)* Bump derive_setters from 0.1.7 to 0.1.8 ([#86](https://github.com/ratatui/tui-widgets/issues/86))
   > Bumps [derive_setters](https://github.com/Lymia/derive_setters) from
   > 0.1.7 to 0.1.8.
   > <details>
@@ -1236,7 +1236,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump clap from 4.5.40 to 4.5.41 ([#87](https://github.com/joshka/tui-widgets/issues/87))
+- *(deps)* Bump clap from 4.5.40 to 4.5.41 ([#87](https://github.com/ratatui/tui-widgets/issues/87))
   > Bumps [clap](https://github.com/clap-rs/clap) from 4.5.40 to 4.5.41.
   > <details>
   > <summary>Changelog</summary>
@@ -1307,7 +1307,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump strum from 0.27.1 to 0.27.2 ([#89](https://github.com/joshka/tui-widgets/issues/89))
+- *(deps)* Bump strum from 0.27.1 to 0.27.2 ([#89](https://github.com/ratatui/tui-widgets/issues/89))
   > Bumps [strum](https://github.com/Peternator7/strum) from 0.27.1 to
   > 0.27.2.
   > <details>
@@ -1514,7 +1514,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump rand from 0.9.1 to 0.9.2 ([#88](https://github.com/joshka/tui-widgets/issues/88))
+- *(deps)* Bump rand from 0.9.1 to 0.9.2 ([#88](https://github.com/ratatui/tui-widgets/issues/88))
   > Bumps [rand](https://github.com/rust-random/rand) from 0.9.1 to 0.9.2.
   > <details>
   > <summary>Changelog</summary>
@@ -1582,7 +1582,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump tokio from 1.45.1 to 1.46.1 ([#85](https://github.com/joshka/tui-widgets/issues/85))
+- *(deps)* Bump tokio from 1.45.1 to 1.46.1 ([#85](https://github.com/ratatui/tui-widgets/issues/85))
   > Bumps [tokio](https://github.com/tokio-rs/tokio) from 1.45.1 to 1.46.1.
   > <details>
   > <summary>Release notes</summary>
@@ -1749,7 +1749,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump clap from 4.5.41 to 4.5.43 ([#97](https://github.com/joshka/tui-widgets/issues/97))
+- *(deps)* Bump clap from 4.5.41 to 4.5.43 ([#97](https://github.com/ratatui/tui-widgets/issues/97))
   > Bumps [clap](https://github.com/clap-rs/clap) from 4.5.41 to 4.5.43.
   > <details>
   > <summary>Release notes</summary>
@@ -1845,7 +1845,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump tokio from 1.46.1 to 1.47.1 ([#96](https://github.com/joshka/tui-widgets/issues/96))
+- *(deps)* Bump tokio from 1.46.1 to 1.47.1 ([#96](https://github.com/ratatui/tui-widgets/issues/96))
   > Bumps [tokio](https://github.com/tokio-rs/tokio) from 1.46.1 to 1.47.1.
   > <details>
   > <summary>Release notes</summary>
@@ -1992,7 +1992,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump clap from 4.5.43 to 4.5.48 ([#103](https://github.com/joshka/tui-widgets/issues/103))
+- *(deps)* Bump clap from 4.5.43 to 4.5.48 ([#103](https://github.com/ratatui/tui-widgets/issues/103))
   > Bumps [clap](https://github.com/clap-rs/clap) from 4.5.43 to 4.5.48.
   > <details>
   > <summary>Release notes</summary>
@@ -2139,7 +2139,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump tracing-subscriber from 0.3.19 to 0.3.20 ([#100](https://github.com/joshka/tui-widgets/issues/100))
+- *(deps)* Bump tracing-subscriber from 0.3.19 to 0.3.20 ([#100](https://github.com/ratatui/tui-widgets/issues/100))
   > Bumps [tracing-subscriber](https://github.com/tokio-rs/tracing) from
   > 0.3.19 to 0.3.20.
   > <details>
@@ -2254,7 +2254,7 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- *(deps)* Bump actions/checkout from 4 to 5 ([#99](https://github.com/joshka/tui-widgets/issues/99))
+- *(deps)* Bump actions/checkout from 4 to 5 ([#99](https://github.com/ratatui/tui-widgets/issues/99))
   > Bumps [actions/checkout](https://github.com/actions/checkout) from 4 to
   > 5.
   > <details>
@@ -2523,7 +2523,7 @@ All notable changes to this project will be documented in this file.
 
 ### Other
 
-- *(deps)* Update rstest requirement from 0.24.0 to 0.25.0 ([#62](https://github.com/joshka/tui-widgets/issues/62))
+- *(deps)* Update rstest requirement from 0.24.0 to 0.25.0 ([#62](https://github.com/ratatui/tui-widgets/issues/62))
   > Updates the requirements on [rstest](https://github.com/la10736/rstest)
   > to permit the latest version.
   > <details>
@@ -2657,9 +2657,9 @@ All notable changes to this project will be documented in this file.
   > alter it yourself. You can also trigger a rebase manually by commenting
   > `@dependabot rebase`.
 
-- Added render_stateful_widget method to ScrollView ([#65](https://github.com/joshka/tui-widgets/issues/65))
+- Added render_stateful_widget method to ScrollView ([#65](https://github.com/ratatui/tui-widgets/issues/65))
 
-- Bump msrv to 1.82.0 ([#74](https://github.com/joshka/tui-widgets/issues/74))
+- Bump msrv to 1.82.0 ([#74](https://github.com/ratatui/tui-widgets/issues/74))
 
 
 ## [0.4.1] - 2024-11-23
@@ -2680,9 +2680,9 @@ All notable changes to this project will be documented in this file.
 
 ### Other
 
-- Remove patch from main Cargo.toml file that was pointing at a local path ([#38](https://github.com/joshka/tui-widgets/pull/38))
+- Remove patch from main Cargo.toml file that was pointing at a local path ([#38](https://github.com/ratatui/tui-widgets/pull/38))
 
-- *(deps)* Update rstest requirement from 0.22.0 to 0.23.0 ([#41](https://github.com/joshka/tui-widgets/pull/41))
+- *(deps)* Update rstest requirement from 0.22.0 to 0.23.0 ([#41](https://github.com/ratatui/tui-widgets/pull/41))
   > Updates the requirements on [rstest](https://github.com/la10736/rstest)
   > to permit the latest version.
   > <details>
@@ -2706,14 +2706,14 @@ All notable changes to this project will be documented in this file.
   > <ul>
   > <li>Now it's possible destructuring input values both for cases, values
   > and fixtures. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/231">[#231](https://github.com/joshka/tui-widgets/pull/231)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/231">[#231](https://github.com/ratatui/tui-widgets/pull/231)</a>
   > for details</li>
   > </ul>
   > <h3>Add</h3>
   > <ul>
   > <li>Implemented <code>#[ignore]</code> attribute to ignore test
   > parameters during fixtures resolution/injection. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/228">[#228](https://github.com/joshka/tui-widgets/pull/228)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/228">[#228](https://github.com/ratatui/tui-widgets/pull/228)</a>
   > for details</li>
   > </ul>
   > <h3>Fixed</h3>
@@ -2726,7 +2726,7 @@ All notable changes to this project will be documented in this file.
   > <li>Add feature <code>crate-name</code> enabled by default to opt-in
   > crate rename
   > support. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/258">[#258](https://github.com/joshka/tui-widgets/pull/258)</a></li>
+  > href="https://redirect.github.com/la10736/rstest/issues/258">[#258](https://github.com/ratatui/tui-widgets/pull/258)</a></li>
   > </ul>
   > <h2>[0.20.0] 2024/5/30</h2>
   > <h3>Add</h3>
@@ -2734,33 +2734,33 @@ All notable changes to this project will be documented in this file.
   > <li>Implemented <code>#[by_ref]</code> attribute to take get a local
   > lifetime for test arguments.
   > See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/joshka/tui-widgets/pull/241)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/ratatui/tui-widgets/pull/241)</a>
   > for more details. Thanks to
   > <a href="https://github.com/narpfel"><code>@​narpfel</code></a> for
   > suggesting it and useful discussions.</li>
   > <li>Support for import <code>rstest</code> with another name. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/221">[#221](https://github.com/joshka/tui-widgets/pull/221)</a></li>
+  > href="https://redirect.github.com/la10736/rstest/issues/221">[#221](https://github.com/ratatui/tui-widgets/pull/221)</a></li>
   > </ul>
   > <h3>Fixed</h3>
   > <ul>
   > <li>Don't remove Lifetimes from test function if any. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/230">[#230](https://github.com/joshka/tui-widgets/pull/230)</a>
-  > <a href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/joshka/tui-widgets/pull/241)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/230">[#230](https://github.com/ratatui/tui-widgets/pull/230)</a>
+  > <a href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/ratatui/tui-widgets/pull/241)</a>
   > for more details.</li>
   > <li><a
   > href="https://doc.rust-lang.org/std/path/struct.PathBuf.html"><code>PathBuf</code></a>
   > does no longer need to be
   > in scope when using <code>#[files]</code> (see <a
-  > href="https://redirect.github.com/la10736/rstest/pull/242">[#242](https://github.com/joshka/tui-widgets/pull/242)</a>)</li>
+  > href="https://redirect.github.com/la10736/rstest/pull/242">[#242](https://github.com/ratatui/tui-widgets/pull/242)</a>)</li>
   > <li><code>#[from(now::accept::also::path::for::fixture)]</code> See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/246">[#246](https://github.com/joshka/tui-widgets/pull/246)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/246">[#246](https://github.com/ratatui/tui-widgets/pull/246)</a>
   > for more details</li>
   > </ul>
   > <h2>[0.19.0] 2024/4/9</h2>
   > <h3>Changed</h3>
   > <ul>
   > <li>Defined <code>rust-version</code> for each crate (see <a
-  > href="https://redirect.github.com/la10736/rstest/issues/227">[#227](https://github.com/joshka/tui-widgets/pull/227)</a>)</li>
+  > href="https://redirect.github.com/la10736/rstest/issues/227">[#227](https://github.com/ratatui/tui-widgets/pull/227)</a>)</li>
   > </ul>
   > <h3>Fixed</h3>
   > <ul>
@@ -2769,7 +2769,7 @@ All notable changes to this project will be documented in this file.
   > href="https://doc.rust-lang.org/std/marker/trait.Sync.html"><code>Sync</code></a>
   > to prevent UB
   > when tests are executed in parallel. (see <a
-  > href="https://redirect.github.com/la10736/rstest/issues/235">[#235](https://github.com/joshka/tui-widgets/pull/235)</a></li>
+  > href="https://redirect.github.com/la10736/rstest/issues/235">[#235](https://github.com/ratatui/tui-widgets/pull/235)</a></li>
   > </ul>
   > <!-- raw HTML omitted -->
   > </blockquote>
@@ -2849,11 +2849,11 @@ Ratatui-0.28.0 compatible release
 
 ### 🐛 Bug Fixes
 
-- Add missing cfg ([#28](https://github.com/joshka/tui-widgets/pull/28))
+- Add missing cfg ([#28](https://github.com/ratatui/tui-widgets/pull/28))
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(tui-big-text)* Release v0.5.5 ([#25](https://github.com/joshka/tui-widgets/pull/25))
+- *(tui-big-text)* Release v0.5.5 ([#25](https://github.com/ratatui/tui-widgets/pull/25))
 
   > ## 🤖 New release
   >
@@ -2870,7 +2870,7 @@ Ratatui-0.28.0 compatible release
   > ### 🐛 Bug Fixes
   >
   > - Update to ratatui 0.28
-  > ([[#24](https://github.com/joshka/tui-widgets/pull/24)](<https://github.com/joshka/tui-widgets/pull/24>))
+  > ([[#24](https://github.com/ratatui/tui-widgets/pull/24)](<https://github.com/ratatui/tui-widgets/pull/24>))
   > > Note that for projects that rely on crossterm, Ratatui 0.28.0 now
   > relies internally on Crossterm 0.28.0.
   > > Ratatui release notes highlights: <https://ratatui.rs/highlights/v028/>
@@ -2889,7 +2889,7 @@ Ratatui-0.28.0 compatible release
 
 ### Other
 
-- *(deps)* Update crossterm requirement from 0.27.0 to 0.28.1 ([#22](https://github.com/joshka/tui-widgets/pull/22))
+- *(deps)* Update crossterm requirement from 0.27.0 to 0.28.1 ([#22](https://github.com/ratatui/tui-widgets/pull/22))
   > Updates the requirements on
   > [crossterm](https://github.com/crossterm-rs/crossterm) to permit the
   > latest version.
@@ -2906,10 +2906,10 @@ Ratatui-0.28.0 compatible release
   > <li>Add <code>NO_COLOR</code> support (<a
   > href="https://no-color.org/">https://no-color.org/</a>)</li>
   > <li>Add option to force overwrite <code>NO_COLOR</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/joshka/tui-widgets/pull/802)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/ratatui/tui-widgets/pull/802)</a>)</li>
   > <li>Add support for scroll left/right events on windows and unix systems
   > (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/joshka/tui-widgets/pull/788)</a>).</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/ratatui/tui-widgets/pull/788)</a>).</li>
   > <li>Add <code>window_size</code> function to fetch pixel width/height of
   > screen for more sophisticated rendering in terminals.</li>
   > <li>Add support for deserializing hex color strings to `Color`` e.g
@@ -2919,14 +2919,14 @@ Ratatui-0.28.0 compatible release
   > <ul>
   > <li>Make the events module an optional feature <code>events</code> (to
   > make crossterm more lightweight) (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/776">[#776](https://github.com/joshka/tui-widgets/pull/776)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/776">[#776](https://github.com/ratatui/tui-widgets/pull/776)</a>)</li>
   > </ul>
   > <h2>Breaking ⚠️</h2>
   > <ul>
   > <li>Set minimum rustc version to 1.58 (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/798">[#798](https://github.com/joshka/tui-widgets/pull/798)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/798">[#798](https://github.com/ratatui/tui-widgets/pull/798)</a>)</li>
   > <li>Change all error types to <code>std::io::Result</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/765">[#765](https://github.com/joshka/tui-widgets/pull/765)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/765">[#765](https://github.com/ratatui/tui-widgets/pull/765)</a>)</li>
   > </ul>
   > <p><a href="https://github.com/Gronis"><code>@​Gronis</code></a>, <a
   > href="https://github.com/kevin-vigor"><code>@​kevin-vigor</code></a>, <a
@@ -2955,7 +2955,7 @@ Ratatui-0.28.0 compatible release
   > <ul>
   > <li>Fix broken build on linux when using <code>use-dev-tty</code> with
   > (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/906">[#906](https://github.com/joshka/tui-widgets/pull/906)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/906">[#906](https://github.com/ratatui/tui-widgets/pull/906)</a>)</li>
   > </ul>
   > <h2>Breaking ⚠️</h2>
   > <ul>
@@ -2966,34 +2966,34 @@ Ratatui-0.28.0 compatible release
   > <h2>Added ⭐</h2>
   > <ul>
   > <li>Capture double click mouse events on windows (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/826">[#826](https://github.com/joshka/tui-widgets/pull/826)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/826">[#826](https://github.com/ratatui/tui-widgets/pull/826)</a>)</li>
   > <li>(De)serialize Reset color (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/824">[#824](https://github.com/joshka/tui-widgets/pull/824)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/824">[#824](https://github.com/ratatui/tui-widgets/pull/824)</a>)</li>
   > <li>Add functions to allow constructing <code>Attributes</code> in a
   > const context (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/817">[#817](https://github.com/joshka/tui-widgets/pull/817)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/817">[#817](https://github.com/ratatui/tui-widgets/pull/817)</a>)</li>
   > <li>Implement <code>Display</code> for <code>KeyCode</code> and
   > <code>KeyModifiers</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/862">[#862](https://github.com/joshka/tui-widgets/pull/862)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/862">[#862](https://github.com/ratatui/tui-widgets/pull/862)</a>)</li>
   > </ul>
   > <h2>Changed ⚙️</h2>
   > <ul>
   > <li>Use Rustix by default instead of libc. Libc can be re-enabled if
   > necessary with the <code>libc</code> feature flag (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/892">[#892](https://github.com/joshka/tui-widgets/pull/892)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/892">[#892](https://github.com/ratatui/tui-widgets/pull/892)</a>)</li>
   > <li><code>FileDesc</code> now requires a lifetime annotation.</li>
   > <li>Improve available color detection (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/885">[#885](https://github.com/joshka/tui-widgets/pull/885)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/885">[#885](https://github.com/ratatui/tui-widgets/pull/885)</a>)</li>
   > <li>Speed up <code>SetColors</code> by ~15-25% (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/879">[#879](https://github.com/joshka/tui-widgets/pull/879)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/879">[#879](https://github.com/ratatui/tui-widgets/pull/879)</a>)</li>
   > <li>Remove unsafe and unnecessary size argument from
   > <code>FileDesc::read()</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/821">[#821](https://github.com/joshka/tui-widgets/pull/821)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/821">[#821](https://github.com/ratatui/tui-widgets/pull/821)</a>)</li>
   > </ul>
   > <h2>Breaking ⚠️</h2>
   > <ul>
   > <li>Fix duplicate bit masks for caps lock and num lock (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/863">[#863](https://github.com/joshka/tui-widgets/pull/863)</a>).
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/863">[#863](https://github.com/ratatui/tui-widgets/pull/863)</a>).
   > This breaks serialization of <code>KeyEventState</code></li>
   > </ul>
   > <h1>Version 0.27.1</h1>
@@ -3008,10 +3008,10 @@ Ratatui-0.28.0 compatible release
   > <li>Add <code>NO_COLOR</code> support (<a
   > href="https://no-color.org/">https://no-color.org/</a>)</li>
   > <li>Add option to force overwrite <code>NO_COLOR</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/joshka/tui-widgets/pull/802)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/ratatui/tui-widgets/pull/802)</a>)</li>
   > <li>Add support for scroll left/right events on windows and unix systems
   > (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/joshka/tui-widgets/pull/788)</a>).</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/ratatui/tui-widgets/pull/788)</a>).</li>
   > <li>Add <code>window_size</code> function to fetch pixel width/height of
   > screen for more sophisticated rendering in terminals.</li>
   > <li>Add support for deserializing hex color strings to
@@ -3076,7 +3076,7 @@ Ratatui-0.28.0 compatible release
   >
   > ---------
 
-- *(deps)* Update rstest requirement from 0.21.0 to 0.22.0 ([#21](https://github.com/joshka/tui-widgets/pull/21))
+- *(deps)* Update rstest requirement from 0.21.0 to 0.22.0 ([#21](https://github.com/ratatui/tui-widgets/pull/21))
   > Updates the requirements on [rstest](https://github.com/la10736/rstest)
   > to permit the latest version.
   > <details>
@@ -3102,7 +3102,7 @@ Ratatui-0.28.0 compatible release
   > <li>Add feature <code>crate-name</code> enabled by default to opt-in
   > crate rename
   > support. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/258">[#258](https://github.com/joshka/tui-widgets/pull/258)</a></li>
+  > href="https://redirect.github.com/la10736/rstest/issues/258">[#258](https://github.com/ratatui/tui-widgets/pull/258)</a></li>
   > </ul>
   > <h2>[0.20.0] 2024/5/30</h2>
   > <h3>Add</h3>
@@ -3110,33 +3110,33 @@ Ratatui-0.28.0 compatible release
   > <li>Implemented <code>#[by_ref]</code> attribute to take get a local
   > lifetime for test arguments.
   > See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/joshka/tui-widgets/pull/241)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/ratatui/tui-widgets/pull/241)</a>
   > for more details. Thanks to
   > <a href="https://github.com/narpfel"><code>@​narpfel</code></a> for
   > suggesting it and useful discussions.</li>
   > <li>Support for import <code>rstest</code> with another name. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/221">[#221](https://github.com/joshka/tui-widgets/pull/221)</a></li>
+  > href="https://redirect.github.com/la10736/rstest/issues/221">[#221](https://github.com/ratatui/tui-widgets/pull/221)</a></li>
   > </ul>
   > <h3>Fixed</h3>
   > <ul>
   > <li>Don't remove Lifetimes from test function if any. See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/230">[#230](https://github.com/joshka/tui-widgets/pull/230)</a>
-  > <a href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/joshka/tui-widgets/pull/241)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/230">[#230](https://github.com/ratatui/tui-widgets/pull/230)</a>
+  > <a href="https://redirect.github.com/la10736/rstest/issues/241">[#241](https://github.com/ratatui/tui-widgets/pull/241)</a>
   > for more details.</li>
   > <li><a
   > href="https://doc.rust-lang.org/std/path/struct.PathBuf.html"><code>PathBuf</code></a>
   > does no longer need to be
   > in scope when using <code>#[files]</code> (see <a
-  > href="https://redirect.github.com/la10736/rstest/pull/242">[#242](https://github.com/joshka/tui-widgets/pull/242)</a>)</li>
+  > href="https://redirect.github.com/la10736/rstest/pull/242">[#242](https://github.com/ratatui/tui-widgets/pull/242)</a>)</li>
   > <li><code>#[from(now::accept::also::path::for::fixture)]</code> See <a
-  > href="https://redirect.github.com/la10736/rstest/issues/246">[#246](https://github.com/joshka/tui-widgets/pull/246)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/246">[#246](https://github.com/ratatui/tui-widgets/pull/246)</a>
   > for more details</li>
   > </ul>
   > <h2>[0.19.0] 2024/4/9</h2>
   > <h3>Changed</h3>
   > <ul>
   > <li>Defined <code>rust-version</code> for each crate (see <a
-  > href="https://redirect.github.com/la10736/rstest/issues/227">[#227](https://github.com/joshka/tui-widgets/pull/227)</a>)</li>
+  > href="https://redirect.github.com/la10736/rstest/issues/227">[#227](https://github.com/ratatui/tui-widgets/pull/227)</a>)</li>
   > </ul>
   > <h3>Fixed</h3>
   > <ul>
@@ -3146,7 +3146,7 @@ Ratatui-0.28.0 compatible release
   > href="https://doc.rust-lang.org/std/marker/trait.Sync.html"><code>Sync</code></a>
   > to prevent UB
   > when tests are executed in parallel. (see <a
-  > href="https://redirect.github.com/la10736/rstest/issues/235">[#235](https://github.com/joshka/tui-widgets/pull/235)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/235">[#235](https://github.com/ratatui/tui-widgets/pull/235)</a>
   > for more details)</p>
   > </li>
   > <li>
@@ -3160,7 +3160,7 @@ Ratatui-0.28.0 compatible release
   > <h3>Changed</h3>
   > <ul>
   > <li>Now <code>#[files]</code> accept also parent folders (see <a
-  > href="https://redirect.github.com/la10736/rstest/issues/205">[#205](https://github.com/joshka/tui-widgets/pull/205)</a>
+  > href="https://redirect.github.com/la10736/rstest/issues/205">[#205](https://github.com/ratatui/tui-widgets/pull/205)</a>
   > for more details).</li>
   > </ul>
   > <h2>[0.18.1] 2023/7/5</h2>
@@ -3224,15 +3224,15 @@ Ratatui-0.28.0 compatible release
 
 ### 📚 Documentation
 
-- Clean up changelogs ([#17](https://github.com/joshka/tui-widgets/pull/17))
+- Clean up changelogs ([#17](https://github.com/ratatui/tui-widgets/pull/17))
   > - removed unnecessary footer comments
   > - removed [unreleased] sections
   > - removed duplicate release notes
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove changelog footer ([#19](https://github.com/joshka/tui-widgets/pull/19))
-  > wrt <https://github.com/joshka/tui-widgets/pull/18/files#r1701302921>
+- Remove changelog footer ([#19](https://github.com/ratatui/tui-widgets/pull/19))
+  > wrt <https://github.com/ratatui/tui-widgets/pull/18/files#r1701302921>
   >
   > not working as expected with `release-plz`
 
@@ -3282,7 +3282,7 @@ Ratatui-0.28.0 compatible release
   >     .build()?;
   > ```
 
-- *(tui-big-text)* [**breaking**] Make `BigText` builder infallible ([#14](https://github.com/joshka/tui-widgets/pull/14))
+- *(tui-big-text)* [**breaking**] Make `BigText` builder infallible ([#14](https://github.com/ratatui/tui-widgets/pull/14))
   > BigTextBuilder.build() no longer returns a Result. Instead it returns
   > the BigText widget directly. This change is made to simplify rendering
   > code which often otherwise doesn't have any error conditions.
@@ -3322,14 +3322,14 @@ Ratatui-0.28.0 compatible release
 ### 🐛 Bug Fixes
 
 - Remove cargo.lock file
-- Delete and backspace behavior for multi-byte characters ([#57](https://github.com/joshka/tui-widgets/pull/57))
+- Delete and backspace behavior for multi-byte characters ([#57](https://github.com/ratatui/tui-widgets/pull/57))
 - Fixup tui-prompts version to match crates.io
 
 ### ⚙️ Miscellaneous Tasks
 
-- Various fixes / clippy lints ([#6](https://github.com/joshka/tui-widgets/pull/6))
+- Various fixes / clippy lints ([#6](https://github.com/ratatui/tui-widgets/pull/6))
 
-## [0.1.3](https://github.com/joshka/tui-widgets/compare/tui-widgets-v0.1.2...tui-widgets-v0.1.3) - 2024-07-24
+## [0.1.3](https://github.com/ratatui/tui-widgets/compare/tui-widgets-v0.1.2...tui-widgets-v0.1.3) - 2024-07-24
 
 ### Fixed
 

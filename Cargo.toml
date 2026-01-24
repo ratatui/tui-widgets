@@ -6,7 +6,7 @@ default-members = ["tui-*"]
 [workspace.package]
 authors = ["Joshka"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/joshka/tui-widgets"
+repository = "https://github.com/ratatui/tui-widgets"
 edition = "2021"
 rust-version = "1.87.0"
 categories = ["command-line-interface", "gui"]

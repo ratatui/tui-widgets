@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Refresh widget docs ([#148](https://github.com/joshka/tui-widgets/issues/148))
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   > Standardize widget crate docs and README layouts.
   > Unify badges, links, and license references.
   > Add consistent usage sections and link style updates.
@@ -16,14 +16,14 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(tui-bar-graph)* [**breaking**] Add block octant characters ([#116](https://github.com/joshka/tui-widgets/issues/116))
+- *(tui-bar-graph)* [**breaking**] Add block octant characters ([#116](https://github.com/ratatui/tui-widgets/issues/116))
   > Since Unicode 16.0 was published on September 10, 2024, support for
   > block octant characters (U+1CD00 to U+1CDE5,
   > [PDF](https://www.unicode.org/charts/PDF/Unicode-16.0/U160-1CC00.pdf))
   > has been improving in fonts. We should enable users of `tui-widgets` to
   > use these characters in addition to existing options.
 
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/joshka/tui-widgets/issues/120))
+- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   > feat!: migrate to ratatui 0.30
   >
   > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
@@ -42,12 +42,12 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- *(tui-bar-graph)* [**breaking**] Support boxed gradients ([#66](https://github.com/joshka/tui-widgets/issues/66))
+- *(tui-bar-graph)* [**breaking**] Support boxed gradients ([#66](https://github.com/ratatui/tui-widgets/issues/66))
   > This patch adds support for boxed gradients in the `BarGraph` widget.
   > This makes it possible to choose gradients of different types at runtime
   > without having to change the type of the `BarGraph` struct.
 
-- *(tui-bar-graph)* Add Quadrant style ([#80](https://github.com/joshka/tui-widgets/issues/80))
+- *(tui-bar-graph)* Add Quadrant style ([#80](https://github.com/ratatui/tui-widgets/issues/80))
   > This style uses the block drawing 2x2 quadrant characters.
   > In contrast to the braille style, it renders solid rather than dots.
   > In contrast to the solid style, it renders two columns and rows per bar.
@@ -58,12 +58,12 @@ All notable changes to this project will be documented in this file.
 
 - Broken bar graph test
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- Use f64:midpoint ([#83](https://github.com/joshka/tui-widgets/issues/83))
+- Use f64:midpoint ([#83](https://github.com/ratatui/tui-widgets/issues/83))
   > MSRV is now 1.87
 
 ### 🚜 Refactor
@@ -76,7 +76,7 @@ All notable changes to this project will be documented in this file.
 
 ### Other
 
-- Bump msrv to 1.82.0 ([#74](https://github.com/joshka/tui-widgets/issues/74))
+- Bump msrv to 1.82.0 ([#74](https://github.com/ratatui/tui-widgets/issues/74))
 
 
 ## [tui-bar-graph-v0.1.1] - 2025-03-05
@@ -89,7 +89,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Add new tui-bar-graph crate ([#63](https://github.com/joshka/tui-widgets/issues/63))
+- Add new tui-bar-graph crate ([#63](https://github.com/ratatui/tui-widgets/issues/63))
   > ![Braille demo](https://vhs.charm.sh/vhs-3H7bFj0M1kj0GoHcc4EIJ4.gif)
   >
   > ![Solid demo](https://vhs.charm.sh/vhs-5XMtSFgX3vqOhKcKl8fEQK.gif)

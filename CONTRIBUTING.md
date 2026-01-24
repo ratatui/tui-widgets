@@ -8,7 +8,7 @@ wish to make by creating a new issue before making the change.
 ## Reporting issues
 
 Before reporting an issue on the
-[issue tracker](https://github.com/joshka/tui-widgets/issues),
+[issue tracker](https://github.com/ratatui/tui-widgets/issues),
 please check that it has not already been reported by searching for some related
 keywords.
 
@@ -55,7 +55,7 @@ A specification for adding human and machine readable meaning to commit messages
 This is no different than other Rust projects.
 
 ```shell
-git clone https://github.com/joshka/tui-widgets
+git clone https://github.com/ratatui/tui-widgets
 cd tui-widgets
 cargo test
 ```

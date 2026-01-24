@@ -70,26 +70,26 @@
 //!
 //! [Crate]: https://crates.io/crates/tui-scrollview
 //! [Docs]: https://docs.rs/tui-scrollview/
-//! [Dependency Status]: https://deps.rs/repo/github/joshka/tui-widgets
-//! [Coverage]: https://app.codecov.io/gh/joshka/tui-widgets
+//! [Dependency Status]: https://deps.rs/repo/github/ratatui/tui-widgets
+//! [Coverage]: https://app.codecov.io/gh/ratatui/tui-widgets
 //! [Ratatui Discord]: https://discord.gg/pMCEU9hNEj
 //! [Crate badge]: https://img.shields.io/crates/v/tui-scrollview?logo=rust&style=flat
 //! [Docs Badge]: https://img.shields.io/docsrs/tui-scrollview?logo=rust&style=flat
-//! [Deps Badge]: https://deps.rs/repo/github/joshka/tui-widgets/status.svg?style=flat
+//! [Deps Badge]: https://deps.rs/repo/github/ratatui/tui-widgets/status.svg?style=flat
 //! [License Badge]: https://img.shields.io/crates/l/tui-scrollview?style=flat
-//! [License]: https://github.com/joshka/tui-widgets/blob/main/LICENSE-MIT
+//! [License]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
 //! [Coverage Badge]:
-//!     https://img.shields.io/codecov/c/github/joshka/tui-widgets?logo=codecov&style=flat
+//!     https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
 //! [Discord Badge]: https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
 //!
-//! [GitHub Repository]: https://github.com/joshka/tui-widgets
+//! [GitHub Repository]: https://github.com/ratatui/tui-widgets
 //! [API Docs]: https://docs.rs/tui-scrollview/
-//! [Examples]: https://github.com/joshka/tui-widgets/tree/main/tui-scrollview/examples
-//! [examples directory]: https://github.com/joshka/tui-widgets/tree/main/tui-scrollview/examples
+//! [Examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollview/examples
+//! [examples directory]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollview/examples
 //! [scrollview.rs]:
-//!     https://github.com/joshka/tui-widgets/tree/main/tui-scrollview/examples/scrollview.rs
-//! [Changelog]: https://github.com/joshka/tui-widgets/blob/main/tui-scrollview/CHANGELOG.md
-//! [Contributing]: https://github.com/joshka/tui-widgets/blob/main/CONTRIBUTING.md
+//!     https://github.com/ratatui/tui-widgets/tree/main/tui-scrollview/examples/scrollview.rs
+//! [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-scrollview/CHANGELOG.md
+//! [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 //!
 //! [Ratatui]: https://crates.io/crates/ratatui
 //!

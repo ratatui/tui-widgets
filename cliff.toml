@@ -35,7 +35,7 @@ body = """
 trim = true
 # postprocessors
 postprocessors = [
-  { pattern = '<REPO>', replace = "https://github.com/joshka/tui-widgets" }, # replace repository URL
+  { pattern = '<REPO>', replace = "https://github.com/ratatui/tui-widgets" }, # replace repository URL
   { pattern = ' +\n', replace = "\n" },
 ]
 

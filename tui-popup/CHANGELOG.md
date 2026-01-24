@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 📚 Documentation
 
-- Refresh widget docs ([#148](https://github.com/joshka/tui-widgets/issues/148))
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
   > Standardize widget crate docs and README layouts.
   > Unify badges, links, and license references.
   > Add consistent usage sections and link style updates.
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Refresh readmes and rdme check ([#140](https://github.com/joshka/tui-widgets/issues/140))
+- Refresh readmes and rdme check ([#140](https://github.com/ratatui/tui-widgets/issues/140))
   > Regenerate crate READMEs via cargo-rdme and add a CI check to keep
   > workspace readmes in sync.
 
@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/joshka/tui-widgets/issues/120))
+- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
   > feat!: migrate to ratatui 0.30
   >
   > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
@@ -44,12 +44,12 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
 ### 🎨 Styling
 
@@ -59,19 +59,19 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove needless lifetimes ([#60](https://github.com/joshka/tui-widgets/issues/60))
+- Remove needless lifetimes ([#60](https://github.com/ratatui/tui-widgets/issues/60))
 
 
 ## [0.6.1] - 2025-11-02
 
 ### 🐛 Bug Fixes
 
-- Clippy lints ([#81](https://github.com/joshka/tui-widgets/issues/81))
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
   > Fixes a bunch of lints that are in beta / nursery. A lot of these are
   > opinionated enough that they're not enabled by default, but I figure
   > they generally lead to nicer code, so are worth fixing.
 
-- More clippy lints ([#84](https://github.com/joshka/tui-widgets/issues/84))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
 
 ### 🎨 Styling
 
@@ -81,7 +81,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- Remove needless lifetimes ([#60](https://github.com/joshka/tui-widgets/issues/60))
+- Remove needless lifetimes ([#60](https://github.com/ratatui/tui-widgets/issues/60))
 
 
 ## [0.5.1] - 2024-10-20
@@ -104,7 +104,7 @@ Ratatui-0.28.0 compatible release
 
 ### Other
 
-- *(deps)* Update crossterm requirement from 0.27.0 to 0.28.1 ([#22](https://github.com/joshka/tui-widgets/pull/22))
+- *(deps)* Update crossterm requirement from 0.27.0 to 0.28.1 ([#22](https://github.com/ratatui/tui-widgets/pull/22))
   > Updates the requirements on
   > [crossterm](https://github.com/crossterm-rs/crossterm) to permit the
   > latest version.
@@ -121,10 +121,10 @@ Ratatui-0.28.0 compatible release
   > <li>Add <code>NO_COLOR</code> support (<a
   > href="https://no-color.org/">https://no-color.org/</a>)</li>
   > <li>Add option to force overwrite <code>NO_COLOR</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/joshka/tui-widgets/pull/802)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/ratatui/tui-widgets/pull/802)</a>)</li>
   > <li>Add support for scroll left/right events on windows and unix systems
   > (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/joshka/tui-widgets/pull/788)</a>).</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/ratatui/tui-widgets/pull/788)</a>).</li>
   > <li>Add <code>window_size</code> function to fetch pixel width/height of
   > screen for more sophisticated rendering in terminals.</li>
   > <li>Add support for deserializing hex color strings to `Color`` e.g
@@ -134,14 +134,14 @@ Ratatui-0.28.0 compatible release
   > <ul>
   > <li>Make the events module an optional feature <code>events</code> (to
   > make crossterm more lightweight) (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/776">[#776](https://github.com/joshka/tui-widgets/pull/776)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/776">[#776](https://github.com/ratatui/tui-widgets/pull/776)</a>)</li>
   > </ul>
   > <h2>Breaking ⚠️</h2>
   > <ul>
   > <li>Set minimum rustc version to 1.58 (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/798">[#798](https://github.com/joshka/tui-widgets/pull/798)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/798">[#798](https://github.com/ratatui/tui-widgets/pull/798)</a>)</li>
   > <li>Change all error types to <code>std::io::Result</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/765">[#765](https://github.com/joshka/tui-widgets/pull/765)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/765">[#765](https://github.com/ratatui/tui-widgets/pull/765)</a>)</li>
   > </ul>
   > <p><a href="https://github.com/Gronis"><code>@​Gronis</code></a>, <a
   > href="https://github.com/kevin-vigor"><code>@​kevin-vigor</code></a>, <a
@@ -170,7 +170,7 @@ Ratatui-0.28.0 compatible release
   > <ul>
   > <li>Fix broken build on linux when using <code>use-dev-tty</code> with
   > (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/906">[#906](https://github.com/joshka/tui-widgets/pull/906)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/906">[#906](https://github.com/ratatui/tui-widgets/pull/906)</a>)</li>
   > </ul>
   > <h2>Breaking ⚠️</h2>
   > <ul>
@@ -181,34 +181,34 @@ Ratatui-0.28.0 compatible release
   > <h2>Added ⭐</h2>
   > <ul>
   > <li>Capture double click mouse events on windows (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/826">[#826](https://github.com/joshka/tui-widgets/pull/826)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/826">[#826](https://github.com/ratatui/tui-widgets/pull/826)</a>)</li>
   > <li>(De)serialize Reset color (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/824">[#824](https://github.com/joshka/tui-widgets/pull/824)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/824">[#824](https://github.com/ratatui/tui-widgets/pull/824)</a>)</li>
   > <li>Add functions to allow constructing <code>Attributes</code> in a
   > const context (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/817">[#817](https://github.com/joshka/tui-widgets/pull/817)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/817">[#817](https://github.com/ratatui/tui-widgets/pull/817)</a>)</li>
   > <li>Implement <code>Display</code> for <code>KeyCode</code> and
   > <code>KeyModifiers</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/862">[#862](https://github.com/joshka/tui-widgets/pull/862)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/862">[#862](https://github.com/ratatui/tui-widgets/pull/862)</a>)</li>
   > </ul>
   > <h2>Changed ⚙️</h2>
   > <ul>
   > <li>Use Rustix by default instead of libc. Libc can be re-enabled if
   > necessary with the <code>libc</code> feature flag (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/892">[#892](https://github.com/joshka/tui-widgets/pull/892)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/892">[#892](https://github.com/ratatui/tui-widgets/pull/892)</a>)</li>
   > <li><code>FileDesc</code> now requires a lifetime annotation.</li>
   > <li>Improve available color detection (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/885">[#885](https://github.com/joshka/tui-widgets/pull/885)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/885">[#885](https://github.com/ratatui/tui-widgets/pull/885)</a>)</li>
   > <li>Speed up <code>SetColors</code> by ~15-25% (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/879">[#879](https://github.com/joshka/tui-widgets/pull/879)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/879">[#879](https://github.com/ratatui/tui-widgets/pull/879)</a>)</li>
   > <li>Remove unsafe and unnecessary size argument from
   > <code>FileDesc::read()</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/821">[#821](https://github.com/joshka/tui-widgets/pull/821)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/821">[#821](https://github.com/ratatui/tui-widgets/pull/821)</a>)</li>
   > </ul>
   > <h2>Breaking ⚠️</h2>
   > <ul>
   > <li>Fix duplicate bit masks for caps lock and num lock (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/863">[#863](https://github.com/joshka/tui-widgets/pull/863)</a>).
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/863">[#863](https://github.com/ratatui/tui-widgets/pull/863)</a>).
   > This breaks serialization of <code>KeyEventState</code></li>
   > </ul>
   > <h1>Version 0.27.1</h1>
@@ -223,10 +223,10 @@ Ratatui-0.28.0 compatible release
   > <li>Add <code>NO_COLOR</code> support (<a
   > href="https://no-color.org/">https://no-color.org/</a>)</li>
   > <li>Add option to force overwrite <code>NO_COLOR</code> (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/joshka/tui-widgets/pull/802)</a>)</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/802">[#802](https://github.com/ratatui/tui-widgets/pull/802)</a>)</li>
   > <li>Add support for scroll left/right events on windows and unix systems
   > (<a
-  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/joshka/tui-widgets/pull/788)</a>).</li>
+  > href="https://redirect.github.com/crossterm-rs/crossterm/issues/788">[#788](https://github.com/ratatui/tui-widgets/pull/788)</a>).</li>
   > <li>Add <code>window_size</code> function to fetch pixel width/height of
   > screen for more sophisticated rendering in terminals.</li>
   > <li>Add support for deserializing hex color strings to
@@ -295,7 +295,7 @@ Ratatui-0.28.0 compatible release
 
 ### 📚 Documentation
 
-- Clean up changelogs ([#17](https://github.com/joshka/tui-widgets/pull/17))
+- Clean up changelogs ([#17](https://github.com/ratatui/tui-widgets/pull/17))
   > - removed unnecessary footer comments
   > - removed [unreleased] sections
   > - removed duplicate release notes
