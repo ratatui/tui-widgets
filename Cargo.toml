@@ -16,12 +16,12 @@ keywords = ["cli", "console", "ratatui", "terminal", "tui"]
 clap = { version = "4.5", features = ["derive"] }
 color-eyre = "0.6"
 crossterm = { version = "0.29" }
-derive_builder = "0.20"
+derive_builder = { version = "0.20", default-features = false, features = ["alloc"] }
 derive-getters = "0.5"
 derive_setters = "0.1.8"
 document-features = "0.2.11"
 futures = "0.3"
-itertools = "0.14"
+itertools = { version = "0.14", default-features = false, features = [] }
 indoc = "2"
 lipsum = "0.9"
 pretty_assertions = "1.4"
@@ -31,7 +31,7 @@ ratatui-core = { version = "0.1" }
 ratatui-macros = "0.7.0"
 ratatui-widgets = { version = "0.3" }
 rstest = "0.26"
-strum = { version = "0.27", features = ["derive"] }
+strum = { version = "0.27", default-features = false, features = ["derive"] }
 tokio = { version = "1.49" }
 
 [lints.rust]

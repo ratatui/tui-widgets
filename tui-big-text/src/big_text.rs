@@ -1,4 +1,5 @@
-use std::cmp::min;
+use core::cmp::min;
+use alloc::vec::Vec;
 
 use derive_builder::Builder;
 use font8x8::UnicodeFonts;
@@ -59,6 +60,7 @@ use crate::PixelSize;
 /// ```
 #[derive(Debug, Builder, Clone, PartialEq, Eq, Hash)]
 #[builder(build_fn(skip))]
+#[cfg_attr(not(feature = "std"), builder(no_std))]
 #[non_exhaustive]
 pub struct BigText<'a> {
     /// The text to display
