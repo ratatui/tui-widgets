@@ -115,6 +115,13 @@
 //! [Joshka]: https://github.com/joshka
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
 
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+extern crate std;
+
+extern crate alloc;
+
 mod big_text;
 mod pixel_size;
 

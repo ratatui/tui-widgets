@@ -12,9 +12,13 @@ license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 
+[features]
+default = ["std"]
+std = ["font8x8/std"]
+
 [dependencies]
 derive_builder.workspace = true
-font8x8 = "0.3.1"
+font8x8 = { version = "0.3.1", default-features = false, features = ["unicode"] }
 itertools.workspace = true
 ratatui-core.workspace = true
 
