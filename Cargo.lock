@@ -2163,7 +2163,7 @@ dependencies = [
 
 [[package]]
 name = "tui-widgets"
-version = "0.7.0"
+version = "0.7.1"
 dependencies = [
  "document-features",
  "ratatui-core",
