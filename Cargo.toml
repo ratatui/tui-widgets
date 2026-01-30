@@ -94,7 +94,7 @@ scrollview = ["tui-scrollview"]
 document-features.workspace = true
 ratatui-core = { workspace = true }
 tui-bar-graph = { version = "0.3.1", path = "tui-bar-graph", optional = true }
-tui-big-text = { version = "0.8.1", path = "tui-big-text", optional = true }
+tui-big-text = { version = "0.8.2", path = "tui-big-text", optional = true }
 tui-box-text = { version = "0.3.1", path = "tui-box-text", optional = true }
 tui-cards = { version = "0.3.1", path = "tui-cards", optional = true }
 tui-popup = { version = "0.7.2", path = "tui-popup", optional = true }

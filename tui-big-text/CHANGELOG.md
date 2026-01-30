@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.2] - 2026-01-30
+
+### ⚙️ Miscellaneous Tasks
+
+- *(project)* Update the repository link
+
+
 ## [0.8.1] - 2025-12-27
 
 ### 📚 Documentation
