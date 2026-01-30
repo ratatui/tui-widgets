@@ -115,6 +115,10 @@
 //! [Joshka]: https://github.com/joshka
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
 
+#![no_std]
+
+extern crate alloc;
+
 mod big_text;
 mod pixel_size;
 

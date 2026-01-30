@@ -355,9 +355,11 @@ const fn get_symbol_octant_size(
 
 #[cfg(test)]
 mod tests {
+    use alloc::boxed::Box;
+
     use super::*;
 
-    type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
+    type Result<T> = core::result::Result<T, Box<dyn core::error::Error>>;
 
     #[test]
     fn check_quadrant_size_symbols() -> Result<()> {

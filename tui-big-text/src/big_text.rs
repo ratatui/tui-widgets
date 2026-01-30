@@ -1,4 +1,6 @@
-use std::cmp::min;
+use alloc::vec::Vec;
+
+use core::cmp::min;
 
 use derive_builder::Builder;
 use font8x8::UnicodeFonts;
@@ -58,7 +60,7 @@ use crate::PixelSize;
 /// ██ ███  ██ ███  ██ ███  ██ ███  ██ ███
 /// ```
 #[derive(Debug, Builder, Clone, PartialEq, Eq, Hash)]
-#[builder(build_fn(skip))]
+#[builder(build_fn(skip), no_std)]
 #[non_exhaustive]
 pub struct BigText<'a> {
     /// The text to display
@@ -198,6 +200,8 @@ fn render_glyph(glyph: [u8; 8], area: Rect, buf: &mut Buffer, pixel_size: &Pixel
 
 #[cfg(test)]
 mod tests {
+    use alloc::vec;
+
     use ratatui_core::style::Stylize;
 
     use super::*;
