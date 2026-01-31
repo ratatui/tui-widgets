@@ -29,6 +29,7 @@ pub struct TextPrompt<'a> {
     /// The block to wrap the prompt in.
     block: Option<Block<'a>>,
     render_style: TextRenderStyle,
+    status_enabled: bool,
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
@@ -57,6 +58,7 @@ impl<'a> TextPrompt<'a> {
             message,
             block: None,
             render_style: TextRenderStyle::Default,
+            status_enabled: true,
         }
     }
 
@@ -69,6 +71,12 @@ impl<'a> TextPrompt<'a> {
     #[must_use]
     pub const fn with_render_style(mut self, render_style: TextRenderStyle) -> Self {
         self.render_style = render_style;
+        self
+    }
+
+    #[must_use]
+    pub const fn with_status_disabled(mut self) -> Self {
+        self.status_enabled = false;
         self
     }
 }
@@ -97,13 +105,18 @@ impl<'a> StatefulWidget for TextPrompt<'a> {
         let value = Span::raw(self.render_style.render(state));
         let value_width = value.width();
 
-        let line = Line::from(vec![
-            state.status().symbol(),
-            " ".into(),
-            self.message.bold(),
-            " › ".cyan().dim(),
-            value,
-        ]);
+        let line = {
+            let mut parts = vec![];
+            if self.status_enabled {
+                parts.push(state.status().symbol());
+                parts.push(" ".into());
+            }
+            parts.push(self.message.bold());
+            parts.push(" › ".cyan().dim());
+            parts.push(value);
+            Line::from(parts)
+        };
+
         let prompt_width = line.width() - value_width;
         let lines = wrap(line, width).take(height).collect_vec();
 
@@ -287,6 +300,18 @@ mod tests {
         prompt.render(buffer.area, &mut buffer, &mut state);
 
         let line = line!["✘".red(), " ", "prompt".bold(), " › ".cyan().dim(), "    "];
+        assert_eq!(buffer, Buffer::with_lines([line]));
+    }
+
+    #[test]
+    fn render_with_disabled_status() {
+        let prompt = TextPrompt::from("prompt").with_status_disabled();
+        let mut state = TextState::new().with_status(Status::Aborted);
+        let mut buffer = Buffer::empty(Rect::new(0, 0, 13, 1));
+
+        prompt.render(buffer.area, &mut buffer, &mut state);
+
+        let line = line!["prompt".bold(), " › ".cyan().dim(), "    "];
         assert_eq!(buffer, Buffer::with_lines([line]));
     }
 
