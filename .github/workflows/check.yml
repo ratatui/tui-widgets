@@ -11,7 +11,7 @@ jobs:
       checks: write
     uses: joshka/github-workflows/.github/workflows/rust-check.yml@main
     with:
-      msrv: 1.87.0
+      msrv: 1.88.0
   readme:
     name: Readme
     runs-on: ubuntu-latest
