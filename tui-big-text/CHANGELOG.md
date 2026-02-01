@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.2] - 2026-02-01
+
+### 🚀 Features
+
+- *(tui-bigtext)* Enable no_std as default ([#190](https://github.com/ratatui/tui-widgets/issues/190))
+  > This enables using `tui-bigtext` in a no_std environment
+  >
+  > e.g. https://github.com/ratatui/mousefood/pull/159
+
+### ⚙️ Miscellaneous Tasks
+
+- *(project)* Update the repository link
+
+
 ## [0.8.1] - 2025-12-27
 
 ### 📚 Documentation
