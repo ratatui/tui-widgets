@@ -21,17 +21,48 @@ suite by [Joshka].
 Create a `Card` and render it directly in a frame.
 
 ```rust
-use tui_cards::{Card, Rank, Suit};
+use tui_cards::{Card, CardSize, Rank, Suit};
 
-let card = Card::new(Rank::Ace, Suit::Spades);
+let card = Card::new(Rank::Ace, Suit::Spades, CardSize::Normal);
 frame.render_widget(&card, frame.area());
 ```
+
+## Card Sizes
+
+Cards can be rendered in two sizes:
+
+| Size | Dimensions |
+|------|------------|
+| `CardSize::Normal` | 14 × 9 characters |
+| `CardSize::Small` | 8 × 5 characters |
+
+Use `CardSize::dimensions()` to get the `(width, height)` tuple for layout calculations.
+
+## Styling
+
+Cards can be styled using the `style()` method to set foreground and background colors:
+
+```rust
+use ratatui::style::{Color, Style};
+use tui_cards::{Card, CardSize, Rank, Suit};
+
+let card = Card::new(Rank::Ace, Suit::Spades, CardSize::Normal)
+    .style(Style::new().bg(Color::White));
+```
+
+If no foreground color is specified, the card uses the suit's default color. The background defaults to transparent (`Color::Reset`).
 
 ## Demo
 
 ```shell
 cargo run --example card
 ```
+
+**Controls:**
+- `s` - Switch to small cards
+- `n` - Switch to normal cards
+- `t` - Toggle card style (Transparent → Classic → Dark → Colorful)
+- `q` - Quit
 
 ## More widgets
 
