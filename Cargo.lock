@@ -2093,6 +2093,7 @@ dependencies = [
  "itertools",
  "ratatui",
  "ratatui-core",
+ "ratatui-widgets",
  "strum",
  "tokio",
 ]
