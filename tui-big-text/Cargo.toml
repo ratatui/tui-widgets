@@ -17,6 +17,7 @@ derive_builder.workspace = true
 font8x8 = { version = "0.3.1", default-features = false, features = ["unicode"] }
 itertools.workspace = true
 ratatui-core.workspace = true
+ratatui-widgets.workspace = true
 
 [dev-dependencies]
 color-eyre.workspace = true

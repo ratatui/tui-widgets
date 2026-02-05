@@ -9,6 +9,7 @@ use ratatui_core::layout::{Alignment, Rect};
 use ratatui_core::style::Style;
 use ratatui_core::text::{Line, StyledGrapheme};
 use ratatui_core::widgets::Widget;
+use ratatui_widgets::block::{Block, BlockExt};
 
 use crate::PixelSize;
 
@@ -84,6 +85,10 @@ pub struct BigText<'a> {
     /// Defaults to `Alignment::default()` (=> Alignment::Left)
     #[builder(default)]
     pub alignment: Alignment,
+
+    /// Block to wrap the widget in
+    #[builder(default, setter(into, strip_option))]
+    pub block: Option<Block<'a>>,
 }
 
 impl BigText<'static> {
@@ -118,13 +123,17 @@ impl<'a> BigTextBuilder<'a> {
             style: self.style.unwrap_or_default(),
             pixel_size: self.pixel_size.unwrap_or_default(),
             alignment: self.alignment.unwrap_or_default(),
+            block: self.block.as_ref().cloned().unwrap_or_default(),
         }
     }
 }
 
 impl Widget for BigText<'_> {
     fn render(self, area: Rect, buf: &mut Buffer) {
-        let layout = layout(area, &self.pixel_size, self.alignment, &self.lines);
+        self.block.as_ref().render(area, buf);
+        let inner = self.block.inner_if_some(area);
+
+        let layout = layout(inner, &self.pixel_size, self.alignment, &self.lines);
         for (line, line_layout) in self.lines.iter().zip(layout) {
             for (g, cell) in line.styled_graphemes(self.style).zip(line_layout) {
                 render_symbol(g, cell, buf, &self.pixel_size);
@@ -223,6 +232,7 @@ mod tests {
                 style,
                 pixel_size,
                 alignment,
+                block: None,
             }
         );
     }
@@ -1132,6 +1142,29 @@ mod tests {
             "          ▐▌  ▝█  █▀▙ ▟▀▙ ▟▀▀           ",
             "          ▐▌▗▌ █  █ █ █▀▀ ▝▀▙           ",
             "          ▀▀▀▘▝▀▘ ▀ ▀ ▝▀▘ ▀▀▘           ",
+        ]);
+        assert_eq!(buf, expected);
+    }
+
+    #[test]
+    fn render_with_block() {
+        let big_text = BigText::builder()
+            .lines(vec![Line::from("In Block")])
+            .block(Block::bordered().title("Big Text Block"))
+            .build();
+        let mut buf = Buffer::empty(Rect::new(0, 0, 65, 10));
+        big_text.render(buf.area, &mut buf);
+        let expected = Buffer::with_lines(vec![
+            "┌Big Text Block─────────────────────────────────────────────────┐",
+            "│ ████                   ██████   ███                    ███    │",
+            "│  ██                     ██  ██   ██                     ██    │",
+            "│  ██    █████            ██  ██   ██     ████    ████    ██  ██│",
+            "│  ██    ██  ██           █████    ██    ██  ██  ██  ██   ██ ██ │",
+            "│  ██    ██  ██           ██  ██   ██    ██  ██  ██       ████  │",
+            "│  ██    ██  ██           ██  ██   ██    ██  ██  ██  ██   ██ ██ │",
+            "│ ████   ██  ██          ██████   ████    ████    ████   ███  ██│",
+            "│                                                               │",
+            "└───────────────────────────────────────────────────────────────┘",
         ]);
         assert_eq!(buf, expected);
     }
