@@ -2166,7 +2166,7 @@ dependencies = [
 
 [[package]]
 name = "tui-scrollbar"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "color-eyre",
  "crossterm 0.28.1",
