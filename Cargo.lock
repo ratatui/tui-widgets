@@ -2100,7 +2100,7 @@ dependencies = [
 
 [[package]]
 name = "tui-box-text"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "color-eyre",
  "indoc",
