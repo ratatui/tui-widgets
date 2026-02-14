@@ -2,6 +2,424 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.1] - 2026-02-14
+
+### 🚀 Features
+
+- *(scrollbar)* Update glyph previews and tests ([#169](https://github.com/ratatui/tui-widgets/issues/169))
+  > Default ScrollBar renders without arrow endcaps and uses a dark gray
+  > background with a blank (space) track.
+  >
+  > Add glyph set variants and improve the Unicode-only fallback. Document
+  > glyph sets with a 1/8-step horizontal thumb walk, and add snapshot
+  > render tests to keep the glyph combinations stable.
+
+- *(scrollbar)* Support crossterm 0.28 ([#172](https://github.com/ratatui/tui-widgets/issues/172))
+  > Add versioned crossterm feature flags and re-export the selected version
+  > as `tui_scrollbar::crossterm`.
+  >
+  > Add CI checks for the feature matrix and a docs.rs-style build.
+  >
+  > ---------
+
+- *(tui-bigtext)* Enable no_std as default ([#190](https://github.com/ratatui/tui-widgets/issues/190))
+  > This enables using `tui-bigtext` in a no_std environment
+  >
+  > e.g. https://github.com/ratatui/mousefood/pull/159
+
+- *(tui-big-text)* Add optional Block wrapping for BigText ([#197](https://github.com/ratatui/tui-widgets/issues/197))
+  > # Summary
+  > Add optional block wrapping for the big text widget so it can render
+  > within a border and title area.
+  >
+  > # Motivation
+  > This enables composing the big text widget with standard block
+  > decorations, which is useful for dashboards and status displays.
+  > E. g. I'm making layout with BigText stopwatch and I want to use block
+  > title as a place for status. Additionally it fits into my dashboard
+  > design.
+  > I think it might be useful.
+  >
+  > My example:
+  >
+  > ![Screenshot_5](https://github.com/user-attachments/assets/0fdbbdeb-8f05-4588-ad39-ba5133295717)
+  >
+  >
+  > # Changes
+  > - Added optional block support in the widget configuration and rendering
+  > flow.
+  > - Added a test to validate rendering with a bordered block and title.
+  >
+  > # Testing
+  > `cargo test -p tui-big-text --all-features -- --nocapture`
+
+### 📚 Documentation
+
+- *(license)* Add ratatui developers to the license
+
+### ⚙️ Miscellaneous Tasks
+
+- *(tui-scrollbar)* Release v0.2.1 ([#170](https://github.com/ratatui/tui-widgets/issues/170))
+  > ## 🤖 New release
+  >
+  > * `tui-scrollbar`: 0.2.0 -> 0.2.1 (✓ API compatible changes)
+  >
+  > <details><summary><i><b>Changelog</b></i></summary><p>
+  >
+  > <blockquote>
+  >
+  > ## [0.2.1] - 2026-01-05
+  >
+  > ### 🚀 Features
+  >
+  > - *(scrollbar)* Update glyph previews and tests
+  > ([#169](https://github.com/joshka/tui-widgets/issues/169))
+  >   > Default ScrollBar renders without arrow endcaps and uses a dark gray
+  >   > background with a blank (space) track.
+  >   >
+  > > Add glyph set variants and improve the Unicode-only fallback. Document
+  >   > glyph sets with a 1/8-step horizontal thumb walk, and add snapshot
+  >   > render tests to keep the glyph combinations stable.
+  > </blockquote>
+  >
+  >
+  > </p></details>
+  >
+  > ---
+  > This PR was generated with
+  > [release-plz](https://github.com/release-plz/release-plz/).
+
+- *(tui-scrollbar)* Release v0.2.2 ([#173](https://github.com/ratatui/tui-widgets/issues/173))
+  > ## 🤖 New release
+  >
+  > * `tui-scrollbar`: 0.2.1 -> 0.2.2 (✓ API compatible changes)
+  >
+  > <details><summary><i><b>Changelog</b></i></summary><p>
+  >
+  > <blockquote>
+  >
+  > ## [0.2.2] - 2026-01-05
+  >
+  > ### 🚀 Features
+  >
+  > - *(scrollbar)* Support crossterm 0.28
+  > ([#172](https://github.com/joshka/tui-widgets/issues/172))
+  > > Add versioned crossterm feature flags and re-export the selected
+  > version
+  >   > as `tui_scrollbar::crossterm`.
+  >   >
+  >   > Add CI checks for the feature matrix and a docs.rs-style build.
+  >   >
+  >   > ---------
+  > </blockquote>
+  >
+  >
+  > </p></details>
+  >
+  > ---
+  > This PR was generated with
+  > [release-plz](https://github.com/release-plz/release-plz/).
+
+- *(project)* Update the repository link
+
+- *(ci)* Check for the ratatui organization for releases
+
+- Bump MSRV to 1.88.0 ([#192](https://github.com/ratatui/tui-widgets/issues/192))
+  > ```
+  > error: rustc 1.87.0 is not supported by the following packages:
+  >   darling@0.23.0 requires rustc 1.88.0
+  >   darling_core@0.23.0 requires rustc 1.88.0
+  >   darling_macro@0.23.0 requires rustc 1.88.0
+  >   instability@0.3.11 requires rustc 1.88
+  >   instability@0.3.11 requires rustc 1.88
+  >   instability@0.3.11 requires rustc 1.88
+  >   time@0.3.46 requires rustc 1.88.0
+  >   time-core@0.1.8 requires rustc 1.88.0
+  > ```
+
+- *(tui-big-text)* Release v0.8.2 ([#176](https://github.com/ratatui/tui-widgets/issues/176))
+  > ## 🤖 New release
+  >
+  > * `tui-big-text`: 0.8.1 -> 0.8.2 (✓ API compatible changes)
+  >
+  > <details><summary><i><b>Changelog</b></i></summary><p>
+  >
+  > <blockquote>
+  >
+  > ## [0.8.2] - 2026-02-01
+  >
+  > ### 🚀 Features
+  >
+  > - *(tui-bigtext)* Enable no_std as default
+  > ([#190](https://github.com/ratatui/tui-widgets/issues/190))
+  >   > This enables using `tui-bigtext` in a no_std environment
+  >   >
+  >   > e.g. https://github.com/ratatui/mousefood/pull/159
+  >
+  > ### ⚙️ Miscellaneous Tasks
+  >
+  > - *(project)* Update the repository link
+  > </blockquote>
+  >
+  >
+  > </p></details>
+  >
+  > ---
+  > This PR was generated with
+  > [release-plz](https://github.com/release-plz/release-plz/).
+
+### 🛡️ Security
+
+- *(deps)* Bump tokio from 1.48.0 to 1.49.0 ([#175](https://github.com/ratatui/tui-widgets/issues/175))
+  > Bumps [tokio](https://github.com/tokio-rs/tokio) from 1.48.0 to 1.49.0.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/tokio-rs/tokio/releases">tokio's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>Tokio v1.49.0</h2>
+  > <h1>1.49.0 (January 3rd, 2026)</h1>
+  > <h3>Added</h3>
+  > <ul>
+  > <li>net: add support for <code>TCLASS</code> option on IPv6 (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7781">#7781</a>)</li>
+  > <li>runtime: stabilize <code>runtime::id::Id</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7125">#7125</a>)</li>
+  > <li>task: implement <code>Extend</code> for <code>JoinSet</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7195">#7195</a>)</li>
+  > <li>task: stabilize the <code>LocalSet::id()</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7776">#7776</a>)</li>
+  > </ul>
+  > <h3>Changed</h3>
+  > <ul>
+  > <li>net: deprecate <code>{TcpStream,TcpSocket}::set_linger</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7752">#7752</a>)</li>
+  > </ul>
+  > <h3>Fixed</h3>
+  > <ul>
+  > <li>macros: fix the hygiene issue of <code>join!</code> and
+  > <code>try_join!</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7766">#7766</a>)</li>
+  > <li>runtime: revert &quot;replace manual vtable definitions with
+  > Wake&quot; (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7699">#7699</a>)</li>
+  > <li>sync: return <code>TryRecvError::Disconnected</code> from
+  > <code>Receiver::try_recv</code> after <code>Receiver::close</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7686">#7686</a>)</li>
+  > <li>task: remove unnecessary trait bounds on the <code>Debug</code>
+  > implementation (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7720">#7720</a>)</li>
+  > </ul>
+  > <h3>Unstable</h3>
+  > <ul>
+  > <li>fs: handle <code>EINTR</code> in <code>fs::write</code> for io-uring
+  > (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7786">#7786</a>)</li>
+  > <li>fs: support io-uring with <code>tokio::fs::read</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7696">#7696</a>)</li>
+  > <li>runtime: disable io-uring on <code>EPERM</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7724">#7724</a>)</li>
+  > <li>time: add alternative timer for better multicore scalability (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7467">#7467</a>)</li>
+  > </ul>
+  > <h3>Documented</h3>
+  > <ul>
+  > <li>docs: fix a typos in <code>bounded.rs</code> and
+  > <code>park.rs</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7817">#7817</a>)</li>
+  > <li>io: add <code>SyncIoBridge</code> cross-references to
+  > <code>copy</code> and <code>copy_buf</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7798">#7798</a>)</li>
+  > <li>io: doc that <code>AsyncWrite</code> does not inherit from
+  > <code>std::io::Write</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7705">#7705</a>)</li>
+  > <li>metrics: clarify that <code>num_alive_tasks</code> is not strongly
+  > consistent (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7614">#7614</a>)</li>
+  > <li>net: clarify the cancellation safety of the
+  > <code>TcpStream::peek</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7305">#7305</a>)</li>
+  > <li>net: clarify the drop behavior of <code>unix::OwnedWriteHalf</code>
+  > (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7742">#7742</a>)</li>
+  > <li>net: clarify the platform-dependent backlog in
+  > <code>TcpSocket</code> docs (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7738">#7738</a>)</li>
+  > <li>runtime: mention <code>LocalRuntime</code> in
+  > <code>new_current_thread</code> docs (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7820">#7820</a>)</li>
+  > <li>sync: add missing period to <code>mpsc::Sender::try_send</code> docs
+  > (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7721">#7721</a>)</li>
+  > <li>sync: clarify the cancellation safety of
+  > <code>oneshot::Receiver</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7780">#7780</a>)</li>
+  > <li>sync: improve the docs for the <code>errors</code> of mpsc (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7722">#7722</a>)</li>
+  > <li>task: add example for <code>spawn_local</code> usage on local
+  > runtime (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7689">#7689</a>)</li>
+  > </ul>
+  > <p><a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7125">#7125</a>:
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/pull/7125">tokio-rs/tokio#7125</a>
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7195">#7195</a>:
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/pull/7195">tokio-rs/tokio#7195</a>
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7305">#7305</a>:
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/pull/7305">tokio-rs/tokio#7305</a>
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7467">#7467</a>:
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/pull/7467">tokio-rs/tokio#7467</a>
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7614">#7614</a>:
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/pull/7614">tokio-rs/tokio#7614</a>
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7686">#7686</a>:
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/pull/7686">tokio-rs/tokio#7686</a>
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7689">#7689</a>:
+  > <a
+  > href="https://redirect.github.com/tokio-rs/tokio/pull/7689">tokio-rs/tokio#7689</a></p>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/e3b89bbefa7564e2eba2fb9f849ef7bf87d60fad"><code>e3b89bb</code></a>
+  > chore: prepare Tokio v1.49.0 (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7824">#7824</a>)</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/4f577b84e939c8d427d79fdc73919842d8735de2"><code>4f577b8</code></a>
+  > Merge 'tokio-1.47.3' into 'master'</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/f320197693ee09e28f1fca0e55418081adcdfc25"><code>f320197</code></a>
+  > chore: prepare Tokio v1.47.3 (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7823">#7823</a>)</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/ea6b144cd1042d6841a7830b18f2df77c3db904b"><code>ea6b144</code></a>
+  > ci: freeze rustc on nightly-2025-01-25 in <code>netlify.toml</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7652">#7652</a>)</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/264e703296bccd6783a438815d91055d4517099b"><code>264e703</code></a>
+  > Merge <code>tokio-1.43.4</code> into <code>tokio-1.47.x</code> (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7822">#7822</a>)</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/dfb0f00838ca1986dee04a54a6299d35b0a4072c"><code>dfb0f00</code></a>
+  > chore: prepare Tokio v1.43.4 (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7821">#7821</a>)</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/4a91f197b03dc335010fffcf0e0c14e1f4011b42"><code>4a91f19</code></a>
+  > ci: fix wasm32-wasip1 tests (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7788">#7788</a>)</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/601c383ab6def5a6d2f95a434c95a97b65059628"><code>601c383</code></a>
+  > ci: upgrade FreeBSD from 14.2 to 14.3 (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7758">#7758</a>)</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/484cb52d8d21cb8156decbeba9569651fcc09d0d"><code>484cb52</code></a>
+  > sync: return <code>TryRecvError::Disconnected</code> from
+  > <code>Receiver::try_recv</code> after `Re...</li>
+  > <li><a
+  > href="https://github.com/tokio-rs/tokio/commit/16f20c34ed9bc11eb1e7cdec441ab844b198d2cd"><code>16f20c3</code></a>
+  > rt: mention <code>LocalRuntime</code> in <code>new_current_thread</code>
+  > docs (<a
+  > href="https://redirect.github.com/tokio-rs/tokio/issues/7820">#7820</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/tokio-rs/tokio/compare/tokio-1.48.0...tokio-1.49.0">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=tokio&package-manager=cargo&previous-version=1.48.0&new-version=1.49.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump clap from 4.5.53 to 4.5.54 ([#174](https://github.com/ratatui/tui-widgets/issues/174))
+  > Bumps [clap](https://github.com/clap-rs/clap) from 4.5.53 to 4.5.54.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/clap-rs/clap/releases">clap's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v4.5.54</h2>
+  > <h2>[4.5.54] - 2026-01-02</h2>
+  > <h3>Fixes</h3>
+  > <ul>
+  > <li><em>(help)</em> Move <code>[default]</code> to its own paragraph
+  > when <code>PossibleValue::help</code> is present in
+  > <code>--help</code></li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/clap-rs/clap/blob/master/CHANGELOG.md">clap's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>[4.5.54] - 2026-01-02</h2>
+  > <h3>Fixes</h3>
+  > <ul>
+  > <li><em>(help)</em> Move <code>[default]</code> to its own paragraph
+  > when <code>PossibleValue::help</code> is present in
+  > <code>--help</code></li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/194c676f60b916506f94f70decdbf319af5d1ec6"><code>194c676</code></a>
+  > chore: Release</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/44838f6606fa015140c65a2d35971c1e9b269e26"><code>44838f6</code></a>
+  > docs: Update changelog</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/0f59d55ff6b132cd59cd252442ce47078494be07"><code>0f59d55</code></a>
+  > Merge pull request <a
+  > href="https://redirect.github.com/clap-rs/clap/issues/6027">#6027</a>
+  > from Alpha1337k/master</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/e2aa2f07d1cd50412de51b51a7cc897e80e0b92f"><code>e2aa2f0</code></a>
+  > Feat: Add catch-all on external subcommands for zsh</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/b9c0aee9f28c5ad72932225bd730260f9bbe1fc6"><code>b9c0aee</code></a>
+  > Feat: Add external subcommands test to suite</li>
+  > <li>See full diff in <a
+  > href="https://github.com/clap-rs/clap/compare/clap_complete-v4.5.53...clap_complete-v4.5.54">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=clap&package-manager=cargo&previous-version=4.5.53&new-version=4.5.54)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+
 ## [0.7.0] - 2026-01-02
 
 ### 🚀 Features
