@@ -18,7 +18,7 @@ color-eyre = "0.6"
 crossterm = { version = "0.29" }
 derive_builder = { version = "0.20", default-features = false, features = ["alloc"] }
 derive-getters = "0.5"
-derive_setters = "0.1.8"
+derive_setters = "0.1.9"
 document-features = "0.2.11"
 futures = "0.3"
 itertools = { version = "0.14", default-features = false, features = [] }
