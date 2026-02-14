@@ -456,6 +456,57 @@ mod tests {
     }
 
     #[rstest]
+    fn move_to_bottom(scroll_view: ScrollView) {
+        let mut buf = Buffer::empty(Rect::new(0, 0, 6, 6));
+        let mut state = ScrollViewState::default();
+
+        // Prior rendering, page and buffer size are unkown. We default to `true`.
+        assert!(state.is_at_bottom());
+
+        scroll_view.clone().render(buf.area, &mut buf, &mut state);
+
+        // The vertical view size is five which means the page size is five.
+        // We have not scrolled yet, view is at the top and not the at the bottom.
+        // => We see the top five rows
+        assert!(!state.is_at_bottom());
+
+        // Since the content height is ten,
+        assert_eq!(state.size.unwrap().height, 10);
+        // if we scroll down one page (five rows),
+        state.scroll_down();
+        state.scroll_down();
+        state.scroll_down();
+        state.scroll_down();
+        state.scroll_down();
+
+        // we reach the bottom,
+        assert!(state.is_at_bottom());
+        assert_eq!(state.offset.y, 5);
+
+        // and we see the last five rows of the content.
+        scroll_view.render(buf.area, &mut buf, &mut state);
+        assert_eq!(
+            buf,
+            Buffer::with_lines(vec![
+                "YZABC▲",
+                "IJKLM║",
+                "STUVW█",
+                "CDEFG█",
+                "MNOPQ▼",
+                "◄██═► ",
+            ])
+        );
+
+        // We could also jump directly to the bottom...
+        state.scroll_to_bottom();
+        assert!(state.is_at_bottom());
+
+        // ...which sets the offset to the last row of content,
+        // ensuring to be at the bottom regardless of the page size.
+        assert_eq!(state.offset.y, state.size.unwrap().height - 1);
+    }
+
+    #[rstest]
     fn hides_both_scrollbars(scroll_view: ScrollView) {
         let mut buf = Buffer::empty(Rect::new(0, 0, 10, 10));
         let mut state = ScrollViewState::new();
@@ -795,7 +846,7 @@ mod tests {
         let items: Vec<String> = (1..=10).map(|i| format!("Item {i}")).collect();
         let list = List::new(items);
         scroll_view.render_stateful_widget(list, scroll_view.area(), &mut list_state);
-        scroll_view.render(buf.area, &mut buf, &mut state);
+        scroll_view.clone().render(buf.area, &mut buf, &mut state);
         assert_eq!(
             buf,
             Buffer::with_lines(vec![
