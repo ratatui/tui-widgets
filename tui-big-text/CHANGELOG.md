@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.3] - 2026-02-14
+
+### 🚀 Features
+
+- *(tui-big-text)* Add optional Block wrapping for BigText ([#197](https://github.com/ratatui/tui-widgets/issues/197))
+  > # Summary
+  > Add optional block wrapping for the big text widget so it can render
+  > within a border and title area.
+  >
+  > # Motivation
+  > This enables composing the big text widget with standard block
+  > decorations, which is useful for dashboards and status displays.
+  > E. g. I'm making layout with BigText stopwatch and I want to use block
+  > title as a place for status. Additionally it fits into my dashboard
+  > design.
+  > I think it might be useful.
+  >
+  > My example:
+  >
+  > ![Screenshot_5](https://github.com/user-attachments/assets/0fdbbdeb-8f05-4588-ad39-ba5133295717)
+  >
+  >
+  > # Changes
+  > - Added optional block support in the widget configuration and rendering
+  > flow.
+  > - Added a test to validate rendering with a bordered block and title.
+  >
+  > # Testing
+  > `cargo test -p tui-big-text --all-features -- --nocapture`
+
+
 ## [0.8.2] - 2026-02-01
 
 ### 🚀 Features
