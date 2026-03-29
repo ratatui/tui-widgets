@@ -1,6 +1,6 @@
 [package]
 name = "tui-prompts"
-version = "0.6.1"
+version = "0.6.2"
 description = "A library for building interactive prompts for ratatui."
 
 authors.workspace = true
