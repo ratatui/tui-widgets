@@ -1,6 +1,6 @@
 [package]
 name = "tui-scrollbar"
-version = "0.2.2"
+version = "0.2.3"
 description = "A Ratatui scrollbar widget with fractional thumb rendering"
 documentation = "https://docs.rs/tui-scrollbar"
 
