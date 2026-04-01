@@ -7,11 +7,11 @@
 //! When a pointer presses inside the thumb, the handler stores a subcell grab offset so subsequent
 //! drag events keep the pointer anchored to the same position within the thumb.
 
-#[cfg(any(feature = "crossterm_0_28", feature = "crossterm_0_29"))]
-use crate::crossterm::event::{MouseButton, MouseEvent, MouseEventKind};
 use ratatui_core::layout::Rect;
 
 use super::{ArrowHit, ArrowLayout, ScrollBar, ScrollBarOrientation, TrackClickBehavior};
+#[cfg(any(feature = "crossterm_0_28", feature = "crossterm_0_29"))]
+use crate::crossterm::event::{MouseButton, MouseEvent, MouseEventKind};
 use crate::input::{
     DragState, PointerButton, PointerEvent, PointerEventKind, ScrollAxis, ScrollBarInteraction,
     ScrollCommand, ScrollEvent, ScrollWheel,

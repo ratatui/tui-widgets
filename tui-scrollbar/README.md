@@ -195,8 +195,8 @@ let scrollbar = ScrollBar::vertical(lengths).glyph_set(GlyphSet::unicode());
 
 ## Features
 
-- `crossterm`: enables crossterm mouse events (latest supported version, currently
-  `crossterm` 0.29).
+- `crossterm`: enables crossterm mouse events (latest supported version, currently `crossterm`
+  0.29).
 - `crossterm_0_28`: enables crossterm mouse events using `crossterm` 0.28.
 - `crossterm_0_29`: enables crossterm mouse events using `crossterm` 0.29.
 

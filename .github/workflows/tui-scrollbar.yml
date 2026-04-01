@@ -1,4 +1,4 @@
-name: tui-scrollbar (crossterm matrix)
+name: Tui-scrollbar
 
 permissions:
   contents: read
@@ -11,7 +11,7 @@ on:
 
 jobs:
   check:
-    name: Cargo check (${{ matrix.features.name }})
+    name: Check (${{ matrix.features.name }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -38,7 +38,7 @@ jobs:
         run: cargo check ${{ matrix.features.args }}
 
   docsrs:
-    name: Docs.rs build (nightly)
+    name: docs.rs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

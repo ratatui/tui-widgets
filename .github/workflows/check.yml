@@ -5,13 +5,65 @@ on:
     branches:
       - main
   pull_request:
+
+permissions:
+  contents: read
+
 jobs:
-  check:
-    permissions:
-      checks: write
-    uses: joshka/github-workflows/.github/workflows/rust-check.yml@main
-    with:
-      msrv: 1.88.0
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt
+      - name: Cache Rust build artifacts
+        uses: Swatinem/rust-cache@v2
+      - name: Run format check
+        run: cargo fmt --all -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Rust build artifacts
+        uses: Swatinem/rust-cache@v2
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features --workspace -- -D warnings
+
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+      - name: Cache Rust build artifacts
+        uses: Swatinem/rust-cache@v2
+      - name: Build docs
+        run: cargo doc --all-features --workspace
+
+  msrv:
+    name: MSRV
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@1.88.0
+      - name: Cache Rust build artifacts
+        uses: Swatinem/rust-cache@v2
+      - name: Check workspace on MSRV
+        run: cargo check --all-features --workspace
+
   readme:
     name: Readme
     runs-on: ubuntu-latest

@@ -2,7 +2,8 @@
 
 <!-- cargo-rdme start -->
 
-A [Ratatui] widget to build smooth scrollable views. Part of the [tui-widgets] suite by [Joshka].
+A [Ratatui] widget to build smooth scrollable views. Part of the [tui-widgets] suite by
+[Joshka].
 
 ![Demo](https://vhs.charm.sh/vhs-6PuT3pdwSTp4aTvKrCBx9F.gif)
 

@@ -197,8 +197,8 @@
 //!
 //! # Features
 //!
-//! - `crossterm`: enables crossterm mouse events (latest supported version, currently
-//!   `crossterm` 0.29).
+//! - `crossterm`: enables crossterm mouse events (latest supported version, currently `crossterm`
+//!   0.29).
 //! - `crossterm_0_28`: enables crossterm mouse events using `crossterm` 0.28.
 //! - `crossterm_0_29`: enables crossterm mouse events using `crossterm` 0.29.
 //!
@@ -266,15 +266,11 @@ mod lengths;
 mod metrics;
 mod scrollbar;
 
-pub use crate::glyphs::GlyphSet;
-pub use crate::input::{
-    PointerButton, PointerEvent, PointerEventKind, ScrollAxis, ScrollBarInteraction, ScrollCommand,
-    ScrollEvent, ScrollWheel,
-};
-pub use crate::lengths::ScrollLengths;
-pub use crate::metrics::{CellFill, HitTest, ScrollMetrics, SUBCELL};
-pub use crate::scrollbar::{ScrollBar, ScrollBarArrows, ScrollBarOrientation, TrackClickBehavior};
-
+/// Re-export of the selected crossterm version.
+///
+/// See `tui_scrollbar::crossterm` for the version selection rules.
+#[cfg(all(feature = "crossterm_0_28", not(feature = "crossterm_0_29")))]
+pub use ::crossterm_0_28 as crossterm;
 /// Re-export of the selected crossterm version.
 ///
 /// This crate supports multiple crossterm versions via feature flags:
@@ -289,8 +285,11 @@ pub use crate::scrollbar::{ScrollBar, ScrollBarArrows, ScrollBarOrientation, Tra
 #[cfg(feature = "crossterm_0_29")]
 pub use ::crossterm_0_29 as crossterm;
 
-/// Re-export of the selected crossterm version.
-///
-/// See `tui_scrollbar::crossterm` for the version selection rules.
-#[cfg(all(feature = "crossterm_0_28", not(feature = "crossterm_0_29")))]
-pub use ::crossterm_0_28 as crossterm;
+pub use crate::glyphs::GlyphSet;
+pub use crate::input::{
+    PointerButton, PointerEvent, PointerEventKind, ScrollAxis, ScrollBarInteraction, ScrollCommand,
+    ScrollEvent, ScrollWheel,
+};
+pub use crate::lengths::ScrollLengths;
+pub use crate::metrics::{CellFill, HitTest, ScrollMetrics, SUBCELL};
+pub use crate::scrollbar::{ScrollBar, ScrollBarArrows, ScrollBarOrientation, TrackClickBehavior};
