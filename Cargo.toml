@@ -13,7 +13,7 @@ categories = ["command-line-interface", "gui"]
 keywords = ["cli", "console", "ratatui", "terminal", "tui"]
 
 [workspace.dependencies]
-clap = { version = "4.5", features = ["derive"] }
+clap = { version = "4", features = ["derive"] }
 color-eyre = "0.6"
 crossterm = { version = "0.29" }
 derive_builder = { version = "0.20", default-features = false, features = ["alloc"] }
@@ -25,14 +25,14 @@ itertools = { version = "0.14", default-features = false, features = [] }
 indoc = "2"
 lipsum = "0.9"
 pretty_assertions = "1.4"
-rand = "0.9"
-ratatui = { version = "0.30.0", default-features = false }
+rand = "0.10"
+ratatui = { version = "0.30", default-features = false }
 ratatui-core = { version = "0.1" }
-ratatui-macros = "0.7.0"
+ratatui-macros = "0.7"
 ratatui-widgets = { version = "0.3" }
 rstest = "0.26"
 strum = { version = "0.27", default-features = false, features = ["derive"] }
-tokio = { version = "1.49" }
+tokio = { version = "1" }
 
 [lints.rust]
 unused = "warn"

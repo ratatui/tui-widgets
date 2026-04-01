@@ -1,7 +1,7 @@
 use clap::{Parser, ValueEnum};
 use colorgrad::Gradient;
 use crossterm::event::{self, Event, KeyEvent, KeyEventKind};
-use rand::Rng;
+use rand::RngExt;
 use ratatui::style::palette::tailwind::SLATE;
 use ratatui::style::{Color, Stylize};
 use ratatui::text::Line;
@@ -101,8 +101,10 @@ fn render(frame: &mut Frame, args: &Args) {
         BarStyle::Octant | BarStyle::Braille => area.width as usize * 2,
         BarStyle::Quadrant => area.width as usize * 4,
     };
-    let mut data = vec![0.0; width];
-    rand::rng().fill(&mut data[..]);
+    let mut rng = rand::rng();
+    let data: Vec<f64> = std::iter::repeat_with(|| rng.random())
+        .take(width)
+        .collect();
     let gradient = args.preset.to_gradient();
     let bar_graph = BarGraph::new(data)
         .with_gradient(gradient)

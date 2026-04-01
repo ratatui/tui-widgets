@@ -12,7 +12,7 @@ categories.workspace = true
 keywords.workspace = true
 
 [dependencies]
-colorgrad = { version = "0.8.0", features = ["preset"] }
+colorgrad = { version = "0.8", features = ["preset"] }
 ratatui-core.workspace = true
 strum.workspace = true
 

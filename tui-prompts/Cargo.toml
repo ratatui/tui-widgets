@@ -19,7 +19,7 @@ itertools.workspace = true
 ratatui-core.workspace = true
 ratatui-widgets.workspace = true
 ratatui-macros.workspace = true
-unicode-width = "0.2.2"
+unicode-width = "0.2"
 
 [dev-dependencies]
 clap.workspace = true

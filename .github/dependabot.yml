@@ -7,9 +7,18 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
     schedule:
       interval: "weekly"
   - package-ecosystem: "cargo" # See documentation for possible values
     directory: "/" # Location of package manifests
+    versioning-strategy: "increase-if-necessary"
+    groups:
+      cargo-dependencies:
+        patterns:
+          - "*"
     schedule:
       interval: "weekly"
