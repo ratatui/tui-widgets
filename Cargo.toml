@@ -13,7 +13,7 @@ categories = ["command-line-interface", "gui"]
 keywords = ["cli", "console", "ratatui", "terminal", "tui"]
 
 [workspace.dependencies]
-clap = { version = "4.5", features = ["derive"] }
+clap = { version = "4.6", features = ["derive"] }
 color-eyre = "0.6"
 crossterm = { version = "0.29" }
 derive_builder = { version = "0.20", default-features = false, features = ["alloc"] }
