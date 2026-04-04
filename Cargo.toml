@@ -31,7 +31,7 @@ ratatui-core = { version = "0.1" }
 ratatui-macros = "0.7"
 ratatui-widgets = { version = "0.3" }
 rstest = "0.26"
-strum = { version = "0.27", default-features = false, features = ["derive"] }
+strum = { version = "0.28", default-features = false, features = ["derive"] }
 tokio = { version = "1" }
 
 [lints.rust]
