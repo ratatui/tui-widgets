@@ -2255,7 +2255,7 @@ dependencies = [
 
 [[package]]
 name = "tui-scrollview"
-version = "0.6.3"
+version = "0.6.4"
 dependencies = [
  "color-eyre",
  "indoc",
