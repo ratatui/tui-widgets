@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4] - 2026-04-04
+
+### ⚙️ Miscellaneous Tasks
+
+- *(deps)* Lower dependency floors and reduce dependabot noise ([#211](https://github.com/ratatui/tui-widgets/issues/211))
+  > ## Summary
+  >
+  > - lower direct dependency requirements to the broadest semver ranges the
+  > workspace actually supports
+  > - keep `Cargo.lock` on current compatible releases, including the direct
+  > `clap`, `tokio`, `futures`, and `rand` updates that fit this PR's scope
+  > - configure Dependabot to group Cargo and GitHub Actions updates and use
+  > `increase-if-necessary` to reduce manifest churn
+  >
+  > ## Details
+  >
+  > This change validates dependency floors with `cargo minimal-versions` in
+  > `--direct` mode so the library manifests reflect honest direct
+  > requirements instead of transitive minimum noise.
+  >
+  > Notable outcomes:
+  >
+  > - broadened requirements such as `clap = "4"` and `tokio = "1"` after
+  > verifying the workspace still compiles and tests against their earliest
+  > compatible direct versions
+  > - kept real floors where required, such as `crossterm = "0.29"`,
+  > `document-features = "0.2.11"`, and `derive_setters = "0.1.9"`
+  > - kept the direct `rand` update to `0.10` and adjusted the
+  > `tui-bar-graph` examples to generate random `Vec<f64>` values in a `rand
+  > 0.10`-compatible way
+  > - kept transitive duplicate major versions where they are still required
+  > by downstream crates like the Ratatui stack or `lipsum`
+  >
+  > Dependabot should now produce less noise because grouped update PRs can
+  > primarily refresh `Cargo.lock` while leaving `Cargo.toml` alone unless a
+  > broader range is truly needed.
+  >
+  > ## Validation
+  >
+  > - `cargo minimal-versions check --workspace --direct`
+  > - `cargo check --all-features --workspace`
+  > - `cargo test --all-features --workspace`
+  > - `cargo minimal-versions test --workspace --all-features --direct`
+  > - `cargo outdated --workspace --root-deps-only`
+  > - `cargo test -p tui-bar-graph --all-features --examples`
+  >
+  > ## Supersedes
+  >
+  > This PR should supersede and allow closing the related Dependabot PRs:
+
+
 ## [0.2.3] - 2026-03-27
 
 ### ⚙️ Miscellaneous Tasks
