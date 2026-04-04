@@ -11,8 +11,18 @@ rust-version.workspace = true
 categories.workspace = true
 keywords.workspace = true
 
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[features]
+default = ["std"]
+## enables std
+std = ["strum/std"]
+
 [dependencies]
-colorgrad = { version = "0.8", features = ["preset"] }
+colorgrad = { version = "0.8", default-features = false, features = ["preset"] }
+document-features.workspace = true
 ratatui-core.workspace = true
 strum.workspace = true
 
@@ -22,3 +32,7 @@ color-eyre.workspace = true
 crossterm.workspace = true
 rand.workspace = true
 ratatui = { workspace = true, default-features = true }
+
+[[example]]
+name = "tui-bar-graph"
+required-features = ["std"]

@@ -38,6 +38,19 @@ jobs:
       - name: Run clippy
         run: cargo clippy --all-targets --all-features --workspace -- -D warnings
 
+  targets:
+    name: Check Targets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache Rust build artifacts
+        uses: Swatinem/rust-cache@v2
+      - name: Check all workspace targets
+        run: cargo check --all-targets --all-features --workspace
+
   docs:
     name: Docs
     runs-on: ubuntu-latest

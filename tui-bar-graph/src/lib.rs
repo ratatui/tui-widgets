@@ -81,6 +81,8 @@
 //!
 //! [Joshka]: https://github.com/joshka
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
+#![cfg_attr(docsrs, doc = "\n# Feature flags\n")]
+#![cfg_attr(docsrs, doc = document_features::document_features!())]
 
 use colorgrad::Gradient;
 use ratatui_core::buffer::Buffer;
