@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4] - 2026-04-04
+
+### Other
+
+- [codex] Vendor CI workflows into this repository ([#212](https://github.com/ratatui/tui-widgets/issues/212))
+
+
 ## [0.2.3] - 2026-03-29
 
 ### ⚙️ Miscellaneous Tasks
