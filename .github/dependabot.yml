@@ -14,9 +14,6 @@ updates:
       github-actions:
         patterns:
           - "*"
-    ignore:
-      # MSRV toolchain bumps are intentional maintainer work.
-      - dependency-name: "dtolnay/rust-toolchain"
     schedule:
       interval: "weekly"
   - package-ecosystem: "cargo" # See documentation for possible values
