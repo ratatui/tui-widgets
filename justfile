@@ -23,5 +23,8 @@ clippy-all: clippy-stable clippy-beta
 test:
     cargo test --all-features --workspace
 
+semver-checks:
+    cargo semver-checks --workspace
+
 test-scrollbar:
     cargo test -p tui-scrollbar --all-features
