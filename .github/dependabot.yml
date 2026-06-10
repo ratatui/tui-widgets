@@ -7,15 +7,24 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
+    # Delay fresh releases so supply-chain attacks have time to be discovered.
+    cooldown:
+      default-days: 7
     groups:
       github-actions:
         patterns:
           - "*"
+    ignore:
+      # MSRV toolchain bumps are intentional maintainer work.
+      - dependency-name: "dtolnay/rust-toolchain"
     schedule:
       interval: "weekly"
   - package-ecosystem: "cargo" # See documentation for possible values
     directory: "/" # Location of package manifests
     versioning-strategy: "increase-if-necessary"
+    # Delay fresh releases so supply-chain attacks have time to be discovered.
+    cooldown:
+      default-days: 7
     groups:
       cargo-dependencies:
         patterns:
