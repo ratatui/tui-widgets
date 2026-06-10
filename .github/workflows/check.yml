@@ -28,6 +28,40 @@ jobs:
       - name: Run format check
         run: cargo fmt --all -- --check
 
+  typos:
+    name: Typos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
+        with:
+          toolchain: stable
+      - name: Install cargo-binstall
+        uses: taiki-e/install-action@fd2f5e3d644b484055ebf4268f474c565f148f25 # v2
+        with:
+          tool: cargo-binstall
+      - name: Install typos
+        run: cargo binstall --no-confirm typos-cli@1.47.2
+      - name: Check spelling
+        run: typos
+
+  markdownlint:
+    name: Markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - name: Install markdownlint-cli2
+        run: npm install --global markdownlint-cli2@0.22.1
+      - name: Lint Markdown
+        run: markdownlint-cli2 "**/*.md"
+
   clippy:
     name: Clippy (${{ matrix.toolchain }})
     runs-on: ubuntu-latest
@@ -219,6 +253,8 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - format
+      - typos
+      - markdownlint
       - clippy
       - targets
       - cargo-deny

@@ -82,7 +82,6 @@ BigText::builder().right_aligned();
 
 For the full suite of widgets, see [tui-widgets].
 
-[tui-big-text]: https://crates.io/crates/tui-big-text
 [Ratatui]: https://crates.io/crates/ratatui
 [font8x8]: https://crates.io/crates/font8x8
 

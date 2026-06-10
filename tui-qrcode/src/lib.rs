@@ -590,7 +590,7 @@ mod tests {
         );
     }
 
-    /// The QR code is doubled vertically and horizontall as the min scaling means this needs to
+    /// The QR code is doubled vertically and horizontally as the min scaling means this needs to
     /// render at least 21x10.5 but the buffer is 22x12
     #[rstest]
     fn render_min_into_larger_area(empty_widget: QrCodeWidget) {
@@ -619,7 +619,7 @@ mod tests {
 
     /// The QR code is truncated as the area is smaller than the QR code
     #[rstest]
-    fn render_exact_into_smaler_area(empty_widget: QrCodeWidget) {
+    fn render_exact_into_smaller_area(empty_widget: QrCodeWidget) {
         let mut buf = Buffer::empty(Rect::new(0, 0, 20, 10));
         empty_widget.render(buf.area, &mut buf);
         assert_eq!(

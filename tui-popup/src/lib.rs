@@ -141,7 +141,6 @@
 //!
 //! For the full suite of widgets, see [tui-widgets].
 //!
-//!
 //! [Crate]: https://crates.io/crates/tui-popup
 //! [Docs]: https://docs.rs/tui-popup/
 //! [Dependency Status]: https://deps.rs/repo/github/ratatui/tui-widgets
@@ -161,8 +160,8 @@
 //! [Examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-popup/examples
 //! [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-popup/CHANGELOG.md
 //! [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
-//! [KnownSize]: https://docs.rs/tui-popup/latest/tui_popup/trait.KnownSize.html
-//! [KnownSizeWrapper]: https://docs.rs/tui-popup/latest/tui_popup/struct.KnownSizeWrapper.html
+//! [`KnownSize`]: https://docs.rs/tui-popup/latest/tui_popup/trait.KnownSize.html
+//! [`KnownSizeWrapper`]: https://docs.rs/tui-popup/latest/tui_popup/struct.KnownSizeWrapper.html
 //! [tui-scrollview]: https://crates.io/crates/tui-scrollview
 //!
 //! [Joshka]: https://github.com/joshka

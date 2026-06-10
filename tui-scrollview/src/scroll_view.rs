@@ -55,7 +55,7 @@ pub struct ScrollView {
     horizontal_scrollbar_visibility: ScrollbarVisibility,
 }
 
-/// The visbility of the vertical and horizontal scrollbars.
+/// The visibility of the vertical and horizontal scrollbars.
 #[derive(Debug, Default, Clone, Copy, Eq, PartialEq, Hash)]
 pub enum ScrollbarVisibility {
     /// Render the scrollbar only whenever needed.
@@ -299,7 +299,7 @@ impl ScrollView {
             self.horizontal_scrollbar_visibility,
             self.vertical_scrollbar_visibility,
         ) {
-            // straightfoward, no need to check fit values
+            // straightforward, no need to check fit values
             (V::Always, V::Always) => (true, true),
             (V::Never, V::Never) => (false, false),
             (V::Always, V::Never) => (true, false),
@@ -521,7 +521,7 @@ mod tests {
         )
     }
 
-    /// Tests the scenario where the vertical scollbar steals a column from the right side of the
+    /// Tests the scenario where the vertical scrollbar steals a column from the right side of the
     /// buffer which causes the horizontal scrollbar to be shown.
     #[rstest]
     fn does_not_hide_horizontal_scrollbar(scroll_view: ScrollView) {
@@ -544,7 +544,7 @@ mod tests {
         )
     }
 
-    /// Tests the scenario where the horizontal scollbar steals a row from the bottom side of the
+    /// Tests the scenario where the horizontal scrollbar steals a row from the bottom side of the
     /// buffer which causes the vertical scrollbar to be shown.
     #[rstest]
     fn does_not_hide_vertical_scrollbar(scroll_view: ScrollView) {

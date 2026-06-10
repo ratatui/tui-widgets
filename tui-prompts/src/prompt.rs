@@ -188,7 +188,7 @@ pub trait State {
             // We cannot use String::insert() as it operates on bytes, which can lead to incorrect
             // modifications with multibyte characters. Instead, we handle text
             // manipulation at the character level using Rust's char type for Unicode
-            // correctness. Check docs of String::insert() and String::chars() for futher info.
+            // correctness. Check docs of String::insert() and String::chars() for further info.
             *self.value_mut() = chain![
                 self.value().chars().take(self.position()),
                 once(c),
