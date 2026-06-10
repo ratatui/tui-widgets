@@ -72,6 +72,29 @@ jobs:
       - name: Check all workspace targets
         run: cargo check --all-targets --all-features --workspace
 
+  cargo-deny:
+    name: cargo-deny (${{ matrix.checks }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        checks:
+          - advisories
+          - bans licenses sources
+    # Prevent a newly announced advisory from suddenly failing unrelated pull requests.
+    continue-on-error: ${{ matrix.checks == 'advisories' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - name: Run cargo-deny
+        uses: EmbarkStudios/cargo-deny-action@bb137d7af7e4fb67e5f82a49c4fce4fad40782fe # v2
+        with:
+          rust-version: stable
+          log-level: info
+          arguments: --all-features
+          command: check ${{ matrix.checks }}
+
   docs:
     name: Docs
     runs-on: ubuntu-latest
@@ -174,6 +197,7 @@ jobs:
       - format
       - clippy
       - targets
+      - cargo-deny
       - docs
       - msrv
       - readme
