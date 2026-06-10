@@ -26,17 +26,29 @@ jobs:
         run: cargo fmt --all -- --check
 
   clippy:
-    name: Clippy
+    name: Clippy (${{ matrix.toolchain }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Beta Clippy runs as an early-warning gate for new lints before they reach stable. This
+        # keeps future stable releases from turning unrelated PRs red because the baseline already
+        # broke on main.
+        toolchain:
+          - stable
+          - beta
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
       - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.toolchain }}
+          components: clippy
       - name: Cache Rust build artifacts
         uses: Swatinem/rust-cache@v2
       - name: Run clippy
-        run: cargo clippy --all-targets --all-features --workspace -- -D warnings
+        run: cargo +${{ matrix.toolchain }} clippy --all-targets --all-features --workspace -- -D warnings
 
   targets:
     name: Check Targets

@@ -118,16 +118,14 @@ impl ScrollMetrics {
         let max_offset = content_len.saturating_sub(viewport_len);
         let offset = offset.min(max_offset);
 
-        let (thumb_len, thumb_start) = if max_offset == 0 {
-            (track_len, 0)
-        } else {
-            let thumb_len = (track_len.saturating_mul(viewport_len) / content_len)
-                .max(SUBCELL)
-                .min(track_len);
-            let thumb_travel = track_len.saturating_sub(thumb_len);
-            let thumb_start = thumb_travel.saturating_mul(offset) / max_offset;
-            (thumb_len, thumb_start)
-        };
+        let thumb_len = (track_len.saturating_mul(viewport_len) / content_len)
+            .max(SUBCELL)
+            .min(track_len);
+        let thumb_travel = track_len.saturating_sub(thumb_len);
+        let thumb_start = thumb_travel
+            .saturating_mul(offset)
+            .checked_div(max_offset)
+            .unwrap_or(0);
 
         Self {
             content_len,
@@ -206,11 +204,11 @@ impl ScrollMetrics {
     /// Larger offsets move the thumb toward the end of the track, clamped to the maximum travel.
     pub fn thumb_start_for_offset(&self, offset: usize) -> usize {
         let max_offset = self.max_offset();
-        if max_offset == 0 {
-            return 0;
-        }
         let offset = offset.min(max_offset);
-        self.thumb_travel().saturating_mul(offset) / max_offset
+        self.thumb_travel()
+            .saturating_mul(offset)
+            .checked_div(max_offset)
+            .unwrap_or(0)
     }
 
     /// Converts a thumb start position (in subcells) to an offset (in subcells).
@@ -218,11 +216,11 @@ impl ScrollMetrics {
     /// Thumb positions beyond the end of travel are clamped to the maximum offset.
     pub fn offset_for_thumb_start(&self, thumb_start: usize) -> usize {
         let max_offset = self.max_offset();
-        if max_offset == 0 {
-            return 0;
-        }
         let thumb_start = thumb_start.min(self.thumb_travel());
-        max_offset.saturating_mul(thumb_start) / self.thumb_travel()
+        max_offset
+            .saturating_mul(thumb_start)
+            .checked_div(self.thumb_travel())
+            .unwrap_or(0)
     }
 
     /// Returns how much of a cell is filled by the thumb.
@@ -392,6 +390,18 @@ mod tests {
             viewport_len: 10,
         };
         let metrics = ScrollMetrics::new(lengths, 0, 4);
+        assert_eq!(metrics.offset_for_thumb_start(5), 0);
+    }
+
+    #[test]
+    fn conversions_return_zero_when_thumb_cannot_travel() {
+        let lengths = crate::ScrollLengths {
+            content_len: 10,
+            viewport_len: 3,
+        };
+        let metrics = ScrollMetrics::new(lengths, 0, 1);
+        assert_eq!(metrics.thumb_travel(), 0);
+        assert_eq!(metrics.thumb_start_for_offset(5), 0);
         assert_eq!(metrics.offset_for_thumb_start(5), 0);
     }
 

@@ -12,9 +12,17 @@
 
 ## Build, Test, and Development Commands
 
+- List project helper commands: `just --list`.
 - Format: `cargo fmt --all` (check only: `cargo fmt --all -- --check`).
 - Lint: `cargo clippy --all-targets --all-features --workspace` (pedantic/nursery enabled; fix or
   justify warnings).
+- Stable Clippy gate: `just clippy-stable` (runs `cargo +stable clippy --all-targets
+  --all-features --workspace -- -D warnings`).
+- Beta Clippy early-warning gate: `just clippy-beta` (same command on `+beta` to catch lints before
+  they reach stable). This repo treats Clippy warnings as a PR-status signal, so beta helps find
+  upcoming lint failures while they are still maintenance work instead of inherited breakage on
+  unrelated PRs.
+- Run both Clippy gates: `just clippy-all`.
 - Test full workspace: `cargo test --all-features --workspace`.
 - Test a single crate: `cargo test -p tui-prompts --all-features -- --nocapture`.
 - Docs smoke test: `cargo doc --all-features --workspace`.
