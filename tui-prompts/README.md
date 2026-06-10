@@ -44,8 +44,7 @@ impl<'a> App<'a> {
     fn draw_ui(&mut self, frame: &mut Frame) {
         let (username_area, password_area, invisible_area) = split_layout(frame.area());
 
-        TextPrompt::from("Username")
-            .draw(frame, username_area, &mut self.username_state);
+        TextPrompt::from("Username").draw(frame, username_area, &mut self.username_state);
 
         TextPrompt::from("Password")
             .with_render_style(TextRenderStyle::Password)

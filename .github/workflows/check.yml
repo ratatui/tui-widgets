@@ -180,8 +180,10 @@ jobs:
           cargo rdme --check --manifest-path Cargo.toml
           cargo rdme --check --manifest-path tui-bar-graph/Cargo.toml
           cargo rdme --check --manifest-path tui-big-text/Cargo.toml
+          cargo rdme --check --manifest-path tui-box-text/Cargo.toml
           cargo rdme --check --manifest-path tui-cards/Cargo.toml
           cargo rdme --check --manifest-path tui-popup/Cargo.toml
+          cargo rdme --check --manifest-path tui-prompts/Cargo.toml
           cargo rdme --check --manifest-path tui-qrcode/Cargo.toml
           cargo rdme --check --manifest-path tui-scrollbar/Cargo.toml
           cargo rdme --check --manifest-path tui-scrollview/Cargo.toml
