@@ -74,14 +74,16 @@ cargo test
   cargo test --all-features --workspace
   ```
 
-- Check to see if there are code formatting issues
+- Check to see if there are code formatting issues. This uses nightly rustfmt because
+  `rustfmt.toml` enables unstable options for comment wrapping and import grouping.
 
   ```shell
-  cargo fmt --all -- --check
+  just fmt-check
   ```
 
-- Format the code in the project
+- Format the code in the project. Use the same nightly-backed recipe so local formatting matches
+  check mode.
 
   ```shell
-  cargo fmt --all
+  just fmt
   ```

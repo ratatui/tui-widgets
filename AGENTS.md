@@ -13,7 +13,8 @@
 ## Build, Test, and Development Commands
 
 - List project helper commands: `just --list`.
-- Format: `cargo fmt --all` (check only: `cargo fmt --all -- --check`).
+- Format: `just fmt` (check only: `just fmt-check`). These run `cargo +nightly fmt` because
+  `rustfmt.toml` uses unstable formatting options such as comment wrapping and grouped imports.
 - Lint: `cargo clippy --all-targets --all-features --workspace` (pedantic/nursery enabled; fix or
   justify warnings).
 - Stable Clippy gate: `just clippy-stable` (runs `cargo +stable clippy --all-targets

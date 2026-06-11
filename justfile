@@ -4,10 +4,12 @@ default:
     @just --list
 
 fmt:
-    cargo fmt --all
+    # rustfmt.toml uses unstable rustfmt options for comment wrapping and import grouping.
+    cargo +nightly fmt --all
 
 fmt-check:
-    cargo fmt --all -- --check
+    # Keep check mode on the same toolchain as fmt so CI and local formatting agree.
+    cargo +nightly fmt --all -- --check
 
 clippy toolchain="stable":
     cargo +{{toolchain}} clippy --all-targets --all-features --workspace -- -D warnings
