@@ -457,6 +457,28 @@ mod tests {
     }
 
     #[rstest]
+    fn is_at_bottom_reports_true_before_the_last_row_is_visible(scroll_view: ScrollView) {
+        let mut buf = Buffer::empty(Rect::new(0, 0, 6, 6));
+        let mut state = ScrollViewState::with_offset((0, 4).into());
+
+        scroll_view.render(buf.area, &mut buf, &mut state);
+
+        assert_eq!(
+            buf,
+            Buffer::with_lines(vec![
+                "OPQRS▲",
+                "YZABC║",
+                "IJKLM█",
+                "STUVW█",
+                "CDEFG▼",
+                "◄██═► ",
+            ])
+        );
+        // Incorrect behavior: the final row is not rendered yet.
+        assert!(state.is_at_bottom());
+    }
+
+    #[rstest]
     fn move_to_bottom(scroll_view: ScrollView) {
         let mut buf = Buffer::empty(Rect::new(0, 0, 6, 6));
         let mut state = ScrollViewState::default();
@@ -482,6 +504,7 @@ mod tests {
 
         // we reach the bottom,
         assert!(state.is_at_bottom());
+        // Incorrect behavior: this offset scrolls past the last full page.
         assert_eq!(state.offset.y, 5);
 
         // and we see the last five rows of the content.
@@ -505,6 +528,29 @@ mod tests {
         // ...which sets the offset to the last row of content,
         // ensuring to be at the bottom regardless of the page size.
         assert_eq!(state.offset.y, state.size.unwrap().height - 1);
+    }
+
+    #[rstest]
+    fn rendering_at_bottom_scrolls_past_the_last_full_page(scroll_view: ScrollView) {
+        let mut buf = Buffer::empty(Rect::new(0, 0, 11, 6));
+        let mut state = ScrollViewState::default();
+
+        state.scroll_to_bottom();
+        scroll_view.render(buf.area, &mut buf, &mut state);
+
+        assert_eq!(
+            buf,
+            Buffer::with_lines(vec![
+                "YZABCDEFGH▲",
+                "IJKLMNOPQR║",
+                "STUVWXYZAB█",
+                "CDEFGHIJKL█",
+                "MNOPQRSTUV█",
+                "          ▼",
+            ])
+        );
+        assert_eq!(state.offset.y, 5);
+        assert_eq!(state.page_size.unwrap().height, 6);
     }
 
     #[rstest]

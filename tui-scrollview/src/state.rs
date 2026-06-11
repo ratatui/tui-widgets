@@ -100,3 +100,24 @@ impl ScrollViewState {
         self.offset.y.saturating_add(page_size) >= bottom
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn is_at_bottom_reports_true_before_the_last_row_is_visible() {
+        let mut state = ScrollViewState {
+            offset: Position::new(0, 4),
+            size: Some(Size::new(1, 10)),
+            page_size: Some(Size::new(1, 5)),
+        };
+
+        // Incorrect behavior: the last row is not visible at this offset.
+        assert!(state.is_at_bottom());
+
+        state.offset.y = 5;
+
+        assert!(state.is_at_bottom());
+    }
+}
