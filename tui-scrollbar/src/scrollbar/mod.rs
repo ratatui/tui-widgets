@@ -1,14 +1,15 @@
 //! Rendering and interaction for proportional scrollbars.
 //!
-//! This module provides the widget, glyph selection, and interaction helpers. The pure math lives
-//! in [`crate::metrics`].
+//! This module provides the widget and interaction helpers. Glyph configuration lives in
+//! [`crate::GlyphSet`], and the pure scrollbar geometry lives in [`crate::ScrollMetrics`].
 //!
-//! # How the parts interact
+//! # Local model
 //!
-//! 1. Your app owns `content_len`, `viewport_len`, and `offset`.
-//! 2. [`ScrollMetrics`] converts them into thumb geometry.
-//! 3. [`ScrollBar`] renders using the selected [`GlyphSet`].
-//! 4. Input events update `offset` via [`ScrollCommand`].
+//! 1. [`ScrollBar`] stores orientation, logical lengths, offset, styles, glyphs, and interaction
+//!    behavior.
+//! 2. [`ScrollMetrics`] converts the current lengths and offset into thumb geometry.
+//! 3. Rendering chooses track, thumb, and arrow glyphs from [`GlyphSet`].
+//! 4. Input helpers return [`ScrollCommand`] values for the application to apply.
 //!
 //! The scrollbar renders only a single row or column. If you provide a larger [`Rect`], it will
 //! still render into the first row/column of that area.
@@ -28,10 +29,6 @@
 //! - Dragging stores a grab offset in subcells so the thumb does not jump under the pointer.
 //! - Arrow endcaps consume track space; the inner track is used for metrics and hit testing so
 //!   thumb math stays consistent regardless of arrows.
-//!
-//! Partial glyph selection uses [`CellFill::Partial`]: `start == 0` means the partial fill begins
-//! at the leading edge (top/left), so the upper/left glyphs are chosen. Non-zero `start` uses the
-//! lower/right glyphs to indicate a trailing-edge fill.
 //!
 //! Drag operations store a "grab offset" in subcells (1/8 of a cell; see [`crate::SUBCELL`]) so the
 //! thumb does not jump when the pointer starts dragging; subsequent drag events subtract that
@@ -131,14 +128,35 @@ struct ArrowLayout {
 
 /// A proportional scrollbar widget with fractional thumb rendering.
 ///
-/// # Key methods
+/// # Method map
+///
+/// ## Construction
 ///
 /// - [`Self::new`]
 /// - [`Self::orientation`]
-/// - [`Self::arrows`]
+/// - [`Self::vertical`]
+/// - [`Self::horizontal`]
+///
+/// ## Position and lengths
+///
 /// - [`Self::content_len`]
 /// - [`Self::viewport_len`]
 /// - [`Self::offset`]
+///
+/// ## Appearance
+///
+/// - [`Self::track_style`]
+/// - [`Self::thumb_style`]
+/// - [`Self::arrow_style`]
+/// - [`Self::glyph_set`]
+/// - [`Self::arrows`]
+///
+/// ## Interaction
+///
+/// - [`Self::handle_event`]
+/// - [`Self::handle_mouse_event`], when a crossterm feature is enabled
+/// - [`Self::track_click_behavior`]
+/// - [`Self::scroll_step`]
 ///
 /// # Important
 ///
@@ -160,11 +178,38 @@ struct ArrowLayout {
 /// Track glyphs use `track_style`. Thumb glyphs use `thumb_style`. Arrow endcaps use
 /// `arrow_style`, which defaults to white on dark gray.
 ///
+/// Scrollbar glyphs are terminal characters. For visible track glyphs, thumb blocks, and arrow
+/// symbols, `Style::fg` colors the glyph itself and `Style::bg` colors the cell behind it. The
+/// default [`GlyphSet::minimal`] track renders spaces, so only the track background is visible in
+/// empty track cells. Visible track glyph sets, such as [`GlyphSet::box_drawing`] and
+/// [`GlyphSet::unicode`], can use foreground color for the track line. Thumb glyphs are block
+/// characters, so `Style::fg` is usually the useful knob for thumb color; `Style::bg` still colors
+/// the rest of the cell. With partial thumb glyphs, especially on a visible line track such as
+/// [`GlyphSet::box_drawing`], that background can show at the ends of the thumb. Match the thumb
+/// background to the track background unless that contrast is intentional.
+///
+/// ```rust
+/// use ratatui_core::style::{Color, Style};
+/// use tui_scrollbar::{ScrollBar, ScrollBarArrows, ScrollLengths};
+///
+/// let lengths = ScrollLengths {
+///     content_len: 120,
+///     viewport_len: 30,
+/// };
+/// let scrollbar = ScrollBar::vertical(lengths)
+///     .arrows(ScrollBarArrows::Both)
+///     .track_style(Style::new().bg(Color::Black))
+///     .thumb_style(Style::new().fg(Color::Rgb(255, 158, 100)))
+///     .arrow_style(Style::new().fg(Color::Yellow).bg(Color::Black));
+/// ```
+///
 /// # State
 ///
 /// This widget is stateless. Pointer drag state lives in [`crate::ScrollBarInteraction`].
 ///
 /// # Examples
+///
+/// Minimal rendering only needs an area, lengths, an offset, and a buffer.
 ///
 /// ```rust
 /// use ratatui_core::buffer::Buffer;
@@ -265,6 +310,9 @@ pub struct ScrollBar {
 impl ScrollBar {
     /// Creates a scrollbar with the given orientation and lengths.
     ///
+    /// Use [`Self::vertical`] or [`Self::horizontal`] when the orientation is known at the call
+    /// site.
+    ///
     /// Zero lengths are treated as 1.
     ///
     /// ```rust
@@ -293,16 +341,52 @@ impl ScrollBar {
     }
 
     /// Creates a vertical scrollbar with the given content and viewport lengths.
+    ///
+    /// The track length is derived from the render area's height.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths);
+    /// ```
     pub fn vertical(lengths: crate::ScrollLengths) -> Self {
         Self::new(ScrollBarOrientation::Vertical, lengths)
     }
 
     /// Creates a horizontal scrollbar with the given content and viewport lengths.
+    ///
+    /// The track length is derived from the render area's width.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::horizontal(lengths);
+    /// ```
     pub fn horizontal(lengths: crate::ScrollLengths) -> Self {
         Self::new(ScrollBarOrientation::Horizontal, lengths)
     }
 
     /// Sets the scrollbar orientation.
+    ///
+    /// This is mostly useful when sharing a builder chain and choosing the orientation later.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollBarOrientation, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).orientation(ScrollBarOrientation::Horizontal);
+    /// ```
     pub const fn orientation(mut self, orientation: ScrollBarOrientation) -> Self {
         self.orientation = orientation;
         self
@@ -313,6 +397,16 @@ impl ScrollBar {
     /// Larger values shrink the thumb, while smaller values enlarge it.
     ///
     /// Zero values are treated as 1.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).content_len(240);
+    /// ```
     pub const fn content_len(mut self, content_len: usize) -> Self {
         self.content_len = content_len;
         self
@@ -323,6 +417,16 @@ impl ScrollBar {
     /// When `viewport_len >= content_len`, the thumb fills the track.
     ///
     /// Zero values are treated as 1.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).viewport_len(60);
+    /// ```
     pub const fn viewport_len(mut self, viewport_len: usize) -> Self {
         self.viewport_len = viewport_len;
         self
@@ -330,7 +434,18 @@ impl ScrollBar {
 
     /// Sets the current scroll offset in logical units.
     ///
-    /// Offsets are clamped to `content_len - viewport_len` during rendering.
+    /// Offsets are clamped to `content_len - viewport_len` during rendering and input handling,
+    /// not when this builder is called.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).offset(30);
+    /// ```
     pub const fn offset(mut self, offset: usize) -> Self {
         self.offset = offset;
         self
@@ -338,7 +453,18 @@ impl ScrollBar {
 
     /// Sets the style applied to track glyphs.
     ///
-    /// Track styling applies only where the thumb is not rendered.
+    /// Track styling applies only to cells where the thumb is not rendered.
+    ///
+    /// ```rust
+    /// use ratatui_core::style::{Color, Style};
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).track_style(Style::new().bg(Color::Black));
+    /// ```
     pub const fn track_style(mut self, style: Style) -> Self {
         self.track_style = style;
         self
@@ -346,7 +472,22 @@ impl ScrollBar {
 
     /// Sets the style applied to thumb glyphs.
     ///
-    /// Thumb styling overrides track styling for covered cells.
+    /// Thumb styling applies to full and partial thumb cells. Thumb glyphs are block characters,
+    /// so `Style::fg` usually controls the visible thumb color. Use `Style::bg` only when the
+    /// cell behind the glyph should differ from the track. On partial thumb cells, the background
+    /// can show at the thumb ends.
+    ///
+    /// ```rust
+    /// use ratatui_core::style::{Color, Style};
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar =
+    ///     ScrollBar::vertical(lengths).thumb_style(Style::new().fg(Color::Rgb(255, 158, 100)));
+    /// ```
     pub const fn thumb_style(mut self, style: Style) -> Self {
         self.thumb_style = style;
         self
@@ -354,7 +495,21 @@ impl ScrollBar {
 
     /// Sets the style applied to arrow glyphs.
     ///
-    /// Defaults to white on dark gray.
+    /// Arrow endcaps render only when enabled with [`Self::arrows`]. If no arrow style is
+    /// configured internally, arrows fall back to the track style.
+    ///
+    /// ```rust
+    /// use ratatui_core::style::{Color, Style};
+    /// use tui_scrollbar::{ScrollBar, ScrollBarArrows, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths)
+    ///     .arrows(ScrollBarArrows::Both)
+    ///     .arrow_style(Style::new().fg(Color::Yellow).bg(Color::Black));
+    /// ```
     pub const fn arrow_style(mut self, style: Style) -> Self {
         self.arrow_style = Some(style);
         self
@@ -362,14 +517,39 @@ impl ScrollBar {
 
     /// Selects the glyph set used to render the track and thumb.
     ///
-    /// [`GlyphSet::symbols_for_legacy_computing`] uses additional symbols for 1/8th upper/right
-    /// fills. Use [`GlyphSet::unicode`] if you want to avoid the legacy supplement.
+    /// [`GlyphSet::symbols_for_legacy_computing`] uses [Symbols for Legacy Computing] for 1/8th
+    /// upper/right fills. Use [`GlyphSet::unicode`] if you want to avoid the legacy supplement, or
+    /// [`GlyphSet::box_drawing`] when you want a visible line track.
+    ///
+    /// [Symbols for Legacy Computing]: https://en.wikipedia.org/wiki/Symbols_for_Legacy_Computing
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{GlyphSet, ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).glyph_set(GlyphSet::unicode());
+    /// ```
     pub const fn glyph_set(mut self, glyph_set: GlyphSet) -> Self {
         self.glyph_set = glyph_set;
         self
     }
 
     /// Sets which arrow endcaps are rendered.
+    ///
+    /// Each enabled arrow reserves one cell at the start or end of the track.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollBarArrows, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).arrows(ScrollBarArrows::Both);
+    /// ```
     pub const fn arrows(mut self, arrows: ScrollBarArrows) -> Self {
         self.arrows = arrows;
         self
@@ -379,6 +559,19 @@ impl ScrollBar {
     ///
     /// Use [`TrackClickBehavior::Page`] for classic page-up/down behavior, or
     /// [`TrackClickBehavior::JumpToClick`] to move the thumb toward the click.
+    ///
+    /// This does not affect clicks on the thumb or arrow endcaps.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths, TrackClickBehavior};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar =
+    ///     ScrollBar::vertical(lengths).track_click_behavior(TrackClickBehavior::JumpToClick);
+    /// ```
     pub const fn track_click_behavior(mut self, behavior: TrackClickBehavior) -> Self {
         self.track_click_behavior = behavior;
         self
@@ -386,7 +579,18 @@ impl ScrollBar {
 
     /// Sets the scroll step used for wheel events.
     ///
-    /// The wheel delta is multiplied by this value (in your logical units) and then clamped.
+    /// The wheel delta is multiplied by this value (in your logical units) and then clamped. A
+    /// step of 0 is normalized to 1.
+    ///
+    /// ```rust
+    /// use tui_scrollbar::{ScrollBar, ScrollLengths};
+    ///
+    /// let lengths = ScrollLengths {
+    ///     content_len: 120,
+    ///     viewport_len: 40,
+    /// };
+    /// let scrollbar = ScrollBar::vertical(lengths).scroll_step(8);
+    /// ```
     pub fn scroll_step(mut self, step: usize) -> Self {
         self.scroll_step = step.max(1);
         self

@@ -141,6 +141,7 @@ impl ScrollBar {
 mod tests {
     use ratatui_core::buffer::Buffer;
     use ratatui_core::layout::Rect;
+    use ratatui_core::style::{Color, Style};
 
     use super::*;
     use crate::{GlyphSet, ScrollBarArrows, ScrollLengths};
@@ -205,6 +206,37 @@ mod tests {
         expected.set_style(expected.area, scrollbar.track_style);
         expected[(0, 0)].set_style(scrollbar.thumb_style);
         expected[(1, 0)].set_style(scrollbar.thumb_style);
+        assert_eq!(buf, expected);
+    }
+
+    #[test]
+    fn render_uses_custom_thumb_style_for_full_and_partial_cells() {
+        let track_style = Style::new().bg(Color::Rgb(10, 20, 30));
+        let thumb_style = Style::new()
+            .fg(Color::Rgb(255, 158, 100))
+            .bg(Color::Rgb(10, 20, 30));
+        let arrow_style = Style::new()
+            .fg(Color::Rgb(158, 206, 106))
+            .bg(Color::Rgb(10, 20, 30));
+        let scrollbar = ScrollBar::horizontal(ScrollLengths {
+            content_len: 10,
+            viewport_len: 3,
+        })
+        .arrows(ScrollBarArrows::Both)
+        .offset(1)
+        .track_style(track_style)
+        .thumb_style(thumb_style)
+        .arrow_style(arrow_style);
+
+        let mut buf = Buffer::empty(Rect::new(0, 0, 6, 1));
+        (&scrollbar).render(buf.area, &mut buf);
+
+        let mut expected = Buffer::with_lines(vec!["◀🮉▌  ▶"]);
+        expected.set_style(expected.area, track_style);
+        expected[(0, 0)].set_style(arrow_style);
+        expected[(1, 0)].set_style(thumb_style);
+        expected[(2, 0)].set_style(thumb_style);
+        expected[(5, 0)].set_style(arrow_style);
         assert_eq!(buf, expected);
     }
 

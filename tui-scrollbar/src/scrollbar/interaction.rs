@@ -22,7 +22,8 @@ use crate::ScrollLengths;
 impl ScrollBar {
     /// Handles a backend-agnostic scrollbar event.
     ///
-    /// Returns a [`ScrollCommand`] when the event should update the offset.
+    /// Returns a [`ScrollCommand`] when the event should update the caller-owned offset. This
+    /// method does not mutate your application state directly.
     ///
     /// Pointer events outside the track are ignored. Scroll wheel events are ignored unless the
     /// axis matches the scrollbar orientation.
@@ -88,7 +89,8 @@ impl ScrollBar {
     /// Handles crossterm mouse events for this scrollbar.
     ///
     /// This helper converts crossterm events into [`ScrollEvent`] values before delegating to
-    /// [`Self::handle_event`].
+    /// [`Self::handle_event`]. See the `scrollbar_mouse` example for a complete terminal event
+    /// loop with mouse capture.
     pub fn handle_mouse_event(
         &self,
         area: Rect,

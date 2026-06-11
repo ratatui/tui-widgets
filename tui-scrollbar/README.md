@@ -39,11 +39,19 @@ exposes a small interaction API plus pure metrics so apps can control behavior e
 cargo add tui-scrollbar
 ```
 
+## Important
+
+- Zero lengths are treated as 1.
+- Arrow endcaps are disabled by default; configure them with [`ScrollBarArrows`].
+- The default [`GlyphSet`] hides the track using spaces; use [`GlyphSet::box_drawing`] or
+  [`GlyphSet::unicode`] for a visible track.
+- The default glyphs use [Symbols for Legacy Computing] for missing upper/right eighth blocks.
+  Use [`GlyphSet::unicode`] if you need only standard Unicode block elements.
+
 ## Quick start
 
 This example renders a vertical [`ScrollBar`] into a [`Buffer`] using a fixed track size and
 offset. Use it as a minimal template when you just need a thumb and track on screen.
-If you prefer named arguments, use [`ScrollLengths`].
 
 ```rust
 use ratatui_core::buffer::Buffer;
@@ -80,7 +88,35 @@ Most apps update `offset` in response to input events and re-render each frame.
 axis. For many apps, those units are items or lines. The ratio between `viewport_len` and
 `content_len` is what matters, so any consistent unit works.
 
-Zero lengths are treated as 1.
+## Styling
+
+Style the track, thumb, and arrow endcaps directly on [`ScrollBar`]. See [`ScrollBar`] for a
+full method map and more focused examples.
+
+Scrollbar glyphs are terminal characters. For visible track glyphs, thumb blocks, and arrow
+symbols, `Style::fg` colors the glyph itself and `Style::bg` colors the cell behind it. The
+default [`GlyphSet::minimal`] track renders spaces, so only the track background is visible in
+empty track cells. Visible track glyph sets, such as [`GlyphSet::box_drawing`] and
+[`GlyphSet::unicode`], can use foreground color for the track line. Thumb glyphs are block
+characters, so `Style::fg` is usually the useful knob for thumb color; `Style::bg` still colors
+the rest of the cell. With partial thumb glyphs, especially on a visible line track such as
+[`GlyphSet::box_drawing`], that background can show at the ends of the thumb. Match the thumb
+background to the track background unless that contrast is intentional.
+
+```rust
+use ratatui_core::style::{Color, Style};
+use tui_scrollbar::{ScrollBar, ScrollBarArrows, ScrollLengths};
+
+let lengths = ScrollLengths {
+    content_len: 120,
+    viewport_len: 30,
+};
+let scrollbar = ScrollBar::vertical(lengths)
+    .arrows(ScrollBarArrows::Both)
+    .track_style(Style::new().bg(Color::Black))
+    .thumb_style(Style::new().fg(Color::Rgb(255, 158, 100)))
+    .arrow_style(Style::new().fg(Color::Yellow).bg(Color::Black));
+```
 
 ## Layout integration
 
@@ -159,9 +195,11 @@ assert!(metrics.thumb_len() >= SUBCELL);
 
 ## Glyph selection
 
-The default glyphs include [Symbols for Legacy Computing] so the thumb can render upper/right
-partial fills that are missing from the standard block set. Use [`GlyphSet`] when you want to
-switch to a glyph set that avoids legacy symbols.
+[`GlyphSet`] controls the track and thumb characters. The default glyphs include
+[Symbols for Legacy Computing] so the thumb can render upper/right partial fills that are
+missing from the standard block set. Use [`GlyphSet::box_drawing`] for a visible line track, or
+[`GlyphSet::unicode`] when the terminal font should avoid [Symbols for Legacy Computing]
+glyphs.
 
 ```rust
 use tui_scrollbar::{GlyphSet, ScrollBar, ScrollLengths};
@@ -193,28 +231,10 @@ let scrollbar = ScrollBar::vertical(lengths).glyph_set(GlyphSet::unicode());
 - [`PointerEvent`], [`PointerEventKind`], [`PointerButton`]
 - [`ScrollWheel`], [`ScrollAxis`]
 
-## Features
-
-- `crossterm`: enables crossterm mouse events (latest supported version, currently `crossterm`
-  0.29).
-- `crossterm_0_28`: enables crossterm mouse events using `crossterm` 0.28.
-- `crossterm_0_29`: enables crossterm mouse events using `crossterm` 0.29.
-
-When multiple crossterm versions are enabled, the latest one is used.
-The selected version is re-exported as `tui_scrollbar::crossterm`.
-
-## Important
-
-- Zero lengths are treated as 1.
-- Arrow endcaps are disabled by default; configure them with [`ScrollBarArrows`].
-- The default [`GlyphSet`] hides the track using spaces; use [`GlyphSet::box_drawing`] or
-  [`GlyphSet::unicode`] for a visible track.
-- The default glyphs use [Symbols for Legacy Computing] for missing upper/right eighth blocks.
-  Use [`GlyphSet::unicode`] if you need only standard Unicode block elements.
-
 ## See also
 
 - [tui-scrollbar examples]
+- [`scrollbar_styled` example]
 - [`scrollbar_mouse` example]
 - [`scrollbar` example]
 - [`Widget`]
@@ -245,6 +265,7 @@ For the full suite of widgets, see [tui-widgets].
 [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 [Crate source]: https://github.com/ratatui/tui-widgets/blob/main/tui-scrollbar/src/lib.rs
 [`scrollbar_mouse` example]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar_mouse.rs
+[`scrollbar_styled` example]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar_styled.rs
 [`scrollbar` example]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar.rs
 [tui-scrollbar examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples
 [`Buffer`]: ratatui_core::buffer::Buffer

@@ -42,5 +42,12 @@ color-eyre.workspace = true
 ratatui = { workspace = true, default-features = true }
 
 [[example]]
+name = "scrollbar"
+doc-scrape-examples = true        # applies to all examples, not just this one
+
+[[example]]
 name = "scrollbar_mouse"
 required-features = ["crossterm"]
+
+[[example]]
+name = "scrollbar_styled"

@@ -30,6 +30,9 @@ pub struct GlyphSet {
 impl GlyphSet {
     /// Minimal glyphs: no visible track by default.
     ///
+    /// Choose this when the thumb should stand out by color against a filled background instead of
+    /// a visible line.
+    ///
     /// This uses a space character for the track so the scrollbar is "all thumb", with the
     /// background color coming from `track_style`.
     ///
@@ -53,6 +56,8 @@ impl GlyphSet {
 
     /// Glyphs that include box-drawing line symbols for the track.
     ///
+    /// Choose this when callers should see a visible track line behind the thumb.
+    ///
     /// ```plain
     /// [██──────]
     /// [🮋█▏─────]
@@ -69,6 +74,9 @@ impl GlyphSet {
     }
 
     /// Glyphs that mix standard block elements with legacy supplement glyphs.
+    ///
+    /// Choose this when the terminal font supports [Symbols for Legacy Computing] and you want
+    /// precise 1/8th-cell rendering on every thumb edge.
     ///
     /// Use this to get full 1/8th coverage for upper and right edges that the standard block set
     /// lacks; these glyphs come from [Symbols for Legacy Computing].
@@ -107,7 +115,7 @@ impl GlyphSet {
 
     /// Glyphs using only standard Unicode block elements.
     ///
-    /// Use this if your font lacks the legacy glyphs.
+    /// Choose this if your font lacks the legacy glyphs.
     ///
     /// The standard block set does not include 1/8th upper or right fills (those come from
     /// [Symbols for Legacy Computing]), so this set approximates upper and right partials by
@@ -128,6 +136,8 @@ impl GlyphSet {
     /// [▕█▉─────]
     /// [─██─────]
     /// ```
+    ///
+    /// [Symbols for Legacy Computing]: https://en.wikipedia.org/wiki/Symbols_for_Legacy_Computing
     pub const fn unicode() -> Self {
         let vertical_lower = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
         let vertical_upper = ['▔', '▔', '▀', '▀', '▀', '▀', '█', '█'];
