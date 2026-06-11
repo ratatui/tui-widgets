@@ -234,16 +234,8 @@ impl StatefulWidget for ScrollView {
         // `saturating_sub` covers both "content smaller than viewport" and zero-sized viewport
         // cases. Zero-sized areas later panic while rendering scrollbars, matching existing
         // behavior, but this arithmetic still must not wrap before that boundary.
-        let max_x_offset = self
-            .buf
-            .area
-            .width
-            .saturating_sub(viewport_width);
-        let max_y_offset = self
-            .buf
-            .area
-            .height
-            .saturating_sub(viewport_height);
+        let max_x_offset = self.buf.area.width.saturating_sub(viewport_width);
+        let max_y_offset = self.buf.area.height.saturating_sub(viewport_height);
 
         x = x.min(max_x_offset);
         y = y.min(max_y_offset);
@@ -567,6 +559,143 @@ mod tests {
         );
         assert_eq!(state.offset.y, 4);
         assert_eq!(state.page_size.unwrap().height, 6);
+    }
+
+    #[rstest]
+    #[case::always_always(
+        ScrollbarVisibility::Always,
+        ScrollbarVisibility::Always,
+        1,
+        1,
+        (true, true)
+    )]
+    #[case::never_never(
+        ScrollbarVisibility::Never,
+        ScrollbarVisibility::Never,
+        -1,
+        -1,
+        (false, false)
+    )]
+    #[case::always_never(
+        ScrollbarVisibility::Always,
+        ScrollbarVisibility::Never,
+        1,
+        1,
+        (true, false)
+    )]
+    #[case::never_always(
+        ScrollbarVisibility::Never,
+        ScrollbarVisibility::Always,
+        1,
+        1,
+        (false, true)
+    )]
+    #[case::automatic_never_needs_horizontal(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Never,
+        -1,
+        1,
+        (true, false)
+    )]
+    #[case::automatic_never_fits_horizontal(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Never,
+        1,
+        -1,
+        (false, false)
+    )]
+    #[case::never_automatic_needs_vertical(
+        ScrollbarVisibility::Never,
+        ScrollbarVisibility::Automatic,
+        1,
+        -1,
+        (false, true)
+    )]
+    #[case::never_automatic_fits_vertical(
+        ScrollbarVisibility::Never,
+        ScrollbarVisibility::Automatic,
+        -1,
+        1,
+        (false, false)
+    )]
+    #[case::always_automatic_exact_fit(
+        ScrollbarVisibility::Always,
+        ScrollbarVisibility::Automatic,
+        1,
+        0,
+        (true, true)
+    )]
+    #[case::always_automatic_vertical_fits(
+        ScrollbarVisibility::Always,
+        ScrollbarVisibility::Automatic,
+        1,
+        1,
+        (true, false)
+    )]
+    #[case::automatic_always_exact_fit(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Always,
+        0,
+        1,
+        (true, true)
+    )]
+    #[case::automatic_always_horizontal_fits(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Always,
+        1,
+        1,
+        (false, true)
+    )]
+    #[case::automatic_automatic_both_fit(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Automatic,
+        1,
+        1,
+        (false, false)
+    )]
+    #[case::automatic_automatic_both_overflow(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Automatic,
+        -1,
+        -1,
+        (true, true)
+    )]
+    #[case::automatic_automatic_only_vertical_overflows(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Automatic,
+        1,
+        -1,
+        (false, true)
+    )]
+    #[case::automatic_automatic_only_horizontal_overflows(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Automatic,
+        -1,
+        1,
+        (true, false)
+    )]
+    #[case::automatic_automatic_exact_fit_with_other_overflow(
+        ScrollbarVisibility::Automatic,
+        ScrollbarVisibility::Automatic,
+        0,
+        -1,
+        (true, true)
+    )]
+    fn visible_scrollbars_honors_visibility_policy(
+        #[case] horizontal_visibility: ScrollbarVisibility,
+        #[case] vertical_visibility: ScrollbarVisibility,
+        #[case] horizontal_space: i32,
+        #[case] vertical_space: i32,
+        #[case] expected: (bool, bool),
+    ) {
+        let scroll_view = ScrollView::new(Size::new(1, 1))
+            .horizontal_scrollbar_visibility(horizontal_visibility)
+            .vertical_scrollbar_visibility(vertical_visibility);
+
+        assert_eq!(
+            scroll_view.visible_scrollbars(horizontal_space, vertical_space),
+            expected
+        );
     }
 
     #[rstest]
