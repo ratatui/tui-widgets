@@ -198,7 +198,6 @@ impl ScrollView {
     ///
     /// This should not be confused with the `render` method, which renders the visible area of the
     /// ScrollView into the main buffer.
-
     pub fn render_stateful_widget<W: StatefulWidget>(
         &mut self,
         widget: W,
@@ -214,26 +213,45 @@ impl StatefulWidget for ScrollView {
 
     fn render(self, area: Rect, buf: &mut Buffer, state: &mut Self::State) {
         let (mut x, mut y) = state.offset.into();
-        // ensure that we don't scroll past the end of the buffer in either direction
+        let horizontal_space = area.width as i32 - self.size.width as i32;
+        let vertical_space = area.height as i32 - self.size.height as i32;
+        let (show_horizontal, show_vertical) =
+            self.visible_scrollbars(horizontal_space, vertical_space);
+
+        // Scrollbars steal space from the viewport. Clamp offsets against that final viewport,
+        // not the raw render area, so the bottom position is the last full page of content.
+        let viewport_width = area.width.saturating_sub(show_vertical as u16);
+        let viewport_height = area.height.saturating_sub(show_horizontal as u16);
+
+        // If the content fits in a direction, discard any stale offset for that direction.
+        if horizontal_space > 0 {
+            x = 0;
+        }
+        if vertical_space > 0 {
+            y = 0;
+        }
+
+        // `saturating_sub` covers both "content smaller than viewport" and zero-sized viewport
+        // cases. Zero-sized areas later panic while rendering scrollbars, matching existing
+        // behavior, but this arithmetic still must not wrap before that boundary.
         let max_x_offset = self
             .buf
             .area
             .width
-            .saturating_sub(area.width.saturating_sub(1));
+            .saturating_sub(viewport_width);
         let max_y_offset = self
             .buf
             .area
             .height
-            .saturating_sub(area.height.saturating_sub(1));
+            .saturating_sub(viewport_height);
 
         x = x.min(max_x_offset);
         y = y.min(max_y_offset);
         state.offset = (x, y).into();
         state.size = Some(self.size);
-        state.page_size = Some(area.into());
-        let visible_area = self
-            .render_scrollbars(area, buf, state)
-            .intersection(self.buf.area);
+        let viewport_area = self.render_scrollbars(area, buf, state);
+        state.page_size = Some(viewport_area.as_size());
+        let visible_area = viewport_area.intersection(self.buf.area);
         self.render_visible_area(area, buf, visible_area);
     }
 }
@@ -249,7 +267,7 @@ impl ScrollView {
         let horizontal_space = area.width as i32 - self.size.width as i32;
         let vertical_space = area.height as i32 - self.size.height as i32;
 
-        // if it fits in that direction, reset state to reflect it
+        // If the content fits in a direction, reset state to reflect it.
         if horizontal_space > 0 {
             state.offset.x = 0;
         }
@@ -457,7 +475,7 @@ mod tests {
     }
 
     #[rstest]
-    fn is_at_bottom_reports_true_before_the_last_row_is_visible(scroll_view: ScrollView) {
+    fn is_not_at_bottom_until_the_last_row_is_visible(scroll_view: ScrollView) {
         let mut buf = Buffer::empty(Rect::new(0, 0, 6, 6));
         let mut state = ScrollViewState::with_offset((0, 4).into());
 
@@ -474,8 +492,7 @@ mod tests {
                 "◄██═► ",
             ])
         );
-        // Incorrect behavior: the final row is not rendered yet.
-        assert!(state.is_at_bottom());
+        assert!(!state.is_at_bottom());
     }
 
     #[rstest]
@@ -483,13 +500,13 @@ mod tests {
         let mut buf = Buffer::empty(Rect::new(0, 0, 6, 6));
         let mut state = ScrollViewState::default();
 
-        // Prior rendering, page and buffer size are unkown. We default to `true`.
+        // Prior to rendering, page and buffer size are unknown. We default to `true`.
         assert!(state.is_at_bottom());
 
         scroll_view.clone().render(buf.area, &mut buf, &mut state);
 
         // The vertical view size is five which means the page size is five.
-        // We have not scrolled yet, view is at the top and not the at the bottom.
+        // We have not scrolled yet, so the view is at the top and not at the bottom.
         // => We see the top five rows
         assert!(!state.is_at_bottom());
 
@@ -504,7 +521,6 @@ mod tests {
 
         // we reach the bottom,
         assert!(state.is_at_bottom());
-        // Incorrect behavior: this offset scrolls past the last full page.
         assert_eq!(state.offset.y, 5);
 
         // and we see the last five rows of the content.
@@ -531,7 +547,7 @@ mod tests {
     }
 
     #[rstest]
-    fn rendering_at_bottom_scrolls_past_the_last_full_page(scroll_view: ScrollView) {
+    fn rendering_at_bottom_uses_the_last_full_page(scroll_view: ScrollView) {
         let mut buf = Buffer::empty(Rect::new(0, 0, 11, 6));
         let mut state = ScrollViewState::default();
 
@@ -541,15 +557,15 @@ mod tests {
         assert_eq!(
             buf,
             Buffer::with_lines(vec![
-                "YZABCDEFGH▲",
-                "IJKLMNOPQR║",
+                "OPQRSTUVWX▲",
+                "YZABCDEFGH║",
+                "IJKLMNOPQR█",
                 "STUVWXYZAB█",
                 "CDEFGHIJKL█",
-                "MNOPQRSTUV█",
-                "          ▼",
+                "MNOPQRSTUV▼",
             ])
         );
-        assert_eq!(state.offset.y, 5);
+        assert_eq!(state.offset.y, 4);
         assert_eq!(state.page_size.unwrap().height, 6);
     }
 
@@ -893,7 +909,7 @@ mod tests {
         let items: Vec<String> = (1..=10).map(|i| format!("Item {i}")).collect();
         let list = List::new(items);
         scroll_view.render_stateful_widget(list, scroll_view.area(), &mut list_state);
-        scroll_view.clone().render(buf.area, &mut buf, &mut state);
+        scroll_view.render(buf.area, &mut buf, &mut state);
         assert_eq!(
             buf,
             Buffer::with_lines(vec![

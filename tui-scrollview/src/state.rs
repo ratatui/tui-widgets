@@ -88,16 +88,22 @@ impl ScrollViewState {
 
     /// True if the scroll view state is at the bottom of the buffer
     ///
-    /// This takes the page size into account. It returns true if the current scroll offset plus
-    /// the page size matches or exceeds the buffer length.
+    /// This takes the page size into account. It returns true if the last row in the buffer is
+    /// visible in the current page.
     ///
     /// The buffer and the page size are unknown until computed during the first rendering. If the
-    /// page size is not yet known, it won't be taken into account. If the buffer is not yet known,
-    /// this function always returns true.
+    /// buffer size is not yet known, this function always returns true. If the page size is not yet
+    /// known, the current row is treated as a one-row page.
+    ///
+    /// Saturating arithmetic prevents large offsets from overflowing when they are combined with
+    /// the page size.
     pub fn is_at_bottom(&self) -> bool {
-        let bottom = self.size.map_or(0, |size| size.height.saturating_sub(1));
-        let page_size = self.page_size.map_or(0, |size| size.height);
-        self.offset.y.saturating_add(page_size) >= bottom
+        let Some(size) = self.size else {
+            return true;
+        };
+        let bottom = size.height.saturating_sub(1);
+        let page_size = self.page_size.map_or(1, |size| size.height);
+        self.offset.y.saturating_add(page_size) > bottom
     }
 }
 
@@ -106,15 +112,14 @@ mod tests {
     use super::*;
 
     #[test]
-    fn is_at_bottom_reports_true_before_the_last_row_is_visible() {
+    fn is_at_bottom_requires_the_last_row_to_be_visible() {
         let mut state = ScrollViewState {
             offset: Position::new(0, 4),
             size: Some(Size::new(1, 10)),
             page_size: Some(Size::new(1, 5)),
         };
 
-        // Incorrect behavior: the last row is not visible at this offset.
-        assert!(state.is_at_bottom());
+        assert!(!state.is_at_bottom());
 
         state.offset.y = 5;
 
