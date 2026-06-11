@@ -2264,7 +2264,7 @@ dependencies = [
 
 [[package]]
 name = "tui-popup"
-version = "0.7.4"
+version = "0.7.5"
 dependencies = [
  "color-eyre",
  "crossterm 0.29.0",
