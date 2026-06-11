@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.5] - 2026-06-11
+
+### ⚙️ Miscellaneous Tasks
+
+- Add documentation hygiene checks ([#243](https://github.com/ratatui/tui-widgets/issues/243))
+  > ## Summary
+  >
+  > - add required CI jobs for typos and markdownlint-cli2
+  > - exclude generated changelogs from spelling checks
+  > - fix small spelling and Markdown hygiene issues caught by the new
+  > checks
+  >
+  > ## Validation
+  >
+  > - typos
+  > - markdownlint-cli2 "**/*.md"
+  > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
+  > - cargo fmt --all -- --check
+  > - actionlint -color=false .github/workflows/check.yml
+
+
 ## [0.8.4] - 2026-04-04
 
 ### ⚙️ Miscellaneous Tasks
