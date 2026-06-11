@@ -2224,7 +2224,7 @@ dependencies = [
 
 [[package]]
 name = "tui-big-text"
-version = "0.8.4"
+version = "0.8.5"
 dependencies = [
  "color-eyre",
  "crossterm 0.29.0",
@@ -2280,7 +2280,7 @@ dependencies = [
 
 [[package]]
 name = "tui-prompts"
-version = "0.6.3"
+version = "0.6.4"
 dependencies = [
  "clap",
  "color-eyre",
@@ -2308,7 +2308,7 @@ dependencies = [
 
 [[package]]
 name = "tui-scrollbar"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "color-eyre",
  "crossterm 0.28.1",
@@ -2320,7 +2320,7 @@ dependencies = [
 
 [[package]]
 name = "tui-scrollview"
-version = "0.6.4"
+version = "0.6.5"
 dependencies = [
  "color-eyre",
  "indoc",
@@ -2333,7 +2333,7 @@ dependencies = [
 
 [[package]]
 name = "tui-widgets"
-version = "0.7.2"
+version = "0.7.3"
 dependencies = [
  "document-features",
  "ratatui-core",

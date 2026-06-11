@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5] - 2026-06-11
+
+### 🐛 Bug Fixes
+
+- Restore stable clippy baseline ([#233](https://github.com/ratatui/tui-widgets/issues/233))
+
+
 ## [0.2.4] - 2026-04-04
 
 ### Other

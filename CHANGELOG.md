@@ -2,6 +2,907 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.3] - 2026-06-11
+
+### 🚀 Features
+
+- *(scrollview)* Add bottom detection state ([#75](https://github.com/ratatui/tui-widgets/issues/75))
+  > Add `ScrollViewState::is_at_bottom()` so callers can query whether the
+  > rendered view has reached the bottom of the scroll buffer.
+  >
+  > The check accounts for the rendered page size, including space consumed
+  > by scrollbars, so it only reports true once the final content row is
+  > visible. Rendering also records the actual viewport size before clipping
+  > to the backing buffer, keeping later page scrolling consistent near the
+  > bottom.
+  >
+  > Add tests covering the new state query, bottom edge cases, and scrollbar
+  > visibility combinations that affect viewport sizing.
+
+- *(tui-prompts)* Allow hiding status symbol ([#191](https://github.com/ratatui/tui-widgets/issues/191))
+  > Add an opt-in TextPrompt builder for rendering prompts without the
+  > status symbol prefix. This supports prompt rows where completion or
+  > cancellation state is communicated by surrounding UI instead of the
+  > prompt itself.
+  >
+  > Preserve the existing default rendering behavior by keeping the status
+  > symbol visible for new and default prompts. Document that hiding the
+  > symbol only changes the rendered prefix: TextState still tracks Status,
+  > and cursor placement follows the shortened prompt width.
+  >
+  > Cover both default rendering and hidden-symbol rendering so the status
+  > symbol spacing and cursor behavior stay explicit.
+
+### 🐛 Bug Fixes
+
+- Restore stable clippy baseline ([#233](https://github.com/ratatui/tui-widgets/issues/233))
+
+### 📚 Documentation
+
+- Add security policy ([#238](https://github.com/ratatui/tui-widgets/issues/238))
+  > ## Summary
+  > - Add SECURITY.md with supported version guidance
+  > - Use GitHub private vulnerability reporting and avoid public disclosure
+  > for sensitive reports
+  >
+  > ## Validation
+  > - markdownlint-cli2 SECURITY.md
+
+- Use nightly rustfmt for formatting ([#250](https://github.com/ratatui/tui-widgets/issues/250))
+  > ## Summary
+  >
+  > - update `just fmt` and `just fmt-check` to run `cargo +nightly fmt`
+  > - point AGENTS.md and CONTRIBUTING.md at the just recipes
+  > - document next to the formatting commands that nightly is required
+  > because `rustfmt.toml` uses unstable rustfmt options for comment
+  > wrapping and import grouping
+  >
+  > ## Validation
+  >
+  > - `just fmt-check`
+  > - `markdownlint-cli2 AGENTS.md CONTRIBUTING.md`
+  > - `just --list`
+
+### ⚙️ Miscellaneous Tasks
+
+- Add auto-merge required gate ([#235](https://github.com/ratatui/tui-widgets/issues/235))
+  > ## Summary
+  > - add a single aggregate required CI job for repository rulesets
+  > - fail the aggregate job when any required dependency fails, is
+  > cancelled, or is skipped
+  >
+  > ## Validation
+  > - ruby -e 'require "yaml";
+  > YAML.load_file(".github/workflows/check.yml"); puts "ok"'
+
+- Quiet Dependabot MSRV updates ([#236](https://github.com/ratatui/tui-widgets/issues/236))
+  > ## Summary
+  >
+  > - Add 7-day Dependabot cooldowns for GitHub Actions and Cargo updates.
+  > - Ignore `dtolnay/rust-toolchain` so the fixed MSRV pin is not bumped
+  > automatically.
+  > - Document that cooldowns give fresh releases time for supply-chain
+  > attacks to be discovered, and that MSRV bumps are intentional maintainer
+  > work.
+  >
+  > ## Validation
+  >
+  > - `ruby -e 'require "yaml"; YAML.load_file(".github/dependabot.yml");
+  > puts "YAML parsed"'`
+  >
+  > Prevents repeats of #226.
+
+- Add workflow linting ([#237](https://github.com/ratatui/tui-widgets/issues/237))
+  > ## Summary
+  >
+  > - Add blocking GitHub Actions workflow linting with zizmor and
+  > actionlint.
+  > - Pin workflow action code to immutable SHAs and disable checkout
+  > credential persistence.
+  > - Keep Rust stable/nightly freshness by pinning dtolnay/rust-toolchain
+  > action code while selecting toolchains through explicit inputs.
+  > - Remove the obsolete Dependabot ignore for dtolnay/rust-toolchain.
+  >
+  > ## Validation
+  >
+  > - actionlint
+  > - zizmor .github/workflows
+  > - ruby -e 'require "yaml"; YAML.load_file(".github/dependabot.yml");
+  > puts "dependabot YAML parsed"'
+
+- Add cargo-deny policy ([#239](https://github.com/ratatui/tui-widgets/issues/239))
+  > ## Summary
+  >
+  > - add a minimal cargo-deny policy for advisories, licenses, bans, and
+  > sources
+  > - run cargo-deny in CI with advisory checks separated from blocking
+  > policy checks
+  > - keep RustSec advisories visible without suddenly failing unrelated PRs
+  >
+  > ## Validation
+  >
+  > - cargo deny --all-features check advisories
+  > - cargo deny --all-features check bans licenses sources
+  > - markdownlint-cli2 .plans/0006-add-cargo-audit.md
+  > .plans/0007-add-cargo-deny.md
+  > - docker run --rm -v "/Users/joshka/local/tui-widgets:/repo" -w /repo
+  > rhysd/actionlint:1.7.12 -color
+  > - zizmor .github/workflows/check.yml
+
+- Add cargo-semver-checks ([#240](https://github.com/ratatui/tui-widgets/issues/240))
+  > ## Summary
+  >
+  > - add a required CI job that runs `cargo semver-checks --workspace`
+  > - add a matching `just semver-checks` recipe for local validation
+  > - cover all publishable workspace crates without skips
+  >
+  > ## Validation
+  >
+  > - `just semver-checks`
+  > - `actionlint .github/workflows/check.yml`
+  > - `markdownlint-cli2 .plans/0008-add-cargo-semver-checks.md`
+
+- Check remaining crate READMEs ([#241](https://github.com/ratatui/tui-widgets/issues/241))
+  > ## Summary
+  >
+  > - add the omitted tui-box-text and tui-prompts manifests to the
+  > cargo-rdme CI check
+  > - refresh the generated tui-prompts README block so the new check passes
+  >
+  > ## Validation
+  >
+  > - cargo rdme --check --manifest-path Cargo.toml
+  > - cargo rdme --check --manifest-path tui-bar-graph/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-box-text/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-cards/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-prompts/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-qrcode/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-scrollbar/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-scrollview/Cargo.toml
+
+- Add documentation hygiene checks ([#243](https://github.com/ratatui/tui-widgets/issues/243))
+  > ## Summary
+  >
+  > - add required CI jobs for typos and markdownlint-cli2
+  > - exclude generated changelogs from spelling checks
+  > - fix small spelling and Markdown hygiene issues caught by the new
+  > checks
+  >
+  > ## Validation
+  >
+  > - typos
+  > - markdownlint-cli2 "**/*.md"
+  > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
+  > - cargo fmt --all -- --check
+  > - actionlint -color=false .github/workflows/check.yml
+
+- Sync action pin comments ([#248](https://github.com/ratatui/tui-widgets/issues/248))
+  > ## Summary
+  >
+  > - update SHA-pinned GitHub Actions comments from broad moving refs to
+  > exact semver tags where the action publishes an exact tag for the pinned
+  > commit
+  > - bump `taiki-e/install-action` pins from `v2.81.9` to the current
+  > `v2.81.10` commit and comment those pins as `# v2.81.10`
+  > - leave non-exact references such as `dtolnay/rust-toolchain # master`
+  > and `Swatinem/rust-cache # v2` unchanged where there is no useful exact
+  > semver tag for the pinned commit
+  >
+  > ## Why this is the correct fix
+  >
+  > The failure on #231 was not caused by the `ratatui-core` lockfile
+  > update. After the PR was rebased/recreated, normal validation passed,
+  > including test, minimal-versions, clippy, docs, MSRV, cargo-deny, and
+  > the tui-scrollbar matrix. The remaining blocker was the aggregate
+  > `required` job, which failed only because the new `zizmor` job failed.
+  >
+  > `zizmor` failed on `ref-version-mismatch`: the workflows pinned actions
+  > by immutable SHA, but several trailing comments described moving
+  > major/minor refs. In particular, `taiki-e/install-action` was pinned to
+  > the commit for `v2.81.9` while the comment said `# v2`; upstream `v2`
+  > had already advanced to `v2.81.10`. With online audits enabled, zizmor
+  > resolves those refs and correctly reports that the human-readable
+  > comment no longer describes the pinned commit.
+  >
+  > This is unintuitive at first because `# v2` looks like harmless
+  > maintainer intent. Technically, though, it is unstable metadata: `v2`
+  > moves as new releases are cut, while the SHA remains fixed. That
+  > interacts poorly with Dependabot cooldowns. During the cooldown window,
+  > the moving tag can advance before Dependabot opens a PR, making the
+  > comment stale even though the pinned SHA is intentionally unchanged.
+  >
+  > Using exact semver comments fixes that mismatch. `# v2.81.10` describes
+  > the immutable commit we are actually running, so zizmor remains stable
+  > during cooldown windows. When Dependabot later bumps the SHA for a
+  > GitHub Actions update, it is expected to update the exact semver comment
+  > as part of the same PR; if it ever misses that metadata update, zizmor
+  > will fail that Dependabot PR for a concrete, reviewable reason instead
+  > of failing unrelated lockfile updates.
+  >
+  > ## Validation
+  >
+  > - `GH_TOKEN=$(gh auth token) zizmor .github/workflows`
+  > - `actionlint -color=false .github/workflows/check.yml
+  > .github/workflows/release-plz.yml .github/workflows/test.yml
+  > .github/workflows/tui-scrollbar.yml`
+
+- Report zizmor findings via code scanning ([#249](https://github.com/ratatui/tui-widgets/issues/249))
+  > ## Summary
+  >
+  > - move zizmor to the default Advanced Security/SARIF integration
+  > - grant the zizmor job `security-events: write` for code scanning upload
+  > while keeping `contents: read` for checkout
+  > - remove zizmor from the synthetic `required` CI gate so findings are
+  > reported in the Security tab instead of failing ordinary CI checks
+  >
+  > ## Context
+  >
+  > The current `advanced-security: false` setup makes zizmor behave like a
+  > normal CI lint: findings fail the `zizmor` job, and the synthetic
+  > `required` job then blocks the PR. The upstream zizmor-action
+  > documentation recommends the Advanced Security mode for stateful triage,
+  > where findings are uploaded as code scanning alerts and merge blocking
+  > is handled by GitHub code scanning rulesets if desired.
+  >
+  > This keeps the workflow job present, but moves the finding lifecycle to
+  > GitHub code scanning rather than making every finding an immediate CI
+  > failure.
+  >
+  > ## Validation
+  >
+  > - `actionlint`
+  > - `zizmor .github/workflows`
+
+- *(tui-popup)* Release v0.7.5 ([#247](https://github.com/ratatui/tui-widgets/issues/247))
+  > ## 🤖 New release
+  >
+  > * `tui-popup`: 0.7.4 -> 0.7.5 (✓ API compatible changes)
+  >
+  > <details><summary><i><b>Changelog</b></i></summary><p>
+  >
+  > <blockquote>
+  >
+  > ## [0.7.5] - 2026-06-11
+  >
+  > ### ⚙️ Miscellaneous Tasks
+  >
+  > - Add documentation hygiene checks
+  > ([#243](https://github.com/ratatui/tui-widgets/issues/243))
+  >   > ## Summary
+  >   >
+  >   > - add required CI jobs for typos and markdownlint-cli2
+  >   > - exclude generated changelogs from spelling checks
+  >   > - fix small spelling and Markdown hygiene issues caught by the new
+  >   > checks
+  >   >
+  >   > ## Validation
+  >   >
+  >   > - typos
+  >   > - markdownlint-cli2 "**/*.md"
+  >   > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
+  >   > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
+  >   > - cargo fmt --all -- --check
+  >   > - actionlint -color=false .github/workflows/check.yml
+  > </blockquote>
+  >
+  >
+  > </p></details>
+  >
+  > ---
+  > This PR was generated with
+  > [release-plz](https://github.com/release-plz/release-plz/).
+
+### 🛡️ Security
+
+- *(deps)* Bump codecov/codecov-action from 5 to 6 ([#225](https://github.com/ratatui/tui-widgets/issues/225))
+  > Bumps
+  > [codecov/codecov-action](https://github.com/codecov/codecov-action) from
+  > 5 to 6.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/codecov/codecov-action/releases">codecov/codecov-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v6.0.0</h2>
+  > <h2>⚠️ This version introduces support for node24 which make cause
+  > breaking changes for systems that do not currently support node24.
+  > ⚠️</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>Revert &quot;Revert &quot;build(deps): bump actions/github-script
+  > from 7.0.1 to 8.0.0&quot;&quot; by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1929">codecov/codecov-action#1929</a></li>
+  > <li>Th/6.0.0 by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1928">codecov/codecov-action#1928</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.5.4...v6.0.0">https://github.com/codecov/codecov-action/compare/v5.5.4...v6.0.0</a></p>
+  > <h2>v5.5.4</h2>
+  > <p>This is a mirror of <code>v5.5.2</code>. <code>v6</code> will be
+  > released which requires <code>node24</code></p>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>Revert &quot;build(deps): bump actions/github-script from 7.0.1 to
+  > 8.0.0&quot; by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1926">codecov/codecov-action#1926</a></li>
+  > <li>chore(release): 5.5.4 by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1927">codecov/codecov-action#1927</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.5.3...v5.5.4">https://github.com/codecov/codecov-action/compare/v5.5.3...v5.5.4</a></p>
+  > <h2>v5.5.3</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>build(deps): bump actions/github-script from 7.0.1 to 8.0.0 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1874">codecov/codecov-action#1874</a></li>
+  > <li>chore(release): bump to 5.5.3 by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1922">codecov/codecov-action#1922</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.5.2...v5.5.3">https://github.com/codecov/codecov-action/compare/v5.5.2...v5.5.3</a></p>
+  > <h2>v5.5.2</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>check gpg only when skip-validation = false by <a
+  > href="https://github.com/maxweng-sentry"><code>@​maxweng-sentry</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1894">codecov/codecov-action#1894</a></li>
+  > <li>chore: <code>disable_search</code> alignment by <a
+  > href="https://github.com/freemanzMrojo"><code>@​freemanzMrojo</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1881">codecov/codecov-action#1881</a></li>
+  > <li>chore(release): 5.5.2 by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1902">codecov/codecov-action#1902</a></li>
+  > </ul>
+  > <h2>New Contributors</h2>
+  > <ul>
+  > <li><a
+  > href="https://github.com/maxweng-sentry"><code>@​maxweng-sentry</code></a>
+  > made their first contribution in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1894">codecov/codecov-action#1894</a></li>
+  > <li><a
+  > href="https://github.com/freemanzMrojo"><code>@​freemanzMrojo</code></a>
+  > made their first contribution in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1881">codecov/codecov-action#1881</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.5.1...v5.5.2">https://github.com/codecov/codecov-action/compare/v5.5.1...v5.5.2</a></p>
+  > <h2>v5.5.1</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>build(deps): bump ossf/scorecard-action from 2.4.1 to 2.4.2 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1833">codecov/codecov-action#1833</a></li>
+  > <li>build(deps): bump github/codeql-action from 3.28.18 to 3.29.9 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1861">codecov/codecov-action#1861</a></li>
+  > <li>Document a <code>codecov-cli</code> version reference example by <a
+  > href="https://github.com/webknjaz"><code>@​webknjaz</code></a> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1774">codecov/codecov-action#1774</a></li>
+  > <li>docs: fix typo in README by <a
+  > href="https://github.com/datalater"><code>@​datalater</code></a> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1866">codecov/codecov-action#1866</a></li>
+  > <li>fix: update to use local app/ dir by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1872">codecov/codecov-action#1872</a></li>
+  > <li>build(deps): bump github/codeql-action from 3.29.9 to 3.29.11 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1867">codecov/codecov-action#1867</a></li>
+  > <li>build(deps): bump actions/checkout from 4.2.2 to 5.0.0 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1868">codecov/codecov-action#1868</a></li>
+  > <li>fix: overwrite pr number on fork by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1871">codecov/codecov-action#1871</a></li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/codecov/codecov-action/blob/main/CHANGELOG.md">codecov/codecov-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>v5.5.2</h2>
+  > <h3>What's Changed</h3>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.5.1..v5.5.2">https://github.com/codecov/codecov-action/compare/v5.5.1..v5.5.2</a></p>
+  > <h2>v5.5.1</h2>
+  > <h3>What's Changed</h3>
+  > <ul>
+  > <li>fix: overwrite pr number on fork by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1871">codecov/codecov-action#1871</a></li>
+  > <li>build(deps): bump actions/checkout from 4.2.2 to 5.0.0 by
+  > <code>@​app/dependabot</code> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1868">codecov/codecov-action#1868</a></li>
+  > <li>build(deps): bump github/codeql-action from 3.29.9 to 3.29.11 by
+  > <code>@​app/dependabot</code> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1867">codecov/codecov-action#1867</a></li>
+  > <li>fix: update to use local app/ dir by <a
+  > href="https://github.com/thomasrockhu-codecov"><code>@​thomasrockhu-codecov</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1872">codecov/codecov-action#1872</a></li>
+  > <li>docs: fix typo in README by <a
+  > href="https://github.com/datalater"><code>@​datalater</code></a> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1866">codecov/codecov-action#1866</a></li>
+  > <li>Document a <code>codecov-cli</code> version reference example by <a
+  > href="https://github.com/webknjaz"><code>@​webknjaz</code></a> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1774">codecov/codecov-action#1774</a></li>
+  > <li>build(deps): bump github/codeql-action from 3.28.18 to 3.29.9 by
+  > <code>@​app/dependabot</code> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1861">codecov/codecov-action#1861</a></li>
+  > <li>build(deps): bump ossf/scorecard-action from 2.4.1 to 2.4.2 by
+  > <code>@​app/dependabot</code> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1833">codecov/codecov-action#1833</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.5.0..v5.5.1">https://github.com/codecov/codecov-action/compare/v5.5.0..v5.5.1</a></p>
+  > <h2>v5.5.0</h2>
+  > <h3>What's Changed</h3>
+  > <ul>
+  > <li>feat: upgrade wrapper to 0.2.4 by <a
+  > href="https://github.com/jviall"><code>@​jviall</code></a> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1864">codecov/codecov-action#1864</a></li>
+  > <li>Pin actions/github-script by Git SHA by <a
+  > href="https://github.com/martincostello"><code>@​martincostello</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1859">codecov/codecov-action#1859</a></li>
+  > <li>fix: check reqs exist by <a
+  > href="https://github.com/joseph-sentry"><code>@​joseph-sentry</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1835">codecov/codecov-action#1835</a></li>
+  > <li>fix: Typo in README by <a
+  > href="https://github.com/spalmurray"><code>@​spalmurray</code></a> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1838">codecov/codecov-action#1838</a></li>
+  > <li>docs: Refine OIDC docs by <a
+  > href="https://github.com/spalmurray"><code>@​spalmurray</code></a> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1837">codecov/codecov-action#1837</a></li>
+  > <li>build(deps): bump github/codeql-action from 3.28.17 to 3.28.18 by
+  > <code>@​app/dependabot</code> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1829">codecov/codecov-action#1829</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.4.3..v5.5.0">https://github.com/codecov/codecov-action/compare/v5.4.3..v5.5.0</a></p>
+  > <h2>v5.4.3</h2>
+  > <h3>What's Changed</h3>
+  > <ul>
+  > <li>build(deps): bump github/codeql-action from 3.28.13 to 3.28.17 by
+  > <code>@​app/dependabot</code> in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1822">codecov/codecov-action#1822</a></li>
+  > <li>fix: OIDC on forks by <a
+  > href="https://github.com/joseph-sentry"><code>@​joseph-sentry</code></a>
+  > in <a
+  > href="https://redirect.github.com/codecov/codecov-action/pull/1823">codecov/codecov-action#1823</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/codecov/codecov-action/compare/v5.4.2..v5.4.3">https://github.com/codecov/codecov-action/compare/v5.4.2..v5.4.3</a></p>
+  > <h2>v5.4.2</h2>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/codecov/codecov-action/commit/57e3a136b779b570ffcdbf80b3bdc90e7fab3de2"><code>57e3a13</code></a>
+  > Th/6.0.0 (<a
+  > href="https://redirect.github.com/codecov/codecov-action/issues/1928">#1928</a>)</li>
+  > <li><a
+  > href="https://github.com/codecov/codecov-action/commit/f67d33dda8a42b51c42a8318a1f66468119e898b"><code>f67d33d</code></a>
+  > Revert &quot;Revert &quot;build(deps): bump actions/github-script from
+  > 7.0.1 to 8.0.0&quot;&quot;...</li>
+  > <li>See full diff in <a
+  > href="https://github.com/codecov/codecov-action/compare/v5...v6">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=codecov/codecov-action&package-manager=github_actions&previous-version=5&new-version=6)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump rand from 0.10.0 to 0.10.1 ([#228](https://github.com/ratatui/tui-widgets/issues/228))
+  > Bumps [rand](https://github.com/rust-random/rand) from 0.10.0 to 0.10.1.
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/rust-random/rand/blob/master/CHANGELOG.md">rand's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>[0.10.1] — 2026-02-11</h2>
+  > <p>This release includes a fix for a soundness bug; see <a
+  > href="https://redirect.github.com/rust-random/rand/issues/1763">#1763</a>.</p>
+  > <h3>Changes</h3>
+  > <ul>
+  > <li>Document panic behavior of <code>make_rng</code> and add
+  > <code>#[track_caller]</code> (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1761">#1761</a>)</li>
+  > <li>Deprecate feature <code>log</code> (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1763">#1763</a>)</li>
+  > </ul>
+  > <p><a
+  > href="https://redirect.github.com/rust-random/rand/issues/1761">#1761</a>:
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/pull/1761">rust-random/rand#1761</a>
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/issues/1763">#1763</a>:
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/pull/1763">rust-random/rand#1763</a></p>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/27ff4cb7ced3122a1f677fc248c1a07e59ddc8cd"><code>27ff4cb</code></a>
+  > Prepare v0.10.1: deprecate feature <code>log</code> (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1763">#1763</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/98d06386dc4e1d1c89a91f4e483d571921c29ecf"><code>98d0638</code></a>
+  > make_rng: document panic and add #[track_caller] (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1761">#1761</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/54e5eaaa7ac11af3aa60b5ccc486182189e6f9ef"><code>54e5eaa</code></a>
+  > Fix doc error (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1758">#1758</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/1ce4c080186730595a8d464591d17aac22a42252"><code>1ce4c08</code></a>
+  > Bump itoa from 1.0.17 to 1.0.18 in the all-deps group (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1756">#1756</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/ccb734b9c22891a19f11be125c2f09a43809b08e"><code>ccb734b</code></a>
+  > docs: fix typo in doc comment (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1754">#1754</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/357eb7de9c9c80184449e8b515c821e48cf4df74"><code>357eb7d</code></a>
+  > Bump libc from 0.2.182 to 0.2.183 in the all-deps group (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1753">#1753</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/5e77fe5d61b886988cae67b6d8fb09e405845c63"><code>5e77fe5</code></a>
+  > Fix trait references in documentation (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1752">#1752</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/da891850ab2b38f4322ec140ae29d305dfb162c3"><code>da89185</code></a>
+  > Bump the all-deps group with 3 updates (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1751">#1751</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/50516ff45c3675d9c2d247e70bc8db691ed8366d"><code>50516ff</code></a>
+  > Bump the all-deps group with 2 updates (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1749">#1749</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/fd71de97fdc7050b9a2d8384f5f8afce7d991ca3"><code>fd71de9</code></a>
+  > Bump the all-deps group with 2 updates (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1747">#1747</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/rust-random/rand/compare/0.10.0...0.10.1">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=rand&package-manager=cargo&previous-version=0.10.0&new-version=0.10.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump clap from 4.6.0 to 4.6.1 ([#229](https://github.com/ratatui/tui-widgets/issues/229))
+  > Bumps [clap](https://github.com/clap-rs/clap) from 4.6.0 to 4.6.1.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/clap-rs/clap/releases">clap's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v4.6.1</h2>
+  > <h2>[4.6.1] - 2026-04-15</h2>
+  > <h3>Fixes</h3>
+  > <ul>
+  > <li><em>(derive)</em> Ensure rebuilds happen when an read env variable
+  > is changed</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/clap-rs/clap/blob/master/CHANGELOG.md">clap's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>[4.6.1] - 2026-04-15</h2>
+  > <h3>Fixes</h3>
+  > <ul>
+  > <li><em>(derive)</em> Ensure rebuilds happen when an read env variable
+  > is changed</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/14202755e52802a3d294c4ceeadd703d24b21fe6"><code>1420275</code></a>
+  > chore: Release</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/d2c817d151db23e0bff70d3df5f9dd9fc311ad5d"><code>d2c817d</code></a>
+  > docs: Update changelog</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/f88c94e53d40c2427450ed65ec025951906eb1d4"><code>f88c94e</code></a>
+  > Merge pull request <a
+  > href="https://redirect.github.com/clap-rs/clap/issues/6341">#6341</a>
+  > from epage/sep</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/acbb8225054e0a498f6941f278ad0095a893efe8"><code>acbb822</code></a>
+  > fix(complete): Reduce risk of conflict with actual subcommands</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/a49fadbf4acf1853f52ae43a445c8f3c81096b01"><code>a49fadb</code></a>
+  > refactor(complete): Pull out subcommand separator</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/ddc008bbbc1924fbda5d6f2c66bcf4d165984977"><code>ddc008b</code></a>
+  > Merge pull request <a
+  > href="https://redirect.github.com/clap-rs/clap/issues/6332">#6332</a>
+  > from epage/update</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/497dc50aebe9384dc229e1b4e92850306231f9c9"><code>497dc50</code></a>
+  > chore: Update compatible dependencies</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/dca2326243615b2375cccb709b19de912910413d"><code>dca2326</code></a>
+  > Merge pull request <a
+  > href="https://redirect.github.com/clap-rs/clap/issues/6331">#6331</a>
+  > from clap-rs/renovate/j178-prek-action-2.x</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/54bdaa340ed434535bbd2d95a05b69d8abd2eb34"><code>54bdaa3</code></a>
+  > chore(deps): Update j178/prek-action action to v2</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/f0d30d961d26f8fb636b33242256fca73a717f77"><code>f0d30d9</code></a>
+  > chore: Release</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/clap-rs/clap/compare/clap_complete-v4.6.0...clap_complete-v4.6.1">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=clap&package-manager=cargo&previous-version=4.6.0&new-version=4.6.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+### Other
+
+- *(deps)* Bump ratatui-core from 0.1.0 to 0.1.1 ([#231](https://github.com/ratatui/tui-widgets/issues/231))
+  > Bumps [ratatui-core](https://github.com/ratatui/ratatui) from 0.1.0 to
+  > 0.1.1.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/releases">ratatui-core's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>ratatui-core-v0.1.1</h2>
+  > <blockquote>
+  > <p><em>&quot;Rats, we're rats; we're the rats.&quot; – <a
+  > href="https://www.youtube.com/watch?v=OXQwx1EolD8">Rat
+  > Movie</a></em></p>
+  > </blockquote>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0301/">https://ratatui.rs/highlights/v0301/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/74d6a846e1fab811fcdbcc09b09648cdca05c174">74d6a84</a>
+  > <em>(block)</em> Support shadows by orhun in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2481">#2481</a></p>
+  > <blockquote>
+  > <p>Introduce <code>Block::shadow(...)</code> with a new
+  > <code>Shadow</code> type that supports:</p>
+  > <ul>
+  > <li>presets: <code>overlay</code>,<code> block</code>,
+  > <code>light_shade</code>, <code>medium_shade</code>,
+  > <code>dark_shade</code></li>
+  > <li>custom symbols via <code>Shadow::symbol(...)</code></li>
+  > <li>custom effects via <code>Shadow::custom(...)</code></li>
+  > </ul>
+  > <pre lang="rust"><code>use ratatui::layout::Offset;
+  > use ratatui::style::Stylize;
+  > use ratatui::widgets::{Block, Shadow};
+  > <p>let popup = Block::bordered().title(&quot;Popup&quot;).shadow(<br />
+  > Shadow::dark_shade()<br />
+  > .black()<br />
+  > .on_white()<br />
+  > .offset(Offset::new(2, 1)),<br />
+  > );<br />
+  > </code></pre></p>
+  > <p>Results in:</p>
+  > <pre><code>┌Popup─────┐
+  > │content   │▒
+  > └──────────┘▒
+  >   ▒▒▒▒▒▒▒▒▒▒▒
+  > </code></pre>
+  > <p><img
+  > src="https://github.com/user-attachments/assets/103ddc17-6536-424c-a7a8-8895540dd145"
+  > alt="shadow" /></p>
+  > <p>fixes <a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/1892">#1892</a></p>
+  > <hr />
+  > </blockquote>
+  > </li>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/4d304206f45c96813dd9773a268b61d7d33d1f44">4d30420</a>
+  > <em>(buffer)</em> Add <code>CellDiffOption::AlwaysUpdate</code> to force
+  > cell updates by sxyazi in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2480">#2480</a></p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/blob/main/CHANGELOG.md">ratatui-core's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <!-- raw HTML omitted -->
+  > <!-- raw HTML omitted -->
+  > <h2><a
+  > href="https://github.com/ratatui/ratatui/releases/tag/ratatui-v0.30.1">v0.30.1</a>
+  > - 2026-06-05</h2>
+  > <blockquote>
+  > <p><em>&quot;Rats, we're rats; we're the rats.&quot; – <a
+  > href="https://www.youtube.com/watch?v=OXQwx1EolD8">Rat
+  > Movie</a></em></p>
+  > </blockquote>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0301/">https://ratatui.rs/highlights/v0301/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/74d6a846e1fab811fcdbcc09b09648cdca05c174">74d6a84</a>
+  > <em>(block)</em> Support shadows by <a
+  > href="https://github.com/orhun"><code>@​orhun</code></a> in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2481">#2481</a></p>
+  > <blockquote>
+  > <p>Introduce <code>Block::shadow(...)</code> with a new
+  > <code>Shadow</code> type that supports:</p>
+  > <ul>
+  > <li>presets: <code>overlay</code>,<code> block</code>,
+  > <code>light_shade</code>, <code>medium_shade</code>,
+  > <code>dark_shade</code></li>
+  > <li>custom symbols via <code>Shadow::symbol(...)</code></li>
+  > <li>custom effects via <code>Shadow::custom(...)</code></li>
+  > </ul>
+  > <pre lang="rust"><code>use ratatui::layout::Offset;
+  > use ratatui::style::Stylize;
+  > use ratatui::widgets::{Block, Shadow};
+  > <p>let popup = Block::bordered().title(&quot;Popup&quot;).shadow(<br />
+  > Shadow::dark_shade()<br />
+  > .black()<br />
+  > .on_white()<br />
+  > .offset(Offset::new(2, 1)),<br />
+  > );<br />
+  > </code></pre></p>
+  > <p>Results in:</p>
+  > <pre><code>┌Popup─────┐
+  > │content   │▒
+  > └──────────┘▒
+  >   ▒▒▒▒▒▒▒▒▒▒▒
+  > </code></pre>
+  > <p><img
+  > src="https://github.com/user-attachments/assets/103ddc17-6536-424c-a7a8-8895540dd145"
+  > alt="shadow" /></p>
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/1c3dbd1ff4fad2696543bf332a7e413d1bb69988"><code>1c3dbd1</code></a>
+  > chore(ratatui): unleash the rats v0.30.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2580">#2580</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/df9f8974f441739e5067db472c2683d1b0c552d6"><code>df9f897</code></a>
+  > docs(ratatui): update the changelog for v0.30.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2568">#2568</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/101a63e112188cbccef968053dee8bbd332cb8c3"><code>101a63e</code></a>
+  > feat(render): add function for applying buffer (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2566">#2566</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/0b03fe47f1a941fccf9dd694f2531157e312f330"><code>0b03fe4</code></a>
+  > chore(toml): migrate from taplo to tombi (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2501">#2501</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/6ef6a2ff897ae98aacd5b9c26cbd9ef0848ad45d"><code>6ef6a2f</code></a>
+  > build(deps): bump octocrab from 0.50.0 to 0.52.0 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2577">#2577</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/83c157965759bf660eb81f47bdedf96b886b9fd3"><code>83c1579</code></a>
+  > docs(changelog): fix doubled words in two entries (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2578">#2578</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/09e3af7d9f46204fc5de37ad5844f397892b801e"><code>09e3af7</code></a>
+  > build(deps): bump compact_str from 0.9.0 to 0.9.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2573">#2573</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/cd8cc4058204438994af8b33c33af56193b75e84"><code>cd8cc40</code></a>
+  > build(deps): bump unicode-segmentation from 1.13.2 to 1.13.3 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2576">#2576</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/e64247d24f7b7d18a7eb57f28190c99b87d7a6de"><code>e64247d</code></a>
+  > build(deps): bump bitflags from 2.11.1 to 2.12.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2575">#2575</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/04dec76dbda6fcaf5350680a88f01b391110745c"><code>04dec76</code></a>
+  > build(deps): bump crate-ci/typos from 1.46.3 to 1.47.0 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2574">#2574</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/ratatui/ratatui/compare/ratatui-core-v0.1.0...ratatui-core-v0.1.1">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+
+
 ## [0.7.2] - 2026-04-04
 
 ### ⚙️ Miscellaneous Tasks

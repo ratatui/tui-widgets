@@ -2,6 +2,64 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.4] - 2026-06-11
+
+### 🚀 Features
+
+- *(tui-prompts)* Allow hiding status symbol ([#191](https://github.com/ratatui/tui-widgets/issues/191))
+  > Add an opt-in TextPrompt builder for rendering prompts without the
+  > status symbol prefix. This supports prompt rows where completion or
+  > cancellation state is communicated by surrounding UI instead of the
+  > prompt itself.
+  >
+  > Preserve the existing default rendering behavior by keeping the status
+  > symbol visible for new and default prompts. Document that hiding the
+  > symbol only changes the rendered prefix: TextState still tracks Status,
+  > and cursor placement follows the shortened prompt width.
+  >
+  > Cover both default rendering and hidden-symbol rendering so the status
+  > symbol spacing and cursor behavior stay explicit.
+
+### ⚙️ Miscellaneous Tasks
+
+- Check remaining crate READMEs ([#241](https://github.com/ratatui/tui-widgets/issues/241))
+  > ## Summary
+  >
+  > - add the omitted tui-box-text and tui-prompts manifests to the
+  > cargo-rdme CI check
+  > - refresh the generated tui-prompts README block so the new check passes
+  >
+  > ## Validation
+  >
+  > - cargo rdme --check --manifest-path Cargo.toml
+  > - cargo rdme --check --manifest-path tui-bar-graph/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-box-text/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-cards/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-prompts/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-qrcode/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-scrollbar/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-scrollview/Cargo.toml
+
+- Add documentation hygiene checks ([#243](https://github.com/ratatui/tui-widgets/issues/243))
+  > ## Summary
+  >
+  > - add required CI jobs for typos and markdownlint-cli2
+  > - exclude generated changelogs from spelling checks
+  > - fix small spelling and Markdown hygiene issues caught by the new
+  > checks
+  >
+  > ## Validation
+  >
+  > - typos
+  > - markdownlint-cli2 "**/*.md"
+  > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
+  > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
+  > - cargo fmt --all -- --check
+  > - actionlint -color=false .github/workflows/check.yml
+
+
 ## [0.6.3] - 2026-04-04
 
 ### ⚙️ Miscellaneous Tasks
