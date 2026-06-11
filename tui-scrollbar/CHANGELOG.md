@@ -2,6 +2,58 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.6] - 2026-06-11
+
+### 📚 Documentation
+
+- *(scrollbar)* Improve API discovery ([#251](https://github.com/ratatui/tui-widgets/issues/251))
+  > ## Summary
+  >
+  > - Improve `tui-scrollbar` crate docs for API discovery, styling
+  > behavior, glyph selection, and interaction flow.
+  > - Add a small `scrollbar_styled` example that shows distinct track,
+  > thumb, and arrow styles for vertical and horizontal scrollbars.
+  > - Configure docs.rs example scraping and add a regression test for
+  > custom thumb styling on full and partial thumb cells.
+  >
+  > ## Details
+  >
+  > This is a non-functional docs/examples/tests change. It reorganizes the
+  > crate-level docs so important defaults and caveats are visible earlier,
+  > replaces the loose `ScrollBar` “Key methods” list with a grouped method
+  > map, and adds canonical examples for the main builder methods.
+  >
+  > The styling docs now spell out how `fg` and `bg` apply to terminal glyph
+  > cells. In particular, they call out that the default minimal track
+  > renders spaces, so empty track cells show background color, while
+  > visible glyph sets can use foreground color for the track line. The docs
+  > also note the partial-thumb caveat: when using visible tracks such as
+  > `GlyphSet::box_drawing`, thumb background can show at partial glyph
+  > edges, so matching it to the track background is usually less
+  > surprising.
+  >
+  > The glyph docs keep repeated `Symbols for Legacy Computing` context
+  > where readers may land directly, rather than relying on linear reading
+  > through the crate docs.
+  >
+  > Related context:
+  >
+  > - Issue #193: https://github.com/ratatui/tui-widgets/issues/193
+  > - PR #201: https://github.com/ratatui/tui-widgets/pull/201
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-scrollbar --all-features`
+  > - `cargo test -p tui-scrollbar --doc --all-features`
+  > - `cargo check -p tui-scrollbar --examples --all-features`
+  > - `cargo clippy -p tui-scrollbar --all-targets --all-features`
+  > - `RUSTDOCFLAGS='-D warnings' cargo doc -p tui-scrollbar --no-deps
+  > --all-features`
+  > - `just fmt-check`
+  > - `cargo rdme --check --manifest-path tui-scrollbar/Cargo.toml`
+  > - `markdownlint-cli2 tui-scrollbar/README.md`
+
+
 ## [0.2.5] - 2026-06-11
 
 ### 🐛 Bug Fixes
