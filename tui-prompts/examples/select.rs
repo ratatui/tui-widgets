@@ -1,18 +1,16 @@
 mod tui;
 
-use std::panic;
+use std::borrow::Cow;
 use std::thread::sleep;
 use std::time::Duration;
 
 use clap::Parser;
 use color_eyre::Result;
-use ratatui::crossterm::event::{self, Event, KeyEvent};
-use ratatui::crossterm::{self};
+use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent};
 use ratatui::prelude::*;
 use ratatui::widgets::*;
 use tui::Tui;
 use tui_prompts::prelude::*;
-use tui_prompts::SelectState;
 
 #[derive(Parser)]
 struct Cli {
@@ -21,50 +19,40 @@ struct Cli {
 }
 
 fn main() -> Result<()> {
-    panic::set_hook(Box::new(|info| {
-        crossterm::execute!(std::io::stderr(), crossterm::terminal::LeaveAlternateScreen)
-            .expect("Failed to leave alternate screen");
-        eprintln!("Panic: {info:?}");
-    }));
-
     let cli = Cli::parse();
     let mut app = App::new(cli);
     app.run()?;
     Ok(())
 }
 
-#[derive(Debug, Default, Clone)]
+const FRUITS: [&str; 4] = ["Apple", "Banana", "Cherry", "Date"];
+const LABEL: &str = "Select a fruit:";
+
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash)]
 struct App {
     debug: bool,
-    select_number_state: SelectState,
-    select_fruit_state: SelectState,
+    quit: bool,
+    state: SelectState,
 }
 
 impl App {
-    fn new(cli: Cli) -> Self {
-        let mut select_number_state = SelectState::default();
-        select_number_state.focus();
-
+    pub const fn new(cli: Cli) -> Self {
         Self {
             debug: cli.debug,
-            select_number_state,
-            select_fruit_state: SelectState::default(),
+            quit: false,
+            state: SelectState::new().with_focus(FocusState::Focused),
         }
     }
 
     pub fn run(&mut self) -> Result<()> {
-        let numbers = vec!["One", "Two", "Three", "Four", "Five"];
-        let fruits = vec!["Apple", "Banana", "Cherry", "Date"];
-        let number_label = "Select a number:";
-        let fruit_label = "Select a fruit:";
-
         let mut tui = Tui::new()?;
 
         while !self.is_finished() {
             self.handle_events()?;
-            tui.draw(|frame| self.draw_ui(frame, fruit_label, &fruits, number_label, &numbers))?;
+            tui.draw(|frame| self.draw_ui(frame))?;
         }
         tui.hide_cursor()?;
+        // wait two seconds before exiting so the user can see the final state of the UI.
         sleep(Duration::from_secs(2));
         Ok(())
     }
@@ -78,65 +66,57 @@ impl App {
         Ok(())
     }
 
-    fn draw_ui(
-        &mut self,
-        frame: &mut Frame,
-        fruit_label: &str,
-        fruit_options: &[&str],
-        number_label: &str,
-        number_options: &[&str],
-    ) {
-        let (text_area, debug_area) = self.split_layout(frame.size());
-        self.draw_select_prompt(
-            frame,
-            text_area,
-            fruit_label,
-            fruit_options,
-            number_label,
-            number_options,
-        );
+    fn draw_ui(&mut self, frame: &mut Frame) {
+        let (prompt_area, selected_area, debug_area) = self.split_layout(frame.area());
+        self.draw_select_prompt(frame, prompt_area);
+        self.draw_selected_value(frame, selected_area);
         self.draw_debug(frame, debug_area);
     }
 
-    fn split_layout(&self, area: Rect) -> (Rect, Rect) {
-        if self.debug {
+    /// split the frame into 3 areas:
+    /// - prompt area
+    /// - selected value area
+    /// - debug area
+    ///
+    /// The debug area is only visible if the `debug` flag is set.
+    fn split_layout(&self, area: Rect) -> (Rect, Rect, Rect) {
+        let (prompt_area, debug_area) = if self.debug {
             let areas = Layout::default()
-                .direction(Direction::Vertical)
+                .direction(Direction::Horizontal)
                 .constraints(vec![Constraint::Ratio(1, 2); 2])
                 .split(area);
-            let text_area = Rect {
-                height: 4,
-                ..areas[0]
-            };
-            (text_area, areas[1])
+            (areas[0], areas[1])
         } else {
             (area, Rect::default())
-        }
-    }
+        };
 
-    fn draw_select_prompt(
-        &mut self,
-        frame: &mut Frame,
-        area: Rect,
-        fruit_label: &str,
-        fruit_options: &[&str],
-        number_label: &str,
-        number_options: &[&str],
-    ) {
-        let chunks = Layout::default()
+        let areas = Layout::default()
             .direction(Direction::Vertical)
-            .constraints([Constraint::Min(5), Constraint::Min(5)])
-            .split(area);
-
-        SelectPrompt::from_strings(number_label, number_options.to_vec())
-            .with_block(Block::new().borders(Borders::ALL).title("Numbers"))
-            .draw(frame, chunks[0], &mut self.select_number_state);
-
-        SelectPrompt::from_strings(fruit_label, fruit_options.to_vec())
-            .with_block(Block::new().borders(Borders::ALL).title("Fruits"))
-            .draw(frame, chunks[1], &mut self.select_fruit_state);
+            .constraints([Constraint::Length(7), Constraint::Length(1)])
+            .split(prompt_area);
+        (areas[0], areas[1], debug_area)
     }
 
+    fn draw_select_prompt(&mut self, frame: &mut Frame, area: Rect) {
+        SelectPrompt::new(Cow::Borrowed(LABEL), FRUITS.into())
+            .with_block(Block::new().borders(Borders::ALL).title("Fruits"))
+            .draw(frame, area, &mut self.state);
+    }
+
+    fn draw_selected_value(&self, frame: &mut Frame, area: Rect) {
+        if !self.state.status().is_done() {
+            return;
+        }
+
+        let selected = FRUITS[self.state.focused_index()];
+        frame.render_widget(
+            Paragraph::new(format!("  Selected: {selected}")).style(Style::new().dark_gray()),
+            area,
+        );
+    }
+
+    /// draw a debug string in the top right corner of the screen that shows the current state of
+    /// the app.
     fn draw_debug(&self, frame: &mut Frame, area: Rect) {
         if !self.debug {
             return;
@@ -146,19 +126,15 @@ impl App {
     }
 
     fn handle_key_event(&mut self, key_event: KeyEvent) {
-        if !self.select_number_state.is_finished() {
-            self.select_number_state.handle_key_event(key_event);
-            // If number selection just finished, focus fruit
-            if self.select_number_state.is_finished() {
-                self.select_number_state.blur();
-                self.select_fruit_state.focus();
-            }
-        } else if !self.select_fruit_state.is_finished() {
-            self.select_fruit_state.handle_key_event(key_event);
+        if self.state.is_finished() && key_event.code == KeyCode::Esc {
+            self.quit = true;
+            return;
         }
+
+        self.state.handle_key_event(key_event);
     }
 
     const fn is_finished(&self) -> bool {
-        self.select_number_state.is_finished() && self.select_fruit_state.is_finished()
+        self.quit
     }
 }

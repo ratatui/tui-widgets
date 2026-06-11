@@ -1,3 +1,7 @@
+# charm/vhs script to create a gif of the select example
+# run with `vhs select.tape` then `vhs publish select_prompt.gif`
+# for docs run `vhs new docs.tape`
+
 Output "target/select_prompt.gif"
 
 Set Theme "Aardvark Blue"
@@ -7,20 +11,15 @@ Set Height 600
 Hide
 Type "cargo -q run --example=select -- --debug"
 Enter
+Wait+Screen /Select a fruit:/
 Show
-# Wait at focused_index: 0 than move to focused_index: 1
 Sleep 1s
 Down
+Sleep 400ms
+Down
 Enter
-Sleep 1s
-# Wait at focused_index: 0 than move to focused_index: 2
-Down 2
-Enter
-Sleep 2s
-Show
-Sleep 2s
-Type "This is the option selection example. The selected index changes with arrow keys and the focus state changes on selection."
+Wait+Screen /Selected: Cherry/
 Sleep 2s
 Hide
-Sleep 2s
-
+Escape
+Wait+Line@5s />$/

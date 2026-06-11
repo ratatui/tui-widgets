@@ -75,6 +75,39 @@ fn split_layout(area: Rect) -> (Rect, Rect, Rect) {
 
 See the [text example] for more details.
 
+### Select Prompt
+
+`SelectPrompt` renders one focused option from an ordered list. Keep a [`SelectState`] beside
+the prompt, render the prompt each frame, and route key events to the state. Up and Down move
+the focused option, Enter completes the prompt, and Escape or Ctrl+C aborts it.
+
+```rust
+use std::borrow::Cow;
+
+use crossterm::event::KeyEvent;
+use ratatui::layout::Rect;
+use ratatui::Frame;
+use tui_prompts::{Prompt, SelectPrompt, SelectState};
+
+struct App {
+    language_state: SelectState,
+}
+
+impl App {
+    fn draw_ui(&mut self, frame: &mut Frame, area: Rect) {
+        let label = Cow::Borrowed("Language");
+        let options = ["Rust", "Zig", "Go"].into();
+        SelectPrompt::new(label, options).draw(frame, area, &mut self.language_state);
+    }
+
+    fn handle_key_event(&mut self, key_event: KeyEvent) {
+        self.language_state.handle_key_event(key_event);
+    }
+}
+```
+
+See the [select example] for an interactive selection flow.
+
 ### Soft Wrapping
 
 Text is automatically character wrapped to fit in the render area.
@@ -98,7 +131,7 @@ See the [multi line example] for more details.
   - [ ] Confirm
   - [ ] List
   - [ ] Toggle
-  - [ ] Select
+  - [x] Select
   - [ ] Multi-select
   - [ ] Autocomplete
   - [ ] Autocomplete multi-select
@@ -128,6 +161,7 @@ See the [multi line example] for more details.
 | Delete (Fn+Delete on Mac), Ctrl+D | Delete character at cursor |
 | Ctrl+K | Delete all characters from the cursor to the end of line |
 | Ctrl+U | Delete the entire line |
+| Up, Down | Move the focused select option |
 | Enter | Complete the prompt |
 | Escape, Ctrl+C | Abort the prompt |
 
@@ -147,6 +181,7 @@ For the full suite of widgets, see [tui-widgets].
 [Examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-prompts/examples
 [text example]: https://github.com/ratatui/tui-widgets/tree/main/tui-prompts/examples/text.rs
 [multi line example]: https://github.com/ratatui/tui-widgets/tree/main/tui-prompts/examples/multi_line.rs
+[select example]: https://github.com/ratatui/tui-widgets/tree/main/tui-prompts/examples/select.rs
 [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-prompts/CHANGELOG.md
 [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 [Crate badge]: https://img.shields.io/crates/v/tui-prompts?logo=rust&style=flat
