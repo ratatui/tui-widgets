@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.6] - 2026-06-12
+
+### Other
+
+- Integrate tui-equalizer into workspace
+
+
 ## [0.7.5] - 2026-06-11
 
 ### 📚 Documentation
