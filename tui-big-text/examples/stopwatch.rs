@@ -15,6 +15,7 @@ use tui_big_text::BigText;
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    color_eyre::install()?;
     let mut app = StopwatchApp::default();
     let mut terminal = ratatui::init();
     let result = app.run(&mut terminal).await;
