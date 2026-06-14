@@ -1,20 +1,17 @@
 use color_eyre::Result;
 use lipsum::lipsum;
 use ratatui::DefaultTerminal;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent, KeyEventKind};
+use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent};
 use ratatui::prelude::{Constraint, Frame, Layout, Rect, Style, Stylize, Text};
 use ratatui::widgets::{Paragraph, Wrap};
 use tui_popup::{Popup, PopupState};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(run)
 }
 
-fn run(mut terminal: DefaultTerminal) -> Result<()> {
+fn run(terminal: &mut DefaultTerminal) -> Result<()> {
     let mut state = PopupState::default();
     let mut exit = false;
     while !exit {
@@ -67,12 +64,11 @@ fn render_status_bar(frame: &mut Frame, area: Rect, state: &PopupState) {
 }
 
 fn handle_events(popup: &mut PopupState, exit: &mut bool) -> Result<()> {
-    match event::read()? {
-        Event::Key(event) if event.kind == KeyEventKind::Press => {
-            handle_key_event(event, popup, exit);
-        }
-        Event::Mouse(event) => popup.handle_mouse_event(event),
-        _ => (),
+    let event = event::read()?;
+    if let Some(key) = event.as_key_press_event() {
+        handle_key_event(key, popup, exit);
+    } else if let Event::Mouse(event) = event {
+        popup.handle_mouse_event(event);
     }
     Ok(())
 }

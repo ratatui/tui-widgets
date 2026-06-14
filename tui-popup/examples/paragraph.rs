@@ -1,17 +1,14 @@
 use color_eyre::Result;
 use lipsum::lipsum;
 use ratatui::Frame;
-use ratatui::crossterm::event::{self, Event, KeyCode};
+use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::prelude::{Rect, Span, Style, Stylize, Text};
 use ratatui::widgets::{Paragraph, Wrap};
 use tui_popup::{KnownSizeWrapper, Popup};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = App::default().run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(|terminal| App::default().run(terminal))
 }
 
 #[derive(Default)]
@@ -22,7 +19,7 @@ struct App {
 }
 
 impl App {
-    fn run(&mut self, mut terminal: ratatui::DefaultTerminal) -> Result<()> {
+    fn run(&mut self, terminal: &mut ratatui::DefaultTerminal) -> Result<()> {
         self.lorem_ipsum = lipsum(2000);
         while !self.should_exit {
             terminal.draw(|frame| self.render(frame))?;
@@ -58,7 +55,7 @@ impl App {
     }
 
     fn handle_events(&mut self) -> Result<()> {
-        if let Event::Key(key) = event::read()? {
+        if let Some(key) = event::read()?.as_key_press_event() {
             match key.code {
                 KeyCode::Char('q') | KeyCode::Esc => self.should_exit = true,
                 KeyCode::Char('j') | KeyCode::Down => self.scroll_down(),

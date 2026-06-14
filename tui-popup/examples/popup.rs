@@ -1,25 +1,22 @@
 use color_eyre::Result;
 use lipsum::lipsum;
-use ratatui::Frame;
-use ratatui::crossterm::event::{self, Event};
+use ratatui::crossterm::event;
 use ratatui::prelude::{Rect, Style, Stylize};
 use ratatui::widgets::{Paragraph, Wrap};
+use ratatui::{DefaultTerminal, Frame};
 use tui_popup::Popup;
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let mut terminal = ratatui::init();
-    let result = run(&mut terminal);
-    ratatui::restore();
-    result
+    ratatui::run(run)
 }
 
-fn run(terminal: &mut ratatui::DefaultTerminal) -> Result<()> {
+fn run(terminal: &mut DefaultTerminal) -> Result<()> {
     loop {
         terminal.draw(|frame| {
             render(frame);
         })?;
-        if matches!(event::read()?, Event::Key(_)) {
+        if event::read()?.as_key_press_event().is_some() {
             break Ok(());
         }
     }
