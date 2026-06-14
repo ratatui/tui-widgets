@@ -1,16 +1,12 @@
-mod tui;
-
-use std::panic;
 use std::thread::sleep;
 use std::time::Duration;
 
 use clap::Parser;
 use color_eyre::Result;
-use ratatui::crossterm::event::{self, Event, KeyEvent};
-use ratatui::crossterm::{self};
+use ratatui::DefaultTerminal;
+use ratatui::crossterm::event::{self, KeyEvent};
 use ratatui::prelude::*;
 use ratatui::widgets::*;
-use tui::Tui;
 use tui_prompts::prelude::*;
 
 #[derive(Parser)]
@@ -20,16 +16,10 @@ struct Cli {
 }
 
 fn main() -> Result<()> {
-    panic::set_hook(Box::new(|info| {
-        crossterm::execute!(std::io::stderr(), crossterm::terminal::LeaveAlternateScreen)
-            .expect("Failed to leave alternate screen");
-        eprintln!("Panic: {info:?}");
-    }));
-
+    color_eyre::install()?;
     let cli = Cli::parse();
     let mut app = App::new(cli);
-    app.run()?;
-    Ok(())
+    ratatui::run(|terminal| app.run(terminal))
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Hash)]
@@ -46,14 +36,12 @@ impl App<'_> {
         }
     }
 
-    pub fn run(&mut self) -> Result<()> {
-        let mut tui = Tui::new()?;
-
+    pub fn run(&mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         while !self.is_finished() {
             self.handle_events()?;
-            tui.draw(|frame| self.draw_ui(frame))?;
+            terminal.draw(|frame| self.draw_ui(frame))?;
         }
-        tui.hide_cursor()?;
+        terminal.hide_cursor()?;
         // wait two seconds before exiting so the user can see the final state of the UI.
         sleep(Duration::from_secs(2));
         Ok(())
@@ -61,7 +49,7 @@ impl App<'_> {
 
     fn handle_events(&mut self) -> Result<()> {
         if event::poll(Duration::from_millis(16))?
-            && let Event::Key(key_event) = event::read()?
+            && let Some(key_event) = event::read()?.as_key_press_event()
         {
             self.handle_key_event(key_event);
         }
