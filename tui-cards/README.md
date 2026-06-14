@@ -63,7 +63,6 @@ For the full suite of widgets, see [tui-widgets].
 
 ## TODO
 
-- [ ] work out bug with background of cell after the suit character
 - [ ] more configuration options
 
 ## License

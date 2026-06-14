@@ -1,33 +1,24 @@
 use itertools::Itertools;
-use ratatui::Frame;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent};
+use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::layout::Rect;
-use ratatui::style::{Color, Stylize};
-use ratatui::widgets::Block;
+use ratatui::{DefaultTerminal, Frame};
 use strum::IntoEnumIterator;
 use tui_cards::{Card, Rank, Suit};
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
-    let mut terminal = ratatui::init();
-    // fix problem with skipping the wrong number of characters when drawing cards
-    // This is probably a bug in ratatui
-    terminal.draw(|frame| frame.render_widget(Block::new().bg(Color::White), frame.area()))?;
+    ratatui::run(run)
+}
+
+fn run(terminal: &mut DefaultTerminal) -> color_eyre::Result<()> {
     loop {
-        if terminal.draw(draw).is_err() {
-            break;
-        }
-        if matches!(
-            event::read()?,
-            Event::Key(KeyEvent {
-                code: KeyCode::Char('q'),
-                ..
-            }),
-        ) {
+        terminal.draw(draw)?;
+        if let Some(key) = event::read()?.as_key_press_event()
+            && matches!(key.code, KeyCode::Char('q') | KeyCode::Esc)
+        {
             break;
         }
     }
-    ratatui::restore();
     Ok(())
 }
 
