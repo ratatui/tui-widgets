@@ -2264,7 +2264,7 @@ dependencies = [
 
 [[package]]
 name = "tui-equalizer"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "color-eyre",
  "crossterm 0.29.0",
