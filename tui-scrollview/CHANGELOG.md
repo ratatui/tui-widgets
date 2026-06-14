@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.7] - 2026-06-14
+
+### 🚀 Features
+
+- *(scrollview)* Render by reference ([#292](https://github.com/ratatui/tui-widgets/issues/292))
+  > ## Summary
+  >
+  > - add `StatefulWidget for &ScrollView`
+  > - keep the owned `StatefulWidget for ScrollView` path as a compatibility
+  > shim
+  > - document the stored scroll view pattern and regenerate the README
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+  > - `cargo rdme --check --manifest-path tui-scrollview/Cargo.toml`
+  > - `markdownlint-cli2 tui-scrollview/README.md`
+
+
 ## [0.6.6] - 2026-06-14
 
 ### 📚 Documentation
