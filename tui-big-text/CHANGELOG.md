@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.7] - 2026-06-14
+
+### 🚀 Features
+
+- *(big-text)* Render by reference ([#288](https://github.com/ratatui/tui-widgets/issues/288))
+  > ## Summary
+  >
+  > - add `Widget for &BigText`
+  > - keep the owned `Widget for BigText` path as a compatibility shim
+  > - cover borrowed rendering against owned rendering
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+
+
 ## [0.8.6] - 2026-06-14
 
 ### 🐛 Bug Fixes
