@@ -645,8 +645,8 @@ mod tests {
     use ratatui_core::style::{Color, Style};
 
     use super::*;
-    use crate::glyphs::GlyphSet;
     use crate::ScrollLengths;
+    use crate::glyphs::GlyphSet;
 
     #[test]
     fn builder_methods_update_fields() {

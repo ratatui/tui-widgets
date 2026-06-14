@@ -3,7 +3,7 @@ use std::time::{Duration, Instant};
 use color_eyre::Result;
 use crossterm::event::{self, KeyCode};
 use itertools::Itertools;
-use rand::{rng, RngExt};
+use rand::{RngExt, rng};
 use ratatui::{DefaultTerminal, Frame};
 use tui_equalizer::{Band, Equalizer};
 

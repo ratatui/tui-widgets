@@ -9,8 +9,8 @@ use ratatui_core::style::Style;
 use ratatui_core::widgets::Widget;
 
 use super::{ArrowLayout, ScrollBar, ScrollBarOrientation};
-use crate::metrics::{CellFill, ScrollMetrics};
 use crate::ScrollLengths;
+use crate::metrics::{CellFill, ScrollMetrics};
 
 impl Widget for &ScrollBar {
     fn render(self, area: Rect, buf: &mut Buffer) {

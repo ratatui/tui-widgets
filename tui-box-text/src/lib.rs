@@ -86,7 +86,7 @@ impl Widget for &BoxChar {
 
 /// A macro for creating a hash table that maps single characters to strings.
 macro_rules! char_table {
-    ( $($char:expr => $repr:expr),* $(,)? ) => {
+    ( $($char:expr_2021 => $repr:expr_2021),* $(,)? ) => {
         {
             let mut table = ::std::collections::HashMap::new();
             $(

@@ -28,16 +28,16 @@
 use std::io;
 
 use color_eyre::Result;
+use ratatui::DefaultTerminal;
 use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
 use ratatui::crossterm::execute;
 use ratatui::layout::{Constraint, Layout, Rect};
 use ratatui::style::{Color, Style, Stylize};
 use ratatui::text::Line;
 use ratatui::widgets::{Block, Borders, Paragraph};
-use ratatui::DefaultTerminal;
 use tui_scrollbar::{
-    ScrollBar, ScrollBarArrows, ScrollBarInteraction, ScrollCommand, ScrollLengths, ScrollMetrics,
-    SUBCELL,
+    SUBCELL, ScrollBar, ScrollBarArrows, ScrollBarInteraction, ScrollCommand, ScrollLengths,
+    ScrollMetrics,
 };
 
 const KEY_STEP: usize = 1;

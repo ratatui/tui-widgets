@@ -1,6 +1,7 @@
 use std::io::{self};
 
 use color_eyre::Result;
+use ratatui::DefaultTerminal;
 use ratatui::buffer::Buffer;
 use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
 use ratatui::layout::{Constraint, Direction, Layout, Rect, Size};
@@ -8,7 +9,6 @@ use ratatui::style::palette::tailwind;
 use ratatui::style::{Color, Stylize};
 use ratatui::text::{Line, Text};
 use ratatui::widgets::*;
-use ratatui::DefaultTerminal;
 use tui_scrollview::{ScrollView, ScrollViewState};
 
 fn main() -> Result<()> {
@@ -105,7 +105,7 @@ impl Widget for &mut App {
 }
 
 impl App {
-    fn title(&self) -> impl Widget {
+    fn title(&self) -> impl Widget + use<> {
         let palette = tailwind::SLATE;
         let fg = palette.c900;
         let bg = palette.c300;
@@ -138,7 +138,7 @@ impl App {
         self.text(2).render(text_2, buf);
     }
 
-    fn line_numbers(&self, height: u16) -> impl Widget {
+    fn line_numbers(&self, height: u16) -> impl Widget + use<> {
         use std::fmt::Write;
         let line_numbers = (1..=height).fold(String::new(), |mut output, n| {
             let _ = writeln!(output, "{n:>4} ");
@@ -147,7 +147,7 @@ impl App {
         Text::from(line_numbers).dim()
     }
 
-    fn vertical_bar_chart(&self) -> impl Widget {
+    fn vertical_bar_chart(&self) -> impl Widget + use<> {
         let block = Block::bordered().title("Vertical Bar Chart");
         BarChart::default()
             .direction(Direction::Vertical)
@@ -157,7 +157,7 @@ impl App {
             .data(bars())
     }
 
-    fn horizontal_bar_chart(&self) -> impl Widget {
+    fn horizontal_bar_chart(&self) -> impl Widget + use<> {
         let block = Block::bordered().title("Horizontal Bar Chart");
         BarChart::default()
             .direction(Direction::Horizontal)
@@ -167,7 +167,7 @@ impl App {
             .data(bars())
     }
 
-    fn text(&self, index: usize) -> impl Widget {
+    fn text(&self, index: usize) -> impl Widget + use<> {
         let block = Block::bordered().title(format!("Text {index}"));
         Paragraph::new(self.text[index].clone())
             .wrap(Wrap { trim: false })

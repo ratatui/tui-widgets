@@ -1,9 +1,9 @@
 use itertools::Itertools;
+use ratatui::Frame;
 use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent};
 use ratatui::layout::Rect;
 use ratatui::style::{Color, Stylize};
 use ratatui::widgets::Block;
-use ratatui::Frame;
 use strum::IntoEnumIterator;
 use tui_cards::{Card, Rank, Suit};
 

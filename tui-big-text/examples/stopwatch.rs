@@ -1,12 +1,12 @@
 use std::io::{self, Stdout};
 use std::time::{Duration, Instant};
 
-use color_eyre::eyre::{bail, Context};
 use color_eyre::Result;
+use color_eyre::eyre::{Context, bail};
 use crossterm::event::{self, KeyCode};
 use crossterm::execute;
 use crossterm::terminal::{
-    disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen,
+    EnterAlternateScreen, LeaveAlternateScreen, disable_raw_mode, enable_raw_mode,
 };
 use futures::{FutureExt, StreamExt};
 // use futures::{select, FutureExt, StreamExt};

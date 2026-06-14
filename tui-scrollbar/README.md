@@ -180,7 +180,7 @@ This example shows how to compute thumb geometry without rendering via [`ScrollM
 useful for testing, hit testing, or when you want to inspect thumb sizing directly.
 
 ```rust
-use tui_scrollbar::{ScrollLengths, ScrollMetrics, SUBCELL};
+use tui_scrollbar::{SUBCELL, ScrollLengths, ScrollMetrics};
 
 let track_cells = 12;
 let viewport_len = track_cells * SUBCELL;

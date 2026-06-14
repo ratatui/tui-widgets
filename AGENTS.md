@@ -27,10 +27,12 @@
 - Test full workspace: `cargo test --all-features --workspace`.
 - Test a single crate: `cargo test -p tui-prompts --all-features -- --nocapture`.
 - Docs smoke test: `cargo doc --all-features --workspace`.
+- README generation check: `just rdme-check` (runs `cargo rdme --check --manifest-path` for the
+  root manifest and every widget crate).
 
 ## Coding Style & Naming Conventions
 
-- Rust 2021 edition; follow `rustfmt` defaults (4-space indent, trailing commas where helpful).
+- Rust 2024 edition; follow `rustfmt` defaults (4-space indent, trailing commas where helpful).
 - Module/files/functions use `snake_case`; types/traits/enums use `CamelCase`; feature flags match
   crate names (`bar-graph`, `prompts`, etc.).
 - Prefer explicit types where clarity matters; keep imports ordered and minimal.
@@ -49,6 +51,8 @@
   end of the doc comment).
 - Keep crate-level docs updated when adding widgets or major behaviors; link to examples for
   interactive flows.
+- Before pushing changes that touch crate-level `src/lib.rs` docs or any `README.md`, run
+  `just rdme-check` and regenerate stale READMEs with `cargo rdme --manifest-path <crate>/Cargo.toml`.
 - Document safety/contracts for unsafe or performance-sensitive code; call out terminal assumptions
   (color, size) and error conditions.
 

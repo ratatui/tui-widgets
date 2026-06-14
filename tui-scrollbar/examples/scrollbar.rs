@@ -18,11 +18,11 @@
 //! draws every 1/8th step from both ends so you can verify the glyph ordering and thumb symmetry.
 
 use color_eyre::Result;
+use ratatui::DefaultTerminal;
 use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
 use ratatui::layout::{Constraint, Layout, Rect};
 use ratatui::widgets::Paragraph;
-use ratatui::DefaultTerminal;
-use tui_scrollbar::{ScrollBar, ScrollBarArrows, ScrollLengths, ScrollMetrics, SUBCELL};
+use tui_scrollbar::{SUBCELL, ScrollBar, ScrollBarArrows, ScrollLengths, ScrollMetrics};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
@@ -68,12 +68,11 @@ impl App {
 
     /// Handles a single input event and updates the run state.
     fn handle_events(&mut self) -> Result<()> {
-        if let Event::Key(key) = event::read()? {
-            if key.kind == KeyEventKind::Press
-                && matches!(key.code, KeyCode::Char('q') | KeyCode::Esc)
-            {
-                self.state = AppState::Quit;
-            }
+        if let Event::Key(key) = event::read()?
+            && key.kind == KeyEventKind::Press
+            && matches!(key.code, KeyCode::Char('q') | KeyCode::Esc)
+        {
+            self.state = AppState::Quit;
         }
         Ok(())
     }

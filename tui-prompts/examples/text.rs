@@ -63,10 +63,10 @@ impl<'a> App<'a> {
     }
 
     fn handle_events(&mut self) -> Result<()> {
-        if event::poll(Duration::from_millis(16))? {
-            if let Event::Key(key_event) = event::read()? {
-                self.handle_key_event(key_event);
-            }
+        if event::poll(Duration::from_millis(16))?
+            && let Event::Key(key_event) = event::read()?
+        {
+            self.handle_key_event(key_event);
         }
         Ok(())
     }

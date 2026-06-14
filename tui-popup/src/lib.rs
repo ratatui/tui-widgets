@@ -24,8 +24,8 @@
 //! Build a `Popup` with content and render it over your frame.
 //!
 //! ```rust
-//! use ratatui::style::{Style, Stylize};
 //! use ratatui::Frame;
+//! use ratatui::style::{Style, Stylize};
 //! use tui_popup::Popup;
 //!
 //! fn render_popup(frame: &mut Frame) {
@@ -45,8 +45,8 @@
 //! # #[cfg(feature = "crossterm")]
 //! # {
 //! use crossterm::event::{KeyCode, KeyEvent};
-//! use ratatui::style::{Style, Stylize};
 //! use ratatui::Frame;
+//! use ratatui::style::{Style, Stylize};
 //! use tui_popup::{Popup, PopupState};
 //!
 //! fn render_stateful_popup(frame: &mut Frame, popup_state: &mut PopupState) {

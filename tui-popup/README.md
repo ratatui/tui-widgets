@@ -28,8 +28,8 @@ cargo add tui-popup
 Build a `Popup` with content and render it over your frame.
 
 ```rust
-use ratatui::style::{Style, Stylize};
 use ratatui::Frame;
+use ratatui::style::{Style, Stylize};
 use tui_popup::Popup;
 
 fn render_popup(frame: &mut Frame) {
@@ -47,8 +47,8 @@ the exact API for this will likely change.
 
 ```rust
 use crossterm::event::{KeyCode, KeyEvent};
-use ratatui::style::{Style, Stylize};
 use ratatui::Frame;
+use ratatui::style::{Style, Stylize};
 use tui_popup::{Popup, PopupState};
 
 fn render_stateful_popup(frame: &mut Frame, popup_state: &mut PopupState) {

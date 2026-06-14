@@ -64,13 +64,13 @@ impl PopupState {
 
     /// Set the state to dragging if the mouse click is in the popup title
     pub fn mouse_down(&mut self, col: u16, row: u16) {
-        if let Some(area) = self.area {
-            if area.contains((col, row).into()) {
-                self.drag_state = DragState::Dragging {
-                    col_offset: col.saturating_sub(area.x),
-                    row_offset: row.saturating_sub(area.y),
-                };
-            }
+        if let Some(area) = self.area
+            && area.contains((col, row).into())
+        {
+            self.drag_state = DragState::Dragging {
+                col_offset: col.saturating_sub(area.x),
+                row_offset: row.saturating_sub(area.y),
+            };
         }
     }
 
@@ -85,12 +85,11 @@ impl PopupState {
             col_offset,
             row_offset,
         } = self.drag_state
+            && let Some(area) = self.area
         {
-            if let Some(area) = self.area {
-                let x = col.saturating_sub(col_offset);
-                let y = row.saturating_sub(row_offset);
-                self.area.replace(Rect { x, y, ..area });
-            }
+            let x = col.saturating_sub(col_offset);
+            let y = row.saturating_sub(row_offset);
+            self.area.replace(Rect { x, y, ..area });
         }
     }
 

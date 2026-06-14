@@ -26,8 +26,8 @@
 //! <summary>Code</summary>
 //!
 //! ```rust
-//! use ratatui::layout::{Constraint, Direction, Layout, Rect};
 //! use ratatui::Frame;
+//! use ratatui::layout::{Constraint, Direction, Layout, Rect};
 //! use tui_prompts::{Prompt, TextPrompt, TextRenderStyle, TextState};
 //!
 //! struct App<'a> {

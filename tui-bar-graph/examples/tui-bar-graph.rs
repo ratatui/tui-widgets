@@ -6,7 +6,7 @@ use ratatui::style::palette::tailwind::SLATE;
 use ratatui::style::{Color, Stylize};
 use ratatui::text::Line;
 use ratatui::widgets::{Block, Borders};
-use ratatui::{symbols, DefaultTerminal, Frame};
+use ratatui::{DefaultTerminal, Frame, symbols};
 use strum::Display;
 use tui_bar_graph::{BarGraph, BarStyle, ColorMode};
 

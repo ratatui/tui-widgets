@@ -3,10 +3,10 @@
 use std::io;
 
 use color_eyre::Result;
-use crossterm::terminal::{
-    disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen,
-};
 use crossterm::ExecutableCommand;
+use crossterm::terminal::{
+    EnterAlternateScreen, LeaveAlternateScreen, disable_raw_mode, enable_raw_mode,
+};
 use ratatui::prelude::CrosstermBackend;
 
 /// A type alias for the terminal
@@ -20,13 +20,15 @@ where
 {
     install_panic_handler();
 
-    with_terminal(|mut terminal| loop {
-        terminal.draw(|frame| render(frame))?;
-        if let crossterm::event::Event::Key(event) = crossterm::event::read()? {
-            if matches!(
-                event.code,
-                crossterm::event::KeyCode::Char('q') | crossterm::event::KeyCode::Esc
-            ) {
+    with_terminal(|mut terminal| {
+        loop {
+            terminal.draw(|frame| render(frame))?;
+            if let crossterm::event::Event::Key(event) = crossterm::event::read()?
+                && matches!(
+                    event.code,
+                    crossterm::event::KeyCode::Char('q') | crossterm::event::KeyCode::Esc
+                )
+            {
                 break Ok(());
             }
         }

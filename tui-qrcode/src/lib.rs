@@ -104,8 +104,8 @@
 //! [Joshka]: https://github.com/joshka
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
 
-use qrcode::render::unicode::Dense1x2;
 use qrcode::QrCode;
+use qrcode::render::unicode::Dense1x2;
 use ratatui_core::buffer::Buffer;
 use ratatui_core::layout::{Rect, Size};
 use ratatui_core::style::{Style, Styled};
@@ -133,8 +133,8 @@ use ratatui_core::widgets::Widget;
 ///
 /// ```no_run
 /// use qrcode::QrCode;
-/// use ratatui::style::{Style, Stylize};
 /// use ratatui::Frame;
+/// use ratatui::style::{Style, Stylize};
 /// use tui_qrcode::{Colors, QrCodeWidget, QuietZone, Scaling};
 ///
 /// fn render(frame: &mut Frame) {

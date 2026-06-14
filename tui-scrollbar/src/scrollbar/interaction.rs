@@ -10,14 +10,14 @@
 use ratatui_core::layout::Rect;
 
 use super::{ArrowHit, ArrowLayout, ScrollBar, ScrollBarOrientation, TrackClickBehavior};
+use crate::ScrollLengths;
 #[cfg(any(feature = "crossterm_0_28", feature = "crossterm_0_29"))]
 use crate::crossterm::event::{MouseButton, MouseEvent, MouseEventKind};
 use crate::input::{
     DragState, PointerButton, PointerEvent, PointerEventKind, ScrollAxis, ScrollBarInteraction,
     ScrollCommand, ScrollEvent, ScrollWheel,
 };
-use crate::metrics::{HitTest, ScrollMetrics, SUBCELL};
-use crate::ScrollLengths;
+use crate::metrics::{HitTest, SUBCELL, ScrollMetrics};
 
 impl ScrollBar {
     /// Handles a backend-agnostic scrollbar event.
@@ -287,15 +287,17 @@ impl ScrollBar {
 
     /// Returns which arrow (if any) a pointer event hit.
     fn arrow_hit(&self, layout: &ArrowLayout, event: PointerEvent) -> Option<ArrowHit> {
-        if let Some((x, y)) = layout.start {
-            if event.column == x && event.row == y {
-                return Some(ArrowHit::Start);
-            }
+        if let Some((x, y)) = layout.start
+            && event.column == x
+            && event.row == y
+        {
+            return Some(ArrowHit::Start);
         }
-        if let Some((x, y)) = layout.end {
-            if event.column == x && event.row == y {
-                return Some(ArrowHit::End);
-            }
+        if let Some((x, y)) = layout.end
+            && event.column == x
+            && event.row == y
+        {
+            return Some(ArrowHit::End);
         }
         None
     }

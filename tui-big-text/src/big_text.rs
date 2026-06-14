@@ -148,7 +148,7 @@ fn layout<'a>(
     pixel_size: &PixelSize,
     alignment: Alignment,
     lines: &'a [Line<'a>],
-) -> impl IntoIterator<Item = impl IntoIterator<Item = Rect>> + 'a {
+) -> impl IntoIterator<Item = impl IntoIterator<Item = Rect> + use<>> + 'a + use<'a> {
     let (step_x, step_y) = pixel_size.pixels_per_cell();
     let width = 8_u16.div_ceil(step_x);
     let height = 8_u16.div_ceil(step_y);

@@ -11,14 +11,14 @@ use std::io;
 
 use color_eyre::Result;
 use lipsum::lipsum;
+use ratatui::DefaultTerminal;
 use ratatui::buffer::Buffer;
 use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
 use ratatui::layout::{Constraint, Layout, Rect, Size};
-use ratatui::style::palette::tailwind;
 use ratatui::style::Stylize;
+use ratatui::style::palette::tailwind;
 use ratatui::text::Line;
 use ratatui::widgets::{Paragraph, StatefulWidget, StatefulWidgetRef, Tabs, Widget, Wrap};
-use ratatui::DefaultTerminal;
 use tui_scrollview::{ScrollView, ScrollViewState};
 
 fn main() -> Result<()> {

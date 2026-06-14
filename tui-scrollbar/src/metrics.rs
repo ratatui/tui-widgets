@@ -18,7 +18,7 @@
 //! then compute a proportional thumb size and position.
 //!
 //! ```rust
-//! use tui_scrollbar::{ScrollLengths, ScrollMetrics, SUBCELL};
+//! use tui_scrollbar::{SUBCELL, ScrollLengths, ScrollMetrics};
 //!
 //! let track_cells = 8;
 //! let viewport_len = track_cells * SUBCELL;
