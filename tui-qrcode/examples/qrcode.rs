@@ -1,3 +1,11 @@
+//! Renders a QR code for <https://ratatui.rs>.
+//!
+//! Run with `cargo run -p tui-qrcode --example qrcode`.
+//!
+//! The example uses inverted colors to render a white-on-black QR code.
+//!
+//! Press any key to quit.
+
 use qrcode::QrCode;
 use ratatui::crossterm::event;
 use ratatui::{DefaultTerminal, Frame};

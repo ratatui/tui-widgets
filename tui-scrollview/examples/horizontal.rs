@@ -1,7 +1,11 @@
 //! Demonstrates horizontal and vertical scrolling in the same `ScrollView`.
 //!
+//! Run with `cargo run -p tui-scrollview --example horizontal`.
+//!
 //! The content is twice as wide as the terminal and usually taller than the viewport, so this
 //! example is useful for checking that both scrollbars update correctly.
+//! `ScrollViewState` stores both offsets; the `ScrollView` clips the larger virtual buffer to the
+//! current frame area on each draw.
 //!
 //! Controls:
 //! - `h` / `Left`: scroll left
@@ -65,6 +69,7 @@ impl App {
     fn draw(&mut self, terminal: &mut DefaultTerminal) -> io::Result<()> {
         terminal.draw(|frame| {
             let area = frame.area();
+            // Make the virtual buffer wider than the viewport so horizontal scrolling is visible.
             let size = Size::new(area.width * 2, area.width);
             let mut scroll_view = ScrollView::new(size);
             let paragraph = Paragraph::new(self.text.clone()).wrap(Wrap::default());

@@ -1,3 +1,13 @@
+//! Renders a grid of playing-card widgets for every suit and rank.
+//!
+//! Run with `cargo run -p tui-cards --example card`.
+//!
+//! Cards are drawn into 15x10 cells, so the example truncates the terminal area to whole-card
+//! multiples before placing the grid. Extra rows or columns are left unused instead of drawing
+//! partial cards.
+//!
+//! Press `q` or `Esc` to quit.
+
 use itertools::Itertools;
 use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::layout::Rect;
@@ -23,6 +33,7 @@ fn run(terminal: &mut DefaultTerminal) -> color_eyre::Result<()> {
 }
 
 fn draw(frame: &mut Frame) {
+    // Cards are designed for a 15x10 cell; leave partial cells unused.
     let width = frame.area().width / 15 * 15;
     let height = frame.area().height / 10 * 10;
     let cards = Suit::iter()

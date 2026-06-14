@@ -1,7 +1,11 @@
 //! Demonstrates a `ScrollView` containing multiple widgets rendered into an offscreen buffer.
 //!
+//! Run with `cargo run -p tui-scrollview --example scrollview`.
+//!
 //! This example builds a taller virtual area, renders several widgets into it, and then lets
 //! `ScrollViewState` decide which part of that content is visible in the terminal.
+//! The content width leaves room for a vertical scrollbar when the virtual height is taller than
+//! the viewport.
 //!
 //! Controls:
 //! - `j` / `Down`: scroll down
@@ -103,6 +107,7 @@ impl Widget for &mut App {
         let [title, body] = layout.areas(area);
 
         self.title().render(title, buf);
+        // When the virtual height overflows, reserve one column for the vertical scrollbar.
         let width = if buf.area.height < SCROLLVIEW_HEIGHT {
             buf.area.width - 1
         } else {

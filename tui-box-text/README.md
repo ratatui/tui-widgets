@@ -51,6 +51,7 @@ For the full suite of widgets, see [tui-widgets].
 [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-box-text/CHANGELOG.md
 [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 [Joshka]: https://github.com/joshka
+[Ratatui]: https://ratatui.rs
 [tui-widgets]: https://crates.io/crates/tui-widgets
 
 <!-- cargo-rdme end -->

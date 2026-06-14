@@ -163,6 +163,7 @@ For the full suite of widgets, see [tui-widgets].
 [tui-scrollview]: https://crates.io/crates/tui-scrollview
 
 [Joshka]: https://github.com/joshka
+[Ratatui]: https://ratatui.rs
 [tui-widgets]: https://crates.io/crates/tui-widgets
 
 <!-- cargo-rdme end -->

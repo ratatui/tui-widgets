@@ -1,5 +1,7 @@
 //! Fractional scrollbar step showcase.
 //!
+//! Run with `cargo run -p tui-scrollbar --example scrollbar`.
+//!
 //! This example renders every 1/8th thumb step for both horizontal and vertical scrollbars so
 //! you can visually compare partial glyphs and track alignment.
 //!

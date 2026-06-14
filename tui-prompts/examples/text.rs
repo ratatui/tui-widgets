@@ -1,3 +1,18 @@
+//! Demonstrates several text prompt render styles in one form.
+//!
+//! Run with `cargo run -p tui-prompts --example text`.
+//!
+//! The three fields share the same `TextPrompt` state model but render the value differently:
+//! normal text, password masking, and invisible input. Focus moves between independent
+//! `TextState` values, and the app exits after all fields are submitted.
+//!
+//! Controls:
+//! - `Tab`: focus the next prompt
+//! - `Shift+Tab`: focus the previous prompt
+//! - `Enter`: submit the focused prompt
+//!
+//! Run with `--debug` to show prompt state while editing.
+
 use std::thread::sleep;
 use std::time::Duration;
 
@@ -104,6 +119,7 @@ impl<'a> App<'a> {
     }
 
     fn draw_text_prompt(&mut self, frame: &mut Frame, username_area: Rect) {
+        // All three prompts use TextState; the render style only changes what is shown.
         TextPrompt::from("Username").draw(frame, username_area, &mut self.username_state);
     }
 

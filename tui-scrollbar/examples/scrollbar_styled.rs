@@ -1,5 +1,7 @@
 //! Styled scrollbar showcase.
 //!
+//! Run with `cargo run -p tui-scrollbar --example scrollbar_styled`.
+//!
 //! This example renders a static layout with independently styled track, thumb, and arrow glyphs.
 
 use std::time::Duration;

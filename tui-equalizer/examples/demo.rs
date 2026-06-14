@@ -1,3 +1,13 @@
+//! Animates two overlaid equalizer widgets with interpolated random bands.
+//!
+//! Run with `cargo run -p tui-equalizer --example demo`.
+//!
+//! One low-brightness equalizer keeps the previous band values visible while a second equalizer
+//! renders the interpolated values at full brightness. The overlay makes the transition between
+//! random targets visible without adding state to the widget itself.
+//!
+//! Press `q` to quit.
+
 use std::time::{Duration, Instant};
 
 use color_eyre::Result;
@@ -56,6 +66,8 @@ fn random_bands(count: u16) -> Vec<Band> {
 
 fn render(frame: &mut Frame, current: &[Band], bands: &[Band]) {
     let size = frame.area();
+    // Draw the previous target first as a dim trail, then the interpolated values at full
+    // brightness.
     frame.render_widget(
         Equalizer {
             bands: current.to_vec(),

@@ -1,5 +1,7 @@
 //! Mouse + keyboard-driven scrollbar demo with smooth subcell movement.
 //!
+//! Run with `cargo run -p tui-scrollbar --example scrollbar_mouse --features crossterm`.
+//!
 //! If you are new to this crate, this is the fastest way to see the full interaction model:
 //! a horizontal scrollbar on the bottom edge and a vertical scrollbar on the right edge, both
 //! wired to the same input flow your app would use. The example keeps the scroll offsets in app

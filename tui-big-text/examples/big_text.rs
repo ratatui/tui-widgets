@@ -1,3 +1,12 @@
+//! Renders a basic `BigText` widget with per-line styling.
+//!
+//! Run with `cargo run -p tui-big-text --example big_text`.
+//!
+//! The builder-level style is blue, while individual `Line` styles override it. This shows the
+//! same styling precedence callers get when mixing widget defaults with styled text spans.
+//!
+//! Press `q` or `Esc` to quit.
+
 use color_eyre::Result;
 use crossterm::event::{self, KeyCode};
 use ratatui::layout::Offset;

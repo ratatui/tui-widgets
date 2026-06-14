@@ -1,3 +1,16 @@
+//! Shows a popup containing a fixed-size scrollable paragraph.
+//!
+//! Run with `cargo run -p tui-popup --example paragraph --features crossterm`.
+//!
+//! `Paragraph` does not report its desired popup size, so the example wraps it in
+//! `KnownSizeWrapper`. The wrapper gives `Popup` a stable width and height while the paragraph
+//! keeps its own scroll offset.
+//!
+//! Controls:
+//! - `j` / `Down`: scroll down
+//! - `k` / `Up`: scroll up
+//! - `q` / `Esc`: quit
+
 use color_eyre::Result;
 use lipsum::lipsum;
 use ratatui::Frame;
@@ -43,6 +56,8 @@ impl App {
     fn render_popup(&self, frame: &mut Frame) {
         let lines: Text = (0..10).map(|i| Span::raw(format!("Line {i}"))).collect();
         let paragraph = Paragraph::new(lines).scroll((self.scroll, 0));
+        // Popup needs KnownSize for placement; Paragraph owns the scroll offset but not a desired
+        // size.
         let wrapper = KnownSizeWrapper {
             inner: paragraph,
             width: 21,

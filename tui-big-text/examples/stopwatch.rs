@@ -1,3 +1,16 @@
+//! Runs an async stopwatch example using `BigText` for the timer display.
+//!
+//! Run with `cargo run -p tui-big-text --example stopwatch`.
+//!
+//! The event handler combines crossterm's async event stream with a fixed tick interval. Key
+//! events update the stopwatch state, while tick messages redraw the timer and FPS counter even
+//! when no input arrives.
+//!
+//! Controls:
+//! - `Space`: start the stopwatch or record a split
+//! - `Enter` / `s`: stop the stopwatch
+//! - `q`: quit
+
 use std::time::{Duration, Instant};
 
 use color_eyre::Result;

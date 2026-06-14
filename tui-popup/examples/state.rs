@@ -1,3 +1,19 @@
+//! Demonstrates `PopupState` by moving a popup with keyboard and mouse input.
+//!
+//! Run with `cargo run -p tui-popup --example state --features crossterm`.
+//!
+//! `PopupState` stores the popup area from the last render. The status bar prints that area so you
+//! can see how keyboard moves, mouse drags, and reset commands change the state used by the next
+//! frame.
+//!
+//! Controls:
+//! - `h` / `Left`: move left
+//! - `j` / `Down`: move down
+//! - `k` / `Up`: move up
+//! - `l` / `Right`: move right
+//! - `r`: reset popup state
+//! - `q` / `Esc`: quit
+
 use color_eyre::Result;
 use lipsum::lipsum;
 use ratatui::DefaultTerminal;

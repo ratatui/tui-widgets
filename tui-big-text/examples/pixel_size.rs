@@ -1,3 +1,13 @@
+//! Compares the available `PixelSize` variants for `BigText`.
+//!
+//! Run with `cargo run -p tui-big-text --example pixel_size`.
+//!
+//! The examples use fixed-height rows because each pixel size consumes a different number of
+//! terminal rows. If a terminal is too short, the lower variants are clipped by the frame boundary
+//! rather than resized.
+//!
+//! Press `q` or `Esc` to quit.
+
 use color_eyre::Result;
 use crossterm::event::{self, KeyCode};
 use ratatui::prelude::*;
@@ -64,8 +74,9 @@ fn render(frame: &mut Frame) {
         .lines(vec!["Octant".magenta().into(), " 1/2*1/4".magenta().into()])
         .build();
 
-    // Setup layout for the title and 8 blocks
     use Constraint::*;
+    // Each pixel size has a fixed cell footprint, so the rows reserve the height each variant
+    // needs rather than asking BigText to scale to the available area.
     let [top, full, half_height, upper_middle, lower_middle, bottom] = Layout::vertical([
         Length(2),
         Length(8),

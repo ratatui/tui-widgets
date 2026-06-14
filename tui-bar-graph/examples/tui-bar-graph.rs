@@ -1,3 +1,13 @@
+//! Demonstrates configurable bar graph rendering from command-line arguments.
+//!
+//! Run with `cargo run -p tui-bar-graph --example tui-bar-graph -- quadrant viridis`.
+//!
+//! This is a survey example for comparing `BarStyle` resolution and `colorgrad` presets. The
+//! example adjusts the generated data length to match each style: solid bars use one value per
+//! column, octant and braille bars use two, and quadrant bars use four.
+//!
+//! Press any key to quit.
+
 use clap::{Parser, ValueEnum};
 use colorgrad::Gradient;
 use crossterm::event::{self, Event, KeyEvent, KeyEventKind};
@@ -93,6 +103,7 @@ fn render(frame: &mut Frame, args: &Args) {
     frame.render_widget(&block, frame.area());
 
     let area = block.inner(frame.area());
+    // Match the data count to the selected glyph resolution so the graph fills the width.
     let width = match args.bar_style {
         BarStyle::Solid => area.width as usize,
         BarStyle::Octant | BarStyle::Braille => area.width as usize * 2,

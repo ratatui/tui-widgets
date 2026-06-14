@@ -1,3 +1,12 @@
+//! Renders a basic centered popup over wrapped background text.
+//!
+//! Run with `cargo run -p tui-popup --example popup --features crossterm`.
+//!
+//! This is the minimal popup example: `Popup::new` receives plain text, centers it in the frame,
+//! and lets the popup size itself from the content.
+//!
+//! Press any key to quit.
+
 use color_eyre::Result;
 use lipsum::lipsum;
 use ratatui::crossterm::event;

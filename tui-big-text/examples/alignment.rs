@@ -1,3 +1,12 @@
+//! Demonstrates left, center, and right alignment for `BigText`.
+//!
+//! Run with `cargo run -p tui-big-text --example alignment`.
+//!
+//! Each widget receives the full row width for its section. The alignment methods change where the
+//! rendered glyphs sit inside that area; they do not change the area Ratatui gives to the widget.
+//!
+//! Press `q` or `Esc` to quit.
+
 use color_eyre::Result;
 use crossterm::event::{self, KeyCode};
 use ratatui::layout::{Constraint, Layout, Offset};

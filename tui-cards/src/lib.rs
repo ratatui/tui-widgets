@@ -55,6 +55,7 @@
 //! [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-cards/CHANGELOG.md
 //! [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 //! [Joshka]: https://github.com/joshka
+//! [Ratatui]: https://ratatui.rs
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
 use std::iter::zip;
 

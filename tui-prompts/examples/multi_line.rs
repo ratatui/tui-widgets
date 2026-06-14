@@ -1,3 +1,13 @@
+//! Demonstrates a multi-line text prompt.
+//!
+//! Run with `cargo run -p tui-prompts --example multi_line`.
+//!
+//! The prompt uses a bottom and right border to make the editable area visible while text wraps
+//! across multiple rows. The app exits only after the prompt state reports completion.
+//!
+//! Use the prompt's normal text-editing keys to enter text. Run with `--debug` to show prompt
+//! state while editing.
+
 use std::thread::sleep;
 use std::time::Duration;
 

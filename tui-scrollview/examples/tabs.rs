@@ -1,9 +1,13 @@
 //! An example of using multiple tabs each with a scrollable view, as well as how state can be
 //! managed across multiple tabs using Stateful Widgets.
 //!
+//! Run with `cargo run -p tui-scrollview --example tabs --features ratatui/unstable-widget-ref`.
+//!
 //! This example uses the `unstable-widget-ref` feature in Ratatui to allow the tab widgets to
 //! be created once and then reused across multiple frames. Each tab has some static lorem ipsum
 //! text, and we store the scroll state for each tab separately.
+//! Switching tabs changes the visible widget, but it does not reset the hidden tabs' scroll
+//! offsets.
 //!
 //! Controls:
 //! - `Tab`: move to the next tab
@@ -149,6 +153,7 @@ impl App {
     fn handle_events(&mut self) -> Result<()> {
         use KeyCode::*;
         if let Some(key) = event::read()?.as_key_press_event() {
+            // Scroll commands apply only to the visible tab's state.
             let (_widget, scroll_view_state) = self
                 .tabs
                 .get_mut(&self.visible_tab)
