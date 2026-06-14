@@ -1,7 +1,6 @@
 use std::iter::zip;
 
-use color_eyre::eyre::Ok;
-use ratatui::crossterm::event::{self, Event, KeyCode};
+use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::layout::{Constraint, Layout, Rect};
 use ratatui::text::Line;
 use ratatui::{DefaultTerminal, Frame};
@@ -9,16 +8,15 @@ use tui_box_text::BoxChar;
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(run)
 }
 
-fn run(mut terminal: DefaultTerminal) -> color_eyre::Result<()> {
+fn run(terminal: &mut DefaultTerminal) -> color_eyre::Result<()> {
     loop {
         terminal.draw(draw)?;
-        if matches!(event::read()?, Event::Key(key) if key.code == KeyCode::Esc) {
+        if let Some(key) = event::read()?.as_key_press_event()
+            && matches!(key.code, KeyCode::Char('q') | KeyCode::Esc)
+        {
             break Ok(());
         }
     }
