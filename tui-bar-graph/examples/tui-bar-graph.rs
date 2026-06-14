@@ -50,13 +50,10 @@ impl Preset {
 fn main() -> color_eyre::Result<()> {
     let args = Args::parse();
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = run(terminal, &args);
-    ratatui::restore();
-    result
+    ratatui::run(|terminal| run(terminal, &args))
 }
 
-fn run(mut terminal: DefaultTerminal, args: &Args) -> color_eyre::Result<()> {
+fn run(terminal: &mut DefaultTerminal, args: &Args) -> color_eyre::Result<()> {
     loop {
         terminal.draw(|frame| render(frame, args))?;
         if matches!(

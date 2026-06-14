@@ -5,13 +5,10 @@ use tui_bar_graph::{BarGraph, BarStyle, ColorMode};
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(run)
 }
 
-fn run(mut terminal: DefaultTerminal) -> color_eyre::Result<()> {
+fn run(terminal: &mut DefaultTerminal) -> color_eyre::Result<()> {
     loop {
         terminal.draw(render)?;
         if matches!(
