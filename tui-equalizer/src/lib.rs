@@ -93,15 +93,21 @@ impl From<f64> for Band {
 
 impl Widget for Equalizer {
     fn render(self, area: Rect, buf: &mut Buffer) {
+        (&self).render(area, buf);
+    }
+}
+
+impl Widget for &Equalizer {
+    fn render(self, area: Rect, buf: &mut Buffer) {
         let areas = Layout::horizontal(vec![Constraint::Length(2); self.bands.len()]).split(area);
-        for (band, area) in zip(self.bands, areas.iter()) {
+        for (band, area) in zip(&self.bands, areas.iter()) {
             band.render(*area, buf, self.brightness);
         }
     }
 }
 
 impl Band {
-    fn render(self, area: Rect, buf: &mut Buffer, brightness: f64) {
+    fn render(&self, area: Rect, buf: &mut Buffer, brightness: f64) {
         let value = self.value.clamp(0.0, 1.0);
         let height = (value * area.height as f64) as u16;
 
@@ -122,5 +128,25 @@ impl Band {
                 .set_fg(color)
                 .set_symbol(symbols::bar::HALF);
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn render_by_reference_matches_owned_render() {
+        let equalizer = Equalizer {
+            bands: vec![Band::from(0.25), Band::from(0.5), Band::from(1.0)],
+            brightness: 1.0,
+        };
+        let mut owned_buf = Buffer::empty(Rect::new(0, 0, 6, 4));
+        let mut borrowed_buf = Buffer::empty(Rect::new(0, 0, 6, 4));
+
+        equalizer.clone().render(owned_buf.area, &mut owned_buf);
+        (&equalizer).render(borrowed_buf.area, &mut borrowed_buf);
+
+        assert_eq!(borrowed_buf, owned_buf);
     }
 }
