@@ -29,7 +29,7 @@ use std::io;
 
 use color_eyre::Result;
 use ratatui::DefaultTerminal;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
+use ratatui::crossterm::event::{self, Event, KeyCode};
 use ratatui::crossterm::execute;
 use ratatui::layout::{Constraint, Layout, Rect};
 use ratatui::style::{Color, Style, Stylize};
@@ -52,12 +52,12 @@ const SCROLLBAR_ARROW_FG: Color = Color::Rgb(224, 224, 224);
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let mut terminal = ratatui::init();
-    execute!(io::stdout(), event::EnableMouseCapture)?;
-    let result = App::new().run(&mut terminal);
-    execute!(io::stdout(), event::DisableMouseCapture)?;
-    ratatui::restore();
-    result
+    ratatui::run(|terminal| {
+        execute!(io::stdout(), event::EnableMouseCapture)?;
+        let result = App::new().run(terminal);
+        execute!(io::stdout(), event::DisableMouseCapture)?;
+        result
+    })
 }
 
 #[derive(Debug, Default)]
@@ -221,15 +221,8 @@ impl App {
     fn handle_events(&mut self) -> Result<()> {
         match event::read()? {
             Event::Key(key) => {
-                if key.kind == KeyEventKind::Press {
-                    match key.code {
-                        KeyCode::Char('q') | KeyCode::Esc => self.state = AppState::Quit,
-                        KeyCode::Up => self.handle_key_scroll(0, -(KEY_STEP as isize)),
-                        KeyCode::Down => self.handle_key_scroll(0, KEY_STEP as isize),
-                        KeyCode::Left => self.handle_key_scroll(-(KEY_STEP as isize), 0),
-                        KeyCode::Right => self.handle_key_scroll(KEY_STEP as isize, 0),
-                        _ => {}
-                    }
+                if key.is_press() {
+                    self.handle_key_event(key.code);
                 }
             }
             Event::Mouse(event) => {
@@ -238,6 +231,18 @@ impl App {
             _ => {}
         }
         Ok(())
+    }
+
+    /// Handles keyboard input, updating offsets or exiting as needed.
+    fn handle_key_event(&mut self, code: KeyCode) {
+        match code {
+            KeyCode::Char('q') | KeyCode::Esc => self.state = AppState::Quit,
+            KeyCode::Up | KeyCode::Char('k') => self.handle_key_scroll(0, -(KEY_STEP as isize)),
+            KeyCode::Down | KeyCode::Char('j') => self.handle_key_scroll(0, KEY_STEP as isize),
+            KeyCode::Left | KeyCode::Char('h') => self.handle_key_scroll(-(KEY_STEP as isize), 0),
+            KeyCode::Right | KeyCode::Char('l') => self.handle_key_scroll(KEY_STEP as isize, 0),
+            _ => {}
+        }
     }
 
     /// Applies a keyboard delta to the scrollbar offsets.

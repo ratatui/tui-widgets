@@ -12,11 +12,11 @@ use tui_scrollbar::{GlyphSet, ScrollBar, ScrollBarArrows, ScrollLengths};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let mut terminal = ratatui::init();
-    terminal.draw(|frame| render(frame.area(), frame))?;
-    std::thread::sleep(Duration::from_secs(3));
-    ratatui::restore();
-    Ok(())
+    ratatui::run(|terminal| {
+        terminal.draw(|frame| render(frame.area(), frame))?;
+        std::thread::sleep(Duration::from_secs(3));
+        Ok(())
+    })
 }
 
 fn render(area: Rect, frame: &mut ratatui::Frame) {

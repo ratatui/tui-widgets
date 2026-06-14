@@ -19,17 +19,14 @@
 
 use color_eyre::Result;
 use ratatui::DefaultTerminal;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
+use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::layout::{Constraint, Layout, Rect};
 use ratatui::widgets::Paragraph;
 use tui_scrollbar::{SUBCELL, ScrollBar, ScrollBarArrows, ScrollLengths, ScrollMetrics};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = App::new().run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(|terminal| App::new().run(terminal))
 }
 
 #[derive(Debug, Default)]
@@ -56,7 +53,7 @@ impl App {
     }
 
     /// Runs the draw loop until a quit key is pressed.
-    fn run(&mut self, mut terminal: DefaultTerminal) -> Result<()> {
+    fn run(&mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         while self.state == AppState::Running {
             terminal.draw(|frame| {
                 render_scrollbars(frame.area(), frame);
@@ -68,8 +65,7 @@ impl App {
 
     /// Handles a single input event and updates the run state.
     fn handle_events(&mut self) -> Result<()> {
-        if let Event::Key(key) = event::read()?
-            && key.kind == KeyEventKind::Press
+        if let Some(key) = event::read()?.as_key_press_event()
             && matches!(key.code, KeyCode::Char('q') | KeyCode::Esc)
         {
             self.state = AppState::Quit;
