@@ -47,6 +47,18 @@ use crate::ScrollViewState;
 /// frame.render_stateful_widget(scroll_view, frame.size(), state);
 /// # }
 /// ```
+///
+/// If you store the `ScrollView`, render it by reference so the same prepared buffer can be reused
+/// across frames.
+///
+/// ```rust
+/// use ratatui::prelude::*;
+/// use tui_scrollview::{ScrollView, ScrollViewState};
+///
+/// # fn terminal_draw(frame: &mut Frame, scroll_view: &ScrollView, state: &mut ScrollViewState) {
+/// frame.render_stateful_widget(scroll_view, frame.area(), state);
+/// # }
+/// ```
 #[derive(Debug, Default, Clone, Eq, PartialEq, Hash)]
 pub struct ScrollView {
     buf: Buffer,
@@ -209,6 +221,14 @@ impl ScrollView {
 }
 
 impl StatefulWidget for ScrollView {
+    type State = ScrollViewState;
+
+    fn render(self, area: Rect, buf: &mut Buffer, state: &mut Self::State) {
+        (&self).render(area, buf, state);
+    }
+}
+
+impl StatefulWidget for &ScrollView {
     type State = ScrollViewState;
 
     fn render(self, area: Rect, buf: &mut Buffer, state: &mut Self::State) {
@@ -428,6 +448,22 @@ mod tests {
                 "◄██═► ",
             ])
         )
+    }
+
+    #[rstest]
+    fn render_by_reference_matches_owned_render(scroll_view: ScrollView) {
+        let mut owned_state = ScrollViewState::default();
+        let mut borrowed_state = ScrollViewState::default();
+        let mut owned_buf = Buffer::empty(Rect::new(0, 0, 6, 6));
+        let mut borrowed_buf = Buffer::empty(Rect::new(0, 0, 6, 6));
+
+        scroll_view
+            .clone()
+            .render(owned_buf.area, &mut owned_buf, &mut owned_state);
+        (&scroll_view).render(borrowed_buf.area, &mut borrowed_buf, &mut borrowed_state);
+
+        assert_eq!(borrowed_buf, owned_buf);
+        assert_eq!(borrowed_state, owned_state);
     }
 
     #[rstest]

@@ -56,6 +56,30 @@
 //! }
 //! ```
 //!
+//! Store the `ScrollView` if its content is expensive to rebuild or changes independently from the
+//! frame render. A stored scroll view can be rendered by reference while `ScrollViewState` keeps
+//! the current offset.
+//!
+//! ```rust
+//! use ratatui::prelude::*;
+//! use tui_scrollview::{ScrollView, ScrollViewState};
+//!
+//! struct App {
+//!     scroll_view: ScrollView,
+//!     scroll_view_state: ScrollViewState,
+//! }
+//!
+//! impl App {
+//!     fn draw(&mut self, frame: &mut Frame) {
+//!         frame.render_stateful_widget(
+//!             &self.scroll_view,
+//!             frame.area(),
+//!             &mut self.scroll_view_state,
+//!         );
+//!     }
+//! }
+//! ```
+//!
 //! # Full Example
 //!
 //! A full example can be found in the [examples directory].
