@@ -284,7 +284,7 @@ impl EventHandler {
         event: Option<core::result::Result<event::Event, std::io::Error>>,
     ) -> Result<Message> {
         match event {
-            Some(Ok(event::Event::Key(key))) => Ok(match key.code {
+            Some(Ok(event::Event::Key(key))) if key.is_press() => Ok(match key.code {
                 KeyCode::Char('q') => Message::Quit,
                 KeyCode::Char(' ') => Message::StartOrSplit,
                 KeyCode::Char('s') | KeyCode::Enter => Message::Stop,
