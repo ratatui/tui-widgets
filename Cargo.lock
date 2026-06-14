@@ -2209,7 +2209,7 @@ dependencies = [
 
 [[package]]
 name = "tui-bar-graph"
-version = "0.3.4"
+version = "0.3.5"
 dependencies = [
  "clap",
  "color-eyre",
