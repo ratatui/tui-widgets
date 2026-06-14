@@ -26,6 +26,29 @@ use crate::prelude::*;
 /// By default, the prompt reserves space for the [`TextState`] status symbol before the prompt
 /// message. Use [`TextPrompt::without_status_symbol`] when the surrounding UI owns completion or
 /// cancellation state and the prompt should start directly with the message.
+///
+/// `TextPrompt` can be rendered by value when it is built inline, or by reference when prompt
+/// configuration is stored and reused across frames. Rendering by reference keeps the prompt
+/// configuration available for later frames while still updating the external [`TextState`].
+///
+/// # Examples
+///
+/// ```rust
+/// use ratatui::Frame;
+/// use ratatui::layout::Rect;
+/// use tui_prompts::{Prompt, TextPrompt, TextState};
+///
+/// struct App<'a> {
+///     prompt: TextPrompt<'a>,
+///     state: TextState<'a>,
+/// }
+///
+/// impl App<'_> {
+///     fn draw(&mut self, frame: &mut Frame, area: Rect) {
+///         (&self.prompt).draw(frame, area, &mut self.state);
+///     }
+/// }
+/// ```
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct TextPrompt<'a> {
     /// The message to display to the user before the input.
@@ -102,6 +125,16 @@ impl Prompt for TextPrompt<'_> {
     /// This is in addition to the `Widget` trait implementation as we need the `Frame` to set the
     /// cursor position.
     fn draw(self, frame: &mut Frame, area: Rect, state: &mut Self::State) {
+        (&self).draw(frame, area, state);
+    }
+}
+
+impl Prompt for &TextPrompt<'_> {
+    /// Draws the prompt widget.
+    ///
+    /// This is in addition to the `Widget` trait implementation as we need the `Frame` to set the
+    /// cursor position.
+    fn draw(self, frame: &mut Frame, area: Rect, state: &mut Self::State) {
         frame.render_stateful_widget(self, area, state);
         if state.is_focused() {
             frame.set_cursor_position(state.cursor());
@@ -112,7 +145,15 @@ impl Prompt for TextPrompt<'_> {
 impl<'a> StatefulWidget for TextPrompt<'a> {
     type State = TextState<'a>;
 
-    fn render(mut self, mut area: Rect, buf: &mut Buffer, state: &mut Self::State) {
+    fn render(self, area: Rect, buf: &mut Buffer, state: &mut Self::State) {
+        (&self).render(area, buf, state);
+    }
+}
+
+impl<'a> StatefulWidget for &TextPrompt<'a> {
+    type State = TextState<'a>;
+
+    fn render(self, mut area: Rect, buf: &mut Buffer, state: &mut Self::State) {
         self.render_block(&mut area, buf);
 
         let width = area.width as usize;
@@ -126,7 +167,7 @@ impl<'a> StatefulWidget for TextPrompt<'a> {
                 parts.push(state.status().symbol());
                 parts.push(" ".into());
             }
-            parts.push(self.message.bold());
+            parts.push(self.message.as_ref().bold());
             parts.push(" › ".cyan().dim());
             parts.push(value);
             Line::from(parts)
@@ -209,8 +250,8 @@ fn span_split_at(span: Span, mid: usize) -> (Span, Span) {
 }
 
 impl TextPrompt<'_> {
-    fn render_block(&mut self, area: &mut Rect, buf: &mut Buffer) {
-        if let Some(block) = self.block.take() {
+    fn render_block(&self, area: &mut Rect, buf: &mut Buffer) {
+        if let Some(block) = &self.block {
             let inner = block.inner(*area);
             block.render(*area, buf);
             *area = inner;
@@ -273,6 +314,23 @@ mod tests {
         let line = line!["?".cyan(), " ", "prompt".bold(), " › ".cyan().dim(), "    ",];
         assert_eq!(buffer, Buffer::with_lines([line]));
         assert_eq!(state.cursor(), (11, 0));
+    }
+
+    #[test]
+    fn render_by_reference_matches_owned_render() {
+        let prompt = TextPrompt::from("prompt");
+        let mut owned_state = TextState::new().with_value("value");
+        let mut borrowed_state = owned_state.clone();
+        let mut owned_buf = Buffer::empty(Rect::new(0, 0, 20, 1));
+        let mut borrowed_buf = Buffer::empty(Rect::new(0, 0, 20, 1));
+
+        prompt
+            .clone()
+            .render(owned_buf.area, &mut owned_buf, &mut owned_state);
+        (&prompt).render(borrowed_buf.area, &mut borrowed_buf, &mut borrowed_state);
+
+        assert_eq!(borrowed_buf, owned_buf);
+        assert_eq!(borrowed_state, owned_state);
     }
 
     #[test]

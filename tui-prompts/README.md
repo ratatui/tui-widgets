@@ -71,6 +71,25 @@ fn split_layout(area: Rect) -> (Rect, Rect, Rect) {
 
 </details>
 
+Store a prompt if its configuration is reused across frames.
+
+```rust
+use ratatui::Frame;
+use ratatui::layout::Rect;
+use tui_prompts::{Prompt, TextPrompt, TextState};
+
+struct App<'a> {
+    prompt: TextPrompt<'a>,
+    state: TextState<'a>,
+}
+
+impl App<'_> {
+    fn draw_ui(&mut self, frame: &mut Frame, area: Rect) {
+        (&self.prompt).draw(frame, area, &mut self.state);
+    }
+}
+```
+
 ![Text Prompt](https://vhs.charm.sh/vhs-7gLcGtWJWDlQZqcMlhrpRG.gif)
 
 See the [text example] for more details.
