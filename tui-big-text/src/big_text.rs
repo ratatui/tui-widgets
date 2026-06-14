@@ -129,6 +129,12 @@ impl<'a> BigTextBuilder<'a> {
 
 impl Widget for BigText<'_> {
     fn render(self, area: Rect, buf: &mut Buffer) {
+        (&self).render(area, buf);
+    }
+}
+
+impl Widget for &BigText<'_> {
+    fn render(self, area: Rect, buf: &mut Buffer) {
         self.block.as_ref().render(area, buf);
         let inner = self.block.inner_if_some(area);
 
@@ -254,6 +260,20 @@ mod tests {
             "                        █████                                                   ",
         ]);
         assert_eq!(buf, expected);
+    }
+
+    #[test]
+    fn render_by_reference_matches_owned_render() {
+        let big_text = BigText::builder()
+            .lines(vec![Line::from("Reference")])
+            .build();
+        let mut owned_buf = Buffer::empty(Rect::new(0, 0, 72, 8));
+        let mut borrowed_buf = Buffer::empty(Rect::new(0, 0, 72, 8));
+
+        big_text.clone().render(owned_buf.area, &mut owned_buf);
+        (&big_text).render(borrowed_buf.area, &mut borrowed_buf);
+
+        assert_eq!(borrowed_buf, owned_buf);
     }
 
     #[test]
