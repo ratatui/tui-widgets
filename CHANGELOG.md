@@ -2,6 +2,88 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.8] - 2026-06-14
+
+### 🚀 Features
+
+- *(big-text)* Render by reference ([#288](https://github.com/ratatui/tui-widgets/issues/288))
+  > ## Summary
+  >
+  > - add `Widget for &BigText`
+  > - keep the owned `Widget for BigText` path as a compatibility shim
+  > - cover borrowed rendering against owned rendering
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+
+- *(equalizer)* Render by reference ([#290](https://github.com/ratatui/tui-widgets/issues/290))
+  > ## Summary
+  >
+  > - add `Widget for &Equalizer`
+  > - make band rendering borrow each band instead of consuming it
+  > - cover borrowed rendering against owned rendering
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+
+- *(bar-graph)* Render by reference ([#289](https://github.com/ratatui/tui-widgets/issues/289))
+  > ## Summary
+  >
+  > - add `Widget for &BarGraph`
+  > - keep the owned `Widget for BarGraph` path as a compatibility shim
+  > - cover borrowed rendering against owned rendering
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+
+- *(prompts)* Render text prompts by reference ([#291](https://github.com/ratatui/tui-widgets/issues/291))
+  > ## Summary
+  >
+  > - add `StatefulWidget for &TextPrompt`
+  > - add `Prompt for &TextPrompt` so stored prompt configuration can be
+  > drawn by reference
+  > - document the stored prompt pattern and regenerate the README
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-prompts --all-features`
+  > - `cargo clippy -p tui-prompts --all-targets --all-features -- -D
+  > warnings`
+  > - `cargo rdme --check --manifest-path tui-prompts/Cargo.toml`
+  > - `markdownlint-cli2 tui-prompts/README.md`
+
+- *(scrollview)* Render by reference ([#292](https://github.com/ratatui/tui-widgets/issues/292))
+  > ## Summary
+  >
+  > - add `StatefulWidget for &ScrollView`
+  > - keep the owned `StatefulWidget for ScrollView` path as a compatibility
+  > shim
+  > - document the stored scroll view pattern and regenerate the README
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+  > - `cargo rdme --check --manifest-path tui-scrollview/Cargo.toml`
+  > - `markdownlint-cli2 tui-scrollview/README.md`
+
+
 ## [0.7.7] - 2026-06-14
 
 ### 🐛 Bug Fixes

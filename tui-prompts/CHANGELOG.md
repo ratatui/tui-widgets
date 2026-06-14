@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.6] - 2026-06-14
+
+### 🚀 Features
+
+- *(prompts)* Render text prompts by reference ([#291](https://github.com/ratatui/tui-widgets/issues/291))
+  > ## Summary
+  >
+  > - add `StatefulWidget for &TextPrompt`
+  > - add `Prompt for &TextPrompt` so stored prompt configuration can be
+  > drawn by reference
+  > - document the stored prompt pattern and regenerate the README
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-prompts --all-features`
+  > - `cargo clippy -p tui-prompts --all-targets --all-features -- -D
+  > warnings`
+  > - `cargo rdme --check --manifest-path tui-prompts/Cargo.toml`
+  > - `markdownlint-cli2 tui-prompts/README.md`
+
+
 ## [0.6.5] - 2026-06-14
 
 ### 📚 Documentation

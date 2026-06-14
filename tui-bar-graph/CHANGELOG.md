@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.5] - 2026-06-14
+
+### 🚀 Features
+
+- *(bar-graph)* Render by reference ([#289](https://github.com/ratatui/tui-widgets/issues/289))
+  > ## Summary
+  >
+  > - add `Widget for &BarGraph`
+  > - keep the owned `Widget for BarGraph` path as a compatibility shim
+  > - cover borrowed rendering against owned rendering
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+
+
 ## [0.3.4] - 2026-06-14
 
 ### 📚 Documentation

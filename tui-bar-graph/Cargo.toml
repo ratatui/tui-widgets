@@ -1,7 +1,7 @@
 [package]
 name = "tui-bar-graph"
 description = "A Ratatui widget for rendering pretty bar graphs in the terminal"
-version = "0.3.4"
+version = "0.3.5"
 documentation = "https://docs.rs/tui-bar-graph"
 authors.workspace = true
 license.workspace = true

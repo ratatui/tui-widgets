@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2026-06-14
+
+### 🚀 Features
+
+- *(equalizer)* Render by reference ([#290](https://github.com/ratatui/tui-widgets/issues/290))
+  > ## Summary
+  >
+  > - add `Widget for &Equalizer`
+  > - make band rendering borrow each band instead of consuming it
+  > - cover borrowed rendering against owned rendering
+  >
+  > ## Validation
+  >
+  > - `cargo test -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-features`
+  > - `cargo clippy -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
+  > tui-prompts -p tui-scrollview --all-targets --all-features -- -D
+  > warnings`
+
+
 ## [0.2.1] - 2026-06-14
 
 ### 📚 Documentation
