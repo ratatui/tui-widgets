@@ -364,6 +364,12 @@ impl<'g> BarGraph<'g> {
 
 impl Widget for BarGraph<'_> {
     fn render(self, area: Rect, buf: &mut Buffer) {
+        (&self).render(area, buf);
+    }
+}
+
+impl Widget for &BarGraph<'_> {
+    fn render(self, area: Rect, buf: &mut Buffer) {
         // f64 doesn't impl Ord because NaN != NaN, so we use fold instead of iter::max/min
         let min = self
             .min
@@ -391,6 +397,20 @@ mod tests {
         // check that we can use either a gradient or a boxed gradient
         let _graph = BarGraph::new(data.clone()).with_gradient(colorgrad::preset::turbo());
         let _graph = BarGraph::new(data).with_gradient(colorgrad::preset::turbo().boxed());
+    }
+
+    #[test]
+    fn render_by_reference_matches_owned_render() {
+        let data = vec![0.0, 0.5, 1.0, 1.5, 2.0];
+        let owned_graph = BarGraph::new(data.clone()).with_bar_style(BarStyle::Solid);
+        let borrowed_graph = BarGraph::new(data).with_bar_style(BarStyle::Solid);
+        let mut owned_buf = Buffer::empty(Rect::new(0, 0, 5, 5));
+        let mut borrowed_buf = Buffer::empty(Rect::new(0, 0, 5, 5));
+
+        owned_graph.render(owned_buf.area, &mut owned_buf);
+        (&borrowed_graph).render(borrowed_buf.area, &mut borrowed_buf);
+
+        assert_eq!(borrowed_buf, owned_buf);
     }
 
     #[test]
