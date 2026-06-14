@@ -2,6 +2,189 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.7] - 2026-06-14
+
+### 🐛 Bug Fixes
+
+- Ignore non-press key events in examples ([#284](https://github.com/ratatui/tui-widgets/issues/284))
+  > ## Summary
+  > - ignore release and repeat key events in the tui-big-text stopwatch
+  > example
+  > - confirm the remaining examples already filter key handling to press
+  > events
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-big-text --examples --all-features
+  > - cargo clippy -p tui-big-text --examples --all-features -- -D warnings
+  > - just rdme-check
+
+### 📚 Documentation
+
+- Modernize tui-bar-graph examples ([#275](https://github.com/ratatui/tui-widgets/issues/275))
+  > ## Summary
+  > - use ratatui::run in the tui-bar-graph examples
+  > - keep CLI parsing, rendering behavior, and key handling unchanged
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-bar-graph --examples --all-features
+  > - cargo clippy -p tui-bar-graph --examples --all-features -- -D warnings
+
+- Modernize tui-big-text examples ([#276](https://github.com/ratatui/tui-widgets/issues/276))
+  > ## Summary
+  > - remove the shared big-text example terminal helper
+  > - use ratatui::run directly in the static examples
+  > - remove the custom Tui wrapper from the stopwatch example
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-big-text --examples --all-features
+  > - cargo clippy -p tui-big-text --examples --all-features -- -D warnings
+
+- Modernize tui-box-text example ([#277](https://github.com/ratatui/tui-widgets/issues/277))
+  > ## Summary
+  > - use ratatui::run in the tui-box-text example
+  > - handle key presses with as_key_press_event
+  > - allow both q and Esc to exit the example
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-box-text --examples --all-features
+  > - cargo clippy -p tui-box-text --examples --all-features -- -D warnings
+
+- Modernize tui-cards example ([#278](https://github.com/ratatui/tui-widgets/issues/278))
+  > ## Summary
+  > - use ratatui::run in the tui-cards example
+  > - handle key presses with as_key_press_event and allow q or Esc to exit
+  > - remove the obsolete card background-fill workaround and stale README
+  > TODO
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-cards --examples --all-features
+  > - cargo clippy -p tui-cards --examples --all-features -- -D warnings
+  > - cargo rdme --check --manifest-path tui-cards/Cargo.toml
+
+- Modernize tui-popup examples ([#279](https://github.com/ratatui/tui-widgets/issues/279))
+  > ## Summary
+  > - use ratatui::run in the tui-popup examples
+  > - borrow DefaultTerminal in example run loops
+  > - handle key presses with as_key_press_event while preserving mouse
+  > handling in the state example
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-popup --examples --all-features
+  > - cargo clippy -p tui-popup --examples --all-features -- -D warnings
+  > - just rdme-check
+
+- Install color-eyre in stopwatch example ([#280](https://github.com/ratatui/tui-widgets/issues/280))
+  > ## Summary
+  > - install color-eyre before running the tui-big-text stopwatch example
+  > - keep the stopwatch lifecycle and behavior unchanged
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-big-text --examples --all-features
+  > - cargo clippy -p tui-big-text --examples --all-features -- -D warnings
+
+- Modernize tui-prompts examples ([#281](https://github.com/ratatui/tui-widgets/issues/281))
+  > ## Summary
+  > - use ratatui::run in the tui-prompts examples
+  > - remove the custom example Tui wrapper
+  > - install color-eyre before running the prompt examples
+  > - handle input with as_key_press_event while preserving prompt focus and
+  > submission behavior
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-prompts --examples --all-features
+  > - cargo clippy -p tui-prompts --examples --all-features -- -D warnings
+  > - cargo test -p tui-prompts --all-features
+
+- Modernize tui-qrcode example ([#282](https://github.com/ratatui/tui-widgets/issues/282))
+  > ## Summary
+  > - use ratatui::run in the tui-qrcode example
+  > - borrow DefaultTerminal in the run loop
+  > - handle key presses with as_key_press_event while preserving any-key
+  > exit behavior
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-qrcode --examples --all-features
+  > - cargo clippy -p tui-qrcode --examples --all-features -- -D warnings
+
+- Modernize tui-scrollbar examples ([#283](https://github.com/ratatui/tui-widgets/issues/283))
+  > ## Summary
+  > - use ratatui::run in the tui-scrollbar examples
+  > - borrow DefaultTerminal in example run loops
+  > - preserve mouse capture setup while using current key press helpers
+  > - add q/Esc exit consistency and vim motion keys for the mouse example
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-scrollbar --examples --all-features
+  > - cargo clippy -p tui-scrollbar --examples --all-features -- -D warnings
+  > - just rdme-check
+
+- Modernize tui-scrollview examples ([#285](https://github.com/ratatui/tui-widgets/issues/285))
+  > ## Summary
+  > - use ratatui::run in the tui-scrollview examples
+  > - borrow DefaultTerminal in example run loops
+  > - use as_key_press_event for key handling
+  > - document each example's purpose and manual controls
+  > - add vertical controls to the horizontal scroll example, which has
+  > vertical overflow on normal terminals
+  >
+  > ## Validation
+  > - cargo +nightly fmt --all
+  > - cargo check -p tui-scrollview --examples --all-features
+  > - cargo clippy -p tui-scrollview --examples --all-features -- -D
+  > warnings
+  > - just rdme-check
+
+- Document widget examples ([#286](https://github.com/ratatui/tui-widgets/issues/286))
+  > ## Summary
+  >
+  > - add run commands and widget-specific context to the example module
+  > docs
+  > - add targeted inline comments for non-obvious example sizing, state,
+  > and rendering choices
+  > - fix broken crate-root `Ratatui` reference links that surfaced during
+  > docs validation
+  >
+  > ## Validation
+  >
+  > - `cargo +nightly fmt --all --check`
+  > - `cargo clippy --workspace --examples --all-features -- -D warnings`
+  > - `cargo doc --workspace --examples --all-features --no-deps`
+  >
+  > `cargo doc` still reports the existing `tui-bar-graph` example/lib
+  > output filename collision.
+
+### ⚙️ Miscellaneous Tasks
+
+- Migrate workspace to Rust 2024 ([#263](https://github.com/ratatui/tui-widgets/issues/263))
+  > ## Summary
+  > - migrate the workspace package edition from Rust 2021 to Rust 2024
+  > - apply Cargo edition fixes for lifetime capture and macro fragment
+  > specifiers
+  > - apply mechanical Clippy let-chain fixes needed for the stable -D
+  > warnings gate
+  > - refresh generated README snippets and document the pre-push README
+  > check in AGENTS.md
+  >
+  > ## Validation
+  > - cargo fix --edition --all-features --workspace --allow-dirty
+  > --allow-staged
+  > - just fmt
+  > - just clippy-stable
+  > - cargo test --all-features --workspace
+  > - just rdme-check
+  > - markdownlint-cli2 AGENTS.md README.md tui-*/README.md
+
+
 ## [0.7.6] - 2026-06-12
 
 ### Other

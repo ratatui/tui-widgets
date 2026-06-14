@@ -46,7 +46,7 @@ nursery = "warn"
 [package]
 name = "tui-widgets"
 description = "A collection of useful widgets for building terminal user interfaces using Ratatui"
-version = "0.7.6"
+version = "0.7.7"
 documentation = "https://docs.rs/tui-widgets"
 
 authors.workspace = true
@@ -96,13 +96,13 @@ scrollview = ["tui-scrollview"]
 [dependencies]
 document-features.workspace = true
 ratatui-core = { workspace = true }
-tui-bar-graph = { version = "0.3.3", path = "tui-bar-graph", optional = true }
-tui-big-text = { version = "0.8.5", path = "tui-big-text", optional = true }
-tui-box-text = { version = "0.3.3", path = "tui-box-text", optional = true }
-tui-cards = { version = "0.3.3", path = "tui-cards", optional = true }
-tui-equalizer = { version = "0.2.0", path = "tui-equalizer", optional = true }
-tui-popup = { version = "0.7.5", path = "tui-popup", optional = true }
-tui-prompts = { version = "0.6.4", path = "tui-prompts", optional = true }
-tui-qrcode = { version = "0.2.5", path = "tui-qrcode", optional = true }
-tui-scrollbar = { version = "0.2.6", path = "tui-scrollbar", optional = true }
-tui-scrollview = { version = "0.6.5", path = "tui-scrollview", optional = true }
+tui-bar-graph = { version = "0.3.4", path = "tui-bar-graph", optional = true }
+tui-big-text = { version = "0.8.6", path = "tui-big-text", optional = true }
+tui-box-text = { version = "0.3.4", path = "tui-box-text", optional = true }
+tui-cards = { version = "0.3.4", path = "tui-cards", optional = true }
+tui-equalizer = { version = "0.2.1", path = "tui-equalizer", optional = true }
+tui-popup = { version = "0.7.6", path = "tui-popup", optional = true }
+tui-prompts = { version = "0.6.5", path = "tui-prompts", optional = true }
+tui-qrcode = { version = "0.2.6", path = "tui-qrcode", optional = true }
+tui-scrollbar = { version = "0.2.7", path = "tui-scrollbar", optional = true }
+tui-scrollview = { version = "0.6.6", path = "tui-scrollview", optional = true }
