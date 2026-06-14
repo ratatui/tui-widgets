@@ -5,16 +5,13 @@ use tui_qrcode::{Colors, QrCodeWidget};
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(run)
 }
 
-fn run(mut terminal: DefaultTerminal) -> color_eyre::Result<()> {
+fn run(terminal: &mut DefaultTerminal) -> color_eyre::Result<()> {
     loop {
         terminal.draw(render)?;
-        if matches!(event::read()?, event::Event::Key(_)) {
+        if event::read()?.as_key_press_event().is_some() {
             break Ok(());
         }
     }
