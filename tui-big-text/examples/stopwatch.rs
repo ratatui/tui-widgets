@@ -1,16 +1,12 @@
-use std::io::{self, Stdout};
 use std::time::{Duration, Instant};
 
 use color_eyre::Result;
-use color_eyre::eyre::{Context, bail};
+use color_eyre::eyre::bail;
 use crossterm::event::{self, KeyCode};
-use crossterm::execute;
-use crossterm::terminal::{
-    EnterAlternateScreen, LeaveAlternateScreen, disable_raw_mode, enable_raw_mode,
-};
 use futures::{FutureExt, StreamExt};
 // use futures::{select, FutureExt, StreamExt};
 use itertools::Itertools;
+use ratatui::DefaultTerminal;
 use ratatui::prelude::*;
 use ratatui::widgets::Paragraph;
 use strum::EnumIs;
@@ -20,7 +16,10 @@ use tui_big_text::BigText;
 #[tokio::main]
 async fn main() -> Result<()> {
     let mut app = StopwatchApp::default();
-    app.run().await
+    let mut terminal = ratatui::init();
+    let result = app.run(&mut terminal).await;
+    ratatui::restore();
+    result
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, EnumIs)]
@@ -47,11 +46,10 @@ struct StopwatchApp {
 }
 
 impl StopwatchApp {
-    async fn run(&mut self) -> Result<()> {
-        let mut tui = Tui::init()?;
+    async fn run(&mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         let mut events = EventHandler::new(60.0);
         while !self.state.is_quitting() {
-            self.draw(&mut tui)?;
+            self.draw(terminal)?;
             let message = events.next().await?;
             self.handle_message(message)?;
         }
@@ -114,8 +112,8 @@ impl StopwatchApp {
         }
     }
 
-    fn draw(&self, tui: &mut Tui) -> Result<()> {
-        tui.draw(|frame| {
+    fn draw(&self, terminal: &mut DefaultTerminal) -> Result<()> {
+        terminal.draw(|frame| {
             let layout = layout(frame.area());
             frame.render_widget(Paragraph::new("Stopwatch Example"), layout[0]);
             frame.render_widget(self.fps_paragraph(), layout[1]);
@@ -123,7 +121,8 @@ impl StopwatchApp {
             frame.render_widget(Paragraph::new("Splits:"), layout[3]);
             frame.render_widget(self.splits_paragraph(), layout[4]);
             frame.render_widget(self.help_paragraph(), layout[5]);
-        })
+        })?;
+        Ok(())
     }
 
     fn fps_paragraph(&self) -> Paragraph<'_> {
@@ -294,37 +293,5 @@ impl EventHandler {
             None => bail!("event stream ended unexpectedly"),
             _ => Ok(Message::Tick),
         }
-    }
-}
-
-struct Tui {
-    terminal: Terminal<CrosstermBackend<Stdout>>,
-}
-
-impl Tui {
-    fn init() -> Result<Self> {
-        let mut stdout = io::stdout();
-        execute!(stdout, EnterAlternateScreen).wrap_err("failed to enter alternate screen")?;
-        let backend = CrosstermBackend::new(stdout);
-        let mut terminal = Terminal::new(backend).wrap_err("failed to create terminal")?;
-        enable_raw_mode().wrap_err("failed to enable raw mode")?;
-        terminal.hide_cursor().wrap_err("failed to hide cursor")?;
-        terminal.clear().wrap_err("failed to clear console")?;
-        Ok(Self { terminal })
-    }
-
-    fn draw(&mut self, frame: impl FnOnce(&mut Frame)) -> Result<()> {
-        self.terminal.draw(frame).wrap_err("failed to draw frame")?;
-        Ok(())
-    }
-}
-
-impl Drop for Tui {
-    fn drop(&mut self) {
-        disable_raw_mode().expect("failed to disable raw mode");
-        execute!(self.terminal.backend_mut(), LeaveAlternateScreen)
-            .expect("failed to switch to main screen");
-        self.terminal.show_cursor().expect("failed to show cursor");
-        self.terminal.clear().expect("failed to clear console");
     }
 }
