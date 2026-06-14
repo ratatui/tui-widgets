@@ -2,8 +2,19 @@
 //! managed across multiple tabs using Stateful Widgets.
 //!
 //! This example uses the `unstable-widget-ref` feature in Ratatui to allow the tab widgets to
-//! created once and then reused across multiple frames. Each tab has some static lorem ipsum text,
-//! and we store the scroll state for each tab separately.
+//! be created once and then reused across multiple frames. Each tab has some static lorem ipsum
+//! text, and we store the scroll state for each tab separately.
+//!
+//! Controls:
+//! - `Tab`: move to the next tab
+//! - `Shift+Tab`: move to the previous tab
+//! - `j` / `Down`: scroll down
+//! - `k` / `Up`: scroll up
+//! - `f` / `PageDown`: scroll one page down
+//! - `b` / `PageUp`: scroll one page up
+//! - `g` / `Home`: scroll to the top
+//! - `G` / `End`: scroll to the bottom
+//! - `q` / `Esc`: quit
 
 use std::collections::HashMap;
 use std::fmt::Debug;
@@ -13,7 +24,7 @@ use color_eyre::Result;
 use lipsum::lipsum;
 use ratatui::DefaultTerminal;
 use ratatui::buffer::Buffer;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
+use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::layout::{Constraint, Layout, Rect, Size};
 use ratatui::style::Stylize;
 use ratatui::style::palette::tailwind;
@@ -23,10 +34,7 @@ use tui_scrollview::{ScrollView, ScrollViewState};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = App::new().run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(|terminal| App::new().run(terminal))
 }
 
 #[derive(Default)]
@@ -121,9 +129,9 @@ impl App {
         }
     }
 
-    fn run(&mut self, mut terminal: DefaultTerminal) -> Result<()> {
+    fn run(&mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         while self.is_running() {
-            self.draw(&mut terminal)?;
+            self.draw(terminal)?;
             self.handle_events()?;
         }
         Ok(())
@@ -140,12 +148,12 @@ impl App {
 
     fn handle_events(&mut self) -> Result<()> {
         use KeyCode::*;
-        let (_widget, scroll_view_state) = self
-            .tabs
-            .get_mut(&self.visible_tab)
-            .expect("visible tab should exist");
-        match event::read()? {
-            Event::Key(key) if key.kind == KeyEventKind::Press => match key.code {
+        if let Some(key) = event::read()?.as_key_press_event() {
+            let (_widget, scroll_view_state) = self
+                .tabs
+                .get_mut(&self.visible_tab)
+                .expect("visible tab should exist");
+            match key.code {
                 Char('q') | Esc => self.quit(),
                 Tab => {
                     self.visible_tab = match self.visible_tab {
@@ -168,8 +176,7 @@ impl App {
                 Char('g') | Home => scroll_view_state.scroll_to_top(),
                 Char('G') | End => scroll_view_state.scroll_to_bottom(),
                 _ => (),
-            },
-            _ => {}
+            }
         }
         Ok(())
     }
@@ -190,8 +197,8 @@ impl Widget for &mut App {
 
         self.title().render(title, buf);
         self.tabs().render(tabs, buf);
-        let (tab, mut state) = self.tabs.get_mut(&self.visible_tab).unwrap();
-        tab.render_ref(body, buf, &mut state);
+        let (tab, state) = self.tabs.get_mut(&self.visible_tab).unwrap();
+        tab.render_ref(body, buf, state);
     }
 }
 

@@ -1,9 +1,23 @@
+//! Demonstrates a `ScrollView` containing multiple widgets rendered into an offscreen buffer.
+//!
+//! This example builds a taller virtual area, renders several widgets into it, and then lets
+//! `ScrollViewState` decide which part of that content is visible in the terminal.
+//!
+//! Controls:
+//! - `j` / `Down`: scroll down
+//! - `k` / `Up`: scroll up
+//! - `f` / `PageDown`: scroll one page down
+//! - `b` / `PageUp`: scroll one page up
+//! - `g` / `Home`: scroll to the top
+//! - `G` / `End`: scroll to the bottom
+//! - `q` / `Esc`: quit
+
 use std::io::{self};
 
 use color_eyre::Result;
 use ratatui::DefaultTerminal;
 use ratatui::buffer::Buffer;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
+use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::layout::{Constraint, Direction, Layout, Rect, Size};
 use ratatui::style::palette::tailwind;
 use ratatui::style::{Color, Stylize};
@@ -13,10 +27,7 @@ use tui_scrollview::{ScrollView, ScrollViewState};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = App::new().run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(|terminal| App::new().run(terminal))
 }
 
 #[derive(Debug, Default, Clone)]
@@ -45,9 +56,9 @@ impl App {
         }
     }
 
-    fn run(&mut self, mut terminal: DefaultTerminal) -> Result<()> {
+    fn run(&mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         while self.is_running() {
-            self.draw(&mut terminal)?;
+            self.draw(terminal)?;
             self.handle_events()?;
         }
         Ok(())
@@ -64,8 +75,8 @@ impl App {
 
     fn handle_events(&mut self) -> Result<()> {
         use KeyCode::*;
-        match event::read()? {
-            Event::Key(key) if key.kind == KeyEventKind::Press => match key.code {
+        if let Some(key) = event::read()?.as_key_press_event() {
+            match key.code {
                 Char('q') | Esc => self.quit(),
                 Char('j') | Down => self.scroll_view_state.scroll_down(),
                 Char('k') | Up => self.scroll_view_state.scroll_up(),
@@ -74,8 +85,7 @@ impl App {
                 Char('g') | Home => self.scroll_view_state.scroll_to_top(),
                 Char('G') | End => self.scroll_view_state.scroll_to_bottom(),
                 _ => (),
-            },
-            _ => {}
+            }
         }
         Ok(())
     }

@@ -1,18 +1,27 @@
+//! Demonstrates horizontal and vertical scrolling in the same `ScrollView`.
+//!
+//! The content is twice as wide as the terminal and usually taller than the viewport, so this
+//! example is useful for checking that both scrollbars update correctly.
+//!
+//! Controls:
+//! - `h` / `Left`: scroll left
+//! - `l` / `Right`: scroll right
+//! - `j` / `Down`: scroll down
+//! - `k` / `Up`: scroll up
+//! - `q` / `Esc`: quit
+
 use std::io;
 
 use color_eyre::Result;
 use ratatui::DefaultTerminal;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEventKind};
+use ratatui::crossterm::event::{self, KeyCode};
 use ratatui::layout::Size;
 use ratatui::widgets::{Paragraph, Wrap};
 use tui_scrollview::{ScrollView, ScrollViewState};
 
 fn main() -> Result<()> {
     color_eyre::install()?;
-    let terminal = ratatui::init();
-    let result = App::new().run(terminal);
-    ratatui::restore();
-    result
+    ratatui::run(|terminal| App::new().run(terminal))
 }
 
 #[derive(Debug, Default, Clone)]
@@ -37,9 +46,9 @@ impl App {
         }
     }
 
-    fn run(&mut self, mut terminal: DefaultTerminal) -> Result<()> {
+    fn run(&mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         while self.is_running() {
-            self.draw(&mut terminal)?;
+            self.draw(terminal)?;
             self.handle_events()?;
         }
         Ok(())
@@ -67,14 +76,15 @@ impl App {
 
     fn handle_events(&mut self) -> Result<()> {
         use KeyCode::*;
-        match event::read()? {
-            Event::Key(key) if key.kind == KeyEventKind::Press => match key.code {
+        if let Some(key) = event::read()?.as_key_press_event() {
+            match key.code {
                 Char('q') | Esc => self.quit(),
+                Char('j') | Down => self.scroll_view_state.scroll_down(),
+                Char('k') | Up => self.scroll_view_state.scroll_up(),
                 Char('h') | Left => self.scroll_view_state.scroll_left(),
                 Char('l') | Right => self.scroll_view_state.scroll_right(),
                 _ => (),
-            },
-            _ => {}
+            }
         }
         Ok(())
     }
