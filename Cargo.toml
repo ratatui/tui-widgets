@@ -100,7 +100,7 @@ tui-bar-graph = { version = "0.3.5", path = "tui-bar-graph", optional = true }
 tui-big-text = { version = "0.8.7", path = "tui-big-text", optional = true }
 tui-box-text = { version = "0.3.4", path = "tui-box-text", optional = true }
 tui-cards = { version = "0.3.5", path = "tui-cards", optional = true }
-tui-equalizer = { version = "0.2.2", path = "tui-equalizer", optional = true }
+tui-equalizer = { version = "0.2.3", path = "tui-equalizer", optional = true }
 tui-popup = { version = "0.7.6", path = "tui-popup", optional = true }
 tui-prompts = { version = "0.6.6", path = "tui-prompts", optional = true }
 tui-qrcode = { version = "0.2.6", path = "tui-qrcode", optional = true }
