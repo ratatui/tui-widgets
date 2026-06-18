@@ -14,6 +14,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
+      pull-requests: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -35,26 +36,11 @@ jobs:
     name: Release-plz PR
     if: ${{ github.repository_owner == 'ratatui' }}
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        package:
-          - tui-widgets
-          - tui-bar-graph
-          - tui-big-text
-          - tui-box-text
-          - tui-cards
-          - tui-equalizer
-          - tui-popup
-          - tui-prompts
-          - tui-qrcode
-          - tui-scrollbar
-          - tui-scrollview
     permissions:
       contents: write
       pull-requests: write
     concurrency:
-      group: release-plz-${{ github.ref }}-${{ matrix.package }}
+      group: release-plz-${{ github.ref }}
       cancel-in-progress: false
     steps:
       - name: Checkout repository
@@ -73,9 +59,7 @@ jobs:
       - name: Run release-plz (release-pr)
         run: >
           release-plz release-pr
-          --git-token "${{ secrets.GITHUB_TOKEN }}"
           --repo-url "https://github.com/${{ github.repository }}"
-          --package "${{ matrix.package }}"
-          --config ".github/release-plz/${{ matrix.package }}.toml"
         env:
+          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,3 +1,0 @@
-[workspace]
-changelog_config = "cliff.toml"
-pr_branch_prefix = "release-plz-tui-widgets-"
