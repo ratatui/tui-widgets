@@ -254,9 +254,9 @@ const fn visible_window_start(
 
 #[cfg(test)]
 mod tests {
+    use ratatui::Terminal;
     use ratatui::backend::TestBackend;
     use ratatui::widgets::Borders;
-    use ratatui::Terminal;
     use rstest::{fixture, rstest};
 
     use super::*;

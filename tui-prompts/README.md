@@ -104,8 +104,8 @@ the focused option, Enter completes the prompt, and Escape or Ctrl+C aborts it.
 use std::borrow::Cow;
 
 use crossterm::event::KeyEvent;
-use ratatui::layout::Rect;
 use ratatui::Frame;
+use ratatui::layout::Rect;
 use tui_prompts::{Prompt, SelectPrompt, SelectState};
 
 struct App {

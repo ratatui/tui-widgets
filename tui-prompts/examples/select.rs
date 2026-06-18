@@ -1,15 +1,13 @@
-mod tui;
-
 use std::borrow::Cow;
 use std::thread::sleep;
 use std::time::Duration;
 
 use clap::Parser;
 use color_eyre::Result;
-use ratatui::crossterm::event::{self, Event, KeyCode, KeyEvent};
+use ratatui::DefaultTerminal;
+use ratatui::crossterm::event::{self, KeyCode, KeyEvent};
 use ratatui::prelude::*;
 use ratatui::widgets::*;
-use tui::Tui;
 use tui_prompts::prelude::*;
 
 #[derive(Parser)]
@@ -19,10 +17,10 @@ struct Cli {
 }
 
 fn main() -> Result<()> {
+    color_eyre::install()?;
     let cli = Cli::parse();
     let mut app = App::new(cli);
-    app.run()?;
-    Ok(())
+    ratatui::run(|terminal| app.run(terminal))
 }
 
 const FRUITS: [&str; 4] = ["Apple", "Banana", "Cherry", "Date"];
@@ -44,24 +42,22 @@ impl App {
         }
     }
 
-    pub fn run(&mut self) -> Result<()> {
-        let mut tui = Tui::new()?;
-
+    pub fn run(&mut self, terminal: &mut DefaultTerminal) -> Result<()> {
         while !self.is_finished() {
             self.handle_events()?;
-            tui.draw(|frame| self.draw_ui(frame))?;
+            terminal.draw(|frame| self.draw_ui(frame))?;
         }
-        tui.hide_cursor()?;
+        terminal.hide_cursor()?;
         // wait two seconds before exiting so the user can see the final state of the UI.
         sleep(Duration::from_secs(2));
         Ok(())
     }
 
     fn handle_events(&mut self) -> Result<()> {
-        if event::poll(Duration::from_millis(16))? {
-            if let Event::Key(key_event) = event::read()? {
-                self.handle_key_event(key_event);
-            }
+        if event::poll(Duration::from_millis(16))?
+            && let Some(key_event) = event::read()?.as_key_press_event()
+        {
+            self.handle_key_event(key_event);
         }
         Ok(())
     }

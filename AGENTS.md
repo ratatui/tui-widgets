@@ -53,6 +53,8 @@
   interactive flows.
 - Before pushing changes that touch crate-level `src/lib.rs` docs or any `README.md`, run
   `just rdme-check` and regenerate stale READMEs with `cargo rdme --manifest-path <crate>/Cargo.toml`.
+- Treat formatter changes to crate-level Rustdoc in `src/lib.rs` as README-affecting docs changes;
+  rustfmt import reordering inside doc examples can make `cargo rdme --check` fail.
 - Document safety/contracts for unsafe or performance-sensitive code; call out terminal assumptions
   (color, size) and error conditions.
 
