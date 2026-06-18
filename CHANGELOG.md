@@ -2,6 +2,800 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.9] - 2026-06-18
+
+### 🚀 Features
+
+- *(prompts)* Add select prompt ([#177](https://github.com/ratatui/tui-widgets/issues/177))
+  > feat(prompts): add select prompt
+  >
+  > Add a select prompt for single-choice terminal flows. The new prompt owns an
+  > ordered option list while SelectState tracks focus, completion, and abort
+  > status. It supports Up/Down navigation, Enter completion, and Escape/Ctrl+C
+  > abort.
+  >
+  > Keep navigation bounded to the rendered options and render a focused window
+  > when the list is taller than the available area, so the highlighted option
+  > remains visible. Finished prompts ignore further routed key events, preventing
+  > selection or status changes after completion or abort.
+  >
+  > Add SelectOption and SelectOptionList for option construction, including
+  > conversions from arrays and vectors of string-like values. Document the select
+  > prompt lifecycle in Rustdoc and the README, add regression coverage for key
+  > handling and clipping behavior, and update the example plus VHS recording to
+  > show the selected value before exit.
+
+### 🐛 Bug Fixes
+
+- *(prompts)* Repair select example CI ([#306](https://github.com/ratatui/tui-widgets/issues/306))
+  > ## Summary
+  >
+  > - repair the `tui-prompts` select example after the local `tui` helper
+  > module was removed
+  > - align the example with the other `tui-prompts` examples by using
+  > `ratatui::run` / `DefaultTerminal`
+  > - regenerate the `tui-prompts` README after rustfmt import ordering
+  > changed crate-level Rustdoc
+  > - clarify AGENTS guidance so formatter-generated crate Rustdoc changes
+  > still trigger `just rdme-check`
+  >
+  > ## Context
+  >
+  > The open Dependabot PRs are inheriting a `main` CI failure from commit
+  > `2d37086b`: `tui-prompts/examples/select.rs` still declares `mod tui;`,
+  > but there is no `tui-prompts/examples/tui.rs`. That breaks Check Targets
+  > and Clippy, and rustfmt also reports stale import ordering. The README
+  > check also failed because `cargo rdme` mirrors the crate-level Rustdoc
+  > import ordering into `tui-prompts/README.md`.
+  >
+  > ## Verification
+  >
+  > - `just fmt-check`
+  > - `cargo check --all-targets --all-features --workspace`
+  > - `just clippy-stable`
+  > - `just clippy-beta`
+  > - `cargo test --all-features --workspace`
+  > - `just rdme-check`
+  > - `markdownlint-cli2 AGENTS.md tui-prompts/README.md`
+
+### ⚙️ Miscellaneous Tasks
+
+- *(tui-cards)* Release v0.3.5 ([#308](https://github.com/ratatui/tui-widgets/issues/308))
+  > ## 🤖 New release
+  >
+  > * `tui-cards`: 0.3.4 -> 0.3.5 (✓ API compatible changes)
+  >
+  > <details><summary><i><b>Changelog</b></i></summary><p>
+  >
+  > <blockquote>
+  >
+  > ## [0.3.5] - 2026-06-18
+  >
+  > ### ⚙️ Miscellaneous Tasks
+  >
+  > - Update Cargo.toml dependencies
+  > </blockquote>
+  >
+  >
+  > </p></details>
+  >
+  > ---
+  > This PR was generated with
+  > [release-plz](https://github.com/release-plz/release-plz/).
+
+### Other
+
+- *(deps)* Bump ratatui-widgets from 0.3.0 to 0.3.1 ([#302](https://github.com/ratatui/tui-widgets/issues/302))
+  > Bumps [ratatui-widgets](https://github.com/ratatui/ratatui) from 0.3.0
+  > to 0.3.1.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/releases">ratatui-widgets's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>ratatui-widgets-v0.3.1</h2>
+  > <blockquote>
+  > <p><em>&quot;Rats, we're rats; we're the rats.&quot; – <a
+  > href="https://www.youtube.com/watch?v=OXQwx1EolD8">Rat
+  > Movie</a></em></p>
+  > </blockquote>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0301/">https://ratatui.rs/highlights/v0301/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/74d6a846e1fab811fcdbcc09b09648cdca05c174">74d6a84</a>
+  > <em>(block)</em> Support shadows by orhun in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2481">#2481</a></p>
+  > <blockquote>
+  > <p>Introduce <code>Block::shadow(...)</code> with a new
+  > <code>Shadow</code> type that supports:</p>
+  > <ul>
+  > <li>presets: <code>overlay</code>,<code> block</code>,
+  > <code>light_shade</code>, <code>medium_shade</code>,
+  > <code>dark_shade</code></li>
+  > <li>custom symbols via <code>Shadow::symbol(...)</code></li>
+  > <li>custom effects via <code>Shadow::custom(...)</code></li>
+  > </ul>
+  > <pre lang="rust"><code>use ratatui::layout::Offset;
+  > use ratatui::style::Stylize;
+  > use ratatui::widgets::{Block, Shadow};
+  > <p>let popup = Block::bordered().title(&quot;Popup&quot;).shadow(<br />
+  > Shadow::dark_shade()<br />
+  > .black()<br />
+  > .on_white()<br />
+  > .offset(Offset::new(2, 1)),<br />
+  > );<br />
+  > </code></pre></p>
+  > <p>Results in:</p>
+  > <pre><code>┌Popup─────┐
+  > │content   │▒
+  > └──────────┘▒
+  >   ▒▒▒▒▒▒▒▒▒▒▒
+  > </code></pre>
+  > <p><img
+  > src="https://github.com/user-attachments/assets/103ddc17-6536-424c-a7a8-8895540dd145"
+  > alt="shadow" /></p>
+  > <p>fixes <a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/1892">#1892</a></p>
+  > <hr />
+  > </blockquote>
+  > </li>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/4d304206f45c96813dd9773a268b61d7d33d1f44">4d30420</a>
+  > <em>(buffer)</em> Add <code>CellDiffOption::AlwaysUpdate</code> to force
+  > cell updates by sxyazi in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2480">#2480</a></p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/blob/main/CHANGELOG.md">ratatui-widgets's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <!-- raw HTML omitted -->
+  > <!-- raw HTML omitted -->
+  > <h2><a
+  > href="https://github.com/ratatui/ratatui/releases/tag/ratatui-v0.30.1">v0.30.1</a>
+  > - 2026-06-05</h2>
+  > <blockquote>
+  > <p><em>&quot;Rats, we're rats; we're the rats.&quot; – <a
+  > href="https://www.youtube.com/watch?v=OXQwx1EolD8">Rat
+  > Movie</a></em></p>
+  > </blockquote>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0301/">https://ratatui.rs/highlights/v0301/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/74d6a846e1fab811fcdbcc09b09648cdca05c174">74d6a84</a>
+  > <em>(block)</em> Support shadows by <a
+  > href="https://github.com/orhun"><code>@​orhun</code></a> in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2481">#2481</a></p>
+  > <blockquote>
+  > <p>Introduce <code>Block::shadow(...)</code> with a new
+  > <code>Shadow</code> type that supports:</p>
+  > <ul>
+  > <li>presets: <code>overlay</code>,<code> block</code>,
+  > <code>light_shade</code>, <code>medium_shade</code>,
+  > <code>dark_shade</code></li>
+  > <li>custom symbols via <code>Shadow::symbol(...)</code></li>
+  > <li>custom effects via <code>Shadow::custom(...)</code></li>
+  > </ul>
+  > <pre lang="rust"><code>use ratatui::layout::Offset;
+  > use ratatui::style::Stylize;
+  > use ratatui::widgets::{Block, Shadow};
+  > <p>let popup = Block::bordered().title(&quot;Popup&quot;).shadow(<br />
+  > Shadow::dark_shade()<br />
+  > .black()<br />
+  > .on_white()<br />
+  > .offset(Offset::new(2, 1)),<br />
+  > );<br />
+  > </code></pre></p>
+  > <p>Results in:</p>
+  > <pre><code>┌Popup─────┐
+  > │content   │▒
+  > └──────────┘▒
+  >   ▒▒▒▒▒▒▒▒▒▒▒
+  > </code></pre>
+  > <p><img
+  > src="https://github.com/user-attachments/assets/103ddc17-6536-424c-a7a8-8895540dd145"
+  > alt="shadow" /></p>
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/1c3dbd1ff4fad2696543bf332a7e413d1bb69988"><code>1c3dbd1</code></a>
+  > chore(ratatui): unleash the rats v0.30.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2580">#2580</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/df9f8974f441739e5067db472c2683d1b0c552d6"><code>df9f897</code></a>
+  > docs(ratatui): update the changelog for v0.30.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2568">#2568</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/101a63e112188cbccef968053dee8bbd332cb8c3"><code>101a63e</code></a>
+  > feat(render): add function for applying buffer (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2566">#2566</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/0b03fe47f1a941fccf9dd694f2531157e312f330"><code>0b03fe4</code></a>
+  > chore(toml): migrate from taplo to tombi (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2501">#2501</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/6ef6a2ff897ae98aacd5b9c26cbd9ef0848ad45d"><code>6ef6a2f</code></a>
+  > build(deps): bump octocrab from 0.50.0 to 0.52.0 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2577">#2577</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/83c157965759bf660eb81f47bdedf96b886b9fd3"><code>83c1579</code></a>
+  > docs(changelog): fix doubled words in two entries (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2578">#2578</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/09e3af7d9f46204fc5de37ad5844f397892b801e"><code>09e3af7</code></a>
+  > build(deps): bump compact_str from 0.9.0 to 0.9.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2573">#2573</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/cd8cc4058204438994af8b33c33af56193b75e84"><code>cd8cc40</code></a>
+  > build(deps): bump unicode-segmentation from 1.13.2 to 1.13.3 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2576">#2576</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/e64247d24f7b7d18a7eb57f28190c99b87d7a6de"><code>e64247d</code></a>
+  > build(deps): bump bitflags from 2.11.1 to 2.12.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2575">#2575</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/04dec76dbda6fcaf5350680a88f01b391110745c"><code>04dec76</code></a>
+  > build(deps): bump crate-ci/typos from 1.46.3 to 1.47.0 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2574">#2574</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/ratatui/ratatui/compare/ratatui-widgets-v0.3.0...ratatui-widgets-v0.3.1">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+
+- *(deps)* Bump ratatui from 0.30.0 to 0.30.1 ([#303](https://github.com/ratatui/tui-widgets/issues/303))
+  > Bumps [ratatui](https://github.com/ratatui/ratatui) from 0.30.0 to
+  > 0.30.1.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/releases">ratatui's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>ratatui-v0.30.1</h2>
+  > <blockquote>
+  > <p><em>&quot;Rats, we're rats; we're the rats.&quot; – <a
+  > href="https://www.youtube.com/watch?v=OXQwx1EolD8">Rat
+  > Movie</a></em></p>
+  > </blockquote>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0301/">https://ratatui.rs/highlights/v0301/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/74d6a846e1fab811fcdbcc09b09648cdca05c174">74d6a84</a>
+  > <em>(block)</em> Support shadows by orhun in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2481">#2481</a></p>
+  > <blockquote>
+  > <p>Introduce <code>Block::shadow(...)</code> with a new
+  > <code>Shadow</code> type that supports:</p>
+  > <ul>
+  > <li>presets: <code>overlay</code>,<code> block</code>,
+  > <code>light_shade</code>, <code>medium_shade</code>,
+  > <code>dark_shade</code></li>
+  > <li>custom symbols via <code>Shadow::symbol(...)</code></li>
+  > <li>custom effects via <code>Shadow::custom(...)</code></li>
+  > </ul>
+  > <pre lang="rust"><code>use ratatui::layout::Offset;
+  > use ratatui::style::Stylize;
+  > use ratatui::widgets::{Block, Shadow};
+  > <p>let popup = Block::bordered().title(&quot;Popup&quot;).shadow(<br />
+  > Shadow::dark_shade()<br />
+  > .black()<br />
+  > .on_white()<br />
+  > .offset(Offset::new(2, 1)),<br />
+  > );<br />
+  > </code></pre></p>
+  > <p>Results in:</p>
+  > <pre><code>┌Popup─────┐
+  > │content   │▒
+  > └──────────┘▒
+  >   ▒▒▒▒▒▒▒▒▒▒▒
+  > </code></pre>
+  > <p><img
+  > src="https://github.com/user-attachments/assets/103ddc17-6536-424c-a7a8-8895540dd145"
+  > alt="shadow" /></p>
+  > <p>fixes <a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/1892">#1892</a></p>
+  > <hr />
+  > </blockquote>
+  > </li>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/4d304206f45c96813dd9773a268b61d7d33d1f44">4d30420</a>
+  > <em>(buffer)</em> Add <code>CellDiffOption::AlwaysUpdate</code> to force
+  > cell updates by sxyazi in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2480">#2480</a></p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/blob/main/CHANGELOG.md">ratatui's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2><a
+  > href="https://github.com/ratatui/ratatui/releases/tag/ratatui-v0.30.1">v0.30.1</a>
+  > - 2026-06-05</h2>
+  > <blockquote>
+  > <p><em>&quot;Rats, we're rats; we're the rats.&quot; – <a
+  > href="https://www.youtube.com/watch?v=OXQwx1EolD8">Rat
+  > Movie</a></em></p>
+  > </blockquote>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0301/">https://ratatui.rs/highlights/v0301/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/74d6a846e1fab811fcdbcc09b09648cdca05c174">74d6a84</a>
+  > <em>(block)</em> Support shadows by <a
+  > href="https://github.com/orhun"><code>@​orhun</code></a> in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2481">#2481</a></p>
+  > <blockquote>
+  > <p>Introduce <code>Block::shadow(...)</code> with a new
+  > <code>Shadow</code> type that supports:</p>
+  > <ul>
+  > <li>presets: <code>overlay</code>,<code> block</code>,
+  > <code>light_shade</code>, <code>medium_shade</code>,
+  > <code>dark_shade</code></li>
+  > <li>custom symbols via <code>Shadow::symbol(...)</code></li>
+  > <li>custom effects via <code>Shadow::custom(...)</code></li>
+  > </ul>
+  > <pre lang="rust"><code>use ratatui::layout::Offset;
+  > use ratatui::style::Stylize;
+  > use ratatui::widgets::{Block, Shadow};
+  > <p>let popup = Block::bordered().title(&quot;Popup&quot;).shadow(<br />
+  > Shadow::dark_shade()<br />
+  > .black()<br />
+  > .on_white()<br />
+  > .offset(Offset::new(2, 1)),<br />
+  > );<br />
+  > </code></pre></p>
+  > <p>Results in:</p>
+  > <pre><code>┌Popup─────┐
+  > │content   │▒
+  > └──────────┘▒
+  >   ▒▒▒▒▒▒▒▒▒▒▒
+  > </code></pre>
+  > <p><img
+  > src="https://github.com/user-attachments/assets/103ddc17-6536-424c-a7a8-8895540dd145"
+  > alt="shadow" /></p>
+  > <p>fixes <a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/1892">#1892</a></p>
+  > <hr />
+  > </blockquote>
+  > </li>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/4d304206f45c96813dd9773a268b61d7d33d1f44">4d30420</a>
+  > <em>(buffer)</em> Add <code>CellDiffOption::AlwaysUpdate</code> to force
+  > cell updates by <a
+  > href="https://github.com/sxyazi"><code>@​sxyazi</code></a> in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2480">#2480</a></p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/1c3dbd1ff4fad2696543bf332a7e413d1bb69988"><code>1c3dbd1</code></a>
+  > chore(ratatui): unleash the rats v0.30.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2580">#2580</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/df9f8974f441739e5067db472c2683d1b0c552d6"><code>df9f897</code></a>
+  > docs(ratatui): update the changelog for v0.30.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2568">#2568</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/101a63e112188cbccef968053dee8bbd332cb8c3"><code>101a63e</code></a>
+  > feat(render): add function for applying buffer (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2566">#2566</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/0b03fe47f1a941fccf9dd694f2531157e312f330"><code>0b03fe4</code></a>
+  > chore(toml): migrate from taplo to tombi (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2501">#2501</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/6ef6a2ff897ae98aacd5b9c26cbd9ef0848ad45d"><code>6ef6a2f</code></a>
+  > build(deps): bump octocrab from 0.50.0 to 0.52.0 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2577">#2577</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/83c157965759bf660eb81f47bdedf96b886b9fd3"><code>83c1579</code></a>
+  > docs(changelog): fix doubled words in two entries (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2578">#2578</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/09e3af7d9f46204fc5de37ad5844f397892b801e"><code>09e3af7</code></a>
+  > build(deps): bump compact_str from 0.9.0 to 0.9.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2573">#2573</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/cd8cc4058204438994af8b33c33af56193b75e84"><code>cd8cc40</code></a>
+  > build(deps): bump unicode-segmentation from 1.13.2 to 1.13.3 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2576">#2576</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/e64247d24f7b7d18a7eb57f28190c99b87d7a6de"><code>e64247d</code></a>
+  > build(deps): bump bitflags from 2.11.1 to 2.12.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2575">#2575</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/04dec76dbda6fcaf5350680a88f01b391110745c"><code>04dec76</code></a>
+  > build(deps): bump crate-ci/typos from 1.46.3 to 1.47.0 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2574">#2574</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/ratatui/ratatui/compare/ratatui-v0.30.0...ratatui-v0.30.1">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+
+- *(deps)* Bump taiki-e/install-action from 2.81.10 to 2.82.0 ([#304](https://github.com/ratatui/tui-widgets/issues/304))
+  > Bumps
+  > [taiki-e/install-action](https://github.com/taiki-e/install-action) from
+  > 2.81.10 to 2.82.0.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/releases">taiki-e/install-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>2.82.0</h2>
+  > <ul>
+  > <li>
+  > <p>Support <code>cargo-vet</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1908">#1908</a>,
+  > thanks <a
+  > href="https://github.com/jakewimmer"><code>@​jakewimmer</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Support <code>cargo-crap</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1905">#1905</a>,
+  > thanks <a
+  > href="https://github.com/BartoszCiesla"><code>@​BartoszCiesla</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Support <code>cargo-leptos</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1903">#1903</a>,
+  > thanks <a
+  > href="https://github.com/404Simon"><code>@​404Simon</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 1.103.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-xwin@latest</code> to 0.23.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 45.0.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-deny@latest</code> to 0.19.9.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>prek@latest</code> to 0.4.5.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>trivy@latest</code> to 0.71.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.10.</p>
+  > </li>
+  > </ul>
+  > <h2>2.81.11</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasm-tools@latest</code> to 1.252.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasm-bindgen@latest</code> to 0.2.125.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.21.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc@latest</code> to 3.35.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.9.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>jaq@latest</code> to 3.1.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-insta@latest</code> to 1.48.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>biome@latest</code> to 2.5.0.</p>
+  > </li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/blob/main/CHANGELOG.md">taiki-e/install-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <p>This project adheres to <a href="https://semver.org">Semantic
+  > Versioning</a>.</p>
+  > <!-- raw HTML omitted -->
+  > <h2>[Unreleased]</h2>
+  > <h2>[2.82.0] - 2026-06-17</h2>
+  > <ul>
+  > <li>
+  > <p>Support <code>cargo-vet</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1908">#1908</a>,
+  > thanks <a
+  > href="https://github.com/jakewimmer"><code>@​jakewimmer</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Support <code>cargo-crap</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1905">#1905</a>,
+  > thanks <a
+  > href="https://github.com/BartoszCiesla"><code>@​BartoszCiesla</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Support <code>cargo-leptos</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1903">#1903</a>,
+  > thanks <a
+  > href="https://github.com/404Simon"><code>@​404Simon</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 1.103.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-xwin@latest</code> to 0.23.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 45.0.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-deny@latest</code> to 0.19.9.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>prek@latest</code> to 0.4.5.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>trivy@latest</code> to 0.71.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.10.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.81.11] - 2026-06-15</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasm-tools@latest</code> to 1.252.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasm-bindgen@latest</code> to 0.2.125.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.21.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc@latest</code> to 3.35.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.9.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>jaq@latest</code> to 3.1.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-insta@latest</code> to 1.48.0.</p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/b8cecb83565409bcc297b2df6e77f030b2a468d5"><code>b8cecb8</code></a>
+  > Release 2.82.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/981171473775d521e3ae1e0b14c569b51c48651e"><code>9811714</code></a>
+  > Update changelog</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/e7005464717d3cca03b48509ba65ebbde552e10c"><code>e700546</code></a>
+  > Update wasmtime manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/fdfb4a4a7c8af40d72ebb849dac38e8718ea669c"><code>fdfb4a4</code></a>
+  > Update mise manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/ef03904287f8419ca540ee664cc9227c6d501867"><code>ef03904</code></a>
+  > Update martin manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/b6d098313f0ccec3f73270982ba4474205dbd7fd"><code>b6d0983</code></a>
+  > Update <code>kingfisher@latest</code> to 1.103.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/ebeb9b1a53c2307773f018dca9868b795675e6c5"><code>ebeb9b1</code></a>
+  > Update just manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/119edcf29d9a2c67fad2ed58e04242daceb433e5"><code>119edcf</code></a>
+  > Update <code>cargo-xwin@latest</code> to 0.23.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/cd319da91ecc8685df284d89c5435723973a5668"><code>cd319da</code></a>
+  > Update <code>wasmtime@latest</code> to 45.0.2</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/4942894b57b5ad6fdcb38216eb1f7df561374b20"><code>4942894</code></a>
+  > Update cargo-xwin manifest</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/taiki-e/install-action/compare/7a79fe8c3a13344501c80d99cae481c1c9085912...b8cecb83565409bcc297b2df6e77f030b2a468d5">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+
+- *(deps)* Bump itertools from 0.14.0 to 0.15.0 ([#305](https://github.com/ratatui/tui-widgets/issues/305))
+  > Bumps [itertools](https://github.com/rust-itertools/itertools) from
+  > 0.14.0 to 0.15.0.
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/rust-itertools/itertools/blob/master/CHANGELOG.md">itertools's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>0.15.0</h2>
+  > <h3>Breaking</h3>
+  > <ul>
+  > <li>Restructure <code>Position</code> as struct instead of enum (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1042">#1042</a>,
+  > <a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1043">#1043</a>)</li>
+  > <li>Canonicalize <code>all_equal_value</code>'s error type (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1032">#1032</a>)</li>
+  > </ul>
+  > <h3>Added</h3>
+  > <ul>
+  > <li>Add <code>*_with_hasher</code> adaptors (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1007">#1007</a>)</li>
+  > <li>Add strip_prefix and strip_prefix_by methods (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1104">#1104</a>)</li>
+  > </ul>
+  > <h3>Changed</h3>
+  > <ul>
+  > <li>Remove <code>Clone</code> bounds from
+  > <code>tuple_combinations</code> and <code>array_combinations</code>(<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1011">#1011</a>)</li>
+  > <li><code>must_use</code> for <code>collect_vec</code> (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1009">#1009</a>)</li>
+  > <li>Make <code>izip!</code> temporary friendly (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1021">#1021</a>)</li>
+  > <li>Add <code>array_combinations_with_replacement</code> (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1033">#1033</a>)</li>
+  > <li>Implement <code>Debug</code> for remaining public types (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1038">#1038</a>)</li>
+  > <li>Specialize <code>ExactlyOneError::count</code> (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1046">#1046</a>)</li>
+  > <li>Implement <code>PeekingNext</code> for more types, in particular
+  > <code>vec::IntoIter</code> (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1059">#1059</a>,
+  > <a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1073">#1073</a>)</li>
+  > <li>Fix <code>PadUsing::next_back</code> (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1082">#1082</a>)</li>
+  > <li>Introduce <code>[circular_]array_windows</code>, deprecate
+  > <code>tuple_windows</code> (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1086">#1086</a>)</li>
+  > <li>Deprecate <code>tuple_combinations</code> (replaced by
+  > <code>array_combinations</code>) (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1085">#1085</a>)</li>
+  > </ul>
+  > <h3>Notable Internal Changes</h3>
+  > <ul>
+  > <li>Make <code>into_group_map</code> code more idiomatic (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1027">#1027</a>)</li>
+  > <li>Fix clippy lints (<a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1017">#1017</a>,
+  > <a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1029">#1029</a>,
+  > <a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1076">#1076</a>,
+  > <a
+  > href="https://redirect.github.com/rust-itertools/itertools/issues/1099">#1099</a>)</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/37bd72aa6d58e594711d127b52418ca5e58b6091"><code>37bd72a</code></a>
+  > Update CHANGELOG.md: strip_prefix[_by]</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/86ec6359258e57a8af391fafc645d6ffab363bff"><code>86ec635</code></a>
+  > Use <code>ControlFlow</code> in <code>fold_while</code>
+  > implementation</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/d5897f7bb2283a34b736f539a369fe16dc9f6bb4"><code>d5897f7</code></a>
+  > refactor(strip_prefix): use try_for_each and drop PartialEq, Eq on
+  > StripPrefi...</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/b2a978abca1dc57f929f60e0be16d83e58f9558f"><code>b2a978a</code></a>
+  > feat(Itertools): add strip_prefix and strip_prefix_by methods</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/12b6ec6f91eb83eebe4ac150e53aca14365cd894"><code>12b6ec6</code></a>
+  > Update CHANGELOG.md for all_equal_value_error's error type</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/121821ed16365a39c015449a3872708fd5dcdfdd"><code>121821e</code></a>
+  > AllEqualValueError implements std::error::Error</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/adac44e4278b087033d23408652e540aef5b22f0"><code>adac44e</code></a>
+  > Introduce AllEqualValueError</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/5707384b6a3a675c65e12b96e71335e9ce857b16"><code>5707384</code></a>
+  > Update CHANGELOG.md</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/df60ff016bf31f5752827808b375d36b0a101e33"><code>df60ff0</code></a>
+  > Update CHANGELOG.md</li>
+  > <li><a
+  > href="https://github.com/rust-itertools/itertools/commit/113b850b9d68406dda7c428d31992002c77eebad"><code>113b850</code></a>
+  > Update CHANGELOG.md to include with_hasher</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/rust-itertools/itertools/compare/v0.14.0...v0.15.0">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  > ---------
+
+
 ## [0.7.8] - 2026-06-14
 
 ### 🚀 Features
