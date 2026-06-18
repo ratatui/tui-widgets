@@ -2158,7 +2158,7 @@ dependencies = [
 
 [[package]]
 name = "tui-big-text"
-version = "0.8.7"
+version = "0.8.8"
 dependencies = [
  "color-eyre",
  "crossterm 0.29.0",
