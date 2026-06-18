@@ -1,7 +1,6 @@
 use std::borrow::Cow;
 use std::vec;
 
-use itertools::Itertools;
 use ratatui_core::buffer::Buffer;
 use ratatui_core::layout::Rect;
 use ratatui_core::style::Stylize;
@@ -174,7 +173,7 @@ impl<'a> StatefulWidget for &TextPrompt<'a> {
         };
 
         let prompt_width = line.width() - value_width;
-        let lines = wrap(line, width).take(height).collect_vec();
+        let lines = wrap(line, width).take(height).collect::<Vec<_>>();
 
         // constrain the position to the area
         let position = state.width_to_pos(state.position()) + prompt_width;

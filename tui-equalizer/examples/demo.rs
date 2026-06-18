@@ -12,7 +12,6 @@ use std::time::{Duration, Instant};
 
 use color_eyre::Result;
 use crossterm::event::{self, KeyCode};
-use itertools::Itertools;
 use rand::{RngExt, rng};
 use ratatui::{DefaultTerminal, Frame};
 use tui_equalizer::{Band, Equalizer};
@@ -55,13 +54,13 @@ fn interpolate(current: &[Band], next: &[Band], percent: f64) -> Vec<Band> {
         .map(|(current, next)| Band {
             value: current.value + (next.value - current.value) * percent.clamp(0.0, 1.0),
         })
-        .collect_vec()
+        .collect()
 }
 
 fn random_bands(count: u16) -> Vec<Band> {
     (0..count / 2)
         .map(|_| Band::from(rng().random_range(0.1..1.0)))
-        .collect_vec()
+        .collect()
 }
 
 fn render(frame: &mut Frame, current: &[Band], bands: &[Band]) {
