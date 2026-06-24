@@ -35,7 +35,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Install Rust toolchain (stable)
-        uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
+        uses: dtolnay/rust-toolchain@67ef31d5b988238dd797d409d6f9574278e20537 # master
         with:
           toolchain: stable
       - name: Cargo check
@@ -50,7 +50,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Install Rust toolchain (nightly)
-        uses: dtolnay/rust-toolchain@3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 # master
+        uses: dtolnay/rust-toolchain@67ef31d5b988238dd797d409d6f9574278e20537 # master
         with:
           toolchain: nightly
       - name: Install cargo-docs-rs
