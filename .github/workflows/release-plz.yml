@@ -53,7 +53,7 @@ jobs:
         with:
           toolchain: stable
       - name: Install release-plz
-        uses: taiki-e/install-action@b8cecb83565409bcc297b2df6e77f030b2a468d5 # v2.82.0
+        uses: taiki-e/install-action@ace6ebe54a6a0c86dfb5f7764b17f793b6925bc3 # v2.82.3
         with:
           tool: release-plz@0.3.150,cargo-semver-checks@0.45
       - name: Run release-plz (release-pr)
