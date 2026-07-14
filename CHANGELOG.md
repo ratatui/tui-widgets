@@ -2,6 +2,1286 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.11] - 2026-07-14
+
+### ⚙️ Miscellaneous Tasks
+
+- Create one release-plz PR ([#313](https://github.com/ratatui/tui-widgets/issues/313))
+  > ## Summary
+  >
+  > - replace the package matrix in the release-plz PR job with one
+  > workspace-level invocation
+  > - use the root `release-plz.toml` for the shared changelog config and
+  > release PR branch prefix
+  > - remove the per-package release-plz config files that only existed to
+  > vary branch prefixes
+  > - grant the release job `pull-requests: read`, matching release-plz's
+  > documented permission for detecting the release PR and its commits
+  > - pass the CLI Git token through `GIT_TOKEN` instead of interpolating it
+  > into the shell command line
+  >
+  > ## Why
+  >
+  > `release-plz release-pr --package <name>` narrows the update to a single
+  > package. Running that in a matrix creates separate package-scoped
+  > release PRs, which can cascade as each package release changes `main`
+  > and refreshes the remaining package PRs. Running `release-plz
+  > release-pr` once from the workspace root lets release-plz prepare one
+  > combined release PR for all ready workspace package updates.
+  >
+  > The release publishing job still runs `release-plz release` on pushes to
+  > `main`; this only adds the documented read permission it needs for
+  > release-PR detection.
+  >
+  > This does not switch away from `GITHUB_TOKEN`. Release-plz's docs note
+  > that default-token-created release PRs and tags do not trigger follow-on
+  > workflows. Fixing that would require a configured PAT or GitHub App
+  > secret, which should be a separate repo policy change.
+  >
+  > ## Validation
+  >
+  > - `actionlint .github/workflows/release-plz.yml`
+  > - temp clone with this patch applied: `release-plz update --allow-dirty
+  > --repo-url https://github.com/ratatui/tui-widgets`
+
+### 🛡️ Security
+
+- *(deps)* Bump ratatui-core from 0.1.1 to 0.1.2 ([#316](https://github.com/ratatui/tui-widgets/issues/316))
+  > Bumps [ratatui-core](https://github.com/ratatui/ratatui) from 0.1.1 to
+  > 0.1.2.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/releases">ratatui-core's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>ratatui-core-v0.1.2</h2>
+  > <p><img
+  > src="https://github.com/ratatui/ratatui-website/raw/refs/heads/main/src/assets/a-gift.png"
+  > alt="a gift" /></p>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0302/">https://ratatui.rs/highlights/v0302/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/90639c179ddcbe483ea05f21b1ce3fa09767441a">90639c1</a>
+  > <em>(uncategorized)</em> Add Termina backend by <code>@joshka</code> in
+  > <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2561">#2561</a></p>
+  > <blockquote>
+  > <h2>Summary</h2>
+  > <ul>
+  > <li>add the <code>ratatui-termina</code> backend crate using the
+  > published <code>termina</code>
+  > crate</li>
+  > <li>expose the backend through the <code>termina</code> feature and
+  > Ratatui
+  > prelude/backend re-exports</li>
+  > <li>add a small Termina event-loop example and wire the backend into CI,
+  > xtask, README generation, and docs</li>
+  > </ul>
+  > <p>Refs <a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/1784">#1784</a></p>
+  > <h2>Validation</h2>
+  > <ul>
+  > <li><code>cargo +nightly fmt</code></li>
+  > <li><code>cargo check -p ratatui-termina --all-features
+  > --all-targets</code></li>
+  > <li><code>cargo check -p ratatui --no-default-features --features
+  > termina</code></li>
+  > <li><code>cargo check -p xtask</code></li>
+  > <li><code>cargo check -p release-header</code></li>
+  > <li><code>cargo xtask check-backend termina</code></li>
+  > <li><code>cargo xtask test-backend termina</code></li>
+  > <li><code>cargo xtask rdme --check</code></li>
+  > <li><code>markdownlint-cli2 ARCHITECTURE.md ratatui-termina/README.md
+  > .github/ISSUE_TEMPLATE/bug_report.md</code></li>
+  > </ul>
+  > <hr />
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <h3>Bug Fixes</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/fce3c80d53d5cf367e62cadf1d5c819947d23e4c">fce3c80</a>
+  > <em>(widgets)</em> Require thread-safe shadow effects by
+  > <code>@joshka</code> in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2584">#2584</a></p>
+  > <blockquote>
+  > <h2>Summary</h2>
+  > <ul>
+  > <li>require custom shadow effects to preserve the auto traits expected
+  > by
+  > Block-backed widgets</li>
+  > <li>document the CellEffect auto-trait contract</li>
+  > <li>add a public widget regression test for the affected
+  > ratatui::widgets
+  > re-exports</li>
+  > </ul>
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/e665c36cb14752a61cd777fbd06dbef8474f2add"><code>e665c36</code></a>
+  > chore(ratatui): unleash the rats v0.30.2 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2581">#2581</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/2700b168b57dd88b9e0fb4ea177673c2e95f3090"><code>2700b16</code></a>
+  > docs(changelog): update changelog for 0.30.2 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2608">#2608</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/e306ce69df3113d41c00c483e36ba3ecc88f3c79"><code>e306ce6</code></a>
+  > fix(buffer): create updates for &quot;uncovered&quot; cells (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2587">#2587</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/81e667f354489a809e0db1f95e378efe859dd409"><code>81e667f</code></a>
+  > fix(scrollbar): keep a large thumb within the track at the end (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2594">#2594</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/c75d7782be5c8157b0c140821090a13fd8cb8eb0"><code>c75d778</code></a>
+  > chore(ci): add cargo-udeps dependency check (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2599">#2599</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/25314d812972b4cff30f863439021575b7a00217"><code>25314d8</code></a>
+  > build(deps): bump release-plz/action from 0.5.129 to 0.5.130 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2600">#2600</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/35340703e8aa2d314870b9022cb75d899cf49b14"><code>3534070</code></a>
+  > build(deps): bump taiki-e/install-action from 2.81.8 to 2.81.10 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2601">#2601</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/a798a13b53f865f46c7b7e4e56da8640b354547b"><code>a798a13</code></a>
+  > build(deps): bump tombi-toml/setup-tombi from 1.1.2 to 1.1.3 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2602">#2602</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/3ac885038ee6fc2ab043b7421b922f1800159829"><code>3ac8850</code></a>
+  > build(deps): bump octocrab from 0.52.0 to 0.53.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2603">#2603</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/9c7963341a0479e02bf92091c57fc0ee82ed1f4e"><code>9c79633</code></a>
+  > build(deps): bump time from 0.3.47 to 0.3.49 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2604">#2604</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/ratatui/ratatui/compare/ratatui-core-v0.1.1...ratatui-core-v0.1.2">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ratatui-core&package-manager=cargo&previous-version=0.1.1&new-version=0.1.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump actions/checkout from 6.0.3 to 7.0.0 ([#319](https://github.com/ratatui/tui-widgets/issues/319))
+  > Bumps [actions/checkout](https://github.com/actions/checkout) from 6.0.3
+  > to 7.0.0.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/actions/checkout/releases">actions/checkout's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v7.0.0</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>block checking out fork pr for pull_request_target and workflow_run
+  > by <a href="https://github.com/aiqiaoy"><code>@​aiqiaoy</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2454">actions/checkout#2454</a></li>
+  > <li>Bump actions/publish-immutable-action from 0.0.3 to 0.0.4 in the
+  > minor-actions-dependencies group across 1 directory by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2458">actions/checkout#2458</a></li>
+  > <li>Bump flatted from 3.3.1 to 3.4.2 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2460">actions/checkout#2460</a></li>
+  > <li>Bump js-yaml from 4.1.0 to 4.2.0 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2461">actions/checkout#2461</a></li>
+  > <li>Bump <code>@​actions/core</code> and
+  > <code>@​actions/tool-cache</code> and Remove uuid by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2459">actions/checkout#2459</a></li>
+  > <li>upgrade module to esm and update dependencies by <a
+  > href="https://github.com/aiqiaoy"><code>@​aiqiaoy</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2463">actions/checkout#2463</a></li>
+  > <li>Bump the minor-npm-dependencies group across 1 directory with 3
+  > updates by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2462">actions/checkout#2462</a></li>
+  > <li>getting ready for checkout v7 release by <a
+  > href="https://github.com/aiqiaoy"><code>@​aiqiaoy</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2464">actions/checkout#2464</a></li>
+  > <li>update error wording by <a
+  > href="https://github.com/aiqiaoy"><code>@​aiqiaoy</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2467">actions/checkout#2467</a></li>
+  > </ul>
+  > <h2>New Contributors</h2>
+  > <ul>
+  > <li><a href="https://github.com/aiqiaoy"><code>@​aiqiaoy</code></a> made
+  > their first contribution in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2454">actions/checkout#2454</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/actions/checkout/compare/v6.0.3...v7.0.0">https://github.com/actions/checkout/compare/v6.0.3...v7.0.0</a></p>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/actions/checkout/blob/main/CHANGELOG.md">actions/checkout's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <h2>v7.0.0</h2>
+  > <ul>
+  > <li>Block checking out fork PR for pull_request_target and workflow_run
+  > by <a href="https://github.com/aiqiaoy"><code>@​aiqiaoy</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2454">actions/checkout#2454</a></li>
+  > <li>Bump actions/publish-immutable-action from 0.0.3 to 0.0.4 in the
+  > minor-actions-dependencies group across 1 directory by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2458">actions/checkout#2458</a></li>
+  > <li>Bump flatted from 3.3.1 to 3.4.2 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2460">actions/checkout#2460</a></li>
+  > <li>Bump js-yaml from 4.1.0 to 4.2.0 by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2461">actions/checkout#2461</a></li>
+  > <li>Bump <code>@​actions/core</code> and
+  > <code>@​actions/tool-cache</code> and Remove uuid by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2459">actions/checkout#2459</a></li>
+  > <li>upgrade module to esm and update dependencies by <a
+  > href="https://github.com/aiqiaoy"><code>@​aiqiaoy</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2463">actions/checkout#2463</a></li>
+  > <li>Bump the minor-npm-dependencies group across 1 directory with 3
+  > updates by <a
+  > href="https://github.com/dependabot"><code>@​dependabot</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2462">actions/checkout#2462</a></li>
+  > </ul>
+  > <h2>v6.0.3</h2>
+  > <ul>
+  > <li>Fix checkout init for SHA-256 repositories by <a
+  > href="https://github.com/yaananth"><code>@​yaananth</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2439">actions/checkout#2439</a></li>
+  > <li>fix: expand merge commit SHA regex and add SHA-256 test cases by <a
+  > href="https://github.com/yaananth"><code>@​yaananth</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2414">actions/checkout#2414</a></li>
+  > </ul>
+  > <h2>v6.0.2</h2>
+  > <ul>
+  > <li>Fix tag handling: preserve annotations and explicit fetch-tags by <a
+  > href="https://github.com/ericsciple"><code>@​ericsciple</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2356">actions/checkout#2356</a></li>
+  > </ul>
+  > <h2>v6.0.1</h2>
+  > <ul>
+  > <li>Add worktree support for persist-credentials includeIf by <a
+  > href="https://github.com/ericsciple"><code>@​ericsciple</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2327">actions/checkout#2327</a></li>
+  > </ul>
+  > <h2>v6.0.0</h2>
+  > <ul>
+  > <li>Persist creds to a separate file by <a
+  > href="https://github.com/ericsciple"><code>@​ericsciple</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2286">actions/checkout#2286</a></li>
+  > <li>Update README to include Node.js 24 support details and requirements
+  > by <a href="https://github.com/salmanmkc"><code>@​salmanmkc</code></a>
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2248">actions/checkout#2248</a></li>
+  > </ul>
+  > <h2>v5.0.1</h2>
+  > <ul>
+  > <li>Port v6 cleanup to v5 by <a
+  > href="https://github.com/ericsciple"><code>@​ericsciple</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2301">actions/checkout#2301</a></li>
+  > </ul>
+  > <h2>v5.0.0</h2>
+  > <ul>
+  > <li>Update actions checkout to use node 24 by <a
+  > href="https://github.com/salmanmkc"><code>@​salmanmkc</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2226">actions/checkout#2226</a></li>
+  > </ul>
+  > <h2>v4.3.1</h2>
+  > <ul>
+  > <li>Port v6 cleanup to v4 by <a
+  > href="https://github.com/ericsciple"><code>@​ericsciple</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2305">actions/checkout#2305</a></li>
+  > </ul>
+  > <h2>v4.3.0</h2>
+  > <ul>
+  > <li>docs: update README.md by <a
+  > href="https://github.com/motss"><code>@​motss</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/1971">actions/checkout#1971</a></li>
+  > <li>Add internal repos for checking out multiple repositories by <a
+  > href="https://github.com/mouismail"><code>@​mouismail</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/1977">actions/checkout#1977</a></li>
+  > <li>Documentation update - add recommended permissions to Readme by <a
+  > href="https://github.com/benwells"><code>@​benwells</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2043">actions/checkout#2043</a></li>
+  > <li>Adjust positioning of user email note and permissions heading by <a
+  > href="https://github.com/joshmgross"><code>@​joshmgross</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2044">actions/checkout#2044</a></li>
+  > <li>Update README.md by <a
+  > href="https://github.com/nebuk89"><code>@​nebuk89</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2194">actions/checkout#2194</a></li>
+  > <li>Update CODEOWNERS for actions by <a
+  > href="https://github.com/TingluoHuang"><code>@​TingluoHuang</code></a>
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2224">actions/checkout#2224</a></li>
+  > <li>Update package dependencies by <a
+  > href="https://github.com/salmanmkc"><code>@​salmanmkc</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/2236">actions/checkout#2236</a></li>
+  > </ul>
+  > <h2>v4.2.2</h2>
+  > <ul>
+  > <li><code>url-helper.ts</code> now leverages well-known environment
+  > variables by <a href="https://github.com/jww3"><code>@​jww3</code></a>
+  > in <a
+  > href="https://redirect.github.com/actions/checkout/pull/1941">actions/checkout#1941</a></li>
+  > <li>Expand unit test coverage for <code>isGhes</code> by <a
+  > href="https://github.com/jww3"><code>@​jww3</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/1946">actions/checkout#1946</a></li>
+  > </ul>
+  > <h2>v4.2.1</h2>
+  > <ul>
+  > <li>Check out other refs/* by commit if provided, fall back to ref by <a
+  > href="https://github.com/orhantoy"><code>@​orhantoy</code></a> in <a
+  > href="https://redirect.github.com/actions/checkout/pull/1924">actions/checkout#1924</a></li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0"><code>9c091bb</code></a>
+  > update error wording (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2467">#2467</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/1044a6dea927916f2c38ba5aeffbc0a847b1221a"><code>1044a6d</code></a>
+  > getting ready for checkout v7 release (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2464">#2464</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/f0282184c7ce73ab54c7e4ab5a617122602e575f"><code>f028218</code></a>
+  > Bump the minor-npm-dependencies group across 1 directory with 3 updates
+  > (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2462">#2462</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/d914b262ffc244530a203ab40decab34c3abf34d"><code>d914b26</code></a>
+  > upgrade module to esm and update dependencies (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2463">#2463</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/537c7ef99cef6e5ddb5e7ff5d16d14510503801d"><code>537c7ef</code></a>
+  > Bump <code>@​actions/core</code> and <code>@​actions/tool-cache</code>
+  > and Remove uuid (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2459">#2459</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/130a169078a413d3a5246a393625e8e742f387f6"><code>130a169</code></a>
+  > Bump js-yaml from 4.1.0 to 4.2.0 (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2461">#2461</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/7d09575332117a40b46e5e020664df234cd416f3"><code>7d09575</code></a>
+  > Bump flatted from 3.3.1 to 3.4.2 (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2460">#2460</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/0f9f3aa320cb53abeb534aeb54048075d9697a0e"><code>0f9f3aa</code></a>
+  > Bump actions/publish-immutable-action (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2458">#2458</a>)</li>
+  > <li><a
+  > href="https://github.com/actions/checkout/commit/f9e715a95fcd1f9253f77dd28f11e88d2d6460c7"><code>f9e715a</code></a>
+  > block checking out fork pr for pull_request_target and workflow_run (<a
+  > href="https://redirect.github.com/actions/checkout/issues/2454">#2454</a>)</li>
+  > <li>See full diff in <a
+  > href="https://github.com/actions/checkout/compare/df4cb1c069e1874edd31b4311f1884172cec0e10...9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=actions/checkout&package-manager=github_actions&previous-version=6.0.3&new-version=7.0.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump taiki-e/install-action from 2.82.0 to 2.82.3 ([#317](https://github.com/ratatui/tui-widgets/issues/317))
+  > Bumps
+  > [taiki-e/install-action](https://github.com/taiki-e/install-action) from
+  > 2.82.0 to 2.82.3.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/releases">taiki-e/install-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>2.82.3</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>zizmor@latest</code> to 1.26.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 46.0.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.1.5.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.12.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 1.104.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-tarpaulin@latest</code> to 0.35.5.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-nextest@latest</code> to 0.9.138.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-crap@latest</code> to 0.3.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-binstall@latest</code> to 1.20.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-rdme@latest</code> to 2.0.1.</p>
+  > </li>
+  > </ul>
+  > <h2>2.82.2</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>xh@latest</code> to 0.26.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.23.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>trivy@latest</code> to 0.71.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>sccache@latest</code> to 0.16.0.</p>
+  > </li>
+  > </ul>
+  > <h2>2.82.1</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.29.4.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.22.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>osv-scanner@latest</code> to 2.4.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.11.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>martin@latest</code> to 1.11.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>just@latest</code> to 1.53.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-zigbuild@latest</code> to 0.23.0.</p>
+  > </li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/blob/main/CHANGELOG.md">taiki-e/install-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <p>This project adheres to <a href="https://semver.org">Semantic
+  > Versioning</a>.</p>
+  > <!-- raw HTML omitted -->
+  > <h2>[Unreleased]</h2>
+  > <h2>[2.82.3] - 2026-06-24</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>zizmor@latest</code> to 1.26.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 46.0.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.1.5.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.12.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 1.104.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-tarpaulin@latest</code> to 0.35.5.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-nextest@latest</code> to 0.9.138.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-crap@latest</code> to 0.3.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-binstall@latest</code> to 1.20.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-rdme@latest</code> to 2.0.1.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.82.2] - 2026-06-21</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>xh@latest</code> to 0.26.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.23.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>trivy@latest</code> to 0.71.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>sccache@latest</code> to 0.16.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.82.1] - 2026-06-20</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.29.4.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.22.</p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/ace6ebe54a6a0c86dfb5f7764b17f793b6925bc3"><code>ace6ebe</code></a>
+  > Release 2.82.3</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/9593d26a566b2dea5528756ce1b593cda56ddf7f"><code>9593d26</code></a>
+  > Update <code>zizmor@latest</code> to 1.26.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/0569c0141a12a1553b9c9a83491ff772d114a6e5"><code>0569c01</code></a>
+  > Update <code>wasmtime@latest</code> to 46.0.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/5ea9fc8c273a1ac2a9f4c160d34b2e37dd1cb9e7"><code>5ea9fc8</code></a>
+  > Update uv manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/d9b6e0d11a25ad9f54aabdb65b4b4fe88d20f710"><code>d9b6e0d</code></a>
+  > Update <code>tombi@latest</code> to 1.1.5</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/d22450fe07f49b408f280b0c4e4ec6c581dd7154"><code>d22450f</code></a>
+  > Update <code>mise@latest</code> to 2026.6.12</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/586c055e27e0fa5c61e72baabffb3c90a6ec9cda"><code>586c055</code></a>
+  > Update <code>kingfisher@latest</code> to 1.104.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/5e27d3091b1094b517876d28ce9933e444be309a"><code>5e27d30</code></a>
+  > Update just manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/eda88a4fdb0862974fa83c21b8ebec7d1ec53972"><code>eda88a4</code></a>
+  > Update <code>cargo-tarpaulin@latest</code> to 0.35.5</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/30ff9da4b104d9918bd41562f2981303f48d3402"><code>30ff9da</code></a>
+  > Update <code>cargo-nextest@latest</code> to 0.9.138</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/taiki-e/install-action/compare/b8cecb83565409bcc297b2df6e77f030b2a468d5...ace6ebe54a6a0c86dfb5f7764b17f793b6925bc3">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=taiki-e/install-action&package-manager=github_actions&previous-version=2.82.0&new-version=2.82.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump zizmorcore/zizmor-action from 0.5.6 to 0.5.7 ([#315](https://github.com/ratatui/tui-widgets/issues/315))
+  > Bumps
+  > [zizmorcore/zizmor-action](https://github.com/zizmorcore/zizmor-action)
+  > from 0.5.6 to 0.5.7.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/zizmorcore/zizmor-action/releases">zizmorcore/zizmor-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v0.5.7</h2>
+  > <p>1.26.1 is now available via the action
+  > 1.26.1 is now the default version of zizmor used by the action</p>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/192e21d79ab29983730a13d1382995c2307fbcaa"><code>192e21d</code></a>
+  > Sync zizmor versions (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/127">#127</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/2720f2673c0b64a8656d08b009ac239b9383c0ae"><code>2720f26</code></a>
+  > Update README.md with new actions/checkout version (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/126">#126</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/40b41b824eab0ad9c19ddf9856be25550729e6d8"><code>40b41b8</code></a>
+  > chore(deps): bump the github-actions group with 2 updates (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/123">#123</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/a687b25bf3aa149153e80ed5f45292e47589888c"><code>a687b25</code></a>
+  > chore(deps): bump github/codeql-action from 4.35.5 to 4.36.0 in the
+  > github-ac...</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/64a6900ea7f40fab0caa7dcfc77b392d28fe0cb1"><code>64a6900</code></a>
+  > add note to explain that the default value for
+  > <code>online-checks</code> is different t...</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/14050abd109fcba34e6e2f31a723280997808e82"><code>14050ab</code></a>
+  > chore(deps): bump the github-actions group with 2 updates (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/118">#118</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/ee9b4194a74f093e38908dbcfcb078f63eeef002"><code>ee9b419</code></a>
+  > chore(deps): bump github/codeql-action in the github-actions group (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/116">#116</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/fddf2b4aa9bf29290c6bf9866e6d113b0cdf6f67"><code>fddf2b4</code></a>
+  > Bump pins in README (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/115">#115</a>)</li>
+  > <li>See full diff in <a
+  > href="https://github.com/zizmorcore/zizmor-action/compare/5f14fd08f7cf1cb1609c1e344975f152c7ee938d...192e21d79ab29983730a13d1382995c2307fbcaa">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=zizmorcore/zizmor-action&package-manager=github_actions&previous-version=0.5.6&new-version=0.5.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump ratatui from 0.30.1 to 0.30.2 ([#322](https://github.com/ratatui/tui-widgets/issues/322))
+  > Bumps [ratatui](https://github.com/ratatui/ratatui) from 0.30.1 to
+  > 0.30.2.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/releases">ratatui's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>ratatui-v0.30.2</h2>
+  > <p><img
+  > src="https://github.com/ratatui/ratatui-website/raw/refs/heads/main/src/assets/a-gift.png"
+  > alt="a gift" /></p>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0302/">https://ratatui.rs/highlights/v0302/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/90639c179ddcbe483ea05f21b1ce3fa09767441a">90639c1</a>
+  > <em>(uncategorized)</em> Add Termina backend by <code>@joshka</code> in
+  > <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2561">#2561</a></p>
+  > <blockquote>
+  > <h2>Summary</h2>
+  > <ul>
+  > <li>add the <code>ratatui-termina</code> backend crate using the
+  > published <code>termina</code>
+  > crate</li>
+  > <li>expose the backend through the <code>termina</code> feature and
+  > Ratatui
+  > prelude/backend re-exports</li>
+  > <li>add a small Termina event-loop example and wire the backend into CI,
+  > xtask, README generation, and docs</li>
+  > </ul>
+  > <p>Refs <a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/1784">#1784</a></p>
+  > <h2>Validation</h2>
+  > <ul>
+  > <li><code>cargo +nightly fmt</code></li>
+  > <li><code>cargo check -p ratatui-termina --all-features
+  > --all-targets</code></li>
+  > <li><code>cargo check -p ratatui --no-default-features --features
+  > termina</code></li>
+  > <li><code>cargo check -p xtask</code></li>
+  > <li><code>cargo check -p release-header</code></li>
+  > <li><code>cargo xtask check-backend termina</code></li>
+  > <li><code>cargo xtask test-backend termina</code></li>
+  > <li><code>cargo xtask rdme --check</code></li>
+  > <li><code>markdownlint-cli2 ARCHITECTURE.md ratatui-termina/README.md
+  > .github/ISSUE_TEMPLATE/bug_report.md</code></li>
+  > </ul>
+  > <hr />
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <h3>Bug Fixes</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/fce3c80d53d5cf367e62cadf1d5c819947d23e4c">fce3c80</a>
+  > <em>(widgets)</em> Require thread-safe shadow effects by
+  > <code>@joshka</code> in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2584">#2584</a></p>
+  > <blockquote>
+  > <h2>Summary</h2>
+  > <ul>
+  > <li>require custom shadow effects to preserve the auto traits expected
+  > by
+  > Block-backed widgets</li>
+  > <li>document the CellEffect auto-trait contract</li>
+  > <li>add a public widget regression test for the affected
+  > ratatui::widgets
+  > re-exports</li>
+  > </ul>
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/ratatui/ratatui/blob/main/CHANGELOG.md">ratatui's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2><a
+  > href="https://github.com/ratatui/ratatui/releases/tag/ratatui-v0.30.2">0.30.2</a>
+  > - 2026-06-19</h2>
+  > <p><img
+  > src="https://github.com/ratatui/ratatui-website/raw/refs/heads/main/src/assets/a-gift.png"
+  > alt="a gift" /></p>
+  > <p>We are excited to announce the new version of <code>ratatui</code> -
+  > a Rust library that's all about cooking up TUIs 👨‍🍳🐀</p>
+  > <p>✨ <strong>Release highlights</strong>: <a
+  > href="https://ratatui.rs/highlights/v0302/">https://ratatui.rs/highlights/v0302/</a></p>
+  > <p>⚠️ List of breaking changes can be found <a
+  > href="https://github.com/ratatui/ratatui/blob/main/BREAKING-CHANGES.md">here</a>.</p>
+  > <h3>Features</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/90639c179ddcbe483ea05f21b1ce3fa09767441a">90639c1</a>
+  > <em>(uncategorized)</em> Add Termina backend by <code>@joshka</code> in
+  > <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2561">#2561</a></p>
+  > <blockquote>
+  > <h2>Summary</h2>
+  > <ul>
+  > <li>add the <code>ratatui-termina</code> backend crate using the
+  > published <code>termina</code>
+  > crate</li>
+  > <li>expose the backend through the <code>termina</code> feature and
+  > Ratatui
+  > prelude/backend re-exports</li>
+  > <li>add a small Termina event-loop example and wire the backend into CI,
+  > xtask, README generation, and docs</li>
+  > </ul>
+  > <p>Refs <a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/1784">#1784</a></p>
+  > <h2>Validation</h2>
+  > <ul>
+  > <li><code>cargo +nightly fmt</code></li>
+  > <li><code>cargo check -p ratatui-termina --all-features
+  > --all-targets</code></li>
+  > <li><code>cargo check -p ratatui --no-default-features --features
+  > termina</code></li>
+  > <li><code>cargo check -p xtask</code></li>
+  > <li><code>cargo check -p release-header</code></li>
+  > <li><code>cargo xtask check-backend termina</code></li>
+  > <li><code>cargo xtask test-backend termina</code></li>
+  > <li><code>cargo xtask rdme --check</code></li>
+  > <li><code>markdownlint-cli2 ARCHITECTURE.md ratatui-termina/README.md
+  > .github/ISSUE_TEMPLATE/bug_report.md</code></li>
+  > </ul>
+  > <hr />
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <h3>Bug Fixes</h3>
+  > <ul>
+  > <li>
+  > <p><a
+  > href="https://github.com/ratatui/ratatui/commit/fce3c80d53d5cf367e62cadf1d5c819947d23e4c">fce3c80</a>
+  > <em>(widgets)</em> Require thread-safe shadow effects by
+  > <code>@joshka</code> in <a
+  > href="https://redirect.github.com/ratatui/ratatui/pull/2584">#2584</a></p>
+  > <blockquote>
+  > <h2>Summary</h2>
+  > <ul>
+  > <li>require custom shadow effects to preserve the auto traits expected
+  > by
+  > Block-backed widgets</li>
+  > <li>document the CellEffect auto-trait contract</li>
+  > <li>add a public widget regression test for the affected
+  > ratatui::widgets</li>
+  > </ul>
+  > </blockquote>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/e665c36cb14752a61cd777fbd06dbef8474f2add"><code>e665c36</code></a>
+  > chore(ratatui): unleash the rats v0.30.2 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2581">#2581</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/2700b168b57dd88b9e0fb4ea177673c2e95f3090"><code>2700b16</code></a>
+  > docs(changelog): update changelog for 0.30.2 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2608">#2608</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/e306ce69df3113d41c00c483e36ba3ecc88f3c79"><code>e306ce6</code></a>
+  > fix(buffer): create updates for &quot;uncovered&quot; cells (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2587">#2587</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/81e667f354489a809e0db1f95e378efe859dd409"><code>81e667f</code></a>
+  > fix(scrollbar): keep a large thumb within the track at the end (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2594">#2594</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/c75d7782be5c8157b0c140821090a13fd8cb8eb0"><code>c75d778</code></a>
+  > chore(ci): add cargo-udeps dependency check (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2599">#2599</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/25314d812972b4cff30f863439021575b7a00217"><code>25314d8</code></a>
+  > build(deps): bump release-plz/action from 0.5.129 to 0.5.130 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2600">#2600</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/35340703e8aa2d314870b9022cb75d899cf49b14"><code>3534070</code></a>
+  > build(deps): bump taiki-e/install-action from 2.81.8 to 2.81.10 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2601">#2601</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/a798a13b53f865f46c7b7e4e56da8640b354547b"><code>a798a13</code></a>
+  > build(deps): bump tombi-toml/setup-tombi from 1.1.2 to 1.1.3 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2602">#2602</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/3ac885038ee6fc2ab043b7421b922f1800159829"><code>3ac8850</code></a>
+  > build(deps): bump octocrab from 0.52.0 to 0.53.1 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2603">#2603</a>)</li>
+  > <li><a
+  > href="https://github.com/ratatui/ratatui/commit/9c7963341a0479e02bf92091c57fc0ee82ed1f4e"><code>9c79633</code></a>
+  > build(deps): bump time from 0.3.47 to 0.3.49 (<a
+  > href="https://redirect.github.com/ratatui/ratatui/issues/2604">#2604</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/ratatui/ratatui/compare/ratatui-v0.30.1...ratatui-v0.30.2">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=ratatui&package-manager=cargo&previous-version=0.30.1&new-version=0.30.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump taiki-e/install-action from 2.82.3 to 2.82.7 ([#324](https://github.com/ratatui/tui-widgets/issues/324))
+  > Bumps
+  > [taiki-e/install-action](https://github.com/taiki-e/install-action) from
+  > 2.82.3 to 2.82.7.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/releases">taiki-e/install-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>2.82.7</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.1.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 1.105.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>gungraun-runner@latest</code> to 0.19.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>editorconfig-checker@latest</code> to 3.8.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.55.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-tarpaulin@latest</code> to 0.36.0.</p>
+  > </li>
+  > </ul>
+  > <h2>2.82.6</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.29.7.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.25.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>syft@latest</code> to 1.46.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.55.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-auditable@latest</code> to 0.7.5.</p>
+  > </li>
+  > </ul>
+  > <h2>2.82.5</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 46.0.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasm-bindgen@latest</code> to 0.2.126.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.29.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.14.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-rdme@latest</code> to 2.1.0.</p>
+  > </li>
+  > </ul>
+  > <h2>2.82.4</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.24.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.13.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>just@latest</code> to 1.54.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>biome@latest</code> to 2.5.1.</p>
+  > </li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/blob/main/CHANGELOG.md">taiki-e/install-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <p>This project adheres to <a href="https://semver.org">Semantic
+  > Versioning</a>.</p>
+  > <!-- raw HTML omitted -->
+  > <h2>[Unreleased]</h2>
+  > <h2>[2.82.7] - 2026-06-30</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.1.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 1.105.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>gungraun-runner@latest</code> to 0.19.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>editorconfig-checker@latest</code> to 3.8.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.55.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-tarpaulin@latest</code> to 0.36.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.82.6] - 2026-06-29</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.29.7.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.11.25.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>syft@latest</code> to 1.46.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.55.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-auditable@latest</code> to 0.7.5.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.82.5] - 2026-06-26</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 46.0.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasm-bindgen@latest</code> to 0.2.126.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.29.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.6.14.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-rdme@latest</code> to 2.1.0.</p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/16b05812d776ae1dfaabc8277e421fb6d2506419"><code>16b0581</code></a>
+  > Release 2.82.7</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/68c845308d9b56d38e797c62e48eddfe1b4ba94f"><code>68c8453</code></a>
+  > Update uv manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/8532697fda4ee37ccd65901e90d87a785c45d7bd"><code>8532697</code></a>
+  > Update trivy manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/2959f9e73b89d18f2d72d0aa55ed797e70062732"><code>2959f9e</code></a>
+  > Update <code>tombi@latest</code> to 1.1.6</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/9bfa119f6c347b458726d629758b16dd861727a4"><code>9bfa119</code></a>
+  > Update <code>kingfisher@latest</code> to 1.105.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/f198b91ffb69aa6008cb3b0ea9cf6eb6b0af01f4"><code>f198b91</code></a>
+  > Update just manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/20feedd5827d6d189bca20753dbd5582948e7478"><code>20feedd</code></a>
+  > Update <code>gungraun-runner@latest</code> to 0.19.3</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/314197aa953241335b4a4c41c2d6e8066d6150da"><code>314197a</code></a>
+  > Update <code>editorconfig-checker@latest</code> to 3.8.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/f8632ebbd28b43dce012ff3db91c959c7751db33"><code>f8632eb</code></a>
+  > Update <code>dprint@latest</code> to 0.55.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/4234dc0f7acb7e7774a1716b103fcaf2d9ed9b4d"><code>4234dc0</code></a>
+  > Update <code>cargo-tarpaulin@latest</code> to 0.36.0</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/taiki-e/install-action/compare/ace6ebe54a6a0c86dfb5f7764b17f793b6925bc3...16b05812d776ae1dfaabc8277e421fb6d2506419">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=taiki-e/install-action&package-manager=github_actions&previous-version=2.82.3&new-version=2.82.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump rand from 0.10.1 to 0.10.2 ([#326](https://github.com/ratatui/tui-widgets/issues/326))
+  > Bumps [rand](https://github.com/rust-random/rand) from 0.10.1 to 0.10.2.
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/rust-random/rand/blob/master/CHANGELOG.md">rand's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>[0.10.2] — 2026-07-02</h2>
+  > <h3>Fixes</h3>
+  > <ul>
+  > <li>Fix possible memory safety violation due to deserialization of
+  > <code>UniformChar</code> from bad source (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1790">#1790</a>)</li>
+  > </ul>
+  > <h3>Changes</h3>
+  > <ul>
+  > <li>Document required output order of fn <code>partial_shuffle</code>
+  > and apply <code>#[must_use]</code> (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1769">#1769</a>)</li>
+  > <li>Avoid usage of <code>unsafe</code> in contexts where non-local
+  > memory corruption could invalidate contract (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1791">#1791</a>)</li>
+  > </ul>
+  > <p><a
+  > href="https://redirect.github.com/rust-random/rand/issues/1769">#1769</a>:
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/pull/1769">rust-random/rand#1769</a>
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/issues/1790">#1790</a>:
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/pull/1790">rust-random/rand#1790</a>
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/issues/1791">#1791</a>:
+  > <a
+  > href="https://redirect.github.com/rust-random/rand/pull/1791">rust-random/rand#1791</a></p>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/1540ea327e8beaf0694ea64f6d9eb8eaadd47bd5"><code>1540ea3</code></a>
+  > Prepare rand 0.10.2 (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1800">#1800</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/a29964ad94b54c25b3865626de6964ce0f796a29"><code>a29964a</code></a>
+  > Bump chacha20 from 0.10.0 to 0.10.1 in the all-deps group (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1801">#1801</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/ced94914cb75c93a1f19140a966a466345185fff"><code>ced9491</code></a>
+  > Tweak docs for RngExt::random_range and SampleRange (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1798">#1798</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/db146647afaf002b866420d34e4501b0dd872163"><code>db14664</code></a>
+  > Check UniformChar validity on deser (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1790">#1790</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/bea8620204c7aeecdefc132b5cb0dec8134add4b"><code>bea8620</code></a>
+  > Bump the all-deps group with 2 updates (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1796">#1796</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/4f449322825498e4ec1f486119e5fd251ba97f8a"><code>4f44932</code></a>
+  > Bump actions/cache from 5 to 6 (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1795">#1795</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/b999a130a990b30af01743021e8ea97f3b09a17e"><code>b999a13</code></a>
+  > Bump actions/checkout from 6 to 7 (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1794">#1794</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/aeab810bd9704a3b7666ba0a78e1ad5d1d5ad1ae"><code>aeab810</code></a>
+  > Avoid unsafe where safety depends on non-local values (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1791">#1791</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/1896d7c660524a022b3dbc3a1e044e162d766b25"><code>1896d7c</code></a>
+  > Add typos CI job (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1789">#1789</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-random/rand/commit/43eddee18c8cca2cebee929be3899cf183afe801"><code>43eddee</code></a>
+  > Bump the all-deps group with 2 updates (<a
+  > href="https://redirect.github.com/rust-random/rand/issues/1788">#1788</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/rust-random/rand/compare/0.10.1...0.10.2">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=rand&package-manager=cargo&previous-version=0.10.1&new-version=0.10.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+### Other
+
+- *(deps)* Bump dtolnay/rust-toolchain from 3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 to 67ef31d5b988238dd797d409d6f9574278e20537 ([#318](https://github.com/ratatui/tui-widgets/issues/318))
+  > Bumps
+  > [dtolnay/rust-toolchain](https://github.com/dtolnay/rust-toolchain) from
+  > 3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9 to
+  > 67ef31d5b988238dd797d409d6f9574278e20537.
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/dtolnay/rust-toolchain/commit/67ef31d5b988238dd797d409d6f9574278e20537"><code>67ef31d</code></a>
+  > Update actions/checkout@v6 -&gt; v7</li>
+  > <li>See full diff in <a
+  > href="https://github.com/dtolnay/rust-toolchain/compare/3c5f7ea28cd621ae0bf5283f0e981fb97b8a7af9...67ef31d5b988238dd797d409d6f9574278e20537">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+
+- *(deps)* Bump dtolnay/rust-toolchain from 67ef31d5b988238dd797d409d6f9574278e20537 to fa04a1451ff1842e2626ccb99004d0195b455a88 ([#320](https://github.com/ratatui/tui-widgets/issues/320))
+  > Bumps
+  > [dtolnay/rust-toolchain](https://github.com/dtolnay/rust-toolchain) from
+  > 67ef31d5b988238dd797d409d6f9574278e20537 to
+  > fa04a1451ff1842e2626ccb99004d0195b455a88.
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/dtolnay/rust-toolchain/commit/fa04a1451ff1842e2626ccb99004d0195b455a88"><code>fa04a14</code></a>
+  > Add 1.96.1 patch release</li>
+  > <li>See full diff in <a
+  > href="https://github.com/dtolnay/rust-toolchain/compare/67ef31d5b988238dd797d409d6f9574278e20537...fa04a1451ff1842e2626ccb99004d0195b455a88">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+
 ## [0.7.10] - 2026-06-18
 
 ### ⚙️ Miscellaneous Tasks
