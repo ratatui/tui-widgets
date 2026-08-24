@@ -4,6 +4,10 @@
 
 ![tui-big-text Demo](https://vhs.charm.sh/vhs-7DFJFGwBEnUjjLCFSqwEm9.gif)
 
+## Non-ASCII Fonts
+
+![Non-ASCII font demo](https://vhs.charm.sh/vhs-6wHS9dZJTj3rOjVFeV3Ty9.gif)
+
 ## Alignment
 
 ![Alignment Demo](https://vhs.charm.sh/vhs-2GdJCPpXfnOCTsykSPr7AW.gif)

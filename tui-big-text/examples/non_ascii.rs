@@ -1,4 +1,4 @@
-//! Renders a basic `BigText` widget with non-ASCII text.
+//! Demonstrates rendering non-ASCII fonts with Hiragana and Greek text.
 //!
 //! Run with `cargo run -p tui-big-text --example non_ascii`.
 //!
@@ -28,7 +28,7 @@ fn run(terminal: &mut ratatui::DefaultTerminal) -> Result<()> {
 }
 
 fn render(frame: &mut Frame) {
-    let title = Line::from("tui-big-text demo. <q> quit").cyan();
+    let title = Line::from("tui-big-text non-ASCII demo. <q> quit").cyan();
 
     let big_text = BigText::builder()
         .centered()

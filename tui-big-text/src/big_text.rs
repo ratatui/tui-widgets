@@ -180,8 +180,11 @@ fn get_alignment_offset<'a>(
     alignment: Alignment,
     line: &'a Line<'a>,
 ) -> u16 {
-    let line_char_count: usize = line.iter().map(|f| f.content.chars().count()).sum();
-    let big_line_width = line_char_count as u16 * letter_width;
+    // Each grapheme occupies one fixed-width bitmap area in the rendered layout.
+    let line_glyph_count = line.styled_graphemes(Style::default()).count();
+    let big_line_width = line_glyph_count
+        .saturating_mul(usize::from(letter_width))
+        .clamp(0, usize::from(u16::MAX)) as u16;
     match alignment {
         Alignment::Center => (area_width / 2).saturating_sub(big_line_width / 2),
         Alignment::Right => area_width.saturating_sub(big_line_width),
@@ -200,16 +203,13 @@ const FONTS: [&dyn UnicodeFonts; 8] = [
     &font8x8::SGA_FONTS,
 ];
 
-/// Render a single grapheme into a cell by looking up the corresponding 8x8 bitmap in the
-/// all of the available fonts and setting the corresponding cells in the buffer.
+/// Render a single grapheme into a cell by looking up the corresponding 8x8 bitmap in all of the
+/// available fonts and setting the corresponding cells in the buffer.
 fn render_symbol(grapheme: StyledGrapheme, area: Rect, buf: &mut Buffer, pixel_size: &PixelSize) {
     buf.set_style(area, grapheme.style);
     let c = grapheme.symbol.chars().next().unwrap(); // TODO: handle multi-char graphemes
-    for font in FONTS {
-        if let Some(glyph) = font.get(c) {
-            render_glyph(glyph, area, buf, pixel_size);
-            break;
-        }
+    if let Some(glyph) = FONTS.iter().find_map(|font| font.get(c)) {
+        render_glyph(glyph, area, buf, pixel_size);
     }
 }
 
@@ -1178,6 +1178,64 @@ mod tests {
             "          ▀▀▀▘▝▀▘ ▀ ▀ ▝▀▘ ▀▀▘           ",
         ]);
         assert_eq!(buf, expected);
+    }
+
+    #[test]
+    fn render_hiragana_font() {
+        let big_text = BigText::builder()
+            .lines(vec![Line::from("ひらがな")])
+            .build();
+        let mut buf = Buffer::empty(Rect::new(0, 0, 32, 8));
+
+        big_text.render(buf.area, &mut buf);
+
+        let expected = Buffer::with_lines(vec![
+            "         ████     █   █  █  ██  ",
+            "                  █  █   █      ",
+            "██  █    █      ████    ███  █  ",
+            " █  ██   █ ███    █ █ █  █   █  ",
+            "█   █ █  ██   █  █  █ █  █  ███ ",
+            "█   █    █    █  █  █ █ █  █ █  ",
+            " ███        ██  █  █    █   █   ",
+            "                                ",
+        ]);
+        assert_eq!(buf, expected);
+    }
+
+    #[test]
+    fn render_greek_font() {
+        let big_text = BigText::builder()
+            .lines(vec![Line::from("ελληνικά")])
+            .build();
+        let mut buf = Buffer::empty(Rect::new(0, 0, 64, 8));
+
+        big_text.render(buf.area, &mut buf);
+
+        let expected = Buffer::with_lines(vec![
+            "                                                            ███ ",
+            "        ██      ██                                              ",
+            " ████    ██      ██     █████   ██  ██    ██    ██  ██   ███ ██ ",
+            "██        ██      ██    ██  ██  ██  ██    ██    ██ ██   ██ ███  ",
+            " ███      ███     ███   ██  ██  ██  ██    ██    ████    ██  █   ",
+            "██       ██ ██   ██ ██  ██  ██   ████     ██ █  ██ ██   ██ ███  ",
+            " ████   ██   ██ ██   ██ ██  ██    ██       ██   ██  ██   ███ ██ ",
+            "                            ██                                  ",
+        ]);
+        assert_eq!(buf, expected);
+    }
+
+    #[test]
+    fn centered_hiragana_uses_glyph_count_for_alignment() {
+        let line = Line::from("ひらがな");
+
+        assert_eq!(get_alignment_offset(80, 8, Alignment::Center, &line), 24);
+    }
+
+    #[test]
+    fn alignment_width_clamps_to_u16_max() {
+        let line = Line::from("x".repeat(usize::from(u16::MAX) + 1));
+
+        assert_eq!(get_alignment_offset(80, 1, Alignment::Center, &line), 0);
     }
 
     #[test]

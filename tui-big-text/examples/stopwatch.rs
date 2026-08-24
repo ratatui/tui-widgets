@@ -303,8 +303,12 @@ impl EventHandler {
                 KeyCode::Char('s') | KeyCode::Enter => Message::Stop,
                 _ => Message::Tick,
             }),
-            Some(Err(err)) => bail!(err),
-            None => bail!("event stream ended unexpectedly"),
+            Some(Err(err)) => {
+                bail!(err);
+            }
+            None => {
+                bail!("event stream ended unexpectedly");
+            }
             _ => Ok(Message::Tick),
         }
     }
