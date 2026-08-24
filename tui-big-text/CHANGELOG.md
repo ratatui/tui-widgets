@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.9] - 2026-08-24
+
+### 🐛 Bug Fixes
+
+- *(tui-big-text)* Add support for rendering all available fonts with `BigText` ([#355](https://github.com/ratatui/tui-widgets/issues/355))
+  > The `BigText` widget would only use the `BasicFont` provided by
+  > `font8x8`. However, there are numerous other fonts that can render the
+  > glyphs, such as Hiragana etc.
+  >
+  > This changes `render_symbol` to iterate over all the available fonts
+  > rather than only doing a lookup against `font8x8::BASIC_FONTS`.
+  >
+  > Also added an example and a VHS tape for demo purposes.
+  >
+  > <img width="1200" height="400" alt="non_ascii"
+  > src="https://github.com/user-attachments/assets/9a3dd054-fb32-4070-92d1-0055bcef04b7"
+  > />
+  >
+  > Doing this exposed a bug with how the line widths are calculated and
+  > therefore how the text alignment worked.
+  >
+  > In `get_alignment_offset`, the "line width" (i.e. character count) was
+  > actually just using the underlying byte width, not the number of
+  > characters. This has been changed to simply sum the number of characters
+  > from each span of the line.
+  >
+  > ---------
+
+
 ## [0.8.8] - 2026-06-18
 
 ### ⚙️ Miscellaneous Tasks
