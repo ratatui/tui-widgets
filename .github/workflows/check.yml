@@ -24,7 +24,7 @@ jobs:
           toolchain: nightly
           components: rustfmt
       - name: Cache Rust build artifacts
-        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Run format check
         run: cargo fmt --all -- --check
 
@@ -85,7 +85,7 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           components: clippy
       - name: Cache Rust build artifacts
-        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Run clippy
         run: cargo +${{ matrix.toolchain }} clippy --all-targets --all-features --workspace -- -D warnings
 
@@ -102,7 +102,7 @@ jobs:
         with:
           toolchain: stable
       - name: Cache Rust build artifacts
-        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Check all workspace targets
         run: cargo check --all-targets --all-features --workspace
 
@@ -143,7 +143,7 @@ jobs:
         with:
           toolchain: stable
       - name: Cache Rust build artifacts
-        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Install cargo-semver-checks
         uses: taiki-e/install-action@ba47c86ac325773530516bb756137ac718732518 # v2.86.5
         with:
@@ -164,7 +164,7 @@ jobs:
         with:
           toolchain: nightly
       - name: Cache Rust build artifacts
-        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Build docs
         run: cargo doc --all-features --workspace
 
@@ -181,7 +181,7 @@ jobs:
         with:
           toolchain: 1.88.0
       - name: Cache Rust build artifacts
-        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Check workspace on MSRV
         run: cargo check --all-features --workspace
 
