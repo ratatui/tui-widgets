@@ -31,9 +31,10 @@ fn render(frame: &mut Frame) {
     let title = Line::from("tui-big-text demo. <q> quit").cyan();
 
     let big_text = BigText::builder()
+        .centered()
         .pixel_size(tui_big_text::PixelSize::HalfHeight)
         .lines(vec![
-            "にほんごのひらがな".white().on_red().into(),
+            "ひらがな".white().on_red().into(),
             "ελληνικά".white().on_blue().into(),
         ])
         .build();
