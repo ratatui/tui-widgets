@@ -188,13 +188,28 @@ fn get_alignment_offset<'a>(
     }
 }
 
+const FONTS: [&dyn UnicodeFonts; 9] = [
+    &font8x8::BASIC_FONTS,
+    &font8x8::LATIN_FONTS,
+    &font8x8::HIRAGANA_FONTS,
+    &font8x8::GREEK_FONTS,
+    &font8x8::BLOCK_FONTS,
+    &font8x8::BOX_FONTS,
+    &font8x8::HIRAGANA_FONTS,
+    &font8x8::MISC_FONTS,
+    &font8x8::SGA_FONTS,
+];
+
 /// Render a single grapheme into a cell by looking up the corresponding 8x8 bitmap in the
-/// `BITMAPS` array and setting the corresponding cells in the buffer.
+/// all of the available fonts and setting the corresponding cells in the buffer.
 fn render_symbol(grapheme: StyledGrapheme, area: Rect, buf: &mut Buffer, pixel_size: &PixelSize) {
     buf.set_style(area, grapheme.style);
     let c = grapheme.symbol.chars().next().unwrap(); // TODO: handle multi-char graphemes
-    if let Some(glyph) = font8x8::BASIC_FONTS.get(c) {
-        render_glyph(glyph, area, buf, pixel_size);
+    for font in FONTS {   
+        if let Some(glyph) = font.get(c) {
+            render_glyph(glyph, area, buf, pixel_size);
+            break
+        }
     }
 }
 
