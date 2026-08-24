@@ -204,10 +204,10 @@ const FONTS: [&dyn UnicodeFonts; 8] = [
 fn render_symbol(grapheme: StyledGrapheme, area: Rect, buf: &mut Buffer, pixel_size: &PixelSize) {
     buf.set_style(area, grapheme.style);
     let c = grapheme.symbol.chars().next().unwrap(); // TODO: handle multi-char graphemes
-    for font in FONTS {   
+    for font in FONTS {
         if let Some(glyph) = font.get(c) {
             render_glyph(glyph, area, buf, pixel_size);
-            break
+            break;
         }
     }
 }
