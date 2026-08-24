@@ -188,14 +188,13 @@ fn get_alignment_offset<'a>(
     }
 }
 
-const FONTS: [&dyn UnicodeFonts; 9] = [
+const FONTS: [&dyn UnicodeFonts; 8] = [
     &font8x8::BASIC_FONTS,
     &font8x8::LATIN_FONTS,
     &font8x8::HIRAGANA_FONTS,
     &font8x8::GREEK_FONTS,
     &font8x8::BLOCK_FONTS,
     &font8x8::BOX_FONTS,
-    &font8x8::HIRAGANA_FONTS,
     &font8x8::MISC_FONTS,
     &font8x8::SGA_FONTS,
 ];
