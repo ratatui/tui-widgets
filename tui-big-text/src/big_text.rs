@@ -180,7 +180,8 @@ fn get_alignment_offset<'a>(
     alignment: Alignment,
     line: &'a Line<'a>,
 ) -> u16 {
-    let big_line_width = line.width() as u16 * letter_width;
+    let line_char_count: usize = line.iter().map(|f| f.content.chars().count()).sum();
+    let big_line_width = line_char_count as u16 * letter_width;
     match alignment {
         Alignment::Center => (area_width / 2).saturating_sub(big_line_width / 2),
         Alignment::Right => area_width.saturating_sub(big_line_width),
