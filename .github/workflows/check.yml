@@ -41,7 +41,7 @@ jobs:
         with:
           toolchain: stable
       - name: Install cargo-binstall
-        uses: taiki-e/install-action@ba47c86ac325773530516bb756137ac718732518 # v2.86.5
+        uses: taiki-e/install-action@6cd13508893c0e7eab5f273c2575d3859bd7229a # v2.86.6
         with:
           tool: cargo-binstall
       - name: Install typos
@@ -145,7 +145,7 @@ jobs:
       - name: Cache Rust build artifacts
         uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
       - name: Install cargo-semver-checks
-        uses: taiki-e/install-action@ba47c86ac325773530516bb756137ac718732518 # v2.86.5
+        uses: taiki-e/install-action@6cd13508893c0e7eab5f273c2575d3859bd7229a # v2.86.6
         with:
           tool: cargo-semver-checks@0.49
       - name: Run cargo-semver-checks
@@ -199,7 +199,7 @@ jobs:
         with:
           toolchain: stable
       - name: Install cargo-binstall
-        uses: taiki-e/install-action@ba47c86ac325773530516bb756137ac718732518 # v2.86.5
+        uses: taiki-e/install-action@6cd13508893c0e7eab5f273c2575d3859bd7229a # v2.86.6
         with:
           tool: cargo-binstall
       - name: Install cargo-rdme
