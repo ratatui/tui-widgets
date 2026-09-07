@@ -2,6 +2,302 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.12] - 2026-09-07
+
+### 🛡️ Security
+
+- *(deps)* Bump taiki-e/install-action from 2.86.5 to 2.87.2 ([#359](https://github.com/ratatui/tui-widgets/issues/359))
+  > Bumps
+  > [taiki-e/install-action](https://github.com/taiki-e/install-action) from
+  > 2.86.5 to 2.87.2.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/releases">taiki-e/install-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>2.87.2</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.50.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>shfmt@latest</code> to 3.14.0.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.1</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.7.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.49.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>syft@latest</code> to 1.51.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>prek@latest</code> to 0.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>d2@latest</code> to 0.8.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-zigbuild@latest</code> to 0.23.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-rdme@latest</code> to 2.2.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>biome@latest</code> to 2.5.11.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.0</h2>
+  > <ul>
+  > <li>
+  > <p>Support <code>kache</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1980">#1980</a>,
+  > thanks <a
+  > href="https://github.com/ChrisJr404"><code>@​ChrisJr404</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.30.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.8.14.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>editorconfig-checker@latest</code> to 3.11.2.</p>
+  > </li>
+  > </ul>
+  > <h2>2.86.8</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 48.0.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasm-tools@latest</code> to 1.258.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>oxfmt@latest</code> to 1.80.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.8.12.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 2.0.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-zigbuild@latest</code> to 0.23.2.</p>
+  > </li>
+  > </ul>
+  > <h2>2.86.7</h2>
+  > <ul>
+  > <li>Update <code>tombi@latest</code> to 1.4.1.</li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/blob/main/CHANGELOG.md">taiki-e/install-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <p>This project adheres to <a href="https://semver.org">Semantic
+  > Versioning</a>.</p>
+  > <!-- raw HTML omitted -->
+  > <h2>[Unreleased]</h2>
+  > <h2>[2.87.4] - 2026-09-02</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.8.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc@latest</code> to 3.36.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>coreutils@latest</code> to 0.11.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.3] - 2026-09-01</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>zizmor@latest</code> to 1.30.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>ubi@latest</code> to 0.12.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc-gen-connect-openapi@latest</code> to 0.25.8.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.8.16.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 2.1.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.57.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.2] - 2026-08-30</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.50.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>shfmt@latest</code> to 3.14.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.1] - 2026-08-29</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.7.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.49.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>syft@latest</code> to 1.51.1.</p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/1ed6d7be6168f6c9046541087ff549b6bc581fdf"><code>1ed6d7b</code></a>
+  > Release 2.87.2</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/0fbfc5b541ba726278965a75a3fd222af703b279"><code>0fbfc5b</code></a>
+  > Update <code>typos@latest</code> to 1.50.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/5f68cef2c452eb3fcb5dccbbcd5f6d192a13a892"><code>5f68cef</code></a>
+  > Update <code>tombi@latest</code> to 1.5.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/d46a5ec40dd3eef68104c5b342f24e599519675f"><code>d46a5ec</code></a>
+  > Update <code>shfmt@latest</code> to 3.14.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/742a3317eac7bd62f91cd888b4eead5e784ba833"><code>742a331</code></a>
+  > Release 2.87.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/c5b69cd73ba573d80324cdcd0b052ca509084b22"><code>c5b69cd</code></a>
+  > Update <code>uv@latest</code> to 0.12.7</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/85e6400c85d74d612698536feafd9e20f40aa257"><code>85e6400</code></a>
+  > Update <code>typos@latest</code> to 1.49.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/91f3a12371baac5722df4e5c6d42937d16656ffe"><code>91f3a12</code></a>
+  > Update tombi manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/160f8b13c099dc3c9067e0658c0da7ac925a00ff"><code>160f8b1</code></a>
+  > Update <code>syft@latest</code> to 1.51.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/aa48d3e72e94215619c754df53a143cdaabefc8b"><code>aa48d3e</code></a>
+  > Update shfmt manifest</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/taiki-e/install-action/compare/ba47c86ac325773530516bb756137ac718732518...1ed6d7be6168f6c9046541087ff549b6bc581fdf">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=taiki-e/install-action&package-manager=github_actions&previous-version=2.86.5&new-version=2.87.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump zizmorcore/zizmor-action from 0.6.2 to 0.6.3 ([#358](https://github.com/ratatui/tui-widgets/issues/358))
+  > Bumps
+  > [zizmorcore/zizmor-action](https://github.com/zizmorcore/zizmor-action)
+  > from 0.6.2 to 0.6.3.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/zizmorcore/zizmor-action/releases">zizmorcore/zizmor-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v0.6.3</h2>
+  > <p>zizmor 1.30.0 is now the default version.</p>
+  > <p>Release notes: <a
+  > href="https://docs.zizmor.sh/release-notes/%5B#1300%5D(https://redirect.github.com/zizmorcore/zizmor-action/issues/1300)">zizmorcore/zizmor-action#1300</a></p>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/70fb788f84895a7701f5643d103d587e460b5c99"><code>70fb788</code></a>
+  > Sync zizmor versions (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/162">#162</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/7999d8c8ac51dbd3bd44e6e35e7cd015b5dcdc82"><code>7999d8c</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif from 4.37.6 to
+  > 4.37.7 in ...</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/2ae1ce9c6b7248fdfc5a4f47f3527240521f79b9"><code>2ae1ce9</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/160">#160</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/951a5eef1c3d7669c20934ceca759fdf8dbd153e"><code>951a5ee</code></a>
+  > Skip prerelease versions in sync-zizmor-versions workflow (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/158">#158</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/79f019101434ac77d41ed24f93c6bdc8676bd355"><code>79f0191</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/156">#156</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/26a3ae6758a68e521bfe592f503410eb61b699bb"><code>26a3ae6</code></a>
+  > sync-zizmor-versions: retry up to 5 times (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/155">#155</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/435cb31ca936c013e7509783c876307347527f14"><code>435cb31</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/151">#151</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/d6cec1055e4fad6cfafcf37200f67065ef8d7acd"><code>d6cec10</code></a>
+  > Try the new self-referencing syntax (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/148">#148</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/edd9b84a6aa802c03764a5ba7c7f627bb5974436"><code>edd9b84</code></a>
+  > README: bump pins (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/150">#150</a>)</li>
+  > <li>See full diff in <a
+  > href="https://github.com/zizmorcore/zizmor-action/compare/3dc1ecc9bcb9e94e9b2c709687979e1298497054...70fb788f84895a7701f5643d103d587e460b5c99">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=zizmorcore/zizmor-action&package-manager=github_actions&previous-version=0.6.2&new-version=0.6.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+
 ## [0.7.11] - 2026-08-24
 
 ### 🐛 Bug Fixes
