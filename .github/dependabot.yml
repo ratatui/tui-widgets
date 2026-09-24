@@ -7,6 +7,8 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
+    commit-message:
+      prefix: "ci(deps)"
     # Delay fresh releases so supply-chain attacks have time to be discovered.
     cooldown:
       default-days: 7
@@ -19,6 +21,8 @@ updates:
   - package-ecosystem: "cargo" # See documentation for possible values
     directory: "/" # Location of package manifests
     versioning-strategy: "increase-if-necessary"
+    commit-message:
+      prefix: "build(deps)"
     # Delay fresh releases so supply-chain attacks have time to be discovered.
     cooldown:
       default-days: 7

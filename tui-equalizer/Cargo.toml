@@ -4,7 +4,6 @@ description = "An equalizer widget for Ratatui with multiple frequency bands."
 version = "0.2.3"
 documentation = "https://docs.rs/tui-equalizer"
 
-authors.workspace = true
 categories.workspace = true
 edition.workspace = true
 keywords.workspace = true

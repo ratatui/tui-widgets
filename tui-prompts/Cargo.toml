@@ -3,7 +3,6 @@ name = "tui-prompts"
 version = "0.6.7"
 description = "A library for building interactive prompts for ratatui."
 
-authors.workspace = true
 categories.workspace = true
 edition.workspace = true
 keywords.workspace = true

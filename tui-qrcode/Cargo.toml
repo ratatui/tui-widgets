@@ -4,7 +4,6 @@ version = "0.2.6"
 description = "A Ratatui widget for displaying QR codes in the terminal"
 documentation = "https://docs.rs/tui-qrcode"
 
-authors.workspace = true
 license.workspace = true
 repository.workspace = true
 edition.workspace = true

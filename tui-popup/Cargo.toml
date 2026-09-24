@@ -4,7 +4,6 @@ version = "0.7.6"
 description = "A simple popup for ratatui"
 documentation = "https://docs.rs/tui-popup"
 
-authors.workspace = true
 categories.workspace = true
 edition.workspace = true
 keywords.workspace = true

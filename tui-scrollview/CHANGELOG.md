@@ -2,318 +2,99 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.6.7] - 2026-06-14
+## [0.6.7](https://crates.io/crates/tui-scrollview/0.6.7) - 2026-06-14
 
-### 🚀 Features
+- *(scrollview)* Render by reference ([#292](https://github.com/ratatui/tui-widgets/pull/292))
 
-- *(scrollview)* Render by reference ([#292](https://github.com/ratatui/tui-widgets/issues/292))
-  > ## Summary
-  >
-  > - add `StatefulWidget for &ScrollView`
-  > - keep the owned `StatefulWidget for ScrollView` path as a compatibility
-  > shim
-  > - document the stored scroll view pattern and regenerate the README
-  >
-  > ## Validation
-  >
-  > - `cargo test -p tui-scrollview --all-features`
-  > - `cargo clippy -p tui-scrollview --all-targets --all-features -- -D
-  > warnings`
-  > - `cargo rdme --check --manifest-path tui-scrollview/Cargo.toml`
-  > - `markdownlint-cli2 tui-scrollview/README.md`
+## [0.6.6](https://crates.io/crates/tui-scrollview/0.6.6) - 2026-06-14
 
+- Modernize tui-scrollview examples ([#285](https://github.com/ratatui/tui-widgets/pull/285))
+- Document widget examples ([#286](https://github.com/ratatui/tui-widgets/pull/286))
 
-## [0.6.6] - 2026-06-14
+## [0.6.5](https://crates.io/crates/tui-scrollview/0.6.5) - 2026-06-11
 
-### 📚 Documentation
+- *(scrollview)* Add bottom detection state ([#75](https://github.com/ratatui/tui-widgets/pull/75))
 
-- Modernize tui-scrollview examples ([#285](https://github.com/ratatui/tui-widgets/issues/285))
-  > ## Summary
-  > - use ratatui::run in the tui-scrollview examples
-  > - borrow DefaultTerminal in example run loops
-  > - use as_key_press_event for key handling
-  > - document each example's purpose and manual controls
-  > - add vertical controls to the horizontal scroll example, which has
-  > vertical overflow on normal terminals
-  >
-  > ## Validation
-  > - cargo +nightly fmt --all
-  > - cargo check -p tui-scrollview --examples --all-features
-  > - cargo clippy -p tui-scrollview --examples --all-features -- -D
-  > warnings
-  > - just rdme-check
+## [0.6.4](https://crates.io/crates/tui-scrollview/0.6.4) - 2026-04-04
 
-- Document widget examples ([#286](https://github.com/ratatui/tui-widgets/issues/286))
-  > ## Summary
-  >
-  > - add run commands and widget-specific context to the example module
-  > docs
-  > - add targeted inline comments for non-obvious example sizing, state,
-  > and rendering choices
-  > - fix broken crate-root `Ratatui` reference links that surfaced during
-  > docs validation
-  >
-  > ## Validation
-  >
-  > - `cargo +nightly fmt --all --check`
-  > - `cargo clippy --workspace --examples --all-features -- -D warnings`
-  > - `cargo doc --workspace --examples --all-features --no-deps`
-  >
-  > `cargo doc` still reports the existing `tui-bar-graph` example/lib
-  > output filename collision.
+- \[codex\] Vendor CI workflows into this repository ([#212](https://github.com/ratatui/tui-widgets/issues/212))
 
-### ⚙️ Miscellaneous Tasks
+## [0.6.3](https://crates.io/crates/tui-scrollview/0.6.3) - 2026-03-29
 
-- Migrate workspace to Rust 2024 ([#263](https://github.com/ratatui/tui-widgets/issues/263))
-  > ## Summary
-  > - migrate the workspace package edition from Rust 2021 to Rust 2024
-  > - apply Cargo edition fixes for lifetime capture and macro fragment
-  > specifiers
-  > - apply mechanical Clippy let-chain fixes needed for the stable -D
-  > warnings gate
-  > - refresh generated README snippets and document the pre-push README
-  > check in AGENTS.md
-  >
-  > ## Validation
-  > - cargo fix --edition --all-features --workspace --allow-dirty
-  > --allow-staged
-  > - just fmt
-  > - just clippy-stable
-  > - cargo test --all-features --workspace
-  > - just rdme-check
-  > - markdownlint-cli2 AGENTS.md README.md tui-*/README.md
+Maintenance updates.
 
+## [0.6.2](https://crates.io/crates/tui-scrollview/0.6.2) - 2025-12-27
 
-## [0.6.5] - 2026-06-11
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/pull/148))
 
-### 🚀 Features
+## [0.6.1](https://crates.io/crates/tui-scrollview/0.6.1) - 2025-12-27
 
-- *(scrollview)* Add bottom detection state ([#75](https://github.com/ratatui/tui-widgets/issues/75))
-  > Add `ScrollViewState::is_at_bottom()` so callers can query whether the
-  > rendered view has reached the bottom of the scroll buffer.
-  >
-  > The check accounts for the rendered page size, including space consumed
-  > by scrollbars, so it only reports true once the final content row is
-  > visible. Rendering also records the actual viewport size before clipping
-  > to the backing buffer, keeping later page scrolling consistent near the
-  > bottom.
-  >
-  > Add tests covering the new state query, bottom edge cases, and scrollbar
-  > visibility combinations that affect viewport sizing.
+Maintenance updates.
 
-### ⚙️ Miscellaneous Tasks
+## [0.6.0](https://crates.io/crates/tui-scrollview/0.6.0) - 2025-12-27
 
-- Add documentation hygiene checks ([#243](https://github.com/ratatui/tui-widgets/issues/243))
-  > ## Summary
-  >
-  > - add required CI jobs for typos and markdownlint-cli2
-  > - exclude generated changelogs from spelling checks
-  > - fix small spelling and Markdown hygiene issues caught by the new
-  > checks
-  >
-  > ## Validation
-  >
-  > - typos
-  > - markdownlint-cli2 "**/*.md"
-  > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
-  > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
-  > - cargo fmt --all -- --check
-  > - actionlint -color=false .github/workflows/check.yml
+- **Breaking:** Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/pull/120))
+  See <https://github.com/joshka/tui-widgets/blob/main/BREAKING_CHANGES.md>
 
+## [0.5.3](https://crates.io/crates/tui-scrollview/0.5.3) - 2025-11-02
 
-## [0.6.4] - 2026-04-04
-
-### Other
-
-- [codex] Vendor CI workflows into this repository ([#212](https://github.com/ratatui/tui-widgets/issues/212))
-
-
-## [0.6.3] - 2026-03-29
-
-### ⚙️ Miscellaneous Tasks
-
-- *(project)* Update the repository link
-
-
-## [0.6.2] - 2025-12-27
-
-### 📚 Documentation
-
-- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
-  > Standardize widget crate docs and README layouts.
-  > Unify badges, links, and license references.
-  > Add consistent usage sections and link style updates.
-
-
-## [0.6.1] - 2025-12-27
-
-### ⚙️ Miscellaneous Tasks
-
-- Refresh readmes and rdme check ([#140](https://github.com/ratatui/tui-widgets/issues/140))
-  > Regenerate crate READMEs via cargo-rdme and add a CI check to keep
-  > workspace readmes in sync.
-
-
-## [0.6.0] - 2025-12-27
-
-### 🚀 Features
-
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
-  > feat!: migrate to ratatui 0.30
-  >
-  > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
-  > crossterm 0.29
-  > - Shift widget crates to ratatui-core/ratatui-widgets imports where
-  > needed
-  > - Update tui-popup/tui-prompts event handling to use crossterm types
-  > - Revise tui-popup rendering/ref semantics and docs to match reference
-  > rendering rules
-  > - Add rolling breaking changes doc and markdownlint config
-  > - Bump direct deps needed for minimal-versions and examples
-  > (document-features, colorgrad, unicode-width)
-
-
-## [0.5.3] - 2025-11-02
-
-### 🐛 Bug Fixes
-
-- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
-  > Fixes a bunch of lints that are in beta / nursery. A lot of these are
-  > opinionated enough that they're not enabled by default, but I figure
-  > they generally lead to nicer code, so are worth fixing.
-
-- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
-
-### 🎨 Styling
-
-- Format doc comments
-
-- Add rustfmt and reformat code
-
-### ⚙️ Miscellaneous Tasks
-
-- Remove leftover github workflow files ([#73](https://github.com/ratatui/tui-widgets/issues/73))
-
-- Use semver compatible dependency versions ([#77](https://github.com/ratatui/tui-widgets/issues/77))
-  > Use 0.x and x.y instead of 0.x.y and x.y.z for deps to reduce
-  > incompatibilities
-
-### Other
-
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/pull/81))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/pull/84))
 - Added render_stateful_widget method to ScrollView ([#65](https://github.com/ratatui/tui-widgets/issues/65))
 
+## [0.5.2](https://crates.io/crates/tui-scrollview/0.5.2) - 2025-11-02
 
-## [0.5.2] - 2025-11-02
-
-### 🐛 Bug Fixes
-
-- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
-  > Fixes a bunch of lints that are in beta / nursery. A lot of these are
-  > opinionated enough that they're not enabled by default, but I figure
-  > they generally lead to nicer code, so are worth fixing.
-
-- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
-
-### 🎨 Styling
-
-- Format doc comments
-
-- Add rustfmt and reformat code
-
-### ⚙️ Miscellaneous Tasks
-
-- Remove leftover github workflow files ([#73](https://github.com/ratatui/tui-widgets/issues/73))
-
-- Use semver compatible dependency versions ([#77](https://github.com/ratatui/tui-widgets/issues/77))
-  > Use 0.x and x.y instead of 0.x.y and x.y.z for deps to reduce
-  > incompatibilities
-
-### Other
-
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/pull/81))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/pull/84))
 - Added render_stateful_widget method to ScrollView ([#65](https://github.com/ratatui/tui-widgets/issues/65))
 
+## [0.5.1](https://crates.io/crates/tui-scrollview/0.5.1) - 2024-11-23
 
-## [0.5.1] - 2024-11-23
+- *(scrollview)* Add scrollbars visibility handling ([#45](https://github.com/ratatui/tui-widgets/pull/45))
 
-### 🚀 Features
-
-- *(tui-scrollview)* Add scrollbars visibility handling ([#45](https://github.com/ratatui/tui-widgets/pull/45))
-  > Scrollbars can now be set to never display, always display or automatically display (default).
-
-## [0.4.1] - 2024-10-20
-
-### 🐛 Bug Fixes
+## [0.4.1](https://crates.io/crates/tui-scrollview/0.4.1) - 2024-10-20
 
 - Broken links from move to tui-widgets
-
-- *(tui-scrollview)* Make scroll_view buffer area the same as its content ([#37](https://github.com/ratatui/tui-widgets/pull/37))
-  > This makes the scroll_view buffer area the same as its content by
-  > default.
-  > The previous behavior is easily reproduced by adding empty space to the
-  > buffer. =)
-  > Most tests remain the same with the scrollbar updated to match the new
-  > size.
-  >
-  > Fixes:[#35](https://github.com/ratatui/tui-widgets/pull/35)
-
-### 📚 Documentation
-
+- *(scrollview)* Make scroll_view buffer area the same as its content ([#37](https://github.com/ratatui/tui-widgets/pull/37))
 - Use ratatui 0.28.1 methods for examples
-
 - Demo horizontal scrolling and mark TODO as done
 
-## [0.4.0] - 2024-08-11
+## [0.4.0](https://crates.io/crates/tui-scrollview/0.4.0) - 2024-08-11
 
 Ratatui-0.28.0 compatible release
 
-## [0.3.13] - 2024-08-06
+## [0.3.13](https://crates.io/crates/tui-scrollview/0.3.13) - 2024-08-06
 
-### ⚙️ Miscellaneous Tasks
+Dependency updates.
 
-- Update Cargo.toml dependencies
-
-## [0.3.12] - 2024-08-02
-
-### 📚 Documentation
+## [0.3.12](https://crates.io/crates/tui-scrollview/0.3.12) - 2024-08-02
 
 - Clean up changelogs ([#17](https://github.com/ratatui/tui-widgets/pull/17))
-  > - removed unnecessary footer comments
-  > - removed [unreleased] sections
-  > - removed duplicate release notes
 
-## [0.3.11] - 2024-07-25
+## [0.3.11](https://crates.io/crates/tui-scrollview/0.3.11) - 2024-07-25
 
-### ⚙️ Miscellaneous Tasks
+Maintenance updates.
 
-- Update READMEs and licensing info
-
-## [0.3.10] - 2024-07-25
-
-### 🐛 Bug Fixes
+## [0.3.10](https://crates.io/crates/tui-scrollview/0.3.10) - 2024-07-25
 
 - Use ratatui::crossterm instead of crossterm::
 
-## [0.3.9] - 2024-07-24
+## [0.3.9](https://crates.io/crates/tui-scrollview/0.3.9) - 2024-07-24
 
-### ⚙️ Miscellaneous Tasks
+Maintenance updates.
 
-- Various fixes / clippy lints ([#6](https://github.com/ratatui/tui-widgets/pull/6))
+## [0.3.8](https://crates.io/crates/tui-scrollview/0.3.8) - 2024-07-24
 
-## [0.3.8](https://github.com/ratatui/tui-widgets/compare/tui-scrollview-v0.3.7...tui-scrollview-v0.3.8) - 2024-07-24
+Maintenance updates.
 
-### Other
-
-- Move to tui-widgets repository
-- move tui-scrollview to its own directory
-
-## [0.3.7] - 2024-06-25
+## [0.3.7](https://crates.io/crates/tui-scrollview/0.3.7) - 2024-06-25
 
 ### ⚙️ Miscellaneous Tasks
 
 - *(deps)* Bump rstest in the all-dependencies group ([#34](https://github.com/joshka/tui-scrollview/pull/34))
 - *(deps)* Bump ratatui in the all-dependencies group ([#36](https://github.com/joshka/tui-scrollview/pull/36))
 
-## [0.3.6] - 2024-05-21
+## [0.3.6](https://crates.io/crates/tui-scrollview/0.3.6) - 2024-05-21
 
 ### 📚 Documentation
 
@@ -328,7 +109,7 @@ Ratatui-0.28.0 compatible release
 
 - --- ([#33](https://github.com/joshka/tui-scrollview/pull/33))
 
-## [0.3.5] - 2024-04-26
+## [0.3.5](https://crates.io/crates/tui-scrollview/0.3.5) - 2024-04-26
 
 ### 🚀 Features
 
@@ -345,13 +126,13 @@ Ratatui-0.28.0 compatible release
 - Group dependabot updates
 - *(deps)* Bump ratatui in the all-dependencies group ([#28](https://github.com/joshka/tui-scollview/issues/28))
 
-## [0.3.4] - 2024-04-01
+## [0.3.4](https://crates.io/crates/tui-scrollview/0.3.4) - 2024-04-01
 
 ### 🐛 Bug Fixes
 
 - Scroll_to_bottom scrolls the y offset not the x offset ([#24](https://github.com/joshka/tui-scollview/issues/24))
 
-## [0.3.3] - 2024-03-28
+## [0.3.3](https://crates.io/crates/tui-scrollview/0.3.3) - 2024-03-28
 
 ### 📚 Documentation
 
@@ -363,20 +144,20 @@ Ratatui-0.28.0 compatible release
 - *(deps)* Bump color-eyre from 0.6.2 to 0.6.3 ([#18](https://github.com/joshka/tui-scollview/issues/18))
 - *(deps)* Bump indoc from 2.0.4 to 2.0.5 ([#21](https://github.com/joshka/tui-scollview/issues/21))
 
-## [0.3.2] - 2024-03-12
+## [0.3.2](https://crates.io/crates/tui-scrollview/0.3.2) - 2024-03-12
 
 ### ⚙️ Miscellaneous Tasks
 
 - Use joshka/github-workflows ([#15](https://github.com/joshka/tui-scollview/issues/15))
 - *(deps)* Bump mio from 0.8.10 to 0.8.11 ([#14](https://github.com/joshka/tui-scollview/issues/14))
 
-## [0.3.1] - 2024-02-13
+## [0.3.1](https://crates.io/crates/tui-scrollview/0.3.1) - 2024-02-13
 
 ### ⚙️ Miscellaneous Tasks
 
 - *(deps)* Bump ratatui from 0.26.0 to 0.26.1 ([#12](https://github.com/joshka/tui-scollview/issues/12))
 
-## [0.3.0] - 2024-02-11
+## [0.3.0](https://crates.io/crates/tui-scrollview/0.3.0) - 2024-02-11
 
 ### 🚀 Features
 
@@ -387,7 +168,7 @@ Ratatui-0.28.0 compatible release
 - *(deps)* Bump ratatui to 0.26.0
 - *(deps)* Bump codecov/codecov-action from 3 to 4 ([#9](https://github.com/joshka/tui-scollview/issues/9))
 
-## [0.2.1] - 2024-01-30
+## [0.2.1](https://crates.io/crates/tui-scrollview/0.2.1) - 2024-01-30
 
 ### 📚 Documentation
 
@@ -398,17 +179,17 @@ Ratatui-0.28.0 compatible release
 - Create dependabot.yml
 - *(deps)* Bump ratatui from 0.26.0-alpha.2 to 0.26.0-alpha.3 ([#8](https://github.com/joshka/tui-scollview/issues/8))
 
-## [0.2.0] - 2024-01-24
+## [0.2.0](https://crates.io/crates/tui-scrollview/0.2.0) - 2024-01-24
 
 ### 🚀 Features
 
-- [**breaking**] Use Position instead of tuple for offset
+- **Breaking:** Use Position instead of tuple for offset
 
 ### 📚 Documentation
 
 - Update readme todo list
 
-## [0.1.5] - 2024-01-18
+## [0.1.5](https://crates.io/crates/tui-scrollview/0.1.5) - 2024-01-18
 
 ### 🐛 Bug Fixes
 
@@ -424,7 +205,7 @@ Ratatui-0.28.0 compatible release
 - Update readme and gif
 - Longer demo time
 
-## [0.1.4] - 2024-01-18
+## [0.1.4](https://crates.io/crates/tui-scrollview/0.1.4) - 2024-01-18
 
 ### 🐛 Bug Fixes
 
@@ -434,7 +215,7 @@ Ratatui-0.28.0 compatible release
 
 - Add demo gif
 
-## [0.1.3] - 2024-01-18
+## [0.1.3](https://crates.io/crates/tui-scrollview/0.1.3) - 2024-01-18
 
 ### 🚀 Features
 
@@ -453,14 +234,14 @@ Ratatui-0.28.0 compatible release
 
 - Add example
 
-## [0.1.2] - 2024-01-18
+## [0.1.2](https://crates.io/crates/tui-scrollview/0.1.2) - 2024-01-18
 
 ### 📚 Documentation
 
 - Add todos to readme
 - Run cargo-rdme
 
-## [0.1.1] - 2024-01-18
+## [0.1.1](https://crates.io/crates/tui-scrollview/0.1.1) - 2024-01-18
 
 ### 🐛 Bug Fixes
 
@@ -471,7 +252,7 @@ Ratatui-0.28.0 compatible release
 - Add changelog
 - Configure release-plz
 
-## [0.1.0] - 2024-01-18
+## [0.1.0](https://crates.io/crates/tui-scrollview/0.1.0) - 2024-01-18
 
 ### ⚙️ Miscellaneous Tasks
 

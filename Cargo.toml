@@ -4,7 +4,6 @@ members = ["tui-*"]
 default-members = ["tui-*"]
 
 [workspace.package]
-authors = ["Joshka"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/ratatui/tui-widgets"
 edition = "2024"
@@ -48,8 +47,9 @@ name = "tui-widgets"
 description = "A collection of useful widgets for building terminal user interfaces using Ratatui"
 version = "0.7.11"
 documentation = "https://docs.rs/tui-widgets"
+# Repository automation is not part of the facade's published package.
+include = ["src/**", "README.md", "CHANGELOG.md", "BREAKING_CHANGES.md", "LICENSE-*", "SECURITY.md"]
 
-authors.workspace = true
 categories.workspace = true
 edition.workspace = true
 keywords.workspace = true

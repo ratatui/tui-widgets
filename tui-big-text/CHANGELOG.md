@@ -2,463 +2,108 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.8.9] - 2026-08-24
-
-### 🐛 Bug Fixes
-
-- *(tui-big-text)* Add support for rendering all available fonts with `BigText` ([#355](https://github.com/ratatui/tui-widgets/issues/355))
-  > The `BigText` widget would only use the `BasicFont` provided by
-  > `font8x8`. However, there are numerous other fonts that can render the
-  > glyphs, such as Hiragana etc.
-  >
-  > This changes `render_symbol` to iterate over all the available fonts
-  > rather than only doing a lookup against `font8x8::BASIC_FONTS`.
-  >
-  > Also added an example and a VHS tape for demo purposes.
-  >
-  > <img width="1200" height="400" alt="non_ascii"
-  > src="https://github.com/user-attachments/assets/9a3dd054-fb32-4070-92d1-0055bcef04b7"
-  > />
-  >
-  > Doing this exposed a bug with how the line widths are calculated and
-  > therefore how the text alignment worked.
-  >
-  > In `get_alignment_offset`, the "line width" (i.e. character count) was
-  > actually just using the underlying byte width, not the number of
-  > characters. This has been changed to simply sum the number of characters
-  > from each span of the line.
-  >
-  > ---------
-
-
-## [0.8.8] - 2026-06-18
-
-### ⚙️ Miscellaneous Tasks
-
-- Update Cargo.toml dependencies
-
-
-## [0.8.7] - 2026-06-14
-
-### 🚀 Features
-
-- *(big-text)* Render by reference ([#288](https://github.com/ratatui/tui-widgets/issues/288))
-  > ## Summary
-  >
-  > - add `Widget for &BigText`
-  > - keep the owned `Widget for BigText` path as a compatibility shim
-  > - cover borrowed rendering against owned rendering
-  >
-  > ## Validation
-  >
-  > - `cargo test -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
-  > tui-prompts -p tui-scrollview --all-features`
-  > - `cargo clippy -p tui-big-text -p tui-bar-graph -p tui-equalizer -p
-  > tui-prompts -p tui-scrollview --all-targets --all-features -- -D
-  > warnings`
-
-
-## [0.8.6] - 2026-06-14
-
-### 🐛 Bug Fixes
-
-- Ignore non-press key events in examples ([#284](https://github.com/ratatui/tui-widgets/issues/284))
-  > ## Summary
-  > - ignore release and repeat key events in the tui-big-text stopwatch
-  > example
-  > - confirm the remaining examples already filter key handling to press
-  > events
-  >
-  > ## Validation
-  > - cargo +nightly fmt --all
-  > - cargo check -p tui-big-text --examples --all-features
-  > - cargo clippy -p tui-big-text --examples --all-features -- -D warnings
-  > - just rdme-check
-
-### 📚 Documentation
-
-- Modernize tui-big-text examples ([#276](https://github.com/ratatui/tui-widgets/issues/276))
-  > ## Summary
-  > - remove the shared big-text example terminal helper
-  > - use ratatui::run directly in the static examples
-  > - remove the custom Tui wrapper from the stopwatch example
-  >
-  > ## Validation
-  > - cargo +nightly fmt --all
-  > - cargo check -p tui-big-text --examples --all-features
-  > - cargo clippy -p tui-big-text --examples --all-features -- -D warnings
-
-- Install color-eyre in stopwatch example ([#280](https://github.com/ratatui/tui-widgets/issues/280))
-  > ## Summary
-  > - install color-eyre before running the tui-big-text stopwatch example
-  > - keep the stopwatch lifecycle and behavior unchanged
-  >
-  > ## Validation
-  > - cargo +nightly fmt --all
-  > - cargo check -p tui-big-text --examples --all-features
-  > - cargo clippy -p tui-big-text --examples --all-features -- -D warnings
-
-- Document widget examples ([#286](https://github.com/ratatui/tui-widgets/issues/286))
-  > ## Summary
-  >
-  > - add run commands and widget-specific context to the example module
-  > docs
-  > - add targeted inline comments for non-obvious example sizing, state,
-  > and rendering choices
-  > - fix broken crate-root `Ratatui` reference links that surfaced during
-  > docs validation
-  >
-  > ## Validation
-  >
-  > - `cargo +nightly fmt --all --check`
-  > - `cargo clippy --workspace --examples --all-features -- -D warnings`
-  > - `cargo doc --workspace --examples --all-features --no-deps`
-  >
-  > `cargo doc` still reports the existing `tui-bar-graph` example/lib
-  > output filename collision.
-
-### ⚙️ Miscellaneous Tasks
-
-- Migrate workspace to Rust 2024 ([#263](https://github.com/ratatui/tui-widgets/issues/263))
-  > ## Summary
-  > - migrate the workspace package edition from Rust 2021 to Rust 2024
-  > - apply Cargo edition fixes for lifetime capture and macro fragment
-  > specifiers
-  > - apply mechanical Clippy let-chain fixes needed for the stable -D
-  > warnings gate
-  > - refresh generated README snippets and document the pre-push README
-  > check in AGENTS.md
-  >
-  > ## Validation
-  > - cargo fix --edition --all-features --workspace --allow-dirty
-  > --allow-staged
-  > - just fmt
-  > - just clippy-stable
-  > - cargo test --all-features --workspace
-  > - just rdme-check
-  > - markdownlint-cli2 AGENTS.md README.md tui-*/README.md
-
-
-## [0.8.5] - 2026-06-11
-
-### ⚙️ Miscellaneous Tasks
-
-- Add documentation hygiene checks ([#243](https://github.com/ratatui/tui-widgets/issues/243))
-  > ## Summary
-  >
-  > - add required CI jobs for typos and markdownlint-cli2
-  > - exclude generated changelogs from spelling checks
-  > - fix small spelling and Markdown hygiene issues caught by the new
-  > checks
-  >
-  > ## Validation
-  >
-  > - typos
-  > - markdownlint-cli2 "**/*.md"
-  > - cargo rdme --check --manifest-path tui-big-text/Cargo.toml
-  > - cargo rdme --check --manifest-path tui-popup/Cargo.toml
-  > - cargo fmt --all -- --check
-  > - actionlint -color=false .github/workflows/check.yml
-
-
-## [0.8.4] - 2026-04-04
-
-### ⚙️ Miscellaneous Tasks
-
-- *(deps)* Lower dependency floors and reduce dependabot noise ([#211](https://github.com/ratatui/tui-widgets/issues/211))
-  > ## Summary
-  >
-  > - lower direct dependency requirements to the broadest semver ranges the
-  > workspace actually supports
-  > - keep `Cargo.lock` on current compatible releases, including the direct
-  > `clap`, `tokio`, `futures`, and `rand` updates that fit this PR's scope
-  > - configure Dependabot to group Cargo and GitHub Actions updates and use
-  > `increase-if-necessary` to reduce manifest churn
-  >
-  > ## Details
-  >
-  > This change validates dependency floors with `cargo minimal-versions` in
-  > `--direct` mode so the library manifests reflect honest direct
-  > requirements instead of transitive minimum noise.
-  >
-  > Notable outcomes:
-  >
-  > - broadened requirements such as `clap = "4"` and `tokio = "1"` after
-  > verifying the workspace still compiles and tests against their earliest
-  > compatible direct versions
-  > - kept real floors where required, such as `crossterm = "0.29"`,
-  > `document-features = "0.2.11"`, and `derive_setters = "0.1.9"`
-  > - kept the direct `rand` update to `0.10` and adjusted the
-  > `tui-bar-graph` examples to generate random `Vec<f64>` values in a `rand
-  > 0.10`-compatible way
-  > - kept transitive duplicate major versions where they are still required
-  > by downstream crates like the Ratatui stack or `lipsum`
-  >
-  > Dependabot should now produce less noise because grouped update PRs can
-  > primarily refresh `Cargo.lock` while leaving `Cargo.toml` alone unless a
-  > broader range is truly needed.
-  >
-  > ## Validation
-  >
-  > - `cargo minimal-versions check --workspace --direct`
-  > - `cargo check --all-features --workspace`
-  > - `cargo test --all-features --workspace`
-  > - `cargo minimal-versions test --workspace --all-features --direct`
-  > - `cargo outdated --workspace --root-deps-only`
-  > - `cargo test -p tui-bar-graph --all-features --examples`
-  >
-  > ## Supersedes
-  >
-  > This PR should supersede and allow closing the related Dependabot PRs:
-
-### Other
-
-- [codex] Vendor CI workflows into this repository ([#212](https://github.com/ratatui/tui-widgets/issues/212))
-
-
-## [0.8.3] - 2026-03-29
-
-### 🚀 Features
-
-- *(tui-big-text)* Add optional Block wrapping for BigText ([#197](https://github.com/ratatui/tui-widgets/issues/197))
-  > # Summary
-  > Add optional block wrapping for the big text widget so it can render
-  > within a border and title area.
-  >
-  > # Motivation
-  > This enables composing the big text widget with standard block
-  > decorations, which is useful for dashboards and status displays.
-  > E. g. I'm making layout with BigText stopwatch and I want to use block
-  > title as a place for status. Additionally it fits into my dashboard
-  > design.
-  > I think it might be useful.
-  >
-  > My example:
-  >
-  > ![Screenshot_5](https://github.com/user-attachments/assets/0fdbbdeb-8f05-4588-ad39-ba5133295717)
-  >
-  >
-  > # Changes
-  > - Added optional block support in the widget configuration and rendering
-  > flow.
-  > - Added a test to validate rendering with a bordered block and title.
-  >
-  > # Testing
-  > `cargo test -p tui-big-text --all-features -- --nocapture`
-
-
-## [0.8.2] - 2026-02-01
-
-### 🚀 Features
-
-- *(tui-bigtext)* Enable no_std as default ([#190](https://github.com/ratatui/tui-widgets/issues/190))
-  > This enables using `tui-bigtext` in a no_std environment
-  >
-  > e.g. https://github.com/ratatui/mousefood/pull/159
-
-### ⚙️ Miscellaneous Tasks
-
-- *(project)* Update the repository link
-
-
-## [0.8.1] - 2025-12-27
-
-### 📚 Documentation
-
-- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/issues/148))
-  > Standardize widget crate docs and README layouts.
-  > Unify badges, links, and license references.
-  > Add consistent usage sections and link style updates.
-
-
-## [0.8.0] - 2025-12-27
-
-### 🚀 Features
-
-- *(tui-big-text)* [**breaking**] Add block octant characters ([#117](https://github.com/ratatui/tui-widgets/issues/117))
-  > The changes in this PR add the following enum variants:
-  >
-  > * `PixelSize::QuarterHeight` and `PixelSize::Octant` to `PixelSize`
-  > found in the `tui-big-text` crate.
-  >
-  > Documentation and tests are included, and the examples (along with the
-  > VHS tapes and screenshots) have been updated to show the new
-  > **two-row-tall text** styles in action and how they compare to text
-  > rendered with other `PixelSize` settings.
-
-- [**breaking**] Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/issues/120))
-  > feat!: migrate to ratatui 0.30
-  >
-  > - Update workspace deps to ratatui 0.30, ratatui-core, ratatui-widgets,
-  > crossterm 0.29
-  > - Shift widget crates to ratatui-core/ratatui-widgets imports where
-  > needed
-  > - Update tui-popup/tui-prompts event handling to use crossterm types
-  > - Revise tui-popup rendering/ref semantics and docs to match reference
-  > rendering rules
-  > - Add rolling breaking changes doc and markdownlint config
-  > - Bump direct deps needed for minimal-versions and examples
-  > (document-features, colorgrad, unicode-width)
-
-### 📚 Documentation
-
-- *(tui-big-text)* Fix enum name in field details ([#119](https://github.com/ratatui/tui-widgets/issues/119))
-
-
-## [0.7.3] - 2025-11-02
-
-### 🐛 Bug Fixes
-
-- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
-  > Fixes a bunch of lints that are in beta / nursery. A lot of these are
-  > opinionated enough that they're not enabled by default, but I figure
-  > they generally lead to nicer code, so are worth fixing.
-
-- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
-
-### 🎨 Styling
-
-- Format doc comments
-
-- Add rustfmt and reformat code
-
-### ⚙️ Miscellaneous Tasks
-
-- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/ratatui/tui-widgets/issues/70))
-
-
-## [0.7.2] - 2025-11-02
-
-### 🐛 Bug Fixes
-
-- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/issues/81))
-  > Fixes a bunch of lints that are in beta / nursery. A lot of these are
-  > opinionated enough that they're not enabled by default, but I figure
-  > they generally lead to nicer code, so are worth fixing.
-
-- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/issues/84))
-
-### 🎨 Styling
-
-- Format doc comments
-
-- Add rustfmt and reformat code
-
-### ⚙️ Miscellaneous Tasks
-
-- *(tui-big-text)* Support disabling crossterm ([#70](https://github.com/ratatui/tui-widgets/issues/70))
-
-
-## [0.6.1] - 2024-10-20
-
-### 🐛 Bug Fixes
+## [0.8.9](https://crates.io/crates/tui-big-text/0.8.9) - 2026-08-24
+
+- *(big-text)* Add support for rendering all available fonts with `BigText` ([#355](https://github.com/ratatui/tui-widgets/pull/355))
+
+## [0.8.8](https://crates.io/crates/tui-big-text/0.8.8) - 2026-06-18
+
+Dependency updates.
+
+## [0.8.7](https://crates.io/crates/tui-big-text/0.8.7) - 2026-06-14
+
+- *(big-text)* Render by reference ([#288](https://github.com/ratatui/tui-widgets/pull/288))
+
+## [0.8.6](https://crates.io/crates/tui-big-text/0.8.6) - 2026-06-14
+
+- Ignore non-press key events in examples ([#284](https://github.com/ratatui/tui-widgets/pull/284))
+- Modernize tui-big-text examples ([#276](https://github.com/ratatui/tui-widgets/pull/276))
+- Install color-eyre in stopwatch example ([#280](https://github.com/ratatui/tui-widgets/pull/280))
+- Document widget examples ([#286](https://github.com/ratatui/tui-widgets/pull/286))
+
+## [0.8.5](https://crates.io/crates/tui-big-text/0.8.5) - 2026-06-11
+
+Maintenance updates.
+
+## [0.8.4](https://crates.io/crates/tui-big-text/0.8.4) - 2026-04-04
+
+- \[codex\] Vendor CI workflows into this repository ([#212](https://github.com/ratatui/tui-widgets/issues/212))
+
+## [0.8.3](https://crates.io/crates/tui-big-text/0.8.3) - 2026-03-29
+
+- *(big-text)* Add optional Block wrapping for BigText ([#197](https://github.com/ratatui/tui-widgets/pull/197))
+
+## [0.8.2](https://crates.io/crates/tui-big-text/0.8.2) - 2026-02-01
+
+- *(bigtext)* Enable no_std as default ([#190](https://github.com/ratatui/tui-widgets/pull/190))
+
+## [0.8.1](https://crates.io/crates/tui-big-text/0.8.1) - 2025-12-27
+
+- Refresh widget docs ([#148](https://github.com/ratatui/tui-widgets/pull/148))
+
+## [0.8.0](https://crates.io/crates/tui-big-text/0.8.0) - 2025-12-27
+
+- *(big-text)* **Breaking:** Add block octant characters ([#117](https://github.com/ratatui/tui-widgets/pull/117))
+  Update exhaustive matches on `PixelSize` to handle the new `Octant` variant.
+- **Breaking:** Migrate to ratatui 0.30 ([#120](https://github.com/ratatui/tui-widgets/pull/120))
+  See <https://github.com/joshka/tui-widgets/blob/main/BREAKING_CHANGES.md>
+- *(big-text)* Fix enum name in field details ([#119](https://github.com/ratatui/tui-widgets/pull/119))
+
+## [0.7.3](https://crates.io/crates/tui-big-text/0.7.3) - 2025-11-02
+
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/pull/81))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/pull/84))
+
+## [0.7.2](https://crates.io/crates/tui-big-text/0.7.2) - 2025-11-02
+
+- Clippy lints ([#81](https://github.com/ratatui/tui-widgets/pull/81))
+- More clippy lints ([#84](https://github.com/ratatui/tui-widgets/pull/84))
+
+## [0.6.1](https://crates.io/crates/tui-big-text/0.6.1) - 2024-10-20
 
 - Broken links from move to tui-widgets
 
-## [0.6.0] - 2024-08-11
+## [0.6.0](https://crates.io/crates/tui-big-text/0.6.0) - 2024-08-11
 
 Ratatui-0.28.0 compatible release
 
-## [0.5.6] - 2024-08-09
+## [0.5.6](https://crates.io/crates/tui-big-text/0.5.6) - 2024-08-09
 
-### ⚙️ Miscellaneous Tasks
+Dependency updates.
 
-- Update Cargo.toml dependencies
-
-## [0.5.5] - 2024-08-09
-
-### 🐛 Bug Fixes
+## [0.5.5](https://crates.io/crates/tui-big-text/0.5.5) - 2024-08-09
 
 - Update to ratatui 0.28 ([#24](https://github.com/ratatui/tui-widgets/pull/24))
-  > Note that for projects that rely on crossterm, Ratatui 0.28.0 now relies internally on Crossterm 0.28.0.
-  > Ratatui release notes highlights: <https://ratatui.rs/highlights/v028/>
-  > See <https://github.com/ratatui-org/ratatui/issues/1298> for notes about crossterm compatibility
 
-## [0.5.4] - 2024-08-06
+## [0.5.4](https://crates.io/crates/tui-big-text/0.5.4) - 2024-08-06
 
-### ⚙️ Miscellaneous Tasks
+Dependency updates.
 
-- Update Cargo.toml dependencies
-
-## [0.5.3] - 2024-08-02
-
-### 📚 Documentation
+## [0.5.3](https://crates.io/crates/tui-big-text/0.5.3) - 2024-08-02
 
 - Clean up changelogs ([#17](https://github.com/ratatui/tui-widgets/pull/17))
-  > - removed unnecessary footer comments
-  > - removed [unreleased] sections
-  > - removed duplicate release notes
 
-## [0.5.2] - 2024-07-25
+## [0.5.2](https://crates.io/crates/tui-big-text/0.5.2) - 2024-07-25
 
-### ⚙️ Miscellaneous Tasks
+Maintenance updates.
 
-- Update tui-big-text images
+## [0.5.1](https://crates.io/crates/tui-big-text/0.5.1) - 2024-07-25
 
-## [0.5.1] - 2024-07-25
+Maintenance updates.
 
-### ⚙️ Miscellaneous Tasks
+## [0.5.0](https://crates.io/crates/tui-big-text/0.5.0) - 2024-07-25
 
-- Remove anyhow dependency
-  > Replaced with color_eyre generally
-
-- Update READMEs and licensing info
-
-## [0.5.0] - 2024-07-25
-
-### 🚀 Features
-
-- *(tui-big-text)* Add alignment helper methods
-  > Adds helper methods to the `BigTextBuilder` struct to set the alignment
-  > of the text. This makes it simpler to set the alignment of the text.
-  >
-  > ```rust
-  > let left = BigText::builder()
-  >     .left_aligned()
-  >     .lines(vec!["Left".white().into()])
-  >     .build()?;
-  >
-  > let right = BigText::builder()
-  >     .right_aligned()
-  >     .lines(vec!["Right".green().into()])
-  >     .build()?;
-  >
-  > let centered = BigText::builder()
-  >     .centered()
-  >     .lines(vec!["Centered".red().into()])
-  >     .build()?;
-  > ```
-
-- *(tui-big-text)* [**breaking**] Make `BigText` builder infallible ([#14](https://github.com/ratatui/tui-widgets/pull/14))
-  > BigTextBuilder.build() no longer returns a Result. Instead it returns
-  > the BigText widget directly. This change is made to simplify rendering
-  > code which often otherwise doesn't have any error conditions.
-  >
-  > This also makes the fields on BigText public (marked as non-exhaustive)
-  >
-  > BREAKING CHANGE:BigTextBuilder.build() no longer returns a Result.
-  >
-  > Remove the `?` / `expect` / `unwrap` calls code which calls the build
-  > method.
-  >
-  > ```diff
-  >  let big_text = BigText::builder()
-  >      .lines(vec![Line::from("SingleLine")])
-  > -    .build()?;
-  > +    .build();
-  > ```
-
-### 📚 Documentation
-
+- *(big-text)* **Breaking:** Make `BigText` builder infallible ([#14](https://github.com/ratatui/tui-widgets/pull/14))
+  `BigTextBuilder::build()` now returns `BigText` directly. Remove `?`, `.expect(...)`,
+  or `.unwrap()` after `.build()`.
+- *(big-text)* Add alignment helper methods
 - Simplify tui-big-text examples
 
-## [0.4.7] - 2024-07-24
+## [0.4.7](https://crates.io/crates/tui-big-text/0.4.7) - 2024-07-24
 
-### ⚙️ Miscellaneous Tasks
+Maintenance updates.
 
-- Various fixes / clippy lints ([#6](https://github.com/ratatui/tui-widgets/pull/6))
-
-## [0.4.5] - 2024-06-25
+## [0.4.5](https://crates.io/crates/tui-big-text/0.4.5) - 2024-06-25
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -467,27 +112,18 @@ Ratatui-0.28.0 compatible release
 - Set msrv to 1.74
 - Update git cliff config
 
-## [0.4.6](https://github.com/ratatui/tui-widgets/compare/tui-big-text-v0.4.5...tui-big-text-v0.4.6) - 2024-07-24
+## [0.4.6](https://crates.io/crates/tui-big-text/0.4.6) - 2024-07-24
 
-### Other
-
-- Move to tui-widgets repository
-
-### ⚙️ Miscellaneous Tasks
-
-- Use faster release-plz
-- *(deps)* Bump ratatui version ([#45](https://github.com/joshka/tui-big-text/issues/45))
-- Use <https://github.com/joshka/github-workflows/>
 - Set msrv to 1.74
 
-## [0.4.4] - 2024-05-28
+## [0.4.4](https://crates.io/crates/tui-big-text/0.4.4) - 2024-05-28
 
 ### ⚙️ Miscellaneous Tasks
 
 - *(deps)* Update ratatui to 0.26.3 and itertools to 0.13.0
 - Release ([#43](https://github.com/joshka/tui-big-text/issues/43))
 
-## [0.4.3] - 2024-04-12
+## [0.4.3](https://crates.io/crates/tui-big-text/0.4.3) - 2024-04-12
 
 ### 🚀 Features
 
@@ -497,7 +133,7 @@ Ratatui-0.28.0 compatible release
 
 - Release v0.4.3 ([#42](https://github.com/joshka/tui-big-text/issues/42))
 
-## [0.4.2] - 2024-02-26
+## [0.4.2](https://crates.io/crates/tui-big-text/0.4.2) - 2024-02-26
 
 ### 🚀 Features
 
@@ -518,13 +154,13 @@ Ratatui-0.28.0 compatible release
 
 - *(deps)* Update derive_builder requirement from 0.13.0 to 0.20.0 ([#38](https://github.com/joshka/tui-big-text/issues/38))
 
-## [0.4.1] - 2024-02-15
+## [0.4.1](https://crates.io/crates/tui-big-text/0.4.1) - 2024-02-15
 
 ### ⚙️ Miscellaneous Tasks
 
 - Release ([#37](https://github.com/joshka/tui-big-text/issues/37))
 
-## [0.4.0] - 2024-02-08
+## [0.4.0](https://crates.io/crates/tui-big-text/0.4.0) - 2024-02-08
 
 ### 🚀 Features
 
@@ -547,21 +183,21 @@ Ratatui-0.28.0 compatible release
 
 - *(deps)* Bump codecov/codecov-action from 3 to 4 ([#34](https://github.com/joshka/tui-big-text/issues/34))
 
-## [0.3.6] - 2024-02-05
+## [0.3.6](https://crates.io/crates/tui-big-text/0.3.6) - 2024-02-05
 
 ### ⚙️ Miscellaneous Tasks
 
 - Update ratatui to 0.26 ([#32](https://github.com/joshka/tui-big-text/issues/32))
 - Release ([#33](https://github.com/joshka/tui-big-text/issues/33))
 
-## [0.3.5] - 2024-01-30
+## [0.3.5](https://crates.io/crates/tui-big-text/0.3.5) - 2024-01-30
 
 ### ⚙️ Miscellaneous Tasks
 
 - *(deps)* Update strum to 0.26.1
 - Release ([#31](https://github.com/joshka/tui-big-text/issues/31))
 
-## [0.3.4] - 2024-01-29
+## [0.3.4](https://crates.io/crates/tui-big-text/0.3.4) - 2024-01-29
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -571,7 +207,7 @@ Ratatui-0.28.0 compatible release
 
 - *(deps)* Update derive_builder requirement from 0.12.0 to 0.13.0 ([#29](https://github.com/joshka/tui-big-text/issues/29))
 
-## [0.3.3] - 2024-01-24
+## [0.3.3](https://crates.io/crates/tui-big-text/0.3.3) - 2024-01-24
 
 ### 🐛 Bug Fixes
 
@@ -583,7 +219,7 @@ Ratatui-0.28.0 compatible release
 - Create dependabot.yml
 - Release ([#25](https://github.com/joshka/tui-big-text/issues/25))
 
-## [0.3.2] - 2024-01-12
+## [0.3.2](https://crates.io/crates/tui-big-text/0.3.2) - 2024-01-12
 
 ### 📚 Documentation
 
@@ -599,7 +235,7 @@ Ratatui-0.28.0 compatible release
 
 - Add PixelSize option ([#22](https://github.com/joshka/tui-big-text/issues/22))
 
-## [0.3.1] - 2023-12-23
+## [0.3.1](https://crates.io/crates/tui-big-text/0.3.1) - 2023-12-23
 
 ### 📚 Documentation
 
@@ -609,7 +245,7 @@ Ratatui-0.28.0 compatible release
 
 - Release ([#21](https://github.com/joshka/tui-big-text/issues/21))
 
-## [0.3.0] - 2023-12-23
+## [0.3.0](https://crates.io/crates/tui-big-text/0.3.0) - 2023-12-23
 
 ### 📚 Documentation
 
@@ -620,13 +256,13 @@ Ratatui-0.28.0 compatible release
 - Add check for cargo-rdme to ensure readme is updated when lib.rs docs are ([#16](https://github.com/joshka/tui-big-text/issues/16))
 - Release v0.3.0 ([#17](https://github.com/joshka/tui-big-text/issues/17))
 
-## [0.2.1] - 2023-10-27
+## [0.2.1](https://crates.io/crates/tui-big-text/0.2.1) - 2023-10-27
 
 ### ⚙️ Miscellaneous Tasks
 
 - Bump release version to 0.2.1
 
-## [0.2.0] - 2023-10-27
+## [0.2.0](https://crates.io/crates/tui-big-text/0.2.0) - 2023-10-27
 
 ### 🐛 Bug Fixes
 
@@ -640,7 +276,7 @@ Ratatui-0.28.0 compatible release
 
 - *(ratatui)* Update dependency to ratatui 0.24.0
 
-## [0.1.4] - 2023-09-05
+## [0.1.4](https://crates.io/crates/tui-big-text/0.1.4) - 2023-09-05
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -648,7 +284,7 @@ Ratatui-0.28.0 compatible release
 - Undo release-plz fetch-depth change
 - Release ([#13](https://github.com/joshka/tui-big-text/issues/13))
 
-## [0.1.3] - 2023-09-05
+## [0.1.3](https://crates.io/crates/tui-big-text/0.1.3) - 2023-09-05
 
 ### 🐛 Bug Fixes
 
@@ -674,7 +310,7 @@ Ratatui-0.28.0 compatible release
 - Configure release-plz fetch depth
 - Release ([#12](https://github.com/joshka/tui-big-text/issues/12))
 
-## [0.1.2] - 2023-09-05
+## [0.1.2](https://crates.io/crates/tui-big-text/0.1.2) - 2023-09-05
 
 ### 📚 Documentation
 
@@ -684,7 +320,7 @@ Ratatui-0.28.0 compatible release
 
 - Release ([#5](https://github.com/joshka/tui-big-text/issues/5))
 
-## [0.1.1] - 2023-09-05
+## [0.1.1](https://crates.io/crates/tui-big-text/0.1.1) - 2023-09-05
 
 ### 🚀 Features
 
