@@ -2261,7 +2261,7 @@ dependencies = [
 
 [[package]]
 name = "tui-prompts"
-version = "0.6.7"
+version = "0.6.8"
 dependencies = [
  "clap",
  "color-eyre",
@@ -2278,7 +2278,7 @@ dependencies = [
 
 [[package]]
 name = "tui-qrcode"
-version = "0.2.6"
+version = "0.2.7"
 dependencies = [
  "color-eyre",
  "qrcode",
@@ -2301,7 +2301,7 @@ dependencies = [
 
 [[package]]
 name = "tui-scrollview"
-version = "0.6.7"
+version = "0.6.8"
 dependencies = [
  "color-eyre",
  "indoc",
@@ -2314,7 +2314,7 @@ dependencies = [
 
 [[package]]
 name = "tui-widgets"
-version = "0.7.11"
+version = "0.7.12"
 dependencies = [
  "document-features",
  "ratatui-core",

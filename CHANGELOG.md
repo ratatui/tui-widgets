@@ -2,6 +2,1549 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.12] - 2026-09-24
+
+### 🛡️ Security
+
+- *(deps)* Bump taiki-e/install-action from 2.86.5 to 2.87.2 ([#359](https://github.com/ratatui/tui-widgets/issues/359))
+  > Bumps
+  > [taiki-e/install-action](https://github.com/taiki-e/install-action) from
+  > 2.86.5 to 2.87.2.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/releases">taiki-e/install-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>2.87.2</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.50.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>shfmt@latest</code> to 3.14.0.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.1</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.7.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.49.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>syft@latest</code> to 1.51.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>prek@latest</code> to 0.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>d2@latest</code> to 0.8.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-zigbuild@latest</code> to 0.23.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-rdme@latest</code> to 2.2.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>biome@latest</code> to 2.5.11.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.0</h2>
+  > <ul>
+  > <li>
+  > <p>Support <code>kache</code>. (<a
+  > href="https://redirect.github.com/taiki-e/install-action/pull/1980">#1980</a>,
+  > thanks <a
+  > href="https://github.com/ChrisJr404"><code>@​ChrisJr404</code></a>)</p>
+  > </li>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.30.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.8.14.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>editorconfig-checker@latest</code> to 3.11.2.</p>
+  > </li>
+  > </ul>
+  > <h2>2.86.8</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 48.0.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>wasm-tools@latest</code> to 1.258.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>oxfmt@latest</code> to 1.80.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.8.12.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 2.0.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-zigbuild@latest</code> to 0.23.2.</p>
+  > </li>
+  > </ul>
+  > <h2>2.86.7</h2>
+  > <ul>
+  > <li>Update <code>tombi@latest</code> to 1.4.1.</li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/blob/main/CHANGELOG.md">taiki-e/install-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <p>This project adheres to <a href="https://semver.org">Semantic
+  > Versioning</a>.</p>
+  > <!-- raw HTML omitted -->
+  > <h2>[Unreleased]</h2>
+  > <h2>[2.87.4] - 2026-09-02</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.8.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc@latest</code> to 3.36.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>coreutils@latest</code> to 0.11.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.3] - 2026-09-01</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>zizmor@latest</code> to 1.30.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>ubi@latest</code> to 0.12.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc-gen-connect-openapi@latest</code> to 0.25.8.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.8.16.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 2.1.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.57.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.2] - 2026-08-30</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.50.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>shfmt@latest</code> to 3.14.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.1] - 2026-08-29</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.7.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.49.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>syft@latest</code> to 1.51.1.</p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/1ed6d7be6168f6c9046541087ff549b6bc581fdf"><code>1ed6d7b</code></a>
+  > Release 2.87.2</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/0fbfc5b541ba726278965a75a3fd222af703b279"><code>0fbfc5b</code></a>
+  > Update <code>typos@latest</code> to 1.50.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/5f68cef2c452eb3fcb5dccbbcd5f6d192a13a892"><code>5f68cef</code></a>
+  > Update <code>tombi@latest</code> to 1.5.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/d46a5ec40dd3eef68104c5b342f24e599519675f"><code>d46a5ec</code></a>
+  > Update <code>shfmt@latest</code> to 3.14.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/742a3317eac7bd62f91cd888b4eead5e784ba833"><code>742a331</code></a>
+  > Release 2.87.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/c5b69cd73ba573d80324cdcd0b052ca509084b22"><code>c5b69cd</code></a>
+  > Update <code>uv@latest</code> to 0.12.7</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/85e6400c85d74d612698536feafd9e20f40aa257"><code>85e6400</code></a>
+  > Update <code>typos@latest</code> to 1.49.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/91f3a12371baac5722df4e5c6d42937d16656ffe"><code>91f3a12</code></a>
+  > Update tombi manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/160f8b13c099dc3c9067e0658c0da7ac925a00ff"><code>160f8b1</code></a>
+  > Update <code>syft@latest</code> to 1.51.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/aa48d3e72e94215619c754df53a143cdaabefc8b"><code>aa48d3e</code></a>
+  > Update shfmt manifest</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/taiki-e/install-action/compare/ba47c86ac325773530516bb756137ac718732518...1ed6d7be6168f6c9046541087ff549b6bc581fdf">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=taiki-e/install-action&package-manager=github_actions&previous-version=2.86.5&new-version=2.87.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump zizmorcore/zizmor-action from 0.6.2 to 0.6.3 ([#358](https://github.com/ratatui/tui-widgets/issues/358))
+  > Bumps
+  > [zizmorcore/zizmor-action](https://github.com/zizmorcore/zizmor-action)
+  > from 0.6.2 to 0.6.3.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/zizmorcore/zizmor-action/releases">zizmorcore/zizmor-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v0.6.3</h2>
+  > <p>zizmor 1.30.0 is now the default version.</p>
+  > <p>Release notes: <a
+  > href="https://docs.zizmor.sh/release-notes/%5B#1300%5D(https://redirect.github.com/zizmorcore/zizmor-action/issues/1300)">zizmorcore/zizmor-action#1300</a></p>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/70fb788f84895a7701f5643d103d587e460b5c99"><code>70fb788</code></a>
+  > Sync zizmor versions (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/162">#162</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/7999d8c8ac51dbd3bd44e6e35e7cd015b5dcdc82"><code>7999d8c</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif from 4.37.6 to
+  > 4.37.7 in ...</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/2ae1ce9c6b7248fdfc5a4f47f3527240521f79b9"><code>2ae1ce9</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/160">#160</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/951a5eef1c3d7669c20934ceca759fdf8dbd153e"><code>951a5ee</code></a>
+  > Skip prerelease versions in sync-zizmor-versions workflow (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/158">#158</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/79f019101434ac77d41ed24f93c6bdc8676bd355"><code>79f0191</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/156">#156</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/26a3ae6758a68e521bfe592f503410eb61b699bb"><code>26a3ae6</code></a>
+  > sync-zizmor-versions: retry up to 5 times (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/155">#155</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/435cb31ca936c013e7509783c876307347527f14"><code>435cb31</code></a>
+  > chore(deps): bump github/codeql-action/upload-sarif (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/151">#151</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/d6cec1055e4fad6cfafcf37200f67065ef8d7acd"><code>d6cec10</code></a>
+  > Try the new self-referencing syntax (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/148">#148</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/edd9b84a6aa802c03764a5ba7c7f627bb5974436"><code>edd9b84</code></a>
+  > README: bump pins (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/150">#150</a>)</li>
+  > <li>See full diff in <a
+  > href="https://github.com/zizmorcore/zizmor-action/compare/3dc1ecc9bcb9e94e9b2c709687979e1298497054...70fb788f84895a7701f5643d103d587e460b5c99">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=zizmorcore/zizmor-action&package-manager=github_actions&previous-version=0.6.2&new-version=0.6.3)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump taiki-e/install-action from 2.87.2 to 2.87.7 ([#363](https://github.com/ratatui/tui-widgets/issues/363))
+  > Bumps
+  > [taiki-e/install-action](https://github.com/taiki-e/install-action) from
+  > 2.87.2 to 2.87.7.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/releases">taiki-e/install-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>2.87.7</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasm-bindgen@latest</code> to 0.2.128.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.10.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.5.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>rclone@latest</code> to 1.75.1.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.6</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>rafn@latest</code> to 0.1.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>editorconfig-checker@latest</code> to 3.11.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.57.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>convco@latest</code> to 0.7.2.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.5</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.30.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.9.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.50.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.5.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>release-plz@latest</code> to 0.3.161.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>prek@latest</code> to 0.5.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>oxfmt@latest</code> to 1.81.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.9.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>martin@latest</code> to 1.15.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>git-cliff@latest</code> to 2.14.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-zigbuild@latest</code> to 0.23.4.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-deb@latest</code> to 3.8.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>biome@latest</code> to 2.5.12.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.4</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.8.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc@latest</code> to 3.36.1.</p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/blob/main/CHANGELOG.md">taiki-e/install-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <p>This project adheres to <a href="https://semver.org">Semantic
+  > Versioning</a>.</p>
+  > <!-- raw HTML omitted -->
+  > <h2>[Unreleased]</h2>
+  > <h2>[2.87.8] - 2026-09-07</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>shfmt@latest</code> to 3.14.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>release-plz@latest</code> to 0.3.162.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc-gen-connect-openapi@latest</code> to 0.26.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.57.4.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-llvm-cov@latest</code> to 0.9.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-crap@latest</code> to 0.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-binstall@latest</code> to 1.23.0.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.7] - 2026-09-06</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasm-bindgen@latest</code> to 0.2.128.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.10.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>tombi@latest</code> to 1.5.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>rclone@latest</code> to 1.75.1.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.6] - 2026-09-05</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>rafn@latest</code> to 0.1.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>editorconfig-checker@latest</code> to 3.11.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>dprint@latest</code> to 0.57.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>convco@latest</code> to 0.7.2.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.5] - 2026-09-04</h2>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/84f5ac3124727fb3d284d4d22ee9ab3654fd09a6"><code>84f5ac3</code></a>
+  > Release 2.87.7</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/9387b0a701bf52ec87d0fab2bb9be442eb2d5d5a"><code>9387b0a</code></a>
+  > Update <code>wasm-bindgen@latest</code> to 0.2.128</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/e78e42317f870ee65eecf610b1806e47a247d483"><code>e78e423</code></a>
+  > Update <code>uv@latest</code> to 0.12.10</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/2a651e44c99da6e412156883bf77f6875ef10954"><code>2a651e4</code></a>
+  > Update <code>tombi@latest</code> to 1.5.2</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/0b467d84e67f7d92f5ca881452597f458b89cea7"><code>0b467d8</code></a>
+  > Update shfmt manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/7d5acd9c247d9a60de005f09476e45a48afba928"><code>7d5acd9</code></a>
+  > Update release-plz manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/2405a4d813a372dde4907d5460f5a8d9dda80a39"><code>2405a4d</code></a>
+  > Update <code>rclone@latest</code> to 1.75.1</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/f4416e2ad3467ae3dbf7b6480da275ce049b866c"><code>f4416e2</code></a>
+  > Update protoc-gen-connect-openapi manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/b323c5fe780719037044305b5e5dd86de0d6953d"><code>b323c5f</code></a>
+  > Update dprint manifest</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/0f9e7db50df379bbdd9d03ad3d2d1fa0c9d677a6"><code>0f9e7db</code></a>
+  > Update cargo-llvm-cov manifest</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/taiki-e/install-action/compare/1ed6d7be6168f6c9046541087ff549b6bc581fdf...84f5ac3124727fb3d284d4d22ee9ab3654fd09a6">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=taiki-e/install-action&package-manager=github_actions&previous-version=2.87.2&new-version=2.87.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump futures from 0.3.32 to 0.3.34 ([#362](https://github.com/ratatui/tui-widgets/issues/362))
+  > Bumps [futures](https://github.com/rust-lang/futures-rs) from 0.3.32 to
+  > 0.3.34.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/rust-lang/futures-rs/releases">futures's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>0.3.34</h2>
+  > <ul>
+  > <li>Preserve cloned waker identity. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3032">#3032</a>)</li>
+  > <li>Updato <code>syn</code> to 3. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3028">#3028</a>)</li>
+  > </ul>
+  > <h2>0.3.33</h2>
+  > <ul>
+  > <li>Fix <code>ReadLine</code>'s soundness issue regarding to exception
+  > safety. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3020">#3020</a>)</li>
+  > <li>Fix unsound <code>Send</code> impl for <code>IterPinRef</code> and
+  > <code>Iter</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3003">#3003</a>)</li>
+  > <li>Fix stacked borrows violation in <code>compat01as03</code>
+  > implementation. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3012">#3012</a>)</li>
+  > <li>Fix memory leak in <code>FuturesUnordered::IntoIter</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3005">#3005</a>)</li>
+  > <li>Add <code>portable-atomic-alloc</code> feature and use it in
+  > <code>FuturesUnordered</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3007">#3007</a>)</li>
+  > <li>Re-export <code>alloc::task::Wake</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3010">#3010</a>)</li>
+  > <li>Update <code>spin</code> to 0.12. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3014">#3014</a>)</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/rust-lang/futures-rs/blob/main/CHANGELOG.md">futures's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>0.3.34 - 2026-08-11</h1>
+  > <ul>
+  > <li>Preserve cloned waker identity. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3032">#3032</a>)</li>
+  > <li>Updato <code>syn</code> to 3. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3028">#3028</a>)</li>
+  > </ul>
+  > <h1>0.3.33 - 2026-07-18</h1>
+  > <ul>
+  > <li>Fix <code>ReadLine</code>'s soundness issue regarding to exception
+  > safety. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3020">#3020</a>)</li>
+  > <li>Fix unsound <code>Send</code> impl for <code>IterPinRef</code> and
+  > <code>Iter</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3003">#3003</a>)</li>
+  > <li>Fix stacked borrows violation in <code>compat01as03</code>
+  > implementation. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3012">#3012</a>)</li>
+  > <li>Fix memory leak in <code>FuturesUnordered::IntoIter</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3005">#3005</a>)</li>
+  > <li>Add <code>portable-atomic-alloc</code> feature and use it in
+  > <code>FuturesUnordered</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3007">#3007</a>)</li>
+  > <li>Re-export <code>alloc::task::Wake</code>. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3010">#3010</a>)</li>
+  > <li>Update <code>spin</code> to 0.12. (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3014">#3014</a>)</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/705e6b5c0f06535b1aac1cb1989a172b3d45be8c"><code>705e6b5</code></a>
+  > Release 0.3.34</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/616dac7bf944ff9876b7f8b77b37c6224cbbb506"><code>616dac7</code></a>
+  > compat: Inline RawWaker clone function</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/41763693ee6400e2a7931530790af6e1746eb1c6"><code>4176369</code></a>
+  > Inline remaining RawWaker clone functions</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/f17a8957d9a25a2dd3c95b43f1c6caa108df6bcc"><code>f17a895</code></a>
+  > Fix cloned FuturesUnordered waker identity</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/51d62ada9bb8eab06339475e0f1b19cfa41fb2d7"><code>51d62ad</code></a>
+  > macro: bump <code>syn</code> to v3 (<a
+  > href="https://redirect.github.com/rust-lang/futures-rs/issues/3028">#3028</a>)</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/9e26177cf01155d57917ee943246d0c97843deed"><code>9e26177</code></a>
+  > ci: Reduce timeout-minutes</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/b2d098331763fca9b0665f80bb31a66e3112a2cf"><code>b2d0983</code></a>
+  > tsan: Enable Adaptive Delay</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/f733d0ea9fed49263203ae0a7cb6beb5fe1a04c4"><code>f733d0e</code></a>
+  > Miri: Ignore compat tests</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/e5def2f60c7eb1e8e6b76da540e148cc7638b115"><code>e5def2f</code></a>
+  > Rename default branch to main</li>
+  > <li><a
+  > href="https://github.com/rust-lang/futures-rs/commit/89cc254cb8bfcc78e6a31e7711d0757f97bcb531"><code>89cc254</code></a>
+  > Release 0.3.33</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/rust-lang/futures-rs/compare/0.3.32...0.3.34">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=futures&package-manager=cargo&previous-version=0.3.32&new-version=0.3.34)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump release-plz/action from 0.5.131 to 0.5.133 ([#361](https://github.com/ratatui/tui-widgets/issues/361))
+  > Bumps [release-plz/action](https://github.com/release-plz/action) from
+  > 0.5.131 to 0.5.133.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/release-plz/action/releases">release-plz/action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v0.5.133</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.5 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/514">release-plz/action#514</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.6 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/515">release-plz/action#515</a></li>
+  > <li>chore(deps): update dependency cargo-bins/cargo-binstall to v1.23.0
+  > by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/516">release-plz/action#516</a></li>
+  > <li>Update to 0.3.162 by <a
+  > href="https://github.com/marcoieni"><code>@​marcoieni</code></a> in <a
+  > href="https://redirect.github.com/release-plz/action/pull/517">release-plz/action#517</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/release-plz/action/compare/v0.5.132...v0.5.133">https://github.com/release-plz/action/compare/v0.5.132...v0.5.133</a></p>
+  > <h2>v0.5.132</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>chore(deps): update dependency cargo-bins/cargo-binstall to v1.21.0
+  > by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/467">release-plz/action#467</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.83.3 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/468">release-plz/action#468</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.83.4 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/469">release-plz/action#469</a></li>
+  > <li>chore(deps): update dependency obi1kenobi/cargo-semver-checks to
+  > v0.49 by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/470">release-plz/action#470</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.84.0 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/471">release-plz/action#471</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.84.1 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/472">release-plz/action#472</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.0 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/473">release-plz/action#473</a></li>
+  > <li>chore(deps): update actions/checkout action to v7.0.1 by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/474">release-plz/action#474</a></li>
+  > <li>chore(deps): update taiki-e/install-action action to v2.85.1 by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/476">release-plz/action#476</a></li>
+  > <li>chore(deps): update cargo-bins/cargo-binstall action to v1.21.1 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/477">release-plz/action#477</a></li>
+  > <li>chore(deps): update dependency cargo-bins/cargo-binstall to v1.21.1
+  > by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/478">release-plz/action#478</a></li>
+  > <li>chore(deps): update taiki-e/install-action action to v2.85.2 by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/479">release-plz/action#479</a></li>
+  > <li>chore(deps): lock file maintenance by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/480">release-plz/action#480</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.3 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/475">release-plz/action#475</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.4 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/481">release-plz/action#481</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.5 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/482">release-plz/action#482</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.6 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/483">release-plz/action#483</a></li>
+  > <li>chore(deps): update dependency obi1kenobi/cargo-semver-checks to
+  > v0.50 by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/485">release-plz/action#485</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.7 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/486">release-plz/action#486</a></li>
+  > <li>chore(deps): lock file maintenance by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/487">release-plz/action#487</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.8 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/488">release-plz/action#488</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.10 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/489">release-plz/action#489</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.11 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/490">release-plz/action#490</a></li>
+  > <li>chore(deps): lock file maintenance by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/491">release-plz/action#491</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.12 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/492">release-plz/action#492</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.13 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/493">release-plz/action#493</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.85.14 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/494">release-plz/action#494</a></li>
+  > <li>chore(deps): update taiki-e/install-action action to v2.86.0 by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/484">release-plz/action#484</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.1 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/495">release-plz/action#495</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.2 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/497">release-plz/action#497</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.3 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/498">release-plz/action#498</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.4 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/499">release-plz/action#499</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.5 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/500">release-plz/action#500</a></li>
+  > <li>chore(deps): update dependency cargo-bins/cargo-binstall to v1.22.0
+  > by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/501">release-plz/action#501</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.6 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/502">release-plz/action#502</a></li>
+  > <li>chore(deps): lock file maintenance by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/503">release-plz/action#503</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.7 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/504">release-plz/action#504</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.86.8 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/505">release-plz/action#505</a></li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/aec534bbd8631793b9b3b8f1ee6cd886c322e17f"><code>aec534b</code></a>
+  > Update to 0.3.162 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/517">#517</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/c2ccfe2ab1863e052e969450e6fa489031c9a01e"><code>c2ccfe2</code></a>
+  > chore(deps): update dependency cargo-bins/cargo-binstall to v1.23.0 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/516">#516</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/638cc1a53449a7a16e938b82f14605420a3fdfd1"><code>638cc1a</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.6 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/515">#515</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/03402f60ca4a62d942017ee2fcafd7e7e57e6ad8"><code>03402f6</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.5 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/514">#514</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/b5543c19b03be9bd48852d20ca89f478b7723260"><code>b5543c1</code></a>
+  > Update to 0.3.161 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/513">#513</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/d44660f6800b7af45498a8ae8a23a95524497290"><code>d44660f</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.4 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/511">#511</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/15ac3418b8a702b42078aa60ded6a817b5225b98"><code>15ac341</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.3 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/510">#510</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/79fe687e46c154372bfd86bed883d012e18f3b9f"><code>79fe687</code></a>
+  > chore(deps): lock file maintenance (<a
+  > href="https://redirect.github.com/release-plz/action/issues/509">#509</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/bfbc53d3139854df691ea819be8c82144fa068ff"><code>bfbc53d</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.2 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/508">#508</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/f36e36e3a42ab544de828cbabd641f32dd661b86"><code>f36e36e</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.1 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/507">#507</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/release-plz/action/compare/2eb1d8bcb770b4c48ccfaad919734b38b51958c9...aec534bbd8631793b9b3b8f1ee6cd886c322e17f">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=release-plz/action&package-manager=github_actions&previous-version=0.5.131&new-version=0.5.133)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump clap from 4.6.6 to 4.6.7 ([#370](https://github.com/ratatui/tui-widgets/issues/370))
+  > Bumps [clap](https://github.com/clap-rs/clap) from 4.6.6 to 4.6.7.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/clap-rs/clap/releases">clap's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v4.6.7</h2>
+  > <h2>[4.6.7] - 2026-09-14</h2>
+  > <h3>Features</h3>
+  > <ul>
+  > <li><em>(derive)</em> Add <code>#[command(defer = &lt;bool&gt;)]</code>
+  > attribute to opt-in to lazy initialisation of subcommands</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/clap-rs/clap/blob/main/CHANGELOG.md">clap's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>[4.6.7] - 2026-09-14</h2>
+  > <h3>Features</h3>
+  > <ul>
+  > <li><em>(derive)</em> Add <code>#[command(defer = &lt;bool&gt;)]</code>
+  > attribute to opt-in to lazy initialisation of subcommands</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/d3e59a9ab214910b9dad02921b7ef42c6400de9b"><code>d3e59a9</code></a>
+  > chore: Release</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/d997f878c484e02b2935d32a7b67afe990e91227"><code>d997f87</code></a>
+  > docs: Update changelog</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/fb6058cc38cf6f4b07b8db89c850fc80e059e222"><code>fb6058c</code></a>
+  > Merge pull request <a
+  > href="https://redirect.github.com/clap-rs/clap/issues/6409">#6409</a>
+  > from heaths/pwsh-support</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/2310870f7a9fe4c39f5bb5620261a06ac9aaa0b1"><code>2310870</code></a>
+  > test(complete): Add tests for completer_for_path</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/5967c17393a09f90112cdc5b2c20a1383f0bd8e4"><code>5967c17</code></a>
+  > refactor(complete): Move shell detection to Shells</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/594602bb29f374e49da5029df63e5c740c723ad0"><code>594602b</code></a>
+  > fix(complete): Detect pwsh for PowerShell</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/3a4f2d031b5110aaaac40f1cb1d6c0b8ff619df8"><code>3a4f2d0</code></a>
+  > Merge pull request <a
+  > href="https://redirect.github.com/clap-rs/clap/issues/6427">#6427</a>
+  > from clap-rs/renovate/shlex-2.x</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/67ebaed4ac95a83d5d7cc22d64ee0fc162ae1db3"><code>67ebaed</code></a>
+  > Merge pull request <a
+  > href="https://redirect.github.com/clap-rs/clap/issues/6426">#6426</a>
+  > from clap-rs/renovate/actions-checkout-7.x</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/c968b136d0e6f560c08b06a844a20f2798a00096"><code>c968b13</code></a>
+  > chore(deps): Update Rust crate shlex to v2</li>
+  > <li><a
+  > href="https://github.com/clap-rs/clap/commit/8f247cbf58c582a755ee4dbe62a2390d93b9f8eb"><code>8f247cb</code></a>
+  > chore(deps): Update actions/checkout action to v7</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/clap-rs/clap/compare/clap_complete-v4.6.6...clap_complete-v4.6.7">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=clap&package-manager=cargo&previous-version=4.6.6&new-version=4.6.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump taiki-e/install-action from 2.87.7 to 2.87.17 ([#371](https://github.com/ratatui/tui-widgets/issues/371))
+  > Bumps
+  > [taiki-e/install-action](https://github.com/taiki-e/install-action) from
+  > 2.87.7 to 2.87.17.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/releases">taiki-e/install-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>2.87.17</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.17.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>release-plz@latest</code> to 0.3.169.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 2.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kache@latest</code> to 0.25.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>git-cliff@latest</code> to 2.14.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-tarpaulin@latest</code> to 0.37.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-leptos@latest</code> to 0.3.9.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.16</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.16.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>release-plz@latest</code> to 0.3.168.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>protoc@latest</code> to 3.36.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.9.11.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.15</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>syft@latest</code> to 1.52.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.9.10.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 2.4.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kache@latest</code> to 0.23.1.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>coreutils@latest</code> to 0.12.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-nextest@latest</code> to 0.9.145.</p>
+  > </li>
+  > </ul>
+  > <h2>2.87.14</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>vacuum@latest</code> to 0.30.6.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.15.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>typos@latest</code> to 1.50.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>sccache@latest</code> to 0.18.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>oxfmt@latest</code> to 1.83.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.9.9.</p>
+  > </li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/taiki-e/install-action/blob/main/CHANGELOG.md">taiki-e/install-action's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h1>Changelog</h1>
+  > <p>All notable changes to this project will be documented in this
+  > file.</p>
+  > <p>This project adheres to <a href="https://semver.org">Semantic
+  > Versioning</a>.</p>
+  > <!-- raw HTML omitted -->
+  > <h2>[Unreleased]</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>wasmtime@latest</code> to 49.0.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-shear@latest</code> to 1.13.5.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-nextest@latest</code> to 0.9.146.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.18] - 2026-09-22</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>oxfmt@latest</code> to 1.84.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>mise@latest</code> to 2026.9.12.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kache@latest</code> to 0.26.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-tarpaulin@latest</code> to 0.37.4.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-rdme@latest</code> to 2.2.3.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.17] - 2026-09-20</h2>
+  > <ul>
+  > <li>
+  > <p>Update <code>uv@latest</code> to 0.12.17.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>release-plz@latest</code> to 0.3.169.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kingfisher@latest</code> to 2.5.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>kache@latest</code> to 0.25.0.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>git-cliff@latest</code> to 2.14.2.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-tarpaulin@latest</code> to 0.37.3.</p>
+  > </li>
+  > <li>
+  > <p>Update <code>cargo-leptos@latest</code> to 0.3.9.</p>
+  > </li>
+  > </ul>
+  > <h2>[2.87.16] - 2026-09-19</h2>
+  > <ul>
+  > <li>Update <code>uv@latest</code> to 0.12.16.</li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/94c31af3204a9f15ab40b35ad084410b905bbc73"><code>94c31af</code></a>
+  > Release 2.87.17</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/475671fc114659712ce2ff4c1d94a927df34acaa"><code>475671f</code></a>
+  > Update <code>uv@latest</code> to 0.12.17</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/eed0e36340db98284aecb38cec932175e66e08ea"><code>eed0e36</code></a>
+  > Update <code>release-plz@latest</code> to 0.3.169</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/28baa71610ff9c6ca6f9c2238420167a40febe2d"><code>28baa71</code></a>
+  > Update <code>kingfisher@latest</code> to 2.5.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/2588b3fa536b03dd80a635cd335014a5a7fbd06c"><code>2588b3f</code></a>
+  > Update <code>kache@latest</code> to 0.25.0</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/0d4ca4ed781961f5ab749f0c9f822ff33177e1bf"><code>0d4ca4e</code></a>
+  > Update <code>git-cliff@latest</code> to 2.14.2</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/b96f11eb0c9f8820d621c4b53579f5ad6045195e"><code>b96f11e</code></a>
+  > Update <code>cargo-tarpaulin@latest</code> to 0.37.3</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/18f77226f9e7299acf999113898461dc73e12132"><code>18f7722</code></a>
+  > Update <code>cargo-leptos@latest</code> to 0.3.9</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/9114bf4d891761788c546334fd37538eae1bf8b3"><code>9114bf4</code></a>
+  > Release 2.87.16</li>
+  > <li><a
+  > href="https://github.com/taiki-e/install-action/commit/bef0ddf2a7e45573907045d6d2e764dc0b552ec4"><code>bef0ddf</code></a>
+  > Update <code>uv@latest</code> to 0.12.16</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/taiki-e/install-action/compare/84f5ac3124727fb3d284d4d22ee9ab3654fd09a6...94c31af3204a9f15ab40b35ad084410b905bbc73">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=taiki-e/install-action&package-manager=github_actions&previous-version=2.87.7&new-version=2.87.17)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump release-plz/action from 0.5.133 to 0.5.139 ([#369](https://github.com/ratatui/tui-widgets/issues/369))
+  > Bumps [release-plz/action](https://github.com/release-plz/action) from
+  > 0.5.133 to 0.5.139.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/release-plz/action/releases">release-plz/action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v0.5.139</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.14 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/536">release-plz/action#536</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.15 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/537">release-plz/action#537</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.16 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/538">release-plz/action#538</a></li>
+  > <li>Update to 0.3.169 by <a
+  > href="https://github.com/marcoieni"><code>@​marcoieni</code></a> in <a
+  > href="https://redirect.github.com/release-plz/action/pull/540">release-plz/action#540</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/release-plz/action/compare/v0.5.138...v0.5.139">https://github.com/release-plz/action/compare/v0.5.138...v0.5.139</a></p>
+  > <h2>v0.5.138</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>chore(deps): lock file maintenance by <a
+  > href="https://github.com/renovate"><code>@​renovate</code></a>[bot] in
+  > <a
+  > href="https://redirect.github.com/release-plz/action/pull/532">release-plz/action#532</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.13 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/534">release-plz/action#534</a></li>
+  > <li>Update to 0.3.168 by <a
+  > href="https://github.com/marcoieni"><code>@​marcoieni</code></a> in <a
+  > href="https://redirect.github.com/release-plz/action/pull/535">release-plz/action#535</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/release-plz/action/compare/v0.5.137...v0.5.138">https://github.com/release-plz/action/compare/v0.5.137...v0.5.138</a></p>
+  > <h2>v0.5.137</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.10 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/526">release-plz/action#526</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.11 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/529">release-plz/action#529</a></li>
+  > <li>fix: support Gitea runners without GitHub identity lookup by <a
+  > href="https://github.com/marcoienibot"><code>@​marcoienibot</code></a>
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/528">release-plz/action#528</a></li>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.12 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/530">release-plz/action#530</a></li>
+  > <li>Update to 0.3.167 by <a
+  > href="https://github.com/marcoieni"><code>@​marcoieni</code></a> in <a
+  > href="https://redirect.github.com/release-plz/action/pull/531">release-plz/action#531</a></li>
+  > </ul>
+  > <h2>New Contributors</h2>
+  > <ul>
+  > <li><a
+  > href="https://github.com/marcoienibot"><code>@​marcoienibot</code></a>
+  > made their first contribution in <a
+  > href="https://redirect.github.com/release-plz/action/pull/528">release-plz/action#528</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/release-plz/action/compare/v0.5.136...v0.5.137">https://github.com/release-plz/action/compare/v0.5.136...v0.5.137</a></p>
+  > <h2>v0.5.136</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>Update to 0.3.165 by <a
+  > href="https://github.com/marcoieni"><code>@​marcoieni</code></a> in <a
+  > href="https://redirect.github.com/release-plz/action/pull/525">release-plz/action#525</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/release-plz/action/compare/v0.5.135...v0.5.136">https://github.com/release-plz/action/compare/v0.5.135...v0.5.136</a></p>
+  > <h2>v0.5.135</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.9 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/524">release-plz/action#524</a></li>
+  > <li>Update to 0.3.164 by <a
+  > href="https://github.com/marcoieni"><code>@​marcoieni</code></a> in <a
+  > href="https://redirect.github.com/release-plz/action/pull/523">release-plz/action#523</a></li>
+  > </ul>
+  > <p><strong>Full Changelog</strong>: <a
+  > href="https://github.com/release-plz/action/compare/v0.5.134...v0.5.135">https://github.com/release-plz/action/compare/v0.5.134...v0.5.135</a></p>
+  > <h2>v0.5.134</h2>
+  > <h2>What's Changed</h2>
+  > <ul>
+  > <li>chore(deps): update dependency taiki-e/install-action to v2.87.7 by
+  > <a href="https://github.com/renovate"><code>@​renovate</code></a>[bot]
+  > in <a
+  > href="https://redirect.github.com/release-plz/action/pull/519">release-plz/action#519</a></li>
+  > </ul>
+  > <!-- raw HTML omitted -->
+  > </blockquote>
+  > <p>... (truncated)</p>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/b8d6b54b02889ff2ae2bb82e8b57c3a8fc1683a5"><code>b8d6b54</code></a>
+  > Update to 0.3.169 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/540">#540</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/7e10418246386569da67d0a24cf48e1e22cd02a5"><code>7e10418</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.16 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/538">#538</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/d857f6137c15757d56160bec07b8b864a0ff4635"><code>d857f61</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.15 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/537">#537</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/9e858f9ef3a7956552c999d63e4560d0f8fee359"><code>9e858f9</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.14 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/536">#536</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/d6c56271d640b6c1b61d1e00593641c400a9f4bd"><code>d6c5627</code></a>
+  > Update to 0.3.168 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/535">#535</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/3acb31e441dd97e24c4a506379662b1f8464c68a"><code>3acb31e</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.13 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/534">#534</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/f77cdb110db9e97e8a6b0be2860b1e30acc07888"><code>f77cdb1</code></a>
+  > chore(deps): lock file maintenance (<a
+  > href="https://redirect.github.com/release-plz/action/issues/532">#532</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/8e61445f0b34e7c6d985255f2f1f05a36eb350dc"><code>8e61445</code></a>
+  > Update to 0.3.167 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/531">#531</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/c9cf542b74a03e4207534ce67266b3e0eaf3fc33"><code>c9cf542</code></a>
+  > chore(deps): update dependency taiki-e/install-action to v2.87.12 (<a
+  > href="https://redirect.github.com/release-plz/action/issues/530">#530</a>)</li>
+  > <li><a
+  > href="https://github.com/release-plz/action/commit/c4d7bf617fc39443dd5d5045d1267fe8400870d6"><code>c4d7bf6</code></a>
+  > fix: support Gitea runners without GitHub identity lookup (<a
+  > href="https://redirect.github.com/release-plz/action/issues/528">#528</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/release-plz/action/compare/aec534bbd8631793b9b3b8f1ee6cd886c322e17f...b8d6b54b02889ff2ae2bb82e8b57c3a8fc1683a5">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=release-plz/action&package-manager=github_actions&previous-version=0.5.133&new-version=0.5.139)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump rstest from 0.26.1 to 0.27.0 ([#366](https://github.com/ratatui/tui-widgets/issues/366))
+  > Bumps [rstest](https://github.com/la10736/rstest) from 0.26.1 to 0.27.0.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/la10736/rstest/releases">rstest's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v0.27.0</h2>
+  > <h2>[0.27.0] 2026/9/6</h2>
+  > <h3>Changed</h3>
+  > <ul>
+  > <li>Bump msrv to 1.85.0 both for <code>rstest</code> and
+  > <code>rstest_reuse</code></li>
+  > <li>Disabled default features of <code>futures-util</code></li>
+  > </ul>
+  > <h3>Added</h3>
+  > <ul>
+  > <li>Doc comments before <code>#[values(...)]</code> entries can be used
+  > to override the generated matrix
+  > test names (both for the legacy <code>arg =&gt; [..]</code> syntax and
+  > the new attribute form).
+  > See <a
+  > href="https://redirect.github.com/la10736/rstest/pull/321">#321</a>
+  > thanks to <a
+  > href="https://github.com/orhun"><code>@​orhun</code></a>.</li>
+  > </ul>
+  > <h3>Fixed</h3>
+  > <ul>
+  > <li>Use fully-qualified <code>core</code> import. See <a
+  > href="https://redirect.github.com/la10736/rstest/pull/336">#336</a>.</li>
+  > <li>Fix <code>mut</code> arguments failing to compile with
+  > <code>#[trace]</code>. See <a
+  > href="https://redirect.github.com/la10736/rstest/pull/345">#345</a>
+  > thanks to <a
+  > href="https://github.com/super-cooper"><code>@​super-cooper</code></a>.</li>
+  > <li>Fix compilation under bazel by upgrading proc-macro-crate to
+  > 3.4.0.</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Changelog</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/la10736/rstest/blob/master/CHANGELOG.md">rstest's
+  > changelog</a>.</em></p>
+  > <blockquote>
+  > <h2>[0.27.0] 2026/9/6</h2>
+  > <h3>Changed</h3>
+  > <ul>
+  > <li>Bump msrv to 1.85.0 both for <code>rstest</code> and
+  > <code>rstest_reuse</code></li>
+  > <li>Disabled default features of <code>futures-util</code></li>
+  > </ul>
+  > <h3>Added</h3>
+  > <ul>
+  > <li>Doc comments before <code>#[values(...)]</code> entries can be used
+  > to override the generated matrix
+  > test names (both for the legacy <code>arg =&gt; [..]</code> syntax and
+  > the new attribute form).
+  > See <a
+  > href="https://redirect.github.com/la10736/rstest/pull/321">#321</a>
+  > thanks to <a
+  > href="https://github.com/orhun"><code>@​orhun</code></a>.</li>
+  > </ul>
+  > <h3>Fixed</h3>
+  > <ul>
+  > <li>Use fully-qualified <code>core</code> import. See <a
+  > href="https://redirect.github.com/la10736/rstest/pull/336">#336</a>.</li>
+  > <li>Fix <code>mut</code> arguments failing to compile with
+  > <code>#[trace]</code>. See <a
+  > href="https://redirect.github.com/la10736/rstest/pull/345">#345</a>
+  > thanks to <a
+  > href="https://github.com/super-cooper"><code>@​super-cooper</code></a>.</li>
+  > <li>Fix compilation under bazel by upgrading proc-macro-crate to
+  > 3.4.0.</li>
+  > </ul>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/59cd3d1919fc471922297606b8819af4e5bfd472"><code>59cd3d1</code></a>
+  > Release 0.27.0</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/0821ebc65d0c8434f0d9b7773a23043549313426"><code>0821ebc</code></a>
+  > test: Add E2E test for mut arguments with #[trace]</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/509ffef32538324bd75d0addf49ee7e0296bff81"><code>509ffef</code></a>
+  > fix: <code>mut</code> arguments with <code>#[trace]</code></li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/043437d63956f1c9e3f6284c4463169cb484cd3b"><code>043437d</code></a>
+  > fix: Resolve clippy warnings and truncate long test project names</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/9aa8d1a3c51627ec87d0620abda9707488a6f8fe"><code>9aa8d1a</code></a>
+  > fix: Suppress nightly cargo lints in test scaffolding</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/3d3c76c4fb7215aae92008e390b7fb618ecd5522"><code>3d3c76c</code></a>
+  > fix: Bump rstest_test MSRV to 1.85 and mark as unpublished</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/d9ae990e323b6910d39364d94876a86b003b4729"><code>d9ae990</code></a>
+  > chore: Add changelog entry</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/05d4b1a817c1ee4684e1cff728d805f3a647fc0b"><code>05d4b1a</code></a>
+  > fix: Use fully-qualified core import</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/6da56a112e65b96685e06be41f8d98a84a6e7452"><code>6da56a1</code></a>
+  > Bump msrv to 1.85 also for rstest_reuse (<a
+  > href="https://redirect.github.com/la10736/rstest/issues/342">#342</a>)</li>
+  > <li><a
+  > href="https://github.com/la10736/rstest/commit/1e9963bbc1a0feff27afdd1c6cec25d00c96d607"><code>1e9963b</code></a>
+  > Add CLAUDE.md for Claude Code guidance (<a
+  > href="https://redirect.github.com/la10736/rstest/issues/340">#340</a>)</li>
+  > <li>Additional commits viewable in <a
+  > href="https://github.com/la10736/rstest/compare/v0.26.1...v0.27.0">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=rstest&package-manager=cargo&previous-version=0.26.1&new-version=0.27.0)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+- *(deps)* Bump zizmorcore/zizmor-action from 0.6.3 to 0.6.4 ([#365](https://github.com/ratatui/tui-widgets/issues/365))
+  > Bumps
+  > [zizmorcore/zizmor-action](https://github.com/zizmorcore/zizmor-action)
+  > from 0.6.3 to 0.6.4.
+  > <details>
+  > <summary>Release notes</summary>
+  > <p><em>Sourced from <a
+  > href="https://github.com/zizmorcore/zizmor-action/releases">zizmorcore/zizmor-action's
+  > releases</a>.</em></p>
+  > <blockquote>
+  > <h2>v0.6.4</h2>
+  > <p><a href="https://github.com/sponsors/woodruffw/">Sponsorship is
+  > appreciated!</a></p>
+  > <p>zizmor 1.30.1 is now the default version.</p>
+  > <p>Release notes: <a
+  > href="https://docs.zizmor.sh/release-notes/%5B#1301%5D(https://redirect.github.com/zizmorcore/zizmor-action/issues/1301)">zizmorcore/zizmor-action#1301</a></p>
+  > </blockquote>
+  > </details>
+  > <details>
+  > <summary>Commits</summary>
+  > <ul>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/cc914d7f3750a2d13d75c7f184a1060aa0e9d482"><code>cc914d7</code></a>
+  > Sync zizmor versions (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/166">#166</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/bae72b71bc270806f906e8e2a1f5985a26effaa2"><code>bae72b7</code></a>
+  > chore(deps): bump the github-actions group with 2 updates (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/165">#165</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/27604f9eef072d6456e69fc10ee36629710fa6f6"><code>27604f9</code></a>
+  > chore(deps): bump the github-actions group with 2 updates (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/164">#164</a>)</li>
+  > <li><a
+  > href="https://github.com/zizmorcore/zizmor-action/commit/c41d66537b2d733801baec1e31ffc22aa2051a8f"><code>c41d665</code></a>
+  > README: bump pins (<a
+  > href="https://redirect.github.com/zizmorcore/zizmor-action/issues/163">#163</a>)</li>
+  > <li>See full diff in <a
+  > href="https://github.com/zizmorcore/zizmor-action/compare/70fb788f84895a7701f5643d103d587e460b5c99...cc914d7f3750a2d13d75c7f184a1060aa0e9d482">compare
+  > view</a></li>
+  > </ul>
+  > </details>
+  > <br />
+  >
+  >
+  > [![Dependabot compatibility
+  > score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=zizmorcore/zizmor-action&package-manager=github_actions&previous-version=0.6.3&new-version=0.6.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+  >
+  > Dependabot will resolve any conflicts with this PR as long as you don't
+  > alter it yourself. You can also trigger a rebase manually by commenting
+  > `@dependabot rebase`.
+
+
 ## [0.7.11] - 2026-08-24
 
 ### 🐛 Bug Fixes
