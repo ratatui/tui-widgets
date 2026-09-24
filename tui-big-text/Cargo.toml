@@ -4,7 +4,6 @@ version = "0.8.9"
 description = "A Ratatui widget for displaying big text in the terminal"
 documentation = "https://docs.rs/tui-big-text"
 
-authors.workspace = true
 categories.workspace = true
 edition.workspace = true
 keywords.workspace = true

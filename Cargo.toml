@@ -4,7 +4,6 @@ members = ["tui-*"]
 default-members = ["tui-*"]
 
 [workspace.package]
-authors = ["Joshka"]
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/ratatui/tui-widgets"
 edition = "2024"
@@ -49,7 +48,6 @@ description = "A collection of useful widgets for building terminal user interfa
 version = "0.7.11"
 documentation = "https://docs.rs/tui-widgets"
 
-authors.workspace = true
 categories.workspace = true
 edition.workspace = true
 keywords.workspace = true
