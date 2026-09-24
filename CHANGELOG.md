@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.12](https://crates.io/crates/tui-widgets/0.7.12) - 2026-09-24
+
+- *(scrollview)* Expose state dimensions ([#373](https://github.com/ratatui/tui-widgets/pull/373))
+
 ## [0.7.11](https://crates.io/crates/tui-widgets/0.7.11) - 2026-08-24
 
 - *(big-text)* Add support for rendering all available fonts with `BigText` ([#355](https://github.com/ratatui/tui-widgets/pull/355))

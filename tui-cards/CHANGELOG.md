@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.6](https://crates.io/crates/tui-cards/0.3.6) - 2026-09-24
+
+Maintenance updates.
+
 ## [0.3.5](https://crates.io/crates/tui-cards/0.3.5) - 2026-06-18
 
 Dependency updates.

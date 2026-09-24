@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.6](https://crates.io/crates/tui-bar-graph/0.3.6) - 2026-09-24
+
+Maintenance updates.
+
 ## [0.3.5](https://crates.io/crates/tui-bar-graph/0.3.5) - 2026-06-14
 
 - *(bar-graph)* Render by reference ([#289](https://github.com/ratatui/tui-widgets/pull/289))

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.8](https://crates.io/crates/tui-scrollview/0.6.8) - 2026-09-24
+
+- *(scrollview)* Expose state dimensions ([#373](https://github.com/ratatui/tui-widgets/pull/373))
+
 ## [0.6.7](https://crates.io/crates/tui-scrollview/0.6.7) - 2026-06-14
 
 - *(scrollview)* Render by reference ([#292](https://github.com/ratatui/tui-widgets/pull/292))

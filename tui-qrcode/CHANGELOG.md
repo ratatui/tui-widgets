@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.7](https://crates.io/crates/tui-qrcode/0.2.7) - 2026-09-24
+
+Maintenance updates.
+
 ## [0.2.6](https://crates.io/crates/tui-qrcode/0.2.6) - 2026-06-14
 
 - Modernize tui-qrcode example ([#282](https://github.com/ratatui/tui-widgets/pull/282))
