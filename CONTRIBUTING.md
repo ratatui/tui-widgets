@@ -48,6 +48,42 @@ A specification for adding human and machine readable meaning to commit messages
 - chore: Chores. Other changes that don't modify src or test files.
 - revert: Reverts. Reverts a previous commit.
 
+## Release notes
+
+Release-plz generates changelogs from squash-merge commit subjects, using the PR title and number.
+Write titles that describe the benefit to users and use a widget scope when applicable, such as
+`fix(big-text): align non-ASCII text correctly`. The facade changelog uses the same concise entries;
+put detailed widget usage in its documentation and link to it from the PR.
+
+Ordinary PR bodies are not copied into changelogs. For a change that needs additional user guidance,
+add a short `Release-note:` footer at the end of the PR body and preserve it in the squash commit:
+
+```text
+Release-note: Use size() and page_size() to inspect the dimensions from the latest render.
+Both return None before the first render.
+```
+
+Use `BREAKING CHANGE:` for migration instructions and `!` in the title for breaking changes.
+Keep migration footers short and self-contained: name the affected API and the required action.
+Put screenshots, extended examples, and implementation details before the footer, and link to the
+PR or migration guide for more detail. Avoid references such as "see above", since the rest of the
+PR body is omitted. Breaking changes remain visible even when their commit type would normally be
+filtered out.
+Use `fix(security):` for a security fix, with a concise explanation of the impact in a
+`Release-note:` footer. Mentioning security in a PR body does not classify it as a security fix.
+
+Routine dependency updates, CI, chores, formatting, tests, and internal refactors are omitted from
+mixed releases. Releases containing only these changes get a single "Dependency updates." or
+"Maintenance updates." summary instead. Entries use a compact list without category headings.
+For dependency changes that affect consumers, describe the effect with a `fix:` or `feat:` title,
+or add a `Release-note:` footer to retain the entry. This includes compatibility changes, minimum
+Rust version increases, and dependency requirements needed to guarantee a fix. Keep compatible
+lockfile refreshes separate from such changes and retain the widest dependency requirements that
+the library supports.
+
+These filters control release notes only; they do not decide which packages receive a release.
+Do not edit historical changelogs by hand. Release-plz and git-cliff generate new entries.
+
 ## Developing
 
 ### Set up

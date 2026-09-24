@@ -47,6 +47,8 @@ name = "tui-widgets"
 description = "A collection of useful widgets for building terminal user interfaces using Ratatui"
 version = "0.7.11"
 documentation = "https://docs.rs/tui-widgets"
+# Repository automation is not part of the facade's published package.
+include = ["src/**", "README.md", "CHANGELOG.md", "BREAKING_CHANGES.md", "LICENSE-*", "SECURITY.md"]
 
 categories.workspace = true
 edition.workspace = true
