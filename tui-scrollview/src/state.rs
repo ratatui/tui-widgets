@@ -34,6 +34,22 @@ impl ScrollViewState {
         self.offset
     }
 
+    /// Returns the full content buffer size from the latest render.
+    ///
+    /// Returns `None` before the first render. Changes to the content size are reflected after
+    /// the next render.
+    pub const fn size(&self) -> Option<Size> {
+        self.size
+    }
+
+    /// Returns the viewport size from the latest render, excluding visible scrollbars.
+    ///
+    /// Returns `None` before the first render. Changes to the render area or scrollbar visibility
+    /// are reflected after the next render. The viewport can be larger than the content buffer.
+    pub const fn page_size(&self) -> Option<Size> {
+        self.page_size
+    }
+
     /// Move the scroll view state up by one row
     pub const fn scroll_up(&mut self) {
         self.offset.y = self.offset.y.saturating_sub(1);
@@ -110,6 +126,18 @@ impl ScrollViewState {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn dimensions_are_unknown_before_rendering() {
+        for state in [
+            ScrollViewState::default(),
+            ScrollViewState::new(),
+            ScrollViewState::with_offset(Position::new(2, 3)),
+        ] {
+            assert_eq!(state.size(), None);
+            assert_eq!(state.page_size(), None);
+        }
+    }
 
     #[test]
     fn is_at_bottom_requires_the_last_row_to_be_visible() {
