@@ -432,6 +432,26 @@ mod tests {
         scroll_view
     }
 
+    #[test]
+    fn dimensions_follow_content_and_viewport_changes() {
+        let mut state = ScrollViewState::default();
+        let mut buf = Buffer::empty(Rect::new(0, 0, 6, 6));
+        ScrollView::new(Size::new(10, 10)).render(buf.area, &mut buf, &mut state);
+        assert_eq!(state.size(), Some(Size::new(10, 10)));
+        assert_eq!(state.page_size(), Some(Size::new(5, 5)));
+
+        let mut buf = Buffer::empty(Rect::new(0, 0, 8, 7));
+        ScrollView::new(Size::new(10, 10))
+            .scrollbars_visibility(ScrollbarVisibility::Never)
+            .render(buf.area, &mut buf, &mut state);
+        assert_eq!(state.size(), Some(Size::new(10, 10)));
+        assert_eq!(state.page_size(), Some(Size::new(8, 7)));
+
+        ScrollView::new(Size::new(2, 3)).render(buf.area, &mut buf, &mut state);
+        assert_eq!(state.size(), Some(Size::new(2, 3)));
+        assert_eq!(state.page_size(), Some(Size::new(8, 7)));
+    }
+
     #[rstest]
     fn zero_offset(scroll_view: ScrollView) {
         let mut buf = Buffer::empty(Rect::new(0, 0, 6, 6));
