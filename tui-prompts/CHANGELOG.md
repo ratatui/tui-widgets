@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.8](https://crates.io/crates/tui-prompts/0.6.8) - 2026-09-24
+
+Maintenance updates.
+
 ## [0.6.7](https://crates.io/crates/tui-prompts/0.6.7) - 2026-06-18
 
 - *(prompts)* Add select prompt ([#177](https://github.com/ratatui/tui-widgets/pull/177))

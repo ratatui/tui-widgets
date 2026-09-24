@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.10](https://crates.io/crates/tui-big-text/0.8.10) - 2026-09-24
+
+Maintenance updates.
+
 ## [0.8.9](https://crates.io/crates/tui-big-text/0.8.9) - 2026-08-24
 
 - *(big-text)* Add support for rendering all available fonts with `BigText` ([#355](https://github.com/ratatui/tui-widgets/pull/355))

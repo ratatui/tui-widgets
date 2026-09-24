@@ -45,7 +45,7 @@ nursery = "warn"
 [package]
 name = "tui-widgets"
 description = "A collection of useful widgets for building terminal user interfaces using Ratatui"
-version = "0.7.11"
+version = "0.7.12"
 documentation = "https://docs.rs/tui-widgets"
 # Repository automation is not part of the facade's published package.
 include = ["src/**", "README.md", "CHANGELOG.md", "BREAKING_CHANGES.md", "LICENSE-*", "SECURITY.md"]
@@ -96,13 +96,13 @@ scrollview = ["tui-scrollview"]
 [dependencies]
 document-features.workspace = true
 ratatui-core = { workspace = true }
-tui-bar-graph = { version = "0.3.5", path = "tui-bar-graph", optional = true }
-tui-big-text = { version = "0.8.9", path = "tui-big-text", optional = true }
-tui-box-text = { version = "0.3.4", path = "tui-box-text", optional = true }
-tui-cards = { version = "0.3.5", path = "tui-cards", optional = true }
-tui-equalizer = { version = "0.2.3", path = "tui-equalizer", optional = true }
-tui-popup = { version = "0.7.6", path = "tui-popup", optional = true }
-tui-prompts = { version = "0.6.7", path = "tui-prompts", optional = true }
-tui-qrcode = { version = "0.2.6", path = "tui-qrcode", optional = true }
-tui-scrollbar = { version = "0.2.7", path = "tui-scrollbar", optional = true }
-tui-scrollview = { version = "0.6.7", path = "tui-scrollview", optional = true }
+tui-bar-graph = { version = "0.3.6", path = "tui-bar-graph", optional = true }
+tui-big-text = { version = "0.8.10", path = "tui-big-text", optional = true }
+tui-box-text = { version = "0.3.5", path = "tui-box-text", optional = true }
+tui-cards = { version = "0.3.6", path = "tui-cards", optional = true }
+tui-equalizer = { version = "0.2.4", path = "tui-equalizer", optional = true }
+tui-popup = { version = "0.7.7", path = "tui-popup", optional = true }
+tui-prompts = { version = "0.6.8", path = "tui-prompts", optional = true }
+tui-qrcode = { version = "0.2.7", path = "tui-qrcode", optional = true }
+tui-scrollbar = { version = "0.2.8", path = "tui-scrollbar", optional = true }
+tui-scrollview = { version = "0.6.8", path = "tui-scrollview", optional = true }

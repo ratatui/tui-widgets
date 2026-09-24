@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.7](https://crates.io/crates/tui-popup/0.7.7) - 2026-09-24
+
+Maintenance updates.
+
 ## [0.7.6](https://crates.io/crates/tui-popup/0.7.6) - 2026-06-14
 
 - Modernize tui-popup examples ([#279](https://github.com/ratatui/tui-widgets/pull/279))

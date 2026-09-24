@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.5](https://crates.io/crates/tui-box-text/0.3.5) - 2026-09-24
+
+Maintenance updates.
+
 ## [0.3.4](https://crates.io/crates/tui-box-text/0.3.4) - 2026-06-14
 
 - Modernize tui-box-text example ([#277](https://github.com/ratatui/tui-widgets/pull/277))
