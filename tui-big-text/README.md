@@ -48,6 +48,50 @@ fn render(frame: &mut Frame) {
 }
 ```
 
+### Convert to Ratatui text
+
+Use [`BigText::to_text`] when another widget needs the rendered glyphs as [`Text`] rather than
+as a `BigText` widget. For example, a [`Paragraph`] can scroll a tall big-text banner while
+retaining its colors and other styles:
+
+```rust
+use ratatui::prelude::Frame;
+use ratatui::widgets::Paragraph;
+use tui_big_text::BigText;
+
+fn render(frame: &mut Frame, scroll_y: u16) {
+    let area = frame.area();
+    let big_text = BigText::builder()
+        .lines(vec!["Hello".into(), "World".into()])
+        .build();
+    let text = big_text.to_text(area.width);
+    frame.render_widget(Paragraph::new(text).scroll((scroll_y, 0)), area);
+}
+```
+
+A table cell is another use case. Give `to_text` the column width and make the row tall enough
+for the chosen [`PixelSize`]:
+
+```rust
+use ratatui::widgets::{Cell, Row};
+use tui_big_text::{BigText, PixelSize};
+
+let column_width = 16;
+let big_text = BigText::builder()
+    .pixel_size(PixelSize::HalfHeight)
+    .lines(vec!["Hi".into()])
+    .build();
+let text = big_text.to_text(column_width);
+let row_height = text.height() as u16;
+let row = Row::new([Cell::new(text)]).height(row_height);
+```
+
+The width is measured in terminal cells. Conversion applies the big text's alignment at that
+width and clips glyphs that extend beyond it, even if only part of a glyph fits. It does not
+wrap glyphs or include the block. Empty input or zero width produces empty text. Set a table
+row's height to the converted text's height, and recreate the text when the available width
+changes.
+
 The [`PixelSize`] can be used to control how many character cells are used to represent a single
 pixel of the 8x8 font. It has six variants:
 
@@ -89,6 +133,10 @@ For the full suite of widgets, see [tui-widgets].
 [`BigText`]: https://docs.rs/tui-big-text/tui_big_text/big_text/struct.BigText.html
 [`BigText::builder`]:
     https://docs.rs/tui-big-text/tui_big_text/big_text/struct.BigText.html#method.builder
+[`BigText::to_text`]:
+    https://docs.rs/tui-big-text/tui_big_text/big_text/struct.BigText.html#method.to_text
+[`Text`]: https://docs.rs/ratatui/latest/ratatui/text/struct.Text.html
+[`Paragraph`]: https://docs.rs/ratatui/latest/ratatui/widgets/struct.Paragraph.html
 [`PixelSize`]: https://docs.rs/tui-big-text/tui_big_text/pixel_size/enum.PixelSize.html
 [`render_widget`]: https://docs.rs/ratatui/ratatui/struct.Frame.html#method.render_widget
 [`Style`]: https://docs.rs/ratatui/ratatui/style/struct.Style.html

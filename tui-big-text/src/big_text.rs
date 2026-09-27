@@ -1,3 +1,4 @@
+use alloc::borrow::ToOwned;
 use alloc::vec::Vec;
 use core::cmp::min;
 
@@ -6,7 +7,7 @@ use font8x8::UnicodeFonts;
 use ratatui_core::buffer::Buffer;
 use ratatui_core::layout::{Alignment, Rect};
 use ratatui_core::style::Style;
-use ratatui_core::text::{Line, StyledGrapheme};
+use ratatui_core::text::{Line, Span, StyledGrapheme, Text};
 use ratatui_core::widgets::Widget;
 use ratatui_widgets::block::{Block, BlockExt};
 
@@ -19,6 +20,11 @@ use crate::PixelSize;
 /// Using the `pixel_size` method, you can also chose, how 'big' a pixel should be. Currently a
 /// pixel of the 8x8 font can be represented by one full or half (horizontal/vertical/both)
 /// character cell of the terminal.
+///
+/// Use [`BigText::to_text`] to pass the rendered glyphs to another text-based widget, such as a
+/// scrolling `Paragraph` or a table `Cell`. The conversion preserves styles and uses a
+/// caller-supplied terminal width for alignment and clipping. Recreate the text when that width
+/// changes, and size table rows to fit the resulting text height.
 ///
 /// # Examples
 ///
@@ -94,6 +100,56 @@ impl BigText<'static> {
     /// Create a new [`BigTextBuilder`] to configure a [`BigText`] widget.
     pub fn builder() -> BigTextBuilder<'static> {
         BigTextBuilder::default()
+    }
+}
+
+impl BigText<'_> {
+    /// Render the glyphs as styled [`Text`] at the given terminal width.
+    ///
+    /// Alignment uses `width`; glyphs past the right edge are clipped, as in widget rendering.
+    /// A narrow width can clip part of a glyph; glyphs are never wrapped. The block is not
+    /// included. Empty input and zero width produce empty [`Text`]. Height is limited to
+    /// `u16::MAX` terminal cells.
+    ///
+    /// ```rust
+    /// use tui_big_text::BigText;
+    ///
+    /// let text = BigText::builder()
+    ///     .lines(vec!["Hi".into()])
+    ///     .build()
+    ///     .to_text(16);
+    /// assert_eq!(text.width(), 16);
+    /// ```
+    pub fn to_text(&self, width: u16) -> Text<'static> {
+        let (_, step_y) = self.pixel_size.pixels_per_cell();
+        let glyph_height = usize::from(8_u16.div_ceil(step_y));
+        let height = self
+            .lines
+            .len()
+            .saturating_mul(glyph_height)
+            .min(usize::from(u16::MAX)) as u16;
+
+        let mut buffer = Buffer::empty(Rect::new(0, 0, width, height));
+        let lines = layout(buffer.area, &self.pixel_size, self.alignment, &self.lines);
+        for (line, line_layout) in self.lines.iter().zip(lines) {
+            for (grapheme, cell) in line.styled_graphemes(self.style).zip(line_layout) {
+                render_symbol(grapheme, cell, &mut buffer, &self.pixel_size);
+            }
+        }
+
+        Text::from(
+            buffer
+                .content()
+                .chunks(usize::from(width).max(1))
+                .map(|row| {
+                    Line::from(
+                        row.iter()
+                            .map(|cell| Span::styled(cell.symbol().to_owned(), cell.style()))
+                            .collect::<Vec<_>>(),
+                    )
+                })
+                .collect::<Vec<_>>(),
+        )
     }
 }
 
@@ -255,6 +311,74 @@ mod tests {
                 block: None,
             }
         );
+    }
+
+    #[test]
+    fn to_text_preserves_rendered_glyphs_and_styles() {
+        let big_text = BigText::builder()
+            .pixel_size(PixelSize::Quadrant)
+            .style(Style::new().bold())
+            .lines(vec![Line::from("A".red()), Line::from("B")])
+            .build();
+        let text = big_text.to_text(4);
+        let mut expected = Buffer::empty(Rect::new(0, 0, 4, 8));
+        let mut actual = Buffer::empty(expected.area);
+
+        (&big_text).render(expected.area, &mut expected);
+        text.render(actual.area, &mut actual);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn to_text_respects_width_and_alignment() {
+        let big_text = BigText::builder()
+            .lines(vec![Line::from("AB")])
+            .right_aligned()
+            .build();
+        let text = big_text.to_text(12);
+        let mut expected = Buffer::empty(Rect::new(0, 0, 12, 8));
+        let mut actual = Buffer::empty(expected.area);
+
+        (&big_text).render(expected.area, &mut expected);
+        text.render(actual.area, &mut actual);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn to_text_clips_partial_glyph() {
+        let big_text = BigText::builder().lines(vec![Line::from("A")]).build();
+        let text = big_text.to_text(3);
+        let mut expected = Buffer::empty(Rect::new(0, 0, 3, 8));
+        let mut actual = Buffer::empty(expected.area);
+
+        (&big_text).render(expected.area, &mut expected);
+        assert_eq!(text.width(), 3);
+        text.render(actual.area, &mut actual);
+
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn to_text_empty_input_and_zero_width() {
+        assert_eq!(BigText::builder().build().to_text(8).height(), 0);
+
+        let big_text = BigText::builder().lines(vec![Line::from("A")]).build();
+        let text = big_text.to_text(0);
+        assert_eq!(text.width(), 0);
+        assert_eq!(text.height(), 0);
+    }
+
+    #[test]
+    fn to_text_excludes_block() {
+        let plain = BigText::builder().lines(vec![Line::from("A")]).build();
+        let blocked = BigText::builder()
+            .lines(vec![Line::from("A")])
+            .block(Block::bordered().title("Title"))
+            .build();
+
+        assert_eq!(blocked.to_text(8), plain.to_text(8));
     }
 
     #[test]
