@@ -1,5 +1,6 @@
 # tui-scrollbar
 
+<!-- markdownlint-disable MD013 -->
 <!-- cargo-rdme start -->
 
 Smooth, fractional scrollbars for Ratatui. Part of the [tui-widgets] suite by [Joshka].
@@ -25,7 +26,7 @@ by implementing [`Widget`] for `&ScrollBar`.
 - Arrow endcaps: optional start/end arrows with click-to-step support.
 - Backend-agnostic input: handle pointer + wheel events without tying to a backend.
 - Stateless rendering: render via [`Widget`] for `&ScrollBar` with external state.
-- Metrics-first: [`ScrollMetrics`] exposes pure geometry for testing and hit testing.
+- Metrics-first: [`ScrollMetrics`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/metrics/struct.ScrollMetrics.html) exposes pure geometry for testing and hit testing.
 
 ## Why not Ratatui's scrollbar?
 
@@ -42,15 +43,15 @@ cargo add tui-scrollbar
 ## Important
 
 - Zero lengths are treated as 1.
-- Arrow endcaps are disabled by default; configure them with [`ScrollBarArrows`].
-- The default [`GlyphSet`] hides the track using spaces; use [`GlyphSet::box_drawing`] or
-  [`GlyphSet::unicode`] for a visible track.
+- Arrow endcaps are disabled by default; configure them with [`ScrollBarArrows`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/enum.ScrollBarArrows.html).
+- The default [`GlyphSet`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html) hides the track using spaces; use [`GlyphSet::box_drawing`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.box_drawing) or
+  [`GlyphSet::unicode`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.unicode) for a visible track.
 - The default glyphs use [Symbols for Legacy Computing] for missing upper/right eighth blocks.
-  Use [`GlyphSet::unicode`] if you need only standard Unicode block elements.
+  Use [`GlyphSet::unicode`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.unicode) if you need only standard Unicode block elements.
 
 ## Quick start
 
-This example renders a vertical [`ScrollBar`] into a [`Buffer`] using a fixed track size and
+This example renders a vertical [`ScrollBar`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/struct.ScrollBar.html) into a [`Buffer`] using a fixed track size and
 offset. Use it as a minimal template when you just need a thumb and track on screen.
 
 ```rust
@@ -77,8 +78,8 @@ scrollbar.render(area, &mut buffer);
 The scrollbar works in three pieces:
 
 1. Your app owns `content_len`, `viewport_len`, and `offset` (lengths along the scroll axis).
-2. [`ScrollMetrics`] converts those values into a thumb position and size.
-3. [`ScrollBar`] renders the track + thumb using fractional glyphs.
+2. [`ScrollMetrics`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/metrics/struct.ScrollMetrics.html) converts those values into a thumb position and size.
+3. [`ScrollBar`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/struct.ScrollBar.html) renders the track + thumb using fractional glyphs.
 
 Most apps update `offset` in response to input events and re-render each frame.
 
@@ -90,17 +91,17 @@ axis. For many apps, those units are items or lines. The ratio between `viewport
 
 ## Styling
 
-Style the track, thumb, and arrow endcaps directly on [`ScrollBar`]. See [`ScrollBar`] for a
+Style the track, thumb, and arrow endcaps directly on [`ScrollBar`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/struct.ScrollBar.html). See [`ScrollBar`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/struct.ScrollBar.html) for a
 full method map and more focused examples.
 
 Scrollbar glyphs are terminal characters. For visible track glyphs, thumb blocks, and arrow
 symbols, `Style::fg` colors the glyph itself and `Style::bg` colors the cell behind it. The
-default [`GlyphSet::minimal`] track renders spaces, so only the track background is visible in
-empty track cells. Visible track glyph sets, such as [`GlyphSet::box_drawing`] and
-[`GlyphSet::unicode`], can use foreground color for the track line. Thumb glyphs are block
+default [`GlyphSet::minimal`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.minimal) track renders spaces, so only the track background is visible in
+empty track cells. Visible track glyph sets, such as [`GlyphSet::box_drawing`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.box_drawing) and
+[`GlyphSet::unicode`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.unicode), can use foreground color for the track line. Thumb glyphs are block
 characters, so `Style::fg` is usually the useful knob for thumb color; `Style::bg` still colors
 the rest of the cell. With partial thumb glyphs, especially on a visible line track such as
-[`GlyphSet::box_drawing`], that background can show at the ends of the thumb. Match the thumb
+[`GlyphSet::box_drawing`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.box_drawing), that background can show at the ends of the thumb. Match the thumb
 background to the track background unless that contrast is intentional.
 
 ```rust
@@ -120,8 +121,8 @@ let scrollbar = ScrollBar::vertical(lengths)
 
 ## Layout integration
 
-This example shows how to reserve a column for a vertical [`ScrollBar`] alongside your content.
-Use the same pattern for a horizontal [`ScrollBar`] by splitting rows instead of columns.
+This example shows how to reserve a column for a vertical [`ScrollBar`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/struct.ScrollBar.html) alongside your content.
+Use the same pattern for a horizontal [`ScrollBar`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/struct.ScrollBar.html) by splitting rows instead of columns.
 
 ```rust
 use ratatui_core::buffer::Buffer;
@@ -148,9 +149,9 @@ scrollbar.render(bar_area, &mut buffer);
 ## Interaction loop
 
 This pattern assumes you have enabled mouse capture in your terminal backend and have the
-scrollbar [`Rect`] (`bar_area`) from your layout each frame. Keep a [`ScrollBarInteraction`] in
+scrollbar [`Rect`] (`bar_area`) from your layout each frame. Keep a [`ScrollBarInteraction`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/struct.ScrollBarInteraction.html) in
 your app state so drag operations persist across draws. Mouse events are handled via
-[`ScrollBar::handle_mouse_event`], which returns a [`ScrollCommand`] to apply.
+[`ScrollBar::handle_mouse_event`], which returns a [`ScrollCommand`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/enum.ScrollCommand.html) to apply.
 
 ```rust
 use ratatui_core::layout::Rect;
@@ -176,7 +177,7 @@ if let Event::Mouse(event) = event::read()? {
 
 ## Metrics-first workflow
 
-This example shows how to compute thumb geometry without rendering via [`ScrollMetrics`]. It's
+This example shows how to compute thumb geometry without rendering via [`ScrollMetrics`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/metrics/struct.ScrollMetrics.html). It's
 useful for testing, hit testing, or when you want to inspect thumb sizing directly.
 
 ```rust
@@ -195,10 +196,10 @@ assert!(metrics.thumb_len() >= SUBCELL);
 
 ## Glyph selection
 
-[`GlyphSet`] controls the track and thumb characters. The default glyphs include
+[`GlyphSet`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html) controls the track and thumb characters. The default glyphs include
 [Symbols for Legacy Computing] so the thumb can render upper/right partial fills that are
-missing from the standard block set. Use [`GlyphSet::box_drawing`] for a visible line track, or
-[`GlyphSet::unicode`] when the terminal font should avoid [Symbols for Legacy Computing]
+missing from the standard block set. Use [`GlyphSet::box_drawing`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.box_drawing) for a visible line track, or
+[`GlyphSet::unicode`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html#method.unicode) when the terminal font should avoid [Symbols for Legacy Computing]
 glyphs.
 
 ```rust
@@ -215,21 +216,21 @@ let scrollbar = ScrollBar::vertical(lengths).glyph_set(GlyphSet::unicode());
 
 ### Widgets
 
-- [`ScrollBar`]: renders vertical or horizontal scrollbars with fractional thumbs.
+- [`ScrollBar`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/struct.ScrollBar.html): renders vertical or horizontal scrollbars with fractional thumbs.
 
 ### Supporting types
 
-- [`ScrollBarInteraction`]: drag capture state for pointer interaction.
-- [`ScrollMetrics`]: pure math for thumb sizing and hit testing.
-- [`GlyphSet`]: glyph selection for track and thumb rendering.
-- [`ScrollBarArrows`]: arrow endcap configuration.
+- [`ScrollBarInteraction`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/struct.ScrollBarInteraction.html): drag capture state for pointer interaction.
+- [`ScrollMetrics`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/metrics/struct.ScrollMetrics.html): pure math for thumb sizing and hit testing.
+- [`GlyphSet`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/glyphs/struct.GlyphSet.html): glyph selection for track and thumb rendering.
+- [`ScrollBarArrows`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/enum.ScrollBarArrows.html): arrow endcap configuration.
 
 ### Enums and events
 
-- [`ScrollBarOrientation`], [`ScrollBarArrows`], [`TrackClickBehavior`]
-- [`ScrollEvent`], [`ScrollCommand`]
-- [`PointerEvent`], [`PointerEventKind`], [`PointerButton`]
-- [`ScrollWheel`], [`ScrollAxis`]
+- [`ScrollBarOrientation`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/enum.ScrollBarOrientation.html), [`ScrollBarArrows`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/enum.ScrollBarArrows.html), [`TrackClickBehavior`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/scrollbar/enum.TrackClickBehavior.html)
+- [`ScrollEvent`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/enum.ScrollEvent.html), [`ScrollCommand`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/enum.ScrollCommand.html)
+- [`PointerEvent`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/struct.PointerEvent.html), [`PointerEventKind`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/enum.PointerEventKind.html), [`PointerButton`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/enum.PointerButton.html)
+- [`ScrollWheel`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/struct.ScrollWheel.html), [`ScrollAxis`](https://docs.rs/tui-scrollbar/latest/tui_scrollbar/input/enum.ScrollAxis.html)
 
 ## See also
 
@@ -255,8 +256,7 @@ For the full suite of widgets, see [tui-widgets].
 [Deps Badge]: https://deps.rs/repo/github/ratatui/tui-widgets/status.svg?style=flat
 [License Badge]: https://img.shields.io/crates/l/tui-scrollbar?style=flat
 [License]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
-[Coverage Badge]:
-    https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
+[Coverage Badge]: https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
 [Discord Badge]: https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
 [GitHub Repository]: https://github.com/ratatui/tui-widgets
 [API Docs]: https://docs.rs/tui-scrollbar/
@@ -268,15 +268,16 @@ For the full suite of widgets, see [tui-widgets].
 [`scrollbar_styled` example]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar_styled.rs
 [`scrollbar` example]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples/scrollbar.rs
 [tui-scrollbar examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollbar/examples
-[`Buffer`]: ratatui_core::buffer::Buffer
-[`Rect`]: ratatui_core::layout::Rect
-[`Widget`]: ratatui_core::widgets::Widget
+[`Buffer`]: https://docs.rs/ratatui_core/latest/ratatui_core/buffer/buffer/struct.Buffer.html
+[`Rect`]: https://docs.rs/ratatui_core/latest/ratatui_core/layout/rect/struct.Rect.html
+[`Widget`]: https://docs.rs/ratatui_core/latest/ratatui_core/widgets/widget/trait.Widget.html
 [Symbols for Legacy Computing]: https://en.wikipedia.org/wiki/Symbols_for_Legacy_Computing
 
 [Joshka]: https://github.com/joshka
 [tui-widgets]: https://crates.io/crates/tui-widgets
 
 <!-- cargo-rdme end -->
+<!-- markdownlint-enable MD013 -->
 
 ## License
 

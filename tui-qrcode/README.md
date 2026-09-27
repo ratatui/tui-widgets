@@ -96,8 +96,7 @@ For the full suite of widgets, see [tui-widgets].
 [Deps Badge]: https://deps.rs/repo/github/ratatui/tui-widgets/status.svg?style=flat
 [License Badge]: https://img.shields.io/crates/l/tui-qrcode?style=flat
 [License]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
-[Coverage Badge]:
-    https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
+[Coverage Badge]: https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
 [Discord Badge]: https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
 [GitHub Repository]: https://github.com/ratatui/tui-widgets
 [API Docs]: https://docs.rs/tui-qrcode/

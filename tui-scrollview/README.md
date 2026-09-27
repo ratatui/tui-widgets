@@ -107,16 +107,14 @@ For the full suite of widgets, see [tui-widgets].
 [Deps Badge]: https://deps.rs/repo/github/ratatui/tui-widgets/status.svg?style=flat
 [License Badge]: https://img.shields.io/crates/l/tui-scrollview?style=flat
 [License]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
-[Coverage Badge]:
-    https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
+[Coverage Badge]: https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
 [Discord Badge]: https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
 
 [GitHub Repository]: https://github.com/ratatui/tui-widgets
 [API Docs]: https://docs.rs/tui-scrollview/
 [Examples]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollview/examples
 [examples directory]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollview/examples
-[scrollview.rs]:
-    https://github.com/ratatui/tui-widgets/tree/main/tui-scrollview/examples/scrollview.rs
+[scrollview.rs]: https://github.com/ratatui/tui-widgets/tree/main/tui-scrollview/examples/scrollview.rs
 [Changelog]: https://github.com/ratatui/tui-widgets/blob/main/tui-scrollview/CHANGELOG.md
 [Contributing]: https://github.com/ratatui/tui-widgets/blob/main/CONTRIBUTING.md
 

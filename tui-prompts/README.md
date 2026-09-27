@@ -1,5 +1,6 @@
 # tui-prompts
 
+<!-- markdownlint-disable MD013 -->
 <!-- cargo-rdme start -->
 
 A [Ratatui] widget set for friendly prompts and input flows. Part of the [tui-widgets] suite by
@@ -96,7 +97,7 @@ See the [text example] for more details.
 
 ### Select Prompt
 
-`SelectPrompt` renders one focused option from an ordered list. Keep a [`SelectState`] beside
+`SelectPrompt` renders one focused option from an ordered list. Keep a [`SelectState`](https://docs.rs/tui-prompts/latest/tui_prompts/select_state/struct.SelectState.html) beside
 the prompt, render the prompt each frame, and route key events to the state. Up and Down move
 the focused option, Enter completes the prompt, and Escape or Ctrl+C aborts it.
 
@@ -208,15 +209,14 @@ For the full suite of widgets, see [tui-widgets].
 [Deps Badge]: https://deps.rs/repo/github/ratatui/tui-widgets/status.svg?style=flat
 [License Badge]: https://img.shields.io/crates/l/tui-prompts?style=flat
 [License]: https://github.com/ratatui/tui-widgets/blob/main/LICENSE-MIT
-[Coverage Badge]:
-    https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
-[Discord Badge]:
-    https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
+[Coverage Badge]: https://img.shields.io/codecov/c/github/ratatui/tui-widgets?logo=codecov&style=flat
+[Discord Badge]: https://img.shields.io/discord/1070692720437383208?logo=discord&style=flat
 [Ratatui]: https://crates.io/crates/ratatui
 [Termion]: https://crates.io/crates/termion
 [Termwiz]: https://crates.io/crates/termwiz
 
 <!-- cargo-rdme end -->
+<!-- markdownlint-enable MD013 -->
 
 ## License
 
