@@ -49,18 +49,20 @@ jobs:
       - name: Check spelling
         run: typos
 
-  markdownlint:
-    name: Markdownlint
+  rumdl:
+    name: rumdl
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Install markdownlint-cli2
-        run: npm install --global markdownlint-cli2@0.22.1
+      - name: Install rumdl
+        uses: taiki-e/install-action@94c31af3204a9f15ab40b35ad084410b905bbc73 # v2.87.17
+        with:
+          tool: rumdl@0.2.77
       - name: Lint Markdown
-        run: markdownlint-cli2 "**/*.md"
+        run: rumdl check .
 
   clippy:
     name: Clippy (${{ matrix.toolchain }})
@@ -258,7 +260,7 @@ jobs:
     needs:
       - format
       - typos
-      - markdownlint
+      - rumdl
       - clippy
       - targets
       - cargo-deny

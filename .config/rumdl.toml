@@ -1,0 +1,13 @@
+[global]
+# no-bare-urls flags URLs inside image link references;
+# existing-relative-links flags Rustdoc type links.
+disable = ["no-duplicate-heading", "no-bare-urls", "existing-relative-links"]
+exclude = ["**/CHANGELOG.md"]
+
+[line-length]
+line-length = 100
+tables = false
+ignore-link-urls = true
+
+[no-inline-html]
+allowed-elements = ["h1", "img", "br", "details", "summary"]

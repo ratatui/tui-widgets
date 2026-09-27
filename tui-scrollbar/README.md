@@ -1,6 +1,5 @@
 # tui-scrollbar
 
-<!-- markdownlint-disable MD013 -->
 <!-- cargo-rdme start -->
 
 Smooth, fractional scrollbars for Ratatui. Part of the [tui-widgets] suite by [Joshka].
@@ -277,7 +276,6 @@ For the full suite of widgets, see [tui-widgets].
 [tui-widgets]: https://crates.io/crates/tui-widgets
 
 <!-- cargo-rdme end -->
-<!-- markdownlint-enable MD013 -->
 
 ## License
 

@@ -1,6 +1,5 @@
 # tui-prompts
 
-<!-- markdownlint-disable MD013 -->
 <!-- cargo-rdme start -->
 
 A [Ratatui] widget set for friendly prompts and input flows. Part of the [tui-widgets] suite by
@@ -216,7 +215,6 @@ For the full suite of widgets, see [tui-widgets].
 [Termwiz]: https://crates.io/crates/termwiz
 
 <!-- cargo-rdme end -->
-<!-- markdownlint-enable MD013 -->
 
 ## License
 
