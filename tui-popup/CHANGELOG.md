@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.8](https://crates.io/crates/tui-popup/0.7.8) - 2026-10-01
+
+Maintenance updates.
+
 ## [0.7.7](https://crates.io/crates/tui-popup/0.7.7) - 2026-09-24
 
 Maintenance updates.

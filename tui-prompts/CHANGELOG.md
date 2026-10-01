@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.9](https://crates.io/crates/tui-prompts/0.6.9) - 2026-10-01
+
+Maintenance updates.
+
 ## [0.6.8](https://crates.io/crates/tui-prompts/0.6.8) - 2026-09-24
 
 Maintenance updates.

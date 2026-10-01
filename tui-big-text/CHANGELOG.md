@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.11](https://crates.io/crates/tui-big-text/0.8.11) - 2026-10-01
+
+- *(big-text)* Convert glyphs to Text ([#375](https://github.com/ratatui/tui-widgets/pull/375))
+
 ## [0.8.10](https://crates.io/crates/tui-big-text/0.8.10) - 2026-09-24
 
 Maintenance updates.
