@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.13](https://crates.io/crates/tui-widgets/0.7.13) - 2026-10-01
+
+- *(big-text)* Convert glyphs to Text ([#375](https://github.com/ratatui/tui-widgets/pull/375))
+
 ## [0.7.12](https://crates.io/crates/tui-widgets/0.7.12) - 2026-09-24
 
 - *(scrollview)* Expose state dimensions ([#373](https://github.com/ratatui/tui-widgets/pull/373))
