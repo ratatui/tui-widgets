@@ -149,7 +149,7 @@ jobs:
       - name: Install cargo-semver-checks
         uses: taiki-e/install-action@e407f7bafb71fd004bc5c2da3032e5470cbb6ef0 # v2.87.24
         with:
-          tool: cargo-semver-checks@0.49
+          tool: cargo-semver-checks@0.51.0
       - name: Run cargo-semver-checks
         run: cargo semver-checks --workspace
 
