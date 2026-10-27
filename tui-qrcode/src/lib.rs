@@ -104,6 +104,8 @@
 //! [Joshka]: https://github.com/joshka
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
 
+#![no_std]
+
 use qrcode::QrCode;
 use qrcode::render::unicode::Dense1x2;
 use ratatui_core::buffer::Buffer;
