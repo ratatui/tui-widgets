@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.8](https://crates.io/crates/tui-qrcode/0.2.8) - 2026-10-31
+
+- *(qrcode)* Move color-eyre to dev-dependencies and mark no_std ([#396](https://github.com/ratatui/tui-widgets/pull/396))
+
 ## [0.2.7](https://crates.io/crates/tui-qrcode/0.2.7) - 2026-09-24
 
 Maintenance updates.
