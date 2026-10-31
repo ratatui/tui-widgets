@@ -41,7 +41,7 @@ jobs:
         with:
           toolchain: stable
       - name: Install cargo-binstall
-        uses: taiki-e/install-action@8cca0918f8471c33515202b73f56ab27f2bed283 # v2.87.29
+        uses: taiki-e/install-action@1e29709c0ec63babbe8f266397a465f29a825f91 # v2.87.31
         with:
           tool: cargo-binstall
       - name: Install typos
@@ -58,7 +58,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Install rumdl
-        uses: taiki-e/install-action@8cca0918f8471c33515202b73f56ab27f2bed283 # v2.87.29
+        uses: taiki-e/install-action@1e29709c0ec63babbe8f266397a465f29a825f91 # v2.87.31
         with:
           tool: rumdl@0.2.77
       - name: Lint Markdown
@@ -147,7 +147,7 @@ jobs:
       - name: Cache Rust build artifacts
         uses: Swatinem/rust-cache@f0d9c3887740aee45f6153b24b3a6b815192ec16 # v2
       - name: Install cargo-semver-checks
-        uses: taiki-e/install-action@8cca0918f8471c33515202b73f56ab27f2bed283 # v2.87.29
+        uses: taiki-e/install-action@1e29709c0ec63babbe8f266397a465f29a825f91 # v2.87.31
         with:
           tool: cargo-semver-checks@0.51.0
       - name: Run cargo-semver-checks
@@ -201,7 +201,7 @@ jobs:
         with:
           toolchain: stable
       - name: Install cargo-rdme
-        uses: taiki-e/install-action@8cca0918f8471c33515202b73f56ab27f2bed283 # v2.87.29
+        uses: taiki-e/install-action@1e29709c0ec63babbe8f266397a465f29a825f91 # v2.87.31
         with:
           tool: cargo-rdme@2.2.3
       - name: Install cargo-rdme rustdoc toolchain
