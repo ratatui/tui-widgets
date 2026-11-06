@@ -51,6 +51,11 @@ impl StatefulWidget for MyScrollableWidget {
         let content_size = Size::new(100, 30);
         let mut scroll_view = ScrollView::new(content_size);
 
+        // you can set your own Scrollbar (with different symbols and style)
+        scroll_view = scroll_view
+            .vertical_scrollbar(Scrollbar::new(ScrollbarOrientation::VerticalRight).style(Style::new().dark_gray()));
+            .horizontal_scrollbar(Scrollbar::new(ScrollbarOrientation::HorizontalBottom).style(Style::new().dark_gray()));
+
         // the layout doesn't have to be hardcoded like this, this is just an example
         scroll_view.render_widget(Paragraph::new(line_numbers), Rect::new(0, 0, 5, 100));
         scroll_view.render_widget(Paragraph::new(content), Rect::new(5, 0, 95, 100));

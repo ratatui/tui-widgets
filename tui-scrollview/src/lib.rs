@@ -64,12 +64,12 @@
 //! use ratatui::prelude::*;
 //! use tui_scrollview::{ScrollView, ScrollViewState};
 //!
-//! struct App {
-//!     scroll_view: ScrollView,
+//! struct App<'a> {
+//!     scroll_view: ScrollView<'a>,
 //!     scroll_view_state: ScrollViewState,
 //! }
 //!
-//! impl App {
+//! impl<'a> App<'a> {
 //!     fn draw(&mut self, frame: &mut Frame) {
 //!         frame.render_stateful_widget(
 //!             &self.scroll_view,
