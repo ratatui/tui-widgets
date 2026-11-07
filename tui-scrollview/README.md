@@ -33,6 +33,7 @@ use std::iter;
 use ratatui::layout::Size;
 use ratatui::prelude::*;
 use ratatui::widgets::*;
+use ratatui::symbols::scrollbar::Set;
 use tui_scrollview::{ScrollView, ScrollViewState};
 
 struct MyScrollableWidget;
@@ -50,6 +51,15 @@ impl StatefulWidget for MyScrollableWidget {
 
         let content_size = Size::new(100, 30);
         let mut scroll_view = ScrollView::new(content_size);
+
+        // you can set custom scrollbars orientation, symbols and style
+        scroll_view = scroll_view
+            .vertical_scrollbar_orientation(ScrollbarOrientation::VerticalRight)
+            .vertical_scrollbar_symbols(Set { begin: "├", thumb: "■", track: "─", end: "┤" })
+            .vertical_scrollbar_style(Style::new().dark_gray())
+            .horizontal_scrollbar_orientation(ScrollbarOrientation::VerticalRight)
+            .horizontal_scrollbar_symbols(Set { begin: "├", thumb: "■", track: "─", end: "┤" })
+            .horizontal_scrollbar_style(Style::new().dark_gray());
 
         // the layout doesn't have to be hardcoded like this, this is just an example
         scroll_view.render_widget(Paragraph::new(line_numbers), Rect::new(0, 0, 5, 100));

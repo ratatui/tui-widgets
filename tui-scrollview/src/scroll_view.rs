@@ -1,5 +1,9 @@
 use ratatui_core::buffer::Buffer;
 use ratatui_core::layout::{Rect, Size};
+use ratatui_core::style::Style;
+use ratatui_core::symbols::scrollbar::{
+    DOUBLE_HORIZONTAL, DOUBLE_VERTICAL, Set as ScrollbarSymbolsSet,
+};
 use ratatui_core::widgets::{StatefulWidget, Widget};
 use ratatui_widgets::scrollbar::{Scrollbar, ScrollbarOrientation, ScrollbarState};
 
@@ -17,11 +21,20 @@ use crate::ScrollViewState;
 /// # Examples
 ///
 /// ```rust
-/// use ratatui::{prelude::*, layout::Size, widgets::*};
+/// use ratatui::{prelude::*, layout::Size, widgets::*, symbols::scrollbar::Set};
 /// use tui_scrollview::{ScrollView, ScrollViewState};
 ///
 /// # fn render(buf: &mut Buffer) {
 /// let mut scroll_view = ScrollView::new(Size::new(20, 20));
+///
+/// // you can set custom scrollbars orientation, symbols and style
+/// scroll_view = scroll_view
+///     .vertical_scrollbar_orientation(ScrollbarOrientation::VerticalRight)
+///     .vertical_scrollbar_symbols(Set { begin: "├", thumb: "■", track: "─", end: "┤" })
+///     .vertical_scrollbar_style(Style::new().dark_gray())
+///     .horizontal_scrollbar_orientation(ScrollbarOrientation::VerticalRight)
+///     .horizontal_scrollbar_symbols(Set { begin: "├", thumb: "■", track: "─", end: "┤" })
+///     .horizontal_scrollbar_style(Style::new().dark_gray());
 ///
 /// // render a few widgets into the buffer at various positions
 /// scroll_view.render_widget(Paragraph::new("Hello, world!"), Rect::new(0, 0, 20, 1));
@@ -60,10 +73,16 @@ use crate::ScrollViewState;
 /// # }
 /// ```
 #[derive(Debug, Default, Clone, Eq, PartialEq, Hash)]
-pub struct ScrollView {
+pub struct ScrollView<'a> {
     buf: Buffer,
     size: Size,
+    vertical_scrollbar_orientation: ScrollbarOrientation,
+    vertical_scrollbar_symbols: ScrollbarSymbolsSet<'a>,
+    vertical_scrollbar_style: Style,
     vertical_scrollbar_visibility: ScrollbarVisibility,
+    horizontal_scrollbar_orientation: ScrollbarOrientation,
+    horizontal_scrollbar_symbols: ScrollbarSymbolsSet<'a>,
+    horizontal_scrollbar_style: Style,
     horizontal_scrollbar_visibility: ScrollbarVisibility,
 }
 
@@ -79,7 +98,7 @@ pub enum ScrollbarVisibility {
     Never,
 }
 
-impl ScrollView {
+impl<'a> ScrollView<'a> {
     /// Create a new scroll view with a buffer of the given size
     ///
     /// The buffer will be empty, with coordinates ranging from (0, 0) to (size.width, size.height).
@@ -89,7 +108,13 @@ impl ScrollView {
         Self {
             buf: Buffer::empty(area),
             size,
+            horizontal_scrollbar_orientation: ScrollbarOrientation::HorizontalBottom,
+            horizontal_scrollbar_symbols: DOUBLE_HORIZONTAL,
+            horizontal_scrollbar_style: Style::default(),
             horizontal_scrollbar_visibility: ScrollbarVisibility::default(),
+            vertical_scrollbar_orientation: ScrollbarOrientation::VerticalRight,
+            vertical_scrollbar_symbols: DOUBLE_VERTICAL,
+            vertical_scrollbar_style: Style::default(),
             vertical_scrollbar_visibility: ScrollbarVisibility::default(),
         }
     }
@@ -126,6 +151,63 @@ impl ScrollView {
         &mut self.buf
     }
 
+    /// Set the vertical scrollbar orientation
+    ///
+    /// This is a fluent setter method which must be chained or used as it consumes self
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # use ratatui::{prelude::*, layout::Size, widgets::*};  
+    /// # use tui_scrollview::ScrollView;
+    ///
+    /// let mut scroll_view = ScrollView::new(Size::new(20, 20))
+    ///     .vertical_scrollbar_orientation(ScrollbarOrientation::VerticalRight);
+    /// ```
+    pub const fn vertical_scrollbar_orientation(
+        mut self,
+        orientation: ScrollbarOrientation,
+    ) -> Self {
+        self.vertical_scrollbar_orientation = orientation;
+        self
+    }
+
+    /// Set the vertical scrollbar symbols set
+    ///
+    /// This is a fluent setter method which must be chained or used as it consumes self
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # use ratatui::{prelude::*, layout::Size, widgets::*, symbols::scrollbar::Set};  
+    /// # use tui_scrollview::ScrollView;
+    ///
+    /// let mut scroll_view = ScrollView::new(Size::new(20, 20))
+    ///     .vertical_scrollbar_symbols(Set { begin: "├", thumb: "■", track: "─", end: "┤" });
+    /// ```
+    pub const fn vertical_scrollbar_symbols(mut self, set: ScrollbarSymbolsSet<'a>) -> Self {
+        self.vertical_scrollbar_symbols = set;
+        self
+    }
+
+    /// Set the vertical scrollbar style
+    ///
+    /// This is a fluent setter method which must be chained or used as it consumes self
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # use ratatui::{prelude::*, layout::Size, widgets::*};  
+    /// # use tui_scrollview::ScrollView;
+    ///
+    /// let mut scroll_view = ScrollView::new(Size::new(20, 20))
+    ///     .vertical_scrollbar_style(Style::new().dark_gray());
+    /// ```
+    pub const fn vertical_scrollbar_style(mut self, style: Style) -> Self {
+        self.vertical_scrollbar_style = style;
+        self
+    }
+
     /// Set the visibility of the vertical scrollbar
     ///
     /// See [`ScrollbarVisibility`] for all the options.
@@ -143,6 +225,63 @@ impl ScrollView {
     /// ```
     pub const fn vertical_scrollbar_visibility(mut self, visibility: ScrollbarVisibility) -> Self {
         self.vertical_scrollbar_visibility = visibility;
+        self
+    }
+
+    /// Set the horizontal scrollbar orientation
+    ///
+    /// This is a fluent setter method which must be chained or used as it consumes self
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # use ratatui::{prelude::*, layout::Size, widgets::*};  
+    /// # use tui_scrollview::ScrollView;
+    ///
+    /// let mut scroll_view = ScrollView::new(Size::new(20, 20))
+    ///     .horizontal_scrollbar_orientation(ScrollbarOrientation::HorizontalBottom);
+    /// ```
+    pub const fn horizontal_scrollbar_orientation(
+        mut self,
+        orientation: ScrollbarOrientation,
+    ) -> Self {
+        self.horizontal_scrollbar_orientation = orientation;
+        self
+    }
+
+    /// Set the horizontal scrollbar symbols set
+    ///
+    /// This is a fluent setter method which must be chained or used as it consumes self
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # use ratatui::{prelude::*, layout::Size, widgets::*, symbols::scrollbar::Set};  
+    /// # use tui_scrollview::ScrollView;
+    ///
+    /// let mut scroll_view = ScrollView::new(Size::new(20, 20))
+    ///     .horizontal_scrollbar_symbols(Set { begin: "├", thumb: "■", track: "─", end: "┤" });
+    /// ```
+    pub const fn horizontal_scrollbar_symbols(mut self, set: ScrollbarSymbolsSet<'a>) -> Self {
+        self.horizontal_scrollbar_symbols = set;
+        self
+    }
+
+    /// Set the horizontal scrollbar style
+    ///
+    /// This is a fluent setter method which must be chained or used as it consumes self
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # use ratatui::{prelude::*, layout::Size, widgets::*};  
+    /// # use tui_scrollview::ScrollView;
+    ///
+    /// let mut scroll_view = ScrollView::new(Size::new(20, 20))
+    ///     .horizontal_scrollbar_style(Style::new().dark_gray());
+    /// ```
+    pub const fn horizontal_scrollbar_style(mut self, style: Style) -> Self {
+        self.horizontal_scrollbar_style = style;
         self
     }
 
@@ -220,7 +359,7 @@ impl ScrollView {
     }
 }
 
-impl StatefulWidget for ScrollView {
+impl<'a> StatefulWidget for ScrollView<'a> {
     type State = ScrollViewState;
 
     fn render(self, area: Rect, buf: &mut Buffer, state: &mut Self::State) {
@@ -228,7 +367,7 @@ impl StatefulWidget for ScrollView {
     }
 }
 
-impl StatefulWidget for &ScrollView {
+impl<'a> StatefulWidget for &ScrollView<'a> {
     type State = ScrollViewState;
 
     fn render(self, area: Rect, buf: &mut Buffer, state: &mut Self::State) {
@@ -261,17 +400,28 @@ impl StatefulWidget for &ScrollView {
         y = y.min(max_y_offset);
         state.offset = (x, y).into();
         state.size = Some(self.size);
-        let viewport_area = self.render_scrollbars(area, buf, state);
+        let (viewport_area, content_area) = self.render_scrollbars(area, buf, state);
         state.page_size = Some(viewport_area.as_size());
         let visible_area = viewport_area.intersection(self.buf.area);
-        self.render_visible_area(area, buf, visible_area);
+        self.render_visible_area(content_area, buf, visible_area);
     }
 }
 
-impl ScrollView {
-    /// Render needed scrollbars and return remaining area relative to
-    /// scrollview's buffer area.
-    fn render_scrollbars(&self, area: Rect, buf: &mut Buffer, state: &mut ScrollViewState) -> Rect {
+impl<'a> ScrollView<'a> {
+    /// Render needed scrollbars.
+    ///
+    /// Returns a tuple of the visible content area relative to the scrollview's buffer area and
+    /// the destination area within `area` where the content should be drawn.
+    ///
+    /// Scrollbars positioned on the leading (top or left) edges occupy the first row or column,
+    /// so the content is shifted past them. Scrollbars on the trailing (bottom or right) edges
+    /// leave the origin unchanged.
+    fn render_scrollbars(
+        &self,
+        area: Rect,
+        buf: &mut Buffer,
+        state: &mut ScrollViewState,
+    ) -> (Rect, Rect) {
         // fit value per direction
         //   > 0 => fits
         //  == 0 => exact fit
@@ -312,7 +462,20 @@ impl ScrollView {
             area.width
         };
 
-        Rect::new(state.offset.x, state.offset.y, new_width, new_height)
+        // Scrollbars on the leading (top/left) edges push the content away from the origin.
+        let offset_x = u16::from(show_vertical && self.is_vertical_scrollbar_on_left());
+        let offset_y = u16::from(show_horizontal && self.is_horizontal_scrollbar_on_top());
+        let content_area = Rect::new(
+            area.x.saturating_add(offset_x),
+            area.y.saturating_add(offset_y),
+            new_width,
+            new_height,
+        );
+
+        (
+            Rect::new(state.offset.x, state.offset.y, new_width, new_height),
+            content_area,
+        )
     }
 
     /// Resolve whether to render each scrollbar.
@@ -373,15 +536,19 @@ impl ScrollView {
         let scrollbar_height = self.size.height.saturating_sub(area.height);
         let mut scrollbar_state =
             ScrollbarState::new(scrollbar_height as usize).position(state.offset.y as usize);
-        let scrollbar = Scrollbar::new(ScrollbarOrientation::VerticalRight);
-        scrollbar.render(area, buf, &mut scrollbar_state);
+        let scrollbar = Scrollbar::new(self.vertical_scrollbar_orientation.clone())
+            .symbols(self.vertical_scrollbar_symbols.clone())
+            .style(self.vertical_scrollbar_style);
+        scrollbar.render(area, buf, &mut scrollbar_state)
     }
 
     fn render_horizontal_scrollbar(&self, area: Rect, buf: &mut Buffer, state: &ScrollViewState) {
         let scrollbar_width = self.size.width.saturating_sub(area.width);
         let mut scrollbar_state =
             ScrollbarState::new(scrollbar_width as usize).position(state.offset.x as usize);
-        let scrollbar = Scrollbar::new(ScrollbarOrientation::HorizontalBottom);
+        let scrollbar = Scrollbar::new(self.horizontal_scrollbar_orientation.clone())
+            .symbols(self.horizontal_scrollbar_symbols.clone())
+            .style(self.horizontal_scrollbar_style);
         scrollbar.render(area, buf, &mut scrollbar_state);
     }
 
@@ -393,10 +560,25 @@ impl ScrollView {
             }
         }
     }
+
+    fn is_horizontal_scrollbar_on_top(&self) -> bool {
+        matches!(
+            self.horizontal_scrollbar_orientation,
+            ScrollbarOrientation::HorizontalTop
+        )
+    }
+
+    fn is_vertical_scrollbar_on_left(&self) -> bool {
+        matches!(
+            self.vertical_scrollbar_orientation,
+            ScrollbarOrientation::VerticalLeft
+        )
+    }
 }
 
 #[cfg(test)]
 mod tests {
+    use ratatui::symbols::scrollbar::Set;
     use ratatui_core::text::Span;
     use rstest::{fixture, rstest};
 
@@ -419,7 +601,7 @@ mod tests {
     /// MNOPQRSTUV
     /// ```
     #[fixture]
-    fn scroll_view() -> ScrollView {
+    fn scroll_view<'a>() -> ScrollView<'a> {
         let mut scroll_view = ScrollView::new(Size::new(10, 10));
         for y in 0..10 {
             for x in 0..10 {
@@ -816,6 +998,124 @@ mod tests {
                 "CDEFGHIJK",
                 "MNOPQRSTU",
                 "◄███████►",
+            ])
+        )
+    }
+
+    #[rstest]
+    fn renders_custom_horizontal_bottom_scrollbar(scroll_view: ScrollView) {
+        let mut buf = Buffer::empty(Rect::new(0, 0, 9, 11));
+        let mut state = ScrollViewState::new();
+        scroll_view
+            .horizontal_scrollbar_symbols(Set {
+                begin: "├",
+                thumb: "■",
+                track: "─",
+                end: "┤",
+            })
+            .render(buf.area, &mut buf, &mut state);
+        assert_eq!(
+            buf,
+            Buffer::with_lines(vec![
+                "ABCDEFGHI",
+                "KLMNOPQRS",
+                "UVWXYZABC",
+                "EFGHIJKLM",
+                "OPQRSTUVW",
+                "YZABCDEFG",
+                "IJKLMNOPQ",
+                "STUVWXYZA",
+                "CDEFGHIJK",
+                "MNOPQRSTU",
+                "├■■■■■■■┤",
+            ])
+        )
+    }
+
+    #[rstest]
+    fn renders_custom_horizontal_top_scrollbar(scroll_view: ScrollView) {
+        let mut buf = Buffer::empty(Rect::new(0, 0, 9, 11));
+        let mut state = ScrollViewState::new();
+        scroll_view
+            .horizontal_scrollbar_orientation(ScrollbarOrientation::HorizontalTop)
+            .horizontal_scrollbar_symbols(Set {
+                begin: "├",
+                thumb: "■",
+                track: "─",
+                end: "┤",
+            })
+            .render(buf.area, &mut buf, &mut state);
+        assert_eq!(
+            buf,
+            Buffer::with_lines(vec![
+                "├■■■■■■■┤",
+                "ABCDEFGHI",
+                "KLMNOPQRS",
+                "UVWXYZABC",
+                "EFGHIJKLM",
+                "OPQRSTUVW",
+                "YZABCDEFG",
+                "IJKLMNOPQ",
+                "STUVWXYZA",
+                "CDEFGHIJK",
+                "MNOPQRSTU",
+            ])
+        )
+    }
+
+    #[rstest]
+    fn renders_custom_vertical_right_scrollbar(scroll_view: ScrollView) {
+        let mut buf = Buffer::empty(Rect::new(0, 0, 11, 9));
+        let mut state = ScrollViewState::new();
+        scroll_view
+            .vertical_scrollbar_symbols(Set {
+                begin: "┬",
+                thumb: "█",
+                track: "│",
+                end: "┴",
+            })
+            .render(buf.area, &mut buf, &mut state);
+        assert_eq!(
+            buf,
+            Buffer::with_lines(vec![
+                "ABCDEFGHIJ┬",
+                "KLMNOPQRST█",
+                "UVWXYZABCD█",
+                "EFGHIJKLMN█",
+                "OPQRSTUVWX█",
+                "YZABCDEFGH█",
+                "IJKLMNOPQR█",
+                "STUVWXYZAB█",
+                "CDEFGHIJKL┴",
+            ])
+        )
+    }
+
+    #[rstest]
+    fn renders_custom_vertical_left_scrollbar(scroll_view: ScrollView) {
+        let mut buf = Buffer::empty(Rect::new(0, 0, 11, 9));
+        let mut state = ScrollViewState::new();
+        scroll_view
+            .vertical_scrollbar_orientation(ScrollbarOrientation::VerticalLeft)
+            .vertical_scrollbar_symbols(Set {
+                begin: "┬",
+                thumb: "█",
+                track: "│",
+                end: "┴",
+            })
+            .render(buf.area, &mut buf, &mut state);
+        assert_eq!(
+            buf,
+            Buffer::with_lines(vec![
+                "┬ABCDEFGHIJ",
+                "█KLMNOPQRST",
+                "█UVWXYZABCD",
+                "█EFGHIJKLMN",
+                "█OPQRSTUVWX",
+                "█YZABCDEFGH",
+                "█IJKLMNOPQR",
+                "█STUVWXYZAB",
+                "┴CDEFGHIJKL",
             ])
         )
     }
