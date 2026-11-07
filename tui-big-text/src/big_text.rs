@@ -94,6 +94,23 @@ pub struct BigText<'a> {
     /// Block to wrap the widget in
     #[builder(default, setter(into, strip_option))]
     pub block: Option<Block<'a>>,
+
+    /// Fallback character to use when a character has no glyph in available fonts.
+    ///
+    /// If not set, characters without glyphs are rendered as empty space.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use tui_big_text::BigText;
+    ///
+    /// let big_text = BigText::builder()
+    ///     .lines(vec!["Hello 🚀".into()])
+    ///     .fallback_character('?')
+    ///     .build();
+    /// ```
+    #[builder(default, setter(strip_option))]
+    pub fallback_character: Option<char>,
 }
 
 impl BigText<'static> {
@@ -133,7 +150,13 @@ impl BigText<'_> {
         let lines = layout(buffer.area, &self.pixel_size, self.alignment, &self.lines);
         for (line, line_layout) in self.lines.iter().zip(lines) {
             for (grapheme, cell) in line.styled_graphemes(self.style).zip(line_layout) {
-                render_symbol(grapheme, cell, &mut buffer, &self.pixel_size);
+                render_symbol(
+                    grapheme,
+                    cell,
+                    &mut buffer,
+                    &self.pixel_size,
+                    self.fallback_character,
+                );
             }
         }
 
@@ -179,6 +202,7 @@ impl<'a> BigTextBuilder<'a> {
             pixel_size: self.pixel_size.unwrap_or_default(),
             alignment: self.alignment.unwrap_or_default(),
             block: self.block.as_ref().cloned().unwrap_or_default(),
+            fallback_character: self.fallback_character.unwrap_or_default(),
         }
     }
 }
@@ -197,7 +221,7 @@ impl Widget for &BigText<'_> {
         let layout = layout(inner, &self.pixel_size, self.alignment, &self.lines);
         for (line, line_layout) in self.lines.iter().zip(layout) {
             for (g, cell) in line.styled_graphemes(self.style).zip(line_layout) {
-                render_symbol(g, cell, buf, &self.pixel_size);
+                render_symbol(g, cell, buf, &self.pixel_size, self.fallback_character);
             }
         }
     }
@@ -261,10 +285,20 @@ const FONTS: [&dyn UnicodeFonts; 8] = [
 
 /// Render a single grapheme into a cell by looking up the corresponding 8x8 bitmap in all of the
 /// available fonts and setting the corresponding cells in the buffer.
-fn render_symbol(grapheme: StyledGrapheme, area: Rect, buf: &mut Buffer, pixel_size: &PixelSize) {
+fn render_symbol(
+    grapheme: StyledGrapheme,
+    area: Rect,
+    buf: &mut Buffer,
+    pixel_size: &PixelSize,
+    fallback_character: Option<char>,
+) {
     buf.set_style(area, grapheme.style);
     let c = grapheme.symbol.chars().next().unwrap(); // TODO: handle multi-char graphemes
-    if let Some(glyph) = FONTS.iter().find_map(|font| font.get(c)) {
+    if let Some(glyph) = FONTS
+        .iter()
+        .find_map(|font| font.get(c))
+        .or_else(|| fallback_character.and_then(|fb| FONTS.iter().find_map(|font| font.get(fb))))
+    {
         render_glyph(glyph, area, buf, pixel_size);
     }
 }
@@ -309,6 +343,7 @@ mod tests {
                 pixel_size,
                 alignment,
                 block: None,
+                fallback_character: None,
             }
         );
     }
@@ -1383,5 +1418,64 @@ mod tests {
             "└───────────────────────────────────────────────────────────────┘",
         ]);
         assert_eq!(buf, expected);
+    }
+
+    #[test]
+    fn render_with_fallback_character() {
+        let text_with_fallback = BigText::builder()
+            .lines(vec![Line::from("A🚀B")])
+            .fallback_character('?')
+            .build();
+        let expected_text = BigText::builder().lines(vec![Line::from("A?B")]).build();
+
+        let mut buf_actual = Buffer::empty(Rect::new(0, 0, 24, 8));
+        let mut buf_expected = Buffer::empty(Rect::new(0, 0, 24, 8));
+
+        text_with_fallback.render(buf_actual.area, &mut buf_actual);
+        expected_text.render(buf_expected.area, &mut buf_expected);
+
+        assert_eq!(buf_actual, buf_expected);
+    }
+
+    #[test]
+    fn render_without_fallback_character_leaves_empty_space() {
+        let text_without_fallback = BigText::builder().lines(vec![Line::from("A🚀B")]).build();
+        let expected_text = BigText::builder().lines(vec![Line::from("A B")]).build();
+
+        let mut buf_actual = Buffer::empty(Rect::new(0, 0, 24, 8));
+        let mut buf_expected = Buffer::empty(Rect::new(0, 0, 24, 8));
+
+        text_without_fallback.render(buf_actual.area, &mut buf_actual);
+        expected_text.render(buf_expected.area, &mut buf_expected);
+
+        assert_eq!(buf_actual, buf_expected);
+    }
+
+    #[test]
+    fn to_text_with_fallback_character() {
+        let text_with_fallback = BigText::builder()
+            .lines(vec![Line::from("X🚀")])
+            .fallback_character('?')
+            .build();
+        let expected_text = BigText::builder().lines(vec![Line::from("X?")]).build();
+
+        assert_eq!(text_with_fallback.to_text(16), expected_text.to_text(16));
+    }
+
+    #[test]
+    fn fallback_character_unknown_glyph_graceful() {
+        let text = BigText::builder()
+            .lines(vec![Line::from("A🚀B")])
+            .fallback_character('🦀')
+            .build();
+        let expected = BigText::builder().lines(vec![Line::from("A B")]).build();
+
+        let mut buf_actual = Buffer::empty(Rect::new(0, 0, 24, 8));
+        let mut buf_expected = Buffer::empty(Rect::new(0, 0, 24, 8));
+
+        text.render(buf_actual.area, &mut buf_actual);
+        expected.render(buf_expected.area, &mut buf_expected);
+
+        assert_eq!(buf_actual, buf_expected);
     }
 }
