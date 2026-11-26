@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.0](https://crates.io/crates/tui-widgets/0.8.0) - 2026-11-26
+
+- *(qrcode)* **Breaking:** Support no_std with qrcode 0.15 ([#417](https://github.com/ratatui/tui-widgets/pull/417))
+  `QrCodeWidget::new` takes a `qrcode::QrCode`, so
+  dependents must upgrade qrcode to 0.15. Without qrcode's `std` feature,
+  `QrError` does not implement `std::error::Error`.
+- *(big-text)* Convert glyphs to Text ([#375](https://github.com/ratatui/tui-widgets/pull/375))
+- *(qrcode)* Move color-eyre to dev-dependencies and mark no_std ([#396](https://github.com/ratatui/tui-widgets/pull/396))
+
 ## [0.7.12](https://crates.io/crates/tui-widgets/0.7.12) - 2026-09-24
 
 - *(scrollview)* Expose state dimensions ([#373](https://github.com/ratatui/tui-widgets/pull/373))
