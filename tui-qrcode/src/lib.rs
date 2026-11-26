@@ -21,6 +21,20 @@
 //! cargo add qrcode tui-qrcode --no-default-features
 //! ```
 //!
+//! ## `no_std` support
+//!
+//! tui-qrcode is `#![no_std]` and does not use `alloc` directly, so it works on embedded targets
+//! where Ratatui renders to a display rather than a terminal. It requires [qrcode] 0.15 or later
+//! with default features disabled, which is what the command above sets up. qrcode still needs a
+//! global allocator.
+//!
+//! On targets with `std`, enable qrcode's `std` feature if you want [`QrError`] to implement
+//! [`std::error::Error`], for example to use `?` with `Box<dyn Error>`:
+//!
+//! ```shell
+//! cargo add qrcode --no-default-features --features std
+//! ```
+//!
 //! # Usage
 //!
 //! This example can be found in the `examples` directory of the repository.
@@ -103,6 +117,9 @@
 //!
 //! [Joshka]: https://github.com/joshka
 //! [tui-widgets]: https://crates.io/crates/tui-widgets
+//! [qrcode]: https://crates.io/crates/qrcode
+//! [`QrError`]: https://docs.rs/qrcode/latest/qrcode/types/enum.QrError.html
+//! [`std::error::Error`]: https://doc.rust-lang.org/std/error/trait.Error.html
 
 #![no_std]
 
