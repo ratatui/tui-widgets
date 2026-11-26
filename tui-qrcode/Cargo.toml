@@ -12,10 +12,11 @@ categories.workspace = true
 keywords.workspace = true
 
 [dependencies]
-qrcode = { version = "0.14", default-features = false }
+qrcode = { version = "0.15", default-features = false }
 ratatui-core.workspace = true
 
 [dev-dependencies]
 color-eyre.workspace = true
+qrcode = { version = "0.15", features = ["std"] }
 rstest.workspace = true
 ratatui = { workspace = true, features = ["crossterm"] }
